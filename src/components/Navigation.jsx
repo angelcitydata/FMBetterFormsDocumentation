@@ -210,10 +210,9 @@ export const navigation = [
   {
     title: 'Components',
     links: [
-      { title: 'Input', href: '/fmbf-components/input' },
       { title: 'Button', href: '/fmbf-components/button' },
-      { title: 'Button Bar', href: '/fmbf-components/button-bar' },
       { title: 'Dropdown', href: '/fmbf-components/dropdown' },
+      { title: 'Input', href: '/fmbf-components/input' },
       // { title: 'Conversations', href: '/fmbf-components/conversations' },
       // { title: 'Messages', href: '/fmbf-components/messages' },
       // { title: 'Groups', href: '/fmbf-components/groups' },
