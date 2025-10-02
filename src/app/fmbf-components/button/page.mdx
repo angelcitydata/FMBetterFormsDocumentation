@@ -1,0 +1,637 @@
+export const metadata = {
+  title: 'Button Component',
+  description:
+    'A versatile button component for FM BetterForms with multiple style variants, loading states, and action handling capabilities.',
+}
+
+# Button Component
+
+The Button component is a flexible, interactive element that triggers actions in your FM BetterForms application. It features multiple visual variants, loading state management, icon support, and smooth animations for an enhanced user experience. {{ className: 'lead' }}
+
+    This component handles click events through the named action system,
+    supports disabled and loading states, and provides extensive styling options
+    to match your application's design language.
+
+---
+
+## Component Properties
+
+### Display & Layout Properties
+
+<Properties>
+  <Property name="label" type="string">
+    The text displayed on the button. Default is "Button".
+  </Property>
+  <Property name="icon" type="string">
+    Font Awesome icon class displayed to the left of the label (e.g., "fa-save",
+    "fa-trash"). The icon is automatically hidden when the button is in a
+    loading state.
+  </Property>
+  <Property name="variant" type="string">
+    The visual style variant of the button. Default is "default".
+
+    **Supported values:**
+
+    - `"default"` - Dark background with light text
+    - `"primary"` - Primary brand color with foreground text
+    - `"secondary"` - Secondary brand color with foreground text
+    - `"destructive"` - Red/danger color for delete/remove actions
+    - `"success"` - Green color for positive actions
+    - `"warning"` - Yellow/orange color for warning actions
+    - `"info"` - Blue color for informational actions
+    - `"outline"` - Transparent with border outline
+    - `"ghost"` - Transparent with no border
+    - `"link"` - Styled as an underlined link
+
+    Each variant has appropriate hover and active states for user feedback.
+
+  </Property>
+  <Property name="fullWidth" type="boolean">
+    When true, the button expands to fill the full width of its container. When
+    false, respects the `width` property. Default is false.
+  </Property>
+  <Property name="width" type="string">
+    Controls the width behavior when `fullWidth` is false. Options: - `"fit"` -
+    Button width fits content with self-start alignment - Any other value -
+    Button takes full width Default is "fit".
+  </Property>
+</Properties>
+
+### Behavior Properties
+
+<Properties>
+  <Property name="isDisabled" type="boolean">
+    When true, the button is disabled and cannot be clicked. Applies 50% opacity
+    and removes pointer events. Default is false.
+  </Property>
+  <Property name="loadingKey" type="string">
+    A key path in the form model to check for loading state. When the value at
+    this path is truthy, the button shows a spinning loader icon and becomes
+    disabled. The regular icon is hidden during loading.
+  </Property>
+  <Property name="namedAction" type="string">
+    The name of the action to trigger when the button is clicked. This should
+    match a named action defined in your BetterForms configuration.
+  </Property>
+  <Property name="actionOptions" type="object">
+    Additional options/parameters to pass to the named action when triggered.
+    Default is an empty object {}.
+  </Property>
+  <Property name="windowIndex" type="number">
+    Index of the window in the BetterForms window stack. Used for multi-window
+    applications to access the correct model state. Default is 0.
+  </Property>
+</Properties>
+
+---
+
+## Button Variants Guide
+
+The Button component offers 10 distinct visual variants, each designed for specific use cases in your application. Understanding when to use each variant helps create a consistent and intuitive user interface.
+
+### Variant Overview
+
+**Primary Actions:**
+
+- **`primary`** - Main call-to-action buttons (e.g., "Save", "Submit", "Continue")
+- **`secondary`** - Alternative actions or less prominent options
+- **`default`** - Standard buttons with neutral styling
+
+**Semantic Colors:**
+
+- **`destructive`** - Dangerous or irreversible actions (e.g., "Delete", "Remove")
+- **`success`** - Positive confirmations (e.g., "Approve", "Confirm")
+- **`warning`** - Cautionary actions requiring attention
+- **`info`** - Informational actions or navigation
+
+**Minimal Styles:**
+
+- **`outline`** - Bordered transparent button for secondary actions
+- **`ghost`** - Borderless transparent button for tertiary actions
+- **`link`** - Text-only underlined button styled as a link
+
+### Choosing the Right Variant
+
+Selecting the appropriate button variant helps create a clear visual hierarchy and guides users toward the most important actions.
+
+#### By Importance Level
+
+Use variants strategically to establish importance:
+
+1. **Primary** - The main action you want users to take (limit to 1-2 per screen)
+2. **Secondary/Default** - Supporting actions of medium importance
+3. **Outline/Ghost** - Tertiary actions or cancel operations
+4. **Link** - Lowest priority actions, navigation, or auxiliary functions
+
+#### By Action Type
+
+Choose variants that communicate the nature of the action:
+
+- **Destructive** - Use for irreversible or dangerous actions (delete, remove, archive). Always pair with confirmation dialogs for critical operations.
+- **Success** - Use for positive confirmations (approve, confirm, accept). Indicates the action will have a beneficial outcome.
+- **Warning** - Use for actions that require caution (proceed, override, force). Signals potential risks without being as severe as destructive.
+- **Info** - Use for informational actions (help, learn more, view documentation). Provides context without triggering state changes.
+
+#### Real-World Examples
+
+**Form Actions:**
+
+- Primary submit button: `primary`
+- Cancel/back button: `outline` or `ghost`
+- Reset form: `secondary` or `outline`
+
+**Data Management:**
+
+- Create new record: `primary`
+- Save changes: `primary`
+- Delete record: `destructive`
+- Duplicate: `secondary`
+
+**Approval Workflows:**
+
+- Approve/accept: `success`
+- Reject/decline: `destructive`
+- Review later: `outline`
+
+**Navigation:**
+
+- Next/continue: `primary`
+- Previous/back: `secondary` or `outline`
+- Skip: `ghost` or `link`
+
+```json {{ title: 'Variant Selection Examples' }}
+{
+  "Save Record": { "variant": "primary" },
+  "Cancel": { "variant": "outline" },
+  "Delete Record": { "variant": "destructive" },
+  "Approve Request": { "variant": "success" },
+  "View Details": { "variant": "ghost" },
+  "Learn More": { "variant": "link" },
+  "Force Update": { "variant": "warning" },
+  "Export Data": { "variant": "secondary" }
+}
+```
+
+#### Best Practices
+
+**✅ Do:**
+
+- Limit primary buttons to one per screen or section
+- Use destructive variant for delete/remove actions
+- Pair ghost/outline buttons with more prominent variants
+- Consider color accessibility when using semantic variants
+
+**❌ Don't:**
+
+- Use multiple primary buttons competing for attention
+- Use destructive variant for reversible actions
+- Mix too many different variants in a small area
+- Rely solely on color to convey meaning (use icons and labels)
+
+### Visual Feedback
+
+All variants include:
+
+- **Hover state** - Slight scale increase (105%) for tactile feedback
+- **Active state** - Slight scale decrease (95%) when clicked
+- **Disabled state** - 50% opacity with no pointer events
+- **Loading state** - Animated spinner replaces icon, button disabled
+
+---
+
+## Usage Examples
+
+The Button component can be used in two ways: as JSON configuration objects or as HTML `<bfcomp>` elements. Both approaches provide the same functionality.
+
+### Basic Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Click Me" 
+        namedAction="handleClick">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Click Me",
+  "namedAction": "handleClick",
+  "variant": "default"
+}
+```
+
+</CodeGroup>
+
+### Primary Action Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Save Changes" 
+        variant="primary" 
+        icon="fa-floppy-disk" 
+        namedAction="saveRecord">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Save Changes",
+  "variant": "primary",
+  "icon": "fa-floppy-disk",
+  "namedAction": "saveRecord"
+}
+```
+
+</CodeGroup>
+
+### Destructive Action Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Delete Record" 
+        variant="destructive" 
+        icon="fa-trash" 
+        namedAction="deleteRecord">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Delete Record",
+  "variant": "destructive",
+  "icon": "fa-trash",
+  "namedAction": "deleteRecord",
+  "actionOptions": {
+    "confirmMessage": "Are you sure you want to delete this record?"
+  }
+}
+```
+
+</CodeGroup>
+
+### Full Width Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Submit Form" 
+        variant="primary" 
+        fullWidth="true" 
+        namedAction="submitForm">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Submit Form",
+  "variant": "primary",
+  "fullWidth": true,
+  "namedAction": "submitForm"
+}
+```
+
+</CodeGroup>
+
+### Button with Loading State
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Save" 
+        variant="primary" 
+        icon="fa-floppy-disk" 
+        loadingKey="isSaving" 
+        namedAction="saveData">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Save",
+  "variant": "primary",
+  "icon": "fa-floppy-disk",
+  "loadingKey": "isSaving",
+  "namedAction": "saveData"
+}
+```
+
+</CodeGroup>
+
+### Disabled Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Unavailable" 
+        variant="secondary" 
+        isDisabled="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Unavailable",
+  "variant": "secondary",
+  "isDisabled": true
+}
+```
+
+</CodeGroup>
+
+### Outline Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Cancel" 
+        variant="outline" 
+        namedAction="cancelAction">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Cancel",
+  "variant": "outline",
+  "namedAction": "cancelAction"
+}
+```
+
+</CodeGroup>
+
+### Ghost Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="View Details" 
+        variant="ghost" 
+        icon="fa-eye" 
+        namedAction="viewDetails">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "View Details",
+  "variant": "ghost",
+  "icon": "fa-eye",
+  "namedAction": "viewDetails"
+}
+```
+
+</CodeGroup>
+
+### Link Style Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Learn More" 
+        variant="link" 
+        namedAction="openDocs">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Learn More",
+  "variant": "link",
+  "namedAction": "openDocs"
+}
+```
+
+</CodeGroup>
+
+### Success Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Approve" 
+        variant="success" 
+        icon="fa-check" 
+        namedAction="approveRequest">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Approve",
+  "variant": "success",
+  "icon": "fa-check",
+  "namedAction": "approveRequest"
+}
+```
+
+</CodeGroup>
+
+### Warning Button
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Proceed with Caution" 
+        variant="warning" 
+        icon="fa-triangle-exclamation" 
+        namedAction="proceedWithWarning">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Proceed with Caution",
+  "variant": "warning",
+  "icon": "fa-triangle-exclamation",
+  "namedAction": "proceedWithWarning"
+}
+```
+
+</CodeGroup>
+
+### Button with Action Options
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Button" 
+        label="Send Email" 
+        variant="primary" 
+        icon="fa-envelope" 
+        namedAction="sendEmail" 
+        :actionOptions="{ recipient: 'user@example.com', template: 'welcome' }">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Send Email",
+  "variant": "primary",
+  "icon": "fa-envelope",
+  "namedAction": "sendEmail",
+  "actionOptions": {
+    "recipient": "user@example.com",
+    "template": "welcome"
+  }
+}
+```
+
+</CodeGroup>
+
+---
+
+## Button Styling
+
+The Button component features a modern, interactive design with smooth animations and clear visual feedback. The styling adapts based on the variant and state of the button.
+
+### Visual Structure
+
+The button renders with the following structure:
+
+- **Icon** (optional): Font Awesome icon displayed to the left of the label
+- **Label**: The button text content
+- **Loading Spinner**: Animated spinner that replaces the icon when loading
+- **Container**: Rounded button with padding and appropriate spacing
+
+### Default Appearance
+
+```html
+<!-- Renders as an inline-flex button with rounded corners -->
+<button
+  class="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 font-medium"
+>
+  <i class="fa-regular fa-save"></i>
+  Save
+</button>
+```
+
+### State Variations
+
+**Normal State**:
+
+```html
+<!-- Standard clickable button -->
+<button class="bg-primary text-primary-foreground hover:bg-primary-hover">
+  Save
+</button>
+```
+
+**Loading State**:
+
+```html
+<!-- Shows spinner, hides icon, becomes disabled -->
+<button disabled class="pointer-events-none opacity-50">
+  <i class="fa-regular fa-spinner-third animate-spin"></i>
+  Save
+</button>
+```
+
+**Disabled State**:
+
+```html
+<!-- 50% opacity, no pointer events -->
+<button disabled class="pointer-events-none opacity-50">Save</button>
+```
+
+**With Icon**:
+
+```html
+<!-- Icon appears to the left of label with gap-2 spacing -->
+<button>
+  <i class="fa-regular fa-trash"></i>
+  Delete
+</button>
+```
+
+### Animation Behavior
+
+The button includes smooth CSS transitions for enhanced user experience:
+
+- **Hover**: Scale increases to 105% (`hover:scale-105`)
+- **Active/Click**: Scale decreases to 95% (`active:scale-95`)
+- **Transition**: All animations use `transition-all` for smooth effects
+
+### Width Behavior
+
+The button's width is controlled by the `fullWidth` and `width` properties:
+
+- **`fullWidth: true`**: Button expands to full container width (`w-full`)
+- **`width: "fit"`**: Button fits content with left alignment (`w-fit self-start`)
+- **Other `width` values**: Button takes full width (`w-full`)
+
+### Theme Integration
+
+The component uses CSS custom properties for colors, allowing seamless integration with your application's theme:
+
+- `bg-primary`, `text-primary-foreground` - Primary theme colors
+- `bg-secondary`, `text-secondary-foreground` - Secondary theme colors
+- `bg-destructive`, `text-destructive-foreground` - Destructive action colors
+- `bg-success`, `bg-warning`, `bg-info` - Semantic colors
+- `border`, `bg-accent` - Neutral colors for outline/ghost variants
+
+---
+
+## Loading State Behavior
+
+The Button component provides intelligent loading state management through the `loadingKey` property.
+
+### How Loading Works
+
+When you specify a `loadingKey`, the button monitors that path in the form model:
+
+1. **Model Check**: Button checks `model[loadingKey]` for a truthy value
+2. **Icon Swap**: Regular icon is hidden, spinning loader appears
+3. **Disabled State**: Button becomes disabled automatically
+4. **Visual Feedback**: Loading spinner rotates continuously
+
+### Loading State Example
+
+```json
+{
+  "label": "Save Record",
+  "variant": "primary",
+  "icon": "fa-floppy-disk",
+  "loadingKey": "isSaving",
+  "namedAction": "saveRecord"
+}
+```
+
+**Implementation Pattern:**
+
+```javascript
+// In your named action handler
+async function saveRecord() {
+  // Set loading state
+  model.isSaving = true
+
+  try {
+    await saveDataToServer()
+  } finally {
+    // Clear loading state
+    model.isSaving = false
+  }
+}
+```
+
+### Loading State Features
+
+- **Automatic disabling**: No need to manually set `isDisabled`
+- **Icon replacement**: Spinner automatically replaces your icon
+- **Visual consistency**: Spinner uses the same icon size and positioning
+- **Animation**: Smooth spinning animation (`animate-spin`)
+
+### Best Practices
+
+**✅ Do:**
+
+- Use unique loading keys for each async operation
+- Always clear the loading state in a `finally` block
+- Combine with `isDisabled` for conditional button states
+
+**❌ Don't:**
+
+- Reuse the same loading key for multiple buttons
+- Forget to reset the loading state after operation completes
+- Use loading states for instant/synchronous operations
