@@ -3,27 +3,27 @@ import { Heading } from '@/components/Heading'
 
 const guides = [
   {
-    href: '/filtering',
+    href: '/fmbf-how-to/filtering',
     name: 'Filtering data',
     description: 'Learn how to filter data in a list view.',
   },
-  {
-    href: '/pagination',
-    name: 'Pagination',
-    description: 'Understand how to work with paginated responses.',
-  },
-  {
-    href: '/errors',
-    name: 'Errors',
-    description:
-      'Read about the different types of errors returned by the API.',
-  },
-  {
-    href: '/webhooks',
-    name: 'Webhooks',
-    description:
-      'Learn how to programmatically configure webhooks for your app.',
-  },
+  // {
+  //   href: '/pagination',
+  //   name: 'Pagination',
+  //   description: 'Understand how to work with paginated responses.',
+  // },
+  // {
+  //   href: '/errors',
+  //   name: 'Errors',
+  //   description:
+  //     'Read about the different types of errors returned by the API.',
+  // },
+  // {
+  //   href: '/webhooks',
+  //   name: 'Webhooks',
+  //   description:
+  //     'Learn how to programmatically configure webhooks for your app.',
+  // },
 ]
 
 export function Guides() {

@@ -12,10 +12,10 @@ import { UsersIcon } from '@/components/icons/UsersIcon'
 
 const resources = [
   {
-    href: '/contacts',
-    name: 'Contacts',
+    href: '/fmbf-components/input',
+    name: 'Input',
     description:
-      'Learn about the contact model and how to create, retrieve, update, delete, and list contacts.',
+      'Learn about the input component and how to create, retrieve, update, delete, and list inputs.',
     icon: UserIcon,
     pattern: {
       y: 16,
@@ -25,45 +25,45 @@ const resources = [
       ],
     },
   },
-  {
-    href: '/conversations',
-    name: 'Conversations',
-    description:
-      'Learn about the conversation model and how to create, retrieve, update, delete, and list conversations.',
-    icon: ChatBubbleIcon,
-    pattern: {
-      y: -6,
-      squares: [
-        [-1, 2],
-        [1, 3],
-      ],
-    },
-  },
-  {
-    href: '/messages',
-    name: 'Messages',
-    description:
-      'Learn about the message model and how to create, retrieve, update, delete, and list messages.',
-    icon: EnvelopeIcon,
-    pattern: {
-      y: 32,
-      squares: [
-        [0, 2],
-        [1, 4],
-      ],
-    },
-  },
-  {
-    href: '/groups',
-    name: 'Groups',
-    description:
-      'Learn about the group model and how to create, retrieve, update, delete, and list groups.',
-    icon: UsersIcon,
-    pattern: {
-      y: 22,
-      squares: [[0, 1]],
-    },
-  },
+  // {
+  //   href: '/conversations',
+  //   name: 'Conversations',
+  //   description:
+  //     'Learn about the conversation model and how to create, retrieve, update, delete, and list conversations.',
+  //   icon: ChatBubbleIcon,
+  //   pattern: {
+  //     y: -6,
+  //     squares: [
+  //       [-1, 2],
+  //       [1, 3],
+  //     ],
+  //   },
+  // },
+  // {
+  //   href: '/messages',
+  //   name: 'Messages',
+  //   description:
+  //     'Learn about the message model and how to create, retrieve, update, delete, and list messages.',
+  //   icon: EnvelopeIcon,
+  //   pattern: {
+  //     y: 32,
+  //     squares: [
+  //       [0, 2],
+  //       [1, 4],
+  //     ],
+  //   },
+  // },
+  // {
+  //   href: '/groups',
+  //   name: 'Groups',
+  //   description:
+  //     'Learn about the group model and how to create, retrieve, update, delete, and list groups.',
+  //   icon: UsersIcon,
+  //   pattern: {
+  //     y: 22,
+  //     squares: [[0, 1]],
+  //   },
+  // },
 ]
 
 function ResourceIcon({ icon: Icon }) {
@@ -143,11 +143,11 @@ function Resource({ resource }) {
   )
 }
 
-export function Resources() {
+export function Components() {
   return (
     <div className="my-16 xl:max-w-none">
-      <Heading level={2} id="resources">
-        Resources
+      <Heading level={2} id="components">
+        Components
       </Heading>
       <div className="not-prose mt-4 grid grid-cols-1 gap-8 border-t border-zinc-900/5 pt-10 sm:grid-cols-2 xl:grid-cols-4 dark:border-white/5">
         {resources.map((resource) => (

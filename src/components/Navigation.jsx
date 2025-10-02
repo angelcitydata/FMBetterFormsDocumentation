@@ -196,25 +196,26 @@ function NavigationGroup({ group, className }) {
 
 export const navigation = [
   {
-    title: 'Guides',
+    title: 'How To',
     links: [
-      { title: 'Introduction', href: '/' },
-      { title: 'Quickstart', href: '/quickstart' },
-      { title: 'SDKs', href: '/sdks' },
-      { title: 'Authentication', href: '/authentication' },
-      { title: 'Pagination', href: '/pagination' },
-      { title: 'Errors', href: '/errors' },
-      { title: 'Webhooks', href: '/webhooks' },
+      { title: 'Filtering', href: '/fmbf-how-to/filtering' },
+      // { title: 'Quickstart', href: '/quickstart' },
+      // { title: 'SDKs', href: '/sdks' },
+      // { title: 'Authentication', href: '/authentication' },
+      // { title: 'Pagination', href: '/pagination' },
+      // { title: 'Errors', href: '/errors' },
+      // { title: 'Webhooks', href: '/webhooks' },
     ],
   },
   {
-    title: 'Resources',
+    title: 'Components',
     links: [
-      { title: 'Contacts', href: '/contacts' },
-      { title: 'Conversations', href: '/conversations' },
-      { title: 'Messages', href: '/messages' },
-      { title: 'Groups', href: '/groups' },
-      { title: 'Attachments', href: '/attachments' },
+      { title: 'Input', href: '/fmbf-components/input' },
+      { title: 'Button Bar', href: '/fmbf-components/button-bar' },
+      // { title: 'Conversations', href: '/fmbf-components/conversations' },
+      // { title: 'Messages', href: '/fmbf-components/messages' },
+      // { title: 'Groups', href: '/fmbf-components/groups' },
+      // { title: 'Attachments', href: '/fmbf-components/attachments' },
     ],
   },
 ]

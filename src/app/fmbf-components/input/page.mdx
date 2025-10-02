@@ -1,0 +1,599 @@
+export const metadata = {
+  title: 'Input Component',
+  description:
+    'A comprehensive input component for FM BetterForms with advanced formatting capabilities including currency, phone numbers, dates, SSN, and intelligent number handling.',
+}
+
+# Input Component
+
+The Input component is an advanced form control that provides intelligent formatting for various data types including currency, phone numbers, dates, SSNs, and numbers. It features real-time formatting, automatic input mode detection, and seamless integration with the FM BetterForms model system. {{ className: 'lead' }}
+
+This component automatically formats user input based on the specified format type, handles value parsing and storage, maintains proper cursor positioning during formatting, and provides extensive customization options.
+
+---
+
+## Component Properties
+
+### Display & Layout Properties
+
+<Properties>
+  <Property name="label" type="string">
+    The label text displayed above the input field. Shows with a red asterisk if the field is required.
+  </Property>
+  <Property name="placeholder" type="string">
+    Placeholder text displayed when the input is empty.
+  </Property>
+  <Property name="fullWidth" type="boolean">
+    When true, the input takes the full width of its container. When false, uses minimum width.
+  </Property>
+  <Property name="size" type="string">
+    Controls the text size of the input. Options: "sm" (text-sm), "md" (text-sm), "lg" (text-base). Default is "md".
+  </Property>
+  <Property name="icon" type="string">
+    Font Awesome icon class displayed on the left side of the input (e.g., "fa-user").
+  </Property>
+  <Property name="iconRight" type="string">
+    Font Awesome icon class displayed on the right side of the input.
+  </Property>
+  <Property name="prefix" type="string">
+    Text displayed before the input value (e.g., "$" for currency).
+  </Property>
+  <Property name="suffix" type="string">
+    Text displayed after the input value (e.g., "%" for percentages).
+  </Property>
+</Properties>
+
+### Input Behavior Properties
+
+<Properties>
+  <Property name="type" type="string">
+    HTML input type that controls basic browser behavior. **Supported values:**
+    - `"text"` (default) - Standard text input
+    - `"email"` - Email input with validation
+    - `"password"` - Password input (masked text)
+    - `"number"` - Numeric input with browser controls
+    - `"tel"` - Telephone number input
+    - `"url"` - URL input with validation
+    - `"search"` - Search input
+    - `"date"` - Date picker input
+    - `"time"` - Time picker input
+    - `"datetime-local"` - Date and time picker
+    
+    **Note:** The type property works independently of format - formats handle display and parsing while type controls browser behavior.
+  </Property>
+  <Property name="format" type="string">
+    Special formatting mode that adds intelligent parsing and display formatting. **Supported values:**
+    - `"currency"` - Currency formatting (e.g., 1,234.56) with decimal support
+    - `"number"` - Number formatting with commas (e.g., 1,234.56) 
+    - `"percent"` - Percentage formatting (same as number but semantic difference)
+    - `"integer"` - Integer-only formatting with commas (e.g., 1,234)
+    - `"phone"` - Phone number formatting (e.g., (555) 123-4567)
+    - `"date"` - Date formatting (MM/DD/YYYY) with ISO storage support
+    - `"ssn"` - Social Security Number formatting (e.g., 123-45-6789)
+    - `""` or `undefined` (default) - No special formatting, standard text input
+    
+    Each format automatically sets appropriate `inputmode` for mobile keyboards and handles real-time formatting during typing.
+  </Property>
+  <Property name="allowNegative" type="boolean">
+    When true, allows negative values for numeric formats (currency, number, percent, integer). Default is false.
+  </Property>
+  <Property name="maxLength" type="string">
+    Maximum number of characters allowed in the input.
+  </Property>
+  <Property name="required" type="boolean">
+    When true, displays a red asterisk next to the label and adds HTML5 required validation.
+  </Property>
+  <Property name="readOnly" type="boolean">
+    When true, the input cannot be edited but can be focused and its value copied.
+  </Property>
+  <Property name="isDisabled" type="boolean">
+    When true, the input is disabled and cannot be interacted with. Applies opacity styling.
+  </Property>
+  <Property name="storeAsNumber" type="boolean">
+    When true, numeric formats store values as numbers in the model. When false, stores as strings. Default is false. Applies to currency, number, percent, and integer formats.
+  </Property>
+</Properties>
+
+### Format-Specific Properties
+
+<Properties>
+  <Property name="phoneMaxDigits" type="number">
+    Maximum number of digits allowed for phone format. Default is 10.
+  </Property>
+  <Property name="ssnMaxDigits" type="number">
+    Maximum number of digits allowed for SSN format. Default is 9.
+  </Property>
+  <Property name="storeMasked" type="boolean">
+    When true, stores the formatted/masked value for phone and SSN formats instead of just digits. Default is false.
+  </Property>
+  <Property name="dateStoreISO" type="boolean">
+    When true, stores valid dates in ISO format (YYYY-MM-DD) for date format. When false, stores raw digits. Default is true.
+  </Property>
+</Properties>
+
+### Data Binding Properties
+
+<Properties>
+  <Property name="modelKey" type="string">
+    The key path in the form model where the input value is stored. Supports nested paths like "user.profile.name". Default is "inputValue".
+  </Property>
+  <Property name="windowIndex" type="number">
+    Index of the window in the BetterForms window stack. Used for multi-window applications. Default is 0.
+  </Property>
+</Properties>
+
+### Action Properties
+
+<Properties>
+  <Property name="inputAction" type="string">
+    Named action to trigger on every input change. Receives the current value and event object.
+  </Property>
+  <Property name="namedAction" type="string">
+    Named action to trigger when Enter key is pressed in the input field.
+  </Property>
+  <Property name="onInput" type="string">
+    Legacy property for input event handling (use inputAction instead).
+  </Property>
+</Properties>
+
+### Validation & Feedback Properties
+
+<Properties>
+  <Property name="errorMessage" type="string">
+    Error message to display below the input. When present, applies error styling (red border and text).
+  </Property>
+  <Property name="successMessage" type="string">
+    Success message to display below the input. When present and no error exists, applies success styling (green border and text).
+  </Property>
+</Properties>
+
+---
+
+## Type vs Format: Understanding the Interaction
+
+The `type` and `format` properties work together in a layered approach, but it's crucial to understand how they interact to avoid conflicts:
+
+### How They Work Together
+
+1. **`type`** provides the foundation HTML input behavior (text, email, password, number, etc.)
+2. **`format`** adds specialized business logic and formatting on top of the base type
+3. **When conflicts arise, `format` takes precedence** and may override the `type`
+
+### Currency Format Override Behavior
+
+When you set `format: "currency"`, the component automatically:
+- **Overrides `type` to "text"** regardless of what you specified
+- **Sets `inputmode="decimal"`** for mobile numeric keypads
+- **Enables special currency logic** (formatting, parsing, validation)
+
+```json {{ title: 'Currency Override Example' }}
+{
+  "type": "number",        // This gets ignored!
+  "format": "currency",    // This forces type="text"
+  "label": "Price"
+  // Result: HTML input will be type="text" with inputmode="decimal"
+}
+```
+
+### Best Practices to Avoid Conflicts
+
+**✅ Do:**
+- Use `type: "text"` with `format: "currency"` (explicit and clear)
+- Use `type: "email"` without any format (standard email validation)
+- Use `type: "password"` without any format (standard password input)
+- Use `type: "text"` without format for general text input
+
+**❌ Don't:**
+- Use `type: "number"` with `format: "currency"` (creates confusion - format will override)
+- Mix incompatible combinations that fight each other
+
+**💡 Future-Proof Approach:**
+When using any `format`, set `type: "text"` explicitly to make the intention clear and avoid surprises when new formats are added.
+
+---
+
+## Usage Examples
+
+The Input component can be used in two ways: as JSON configuration objects or as HTML `<bfcomp>` elements. Both approaches provide the same functionality.
+
+### Basic Text Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="contact.nameFirst" 
+        label="First Name" 
+        placeholder="First Name" 
+        fullWidth="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Full Name",
+  "placeholder": "Enter your full name",
+  "modelKey": "user.fullName",
+  "required": true,
+  "maxLength": "50"
+}
+```
+</CodeGroup>
+
+### Currency Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="case.totalAmount" 
+        label="Total Amount" 
+        prefix="$" 
+        format="currency">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Total Amount",
+  "type": "text",
+  "format": "currency",
+  "prefix": "$",
+  "modelKey": "case.totalAmount",
+  "storeAsNumber": true,
+  "allowNegative": true
+}
+```
+</CodeGroup>
+
+### Phone Number Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="contact.phone" 
+        label="Phone" 
+        type="tel" 
+        format="phone" 
+        placeholder="Phone" 
+        fullWidth="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Phone Number",
+  "type": "tel",
+  "format": "phone",
+  "modelKey": "contact.phone",
+  "phoneMaxDigits": 10,
+  "storeMasked": false,
+  "placeholder": "Phone",
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Date Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="contact.dateOfBirth" 
+        label="DoB" 
+        type="date" 
+        format="date" 
+        placeholder="Date of Birth" 
+        fullWidth="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Date of Birth",
+  "type": "date",
+  "format": "date",
+  "modelKey": "contact.dateOfBirth",
+  "dateStoreISO": true,
+  "placeholder": "Date of Birth",
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### SSN Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="contact.ssn" 
+        label="SSN" 
+        placeholder="SSN" 
+        format="ssn" 
+        fullWidth="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Social Security Number",
+  "type": "text",
+  "format": "ssn",
+  "modelKey": "contact.ssn",
+  "ssnMaxDigits": 9,
+  "storeMasked": false,
+  "placeholder": "SSN",
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Integer Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="order.quantity" 
+        label="Quantity" 
+        format="integer" 
+        placeholder="0" 
+        storeAsNumber="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Quantity",
+  "type": "text",
+  "format": "integer",
+  "modelKey": "order.quantity",
+  "storeAsNumber": true,
+  "allowNegative": false,
+  "placeholder": "0"
+}
+```
+</CodeGroup>
+
+### Email Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="contact.email" 
+        label="Email Address" 
+        type="email" 
+        placeholder="Enter your email" 
+        required="true" 
+        fullWidth="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Email Address",
+  "type": "email",
+  "modelKey": "contact.email",
+  "placeholder": "Enter your email",
+  "required": true,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Input with Actions
+
+<CodeGroup>
+```json {{ title: 'SSN Configuration' }}
+{
+  "label": "Social Security Number",
+  "type": "text",
+  "format": "ssn",
+  "modelKey": "employee.ssn",
+  "ssnMaxDigits": 9,
+  "storeMasked": false,
+  "placeholder": "123-45-6789"
+}
+```
+</CodeGroup>
+
+### Input with Icons and Actions
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="searchQuery" 
+        label="Search Query" 
+        placeholder="Type to search..." 
+        icon="fa-search" 
+        iconRight="fa-times" 
+        inputAction="performSearch" 
+        namedAction="submitSearch">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Search Query",
+  "placeholder": "Type to search...",
+  "icon": "fa-search",
+  "iconRight": "fa-times",
+  "modelKey": "searchQuery",
+  "inputAction": "performSearch",
+  "namedAction": "submitSearch"
+}
+```
+</CodeGroup>
+
+### Dynamic Search with Filter Action
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="query" 
+        :placeholder="`Search ${model.contactList.length} contacts`" 
+        icon="fa-magnifying-glass" 
+        fullWidth="true" 
+        inputAction="filter">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "query",
+  "placeholder": "Search contacts...",
+  "icon": "fa-magnifying-glass",
+  "fullWidth": true,
+  "inputAction": "filter"
+}
+```
+</CodeGroup>
+
+### Password Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="user.password" 
+        label="Password" 
+        type="password" 
+        placeholder="Enter your password" 
+        required="true" 
+        iconRight="fa-eye" 
+        fullWidth="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Password",
+  "type": "password",
+  "modelKey": "user.password",
+  "placeholder": "Enter your password",
+  "required": true,
+  "iconRight": "fa-eye",
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Number/Percent Input
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Input" 
+        modelKey="tax.rate" 
+        label="Tax Rate" 
+        format="percent" 
+        suffix="%" 
+        storeAsNumber="true" 
+        placeholder="0.00">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Tax Rate",
+  "type": "text",
+  "format": "percent",
+  "suffix": "%",
+  "modelKey": "tax.rate",
+  "storeAsNumber": true,
+  "allowNegative": false,
+  "placeholder": "0.00"
+}
+```
+</CodeGroup>
+
+---
+
+## Input Styling
+
+The Input component renders with a consistent, modern appearance that adapts to your form's theme. Here's what you can expect from the component styling:
+
+### Visual Structure
+
+The component renders as a structured input container with the following visual hierarchy:
+
+- **Label**: Positioned above the input field with appropriate spacing
+- **Input Container**: A bordered input box with rounded corners and proper padding
+- **Prefix/Suffix**: Styled text elements positioned inside the input container
+- **Icons**: Font Awesome icons positioned appropriately within the input
+- **Placeholder**: Subtle text that appears when the input is empty
+
+### Default Appearance
+
+```html
+<!-- Renders as a clean, bordered input with label -->
+<div class="input-group">
+  <label>First Name</label>
+  <div class="input-container">
+    <input type="text" placeholder="First Name" />
+  </div>
+</div>
+```
+
+### Styled Variations
+
+**With Prefix** (e.g., Currency Input):
+```html
+<!-- $ symbol appears inside the input on the left -->
+<div class="input-container">
+  <span class="prefix">$</span>
+  <input type="text" />
+</div>
+```
+
+**With Suffix** (e.g., Percent Input):
+```html
+<!-- % symbol appears inside the input on the right -->
+<div class="input-container">
+  <input type="text" />
+  <span class="suffix">%</span>
+</div>
+```
+
+**With Icons** (e.g., Phone Input):
+```html
+<!-- Font Awesome icon appears inside the input -->
+<div class="input-container">
+  <i class="fa-regular fa-phone"></i>
+  <input type="tel" />
+</div>
+```
+
+### Responsive Behavior
+
+- **Full Width**: When `fullWidth="true"`, the input expands to fill its container
+- **Mobile Optimized**: Inputs automatically show appropriate mobile keyboards based on format
+- **Focus States**: Clear visual feedback when the input receives focus
+- **Error States**: Validation errors are displayed with appropriate styling
+
+### Theme Integration
+
+The component styling integrates seamlessly with your form's overall design system and supports consistent spacing, colors, and typography throughout your application.
+
+---
+
+## Format Behavior Details
+
+### Input Mode Mapping
+
+The component automatically sets the appropriate `inputmode` attribute based on format for optimal mobile keyboard experience:
+
+- **`currency, number, percent`** → `inputmode="decimal"` (numeric keypad with decimal)
+- **`integer, date, ssn`** → `inputmode="numeric"` (numeric keypad only)
+- **`phone`** → `inputmode="tel"` (telephone keypad)
+- **All others** → No inputmode (standard keyboard)
+
+### Real-Time Formatting
+
+All formats provide real-time formatting as the user types:
+- **Maintains cursor position** during formatting changes
+- **Handles special keys** (decimal point, negative sign) intelligently  
+- **Prevents invalid characters** from being entered
+- **Provides immediate visual feedback**
+
+### Storage Options
+
+Different formats offer different storage options:
+- **Numeric formats** (`currency`, `number`, `percent`, `integer`): Can store as numbers or formatted strings
+- **Masked formats** (`phone`, `ssn`): Can store masked display value or raw digits
+- **Date format**: Can store as ISO date string or raw digits
