@@ -1,0 +1,147 @@
+export const metadata = {
+  title: 'Filtering',
+  description:
+    'IN this guide we look at how to set up filtering for list views in FM BetterForms',
+}
+
+# Filtering Concept
+The filtering of data on our page should happen in the browser. It is triggered by buttons, dropdowns, input fields on pages and filteres the data already in the browser. Typically we'd fetch all the data from FileMaker file and then put the filtered data into another property in the page model. {{ className: 'lead' }}
+
+# Model structure
+Since we're working with different pages (a list view and a filter popover (another page)), we have to make sure the popover, card window, can tell the underlying page what is the current filter.
+
+## App model
+To do that we implement the app model which holds the `selectedFilter` property at any time. I think we only have one filter at a time, so it is easy enough to use the same object. This app model property looks like this:
+<CodeGroup>
+```json {{ title: 'App Model Structure' }}
+{
+  "selectedFilter": {
+    "data": {},
+    "type": ""
+  }
+}
+```
+</CodeGroup>
+The app model is global, so any page can read and write to it.
+
+We will use this in named Actions to set the filter to the button or field the user has typed in.
+
+## Page model
+The page model has a few properties we are working with:
+
+# Pages
+
+There are at least two pages in play here:
+1. The list view page
+2. The filter popover page
+
+The list view page shows the filtered data in a list and provides many of the buttons for filtering. The list view also contains a button that opens up the Filter Card Window, the next page.
+ 
+ ## List view page
+The list view page has the following properties in its model:
+ <Row>
+<Col>
+ <Properties>
+      <Property name="availableFilters" type="array">
+        Array of filter objects that define all possible filters that can be applied to the data.
+      </Property>
+      <Property name="filters" type="array">
+        Array of currently active filters applied to the data.
+      </Property>
+      <Property name="list" type="array">
+        The complete unfiltered dataset fetched from FileMaker.
+      </Property>
+      <Property name="listFiltered" type="array">
+        The filtered dataset that is displayed in the list view based on applied filters. NOTE: there are many places where the data is filtered.
+      </Property>
+      <Property name="selectedFilter" type="object">
+        The currently selected filter object, typically synchronized with the app model.
+      </Property>
+    </Properties>
+</Col>
+<Col>
+<CodeGroup>
+```json {{ title: 'Page Model Structure' }}
+{
+      "availableFilters": [{
+        "data": {},
+        "icon": "fa-calendar-range",
+        "label": "Date Range",
+        "type": "date"
+    }, {
+        "data": {},
+        "icon": "fa-user-police-tie",
+        "label": "Officer",
+        "type": "officer"
+    }, {
+        "data": {},
+        "icon": "fa-location-dot",
+        "label": "Location Type",
+        "type": "locationType"
+    }, {
+        "data": "All",
+        "icon": "fa-file-invoice-dollar",
+        "label": "Job Type",
+        "type": "jobType"
+    }],
+    "filters": [],
+    "list": [],
+    "listFiltered": [],
+    "selectedFilter": {},
+}
+```
+</CodeGroup>
+</Col>
+</Row>
+The filter popover page has buttons and fields that the user can interact with to set the filter. When the user interacts with these elements, they trigger named Actions that update the `selectedFilter` property in the app model.
+
+
+## Filter popover page
+The filter popover page has the following properties in its model:
+ <Row>
+<Col>
+ <Properties>
+      <Property name="activeField" type="string">
+        The currently active field in the filter popover.
+      </Property>
+      <Property name="selectedFilter" type="object">        
+        The currently selected filter object, typically synchronized with the app model.
+      </Property>
+    </Properties>
+</Col>
+<Col>
+<CodeGroup>
+```json {{ title: 'Filter Popover Page Model Structure' }}
+{
+    "_hideHeader": true,
+    "activeField": "",
+    "selectedFilter": {
+        "data": ["One", "two"],
+        "type": ""
+    }
+}
+```
+</CodeGroup>
+</Col>
+</Row>
+## Components
+The Card window will contain all the inputs, selects, and other UI items to set the filter. It could contain all of them but only show one of them at a time, depending on what `app.selectedFilter.type` is set to.
+
+Here is an example
+
+<CodeGroup>
+```html
+ <div v-if="app.selectedFilter.type === 'destination'" class="flex flex-col gap-2">
+            <h3 class="text-slate-400 text-sm font-medium">Select a Destination</h3>
+            <multiselect
+                v-model="model.selectedFilter.data"
+                :closeOnSelect="false"
+                :multiple="false"
+                :showLabels="false"
+                :options="app.destinations"
+            ></multiselect>
+ </div>
+```
+</CodeGroup>
+
+## Named Actions
