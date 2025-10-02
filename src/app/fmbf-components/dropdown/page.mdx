@@ -1,0 +1,1147 @@
+export const metadata = {
+  title: 'Dropdown Component',
+  description:
+    'A flexible dropdown menu component for FM BetterForms with support for various item types, state management, and customizable actions.',
+}
+
+# Dropdown Component
+
+The Dropdown component is a versatile menu element that displays a list of options, actions, or controls in your FM BetterForms application. It supports multiple item types including standard items, checkboxes, radios, groups, and separators, with full keyboard navigation and accessibility features. {{ className: 'lead' }}
+
+    This component manages its own open/close state, handles item selection
+    through the named action system, and provides flexible configuration options
+    for building rich, interactive menus.
+
+---
+
+## Component Properties
+
+### Display & Layout Properties
+
+<Properties>
+  <Property name="label" type="string">
+    The text displayed on the dropdown trigger button. Default is "Open Menu".
+  </Property>
+  <Property name="icon" type="string">
+    Font Awesome icon class displayed to the left of the label on the trigger
+    button (e.g., "fa-bars", "fa-ellipsis-vertical").
+  </Property>
+  <Property name="items" type="array">
+    Array of menu items to display in the dropdown. Each item can be a standard
+    item, checkbox, radio, group, or separator. See Item Types Guide below for
+    detailed configuration options.
+  </Property>
+  <Property name="align" type="string">
+    Controls the horizontal alignment of the dropdown menu relative to the
+    trigger button. **Supported values:**
+    
+    - `"start"` - Aligns menu to the left edge of the button
+    - `"end"` - Aligns menu to the right edge of the button (default)
+    - `"center"` - Centers menu relative to the button
+
+    Default is "end".
+
+  </Property>
+  <Property name="fullWidth" type="boolean">
+    When true, the dropdown trigger button expands to fill the full width of
+    its container. Default is false.
+  </Property>
+  <Property name="idPrefix" type="string">
+    Prefix used for generating unique element IDs. Useful when you have
+    multiple dropdowns on the same page. Default is "dd".
+  </Property>
+</Properties>
+
+### State Management Properties
+
+<Properties>
+  <Property name="stateKey" type="string">
+    The model key used to track the dropdown's open/closed state. If not
+    provided, defaults to `dropdownState_` + `modelKey` (or "default" if no
+    modelKey). The component automatically manages this state.
+  </Property>
+  <Property name="modelKey" type="string">
+    The model key used for radio items to store the selected value. Only applies
+    when using radio-type items. Default is "dropdownRadio".
+  </Property>
+  <Property name="radioModelKey" type="string">
+    Alternative property name for specifying the radio model key. Functionally
+    equivalent to `modelKey`.
+  </Property>
+  <Property name="checkboxModelKey" type="string">
+    The base model key for checkbox state management. Checkbox states are stored
+    in an object at `stateKey + '_checks'` unless individual items specify their
+    own modelKey.
+  </Property>
+  <Property name="closeOnSelect" type="string | boolean">
+    Controls whether the dropdown menu closes when an item is clicked. Accepts
+    "true", "1", "on", "yes", true, or empty string for true. Any other value is
+    false. Default is true (empty string).
+  </Property>
+  <Property name="windowIndex" type="number">
+    Index of the window in the BetterForms window stack. Used for multi-window
+    applications to access the correct model state. Default is 0.
+  </Property>
+</Properties>
+
+---
+
+## Item Types Guide
+
+The Dropdown component supports five different item types, each serving a specific purpose in your menu structure.
+
+### Item Type Overview
+
+**Interactive Items:**
+
+- **`item`** - Standard clickable menu item (default type)
+- **`checkbox`** - Toggle item with checkbox indicator
+- **`radio`** - Single-selection item with radio indicator
+
+**Organizational Elements:**
+
+- **`group`** - Container for organizing related items with a label
+- **`separator`** - Visual divider between menu sections
+
+### Standard Item
+
+The default item type for clickable menu options.
+
+```json
+{
+  "type": "item",
+  "label": "Edit Profile",
+  "value": "edit",
+  "icon": "fa-user-pen",
+  "shortcut": "⌘E",
+  "disabled": false,
+  "onClick": "handleEdit"
+}
+```
+
+**Properties:**
+
+- `label` - Display text (required)
+- `value` - Item value passed to onClick handler
+- `icon` - Font Awesome icon class
+- `shortcut` - Keyboard shortcut hint (display only)
+- `disabled` - Boolean to disable the item
+- `onClick` - Named action to trigger. Can be:
+  - String: `"myAction"` (just the action name)
+  - Object: `{ "namedAction": "myAction", "actionOptions": { ... } }` (action with options)
+
+**onClick Handler:**
+
+When an item is clicked, the named action receives an options object containing:
+
+```javascript
+{
+  value: "edit",           // The item's value property
+  item: { /* full item */ }, // The complete item object
+  // Plus any custom properties from actionOptions
+}
+```
+
+**Example:**
+
+```javascript
+// Item configuration
+{
+  "label": "Edit Profile",
+  "value": "editProfile",
+  "onClick": {
+    "namedAction": "handleAction",
+    "actionOptions": { "mode": "edit", "section": "profile" }
+  }
+}
+
+// Your named action handler
+function handleAction(options) {
+  console.log(options.value)   // "editProfile"
+  console.log(options.mode)    // "edit"
+  console.log(options.section) // "profile"
+  console.log(options.item)    // { label: "Edit Profile", value: "editProfile", ... }
+}
+```
+
+### Checkbox Item
+
+Toggle items that maintain independent checked/unchecked states.
+
+```json
+{
+  "type": "checkbox",
+  "label": "Show Deleted",
+  "value": "showDeleted",
+  "icon": "fa-eye-slash",
+  "modelKey": "filters.showDeleted",
+  "disabled": false,
+  "onClick": "updateFilters"
+}
+```
+
+**Properties:**
+
+- Same as standard item, plus:
+- `modelKey` - Optional model path for checkbox state. If not provided, state is stored in the internal checks object using the `value` as the key.
+
+**State Management:**
+
+- Without `modelKey`: State stored at `model[stateKey + '_checks'][value]`
+- With `modelKey`: State stored at `model[modelKey]`
+
+### Radio Item
+
+Single-selection items where only one can be active at a time.
+
+```json
+{
+  "type": "radio",
+  "label": "Sort by Name",
+  "value": "name",
+  "icon": "fa-arrow-down-a-z",
+  "disabled": false,
+  "onClick": "updateSort"
+}
+```
+
+**Properties:**
+
+- Same as standard item
+- All radio items in the same dropdown share the `modelKey` specified at the dropdown level
+- Selecting a radio item automatically closes the dropdown
+
+**State Management:**
+
+- Selected value stored at `model[modelKey]` (dropdown-level property)
+- Only one radio item can be selected at a time
+
+### Group
+
+Organizes related items under a labeled section.
+
+```json
+{
+  "type": "group",
+  "label": "Actions",
+  "items": [
+    {
+      "label": "Edit",
+      "value": "edit",
+      "icon": "fa-pen",
+      "onClick": "handleEdit"
+    },
+    {
+      "label": "Duplicate",
+      "value": "duplicate",
+      "icon": "fa-copy",
+      "onClick": "handleDuplicate"
+    },
+    {
+      "label": "Delete",
+      "value": "delete",
+      "icon": "fa-trash",
+      "onClick": "handleDelete"
+    }
+  ]
+}
+```
+
+**Properties:**
+
+- `label` - Group header text
+- `items` - Array of items (item, checkbox, or radio types)
+
+**Notes:**
+
+- Groups cannot be nested
+- Group labels are styled with smaller, muted text
+- Separator items within groups are supported
+
+### Separator
+
+Visual divider for organizing menu sections.
+
+```json
+{
+  "type": "separator"
+}
+```
+
+**Properties:**
+
+- No additional properties required
+
+**Usage:**
+
+- Place between groups or items to create visual separation
+- Renders as a horizontal line with appropriate spacing
+
+---
+
+## Choosing the Right Item Type
+
+Select item types based on the interaction pattern you need.
+
+**By Interaction Pattern:**
+
+- **Standard Items** - Use for actions or navigation (e.g., "Edit", "Delete", "View Details")
+- **Checkboxes** - Use for independent toggles that can be on/off simultaneously (e.g., filters, preferences)
+- **Radio Items** - Use for mutually exclusive options (e.g., sort order, view mode, status filter)
+- **Groups** - Use to organize related items under a category
+- **Separators** - Use to visually divide different sections of the menu
+
+**By Use Case:**
+
+**Actions Menu:**
+
+- Standard items for primary actions
+- Separators between action groups
+- Group for related actions
+
+**Settings/Filters:**
+
+- Checkboxes for multiple independent settings
+- Radio items for single-choice options
+- Groups to organize by category
+
+**Context Menu:**
+
+- Standard items for quick actions
+- Separators between action types
+- Disabled items for unavailable actions
+
+**Real-World Examples:**
+
+**User Menu:**
+
+```json
+{
+  "items": [
+    {
+      "label": "Profile",
+      "value": "profile",
+      "icon": "fa-user",
+      "onClick": "viewProfile"
+    },
+    {
+      "label": "Settings",
+      "value": "settings",
+      "icon": "fa-cog",
+      "onClick": "openSettings"
+    },
+    { "type": "separator" },
+    {
+      "label": "Sign Out",
+      "value": "signout",
+      "icon": "fa-sign-out",
+      "onClick": "signOut"
+    }
+  ]
+}
+```
+
+**Filter Menu:**
+
+```json
+{
+  "items": [
+    {
+      "type": "group",
+      "label": "Status",
+      "items": [
+        { "type": "checkbox", "label": "Active", "value": "active" },
+        { "type": "checkbox", "label": "Pending", "value": "pending" },
+        { "type": "checkbox", "label": "Completed", "value": "completed" }
+      ]
+    },
+    { "type": "separator" },
+    {
+      "type": "group",
+      "label": "Sort By",
+      "items": [
+        { "type": "radio", "label": "Name", "value": "name" },
+        { "type": "radio", "label": "Date", "value": "date" },
+        { "type": "radio", "label": "Priority", "value": "priority" }
+      ]
+    }
+  ]
+}
+```
+
+**Best Practices:**
+
+**✅ Do:**
+
+- Use groups to organize more than 5 items
+- Add icons to improve scannability
+- Use separators to create logical sections
+- Provide clear, action-oriented labels
+- Set disabled state for unavailable actions
+
+**❌ Don't:**
+
+- Nest groups within groups
+- Mix radio items across multiple groups (use separate dropdowns)
+- Create dropdowns with more than 15-20 items (consider alternatives)
+- Use overly long labels that wrap multiple lines
+
+---
+
+## Usage Examples
+
+The Dropdown component can be used in two ways: as JSON configuration objects or as HTML `<bfcomp>` elements. Both approaches provide the same functionality.
+
+### Basic Dropdown
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Actions" 
+        :items='[
+          {"label": "Edit", "value": "edit", "onClick": "handleEdit"},
+          {"label": "Delete", "value": "delete", "onClick": "handleDelete"}
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Actions",
+  "items": [
+    { "label": "Edit", "value": "edit", "onClick": "handleEdit" },
+    { "label": "Delete", "value": "delete", "onClick": "handleDelete" }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Dropdown with Icons
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Menu" 
+        icon="fa-bars"
+        :items='[
+          {"label": "New", "icon": "fa-plus", "onClick": "createNew"},
+          {"label": "Save", "icon": "fa-floppy-disk", "onClick": "save"},
+          {"type": "separator"},
+          {"label": "Export", "icon": "fa-download", "onClick": "export"}
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Menu",
+  "icon": "fa-bars",
+  "items": [
+    { "label": "New", "icon": "fa-plus", "onClick": "createNew" },
+    { "label": "Save", "icon": "fa-floppy-disk", "onClick": "save" },
+    { "type": "separator" },
+    { "label": "Export", "icon": "fa-download", "onClick": "export" }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Dropdown with Checkboxes
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Filters" 
+        stateKey="filterMenuOpen"
+        :items='[
+          {"type": "checkbox", "label": "Active", "value": "active", "onClick": "updateFilter"},
+          {"type": "checkbox", "label": "Pending", "value": "pending", "onClick": "updateFilter"},
+          {"type": "checkbox", "label": "Completed", "value": "completed", "onClick": "updateFilter"}
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Filters",
+  "stateKey": "filterMenuOpen",
+  "items": [
+    {
+      "type": "checkbox",
+      "label": "Active",
+      "value": "active",
+      "onClick": "updateFilter"
+    },
+    {
+      "type": "checkbox",
+      "label": "Pending",
+      "value": "pending",
+      "onClick": "updateFilter"
+    },
+    {
+      "type": "checkbox",
+      "label": "Completed",
+      "value": "completed",
+      "onClick": "updateFilter"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Dropdown with Radio Items
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Sort By" 
+        modelKey="sortField"
+        :items='[
+          {"type": "radio", "label": "Name", "value": "name", "onClick": "updateSort"},
+          {"type": "radio", "label": "Date Created", "value": "created", "onClick": "updateSort"},
+          {"type": "radio", "label": "Date Modified", "value": "modified", "onClick": "updateSort"}
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Sort By",
+  "modelKey": "sortField",
+  "items": [
+    {
+      "type": "radio",
+      "label": "Name",
+      "value": "name",
+      "onClick": "updateSort"
+    },
+    {
+      "type": "radio",
+      "label": "Date Created",
+      "value": "created",
+      "onClick": "updateSort"
+    },
+    {
+      "type": "radio",
+      "label": "Date Modified",
+      "value": "modified",
+      "onClick": "updateSort"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Dropdown with Groups
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Options" 
+        :items='[
+          {
+            "type": "group",
+            "label": "File Actions",
+            "items": [
+              {"label": "New File", "icon": "fa-file", "onClick": "newFile"},
+              {"label": "Open File", "icon": "fa-folder-open", "onClick": "openFile"}
+            ]
+          },
+          {"type": "separator"},
+          {
+            "type": "group",
+            "label": "Edit Actions",
+            "items": [
+              {"label": "Cut", "icon": "fa-scissors", "shortcut": "⌘X", "onClick": "cut"},
+              {"label": "Copy", "icon": "fa-copy", "shortcut": "⌘C", "onClick": "copy"},
+              {"label": "Paste", "icon": "fa-paste", "shortcut": "⌘V", "onClick": "paste"}
+            ]
+          }
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Options",
+  "items": [
+    {
+      "type": "group",
+      "label": "File Actions",
+      "items": [
+        { "label": "New File", "icon": "fa-file", "onClick": "newFile" },
+        {
+          "label": "Open File",
+          "icon": "fa-folder-open",
+          "onClick": "openFile"
+        }
+      ]
+    },
+    { "type": "separator" },
+    {
+      "type": "group",
+      "label": "Edit Actions",
+      "items": [
+        {
+          "label": "Cut",
+          "icon": "fa-scissors",
+          "shortcut": "⌘X",
+          "onClick": "cut"
+        },
+        {
+          "label": "Copy",
+          "icon": "fa-copy",
+          "shortcut": "⌘C",
+          "onClick": "copy"
+        },
+        {
+          "label": "Paste",
+          "icon": "fa-paste",
+          "shortcut": "⌘V",
+          "onClick": "paste"
+        }
+      ]
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Dropdown with Disabled Items
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Edit" 
+        :items='[
+          {"label": "Undo", "icon": "fa-rotate-left", "disabled": true},
+          {"label": "Redo", "icon": "fa-rotate-right", "disabled": true},
+          {"type": "separator"},
+          {"label": "Cut", "icon": "fa-scissors", "onClick": "cut"},
+          {"label": "Copy", "icon": "fa-copy", "onClick": "copy"}
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Edit",
+  "items": [
+    { "label": "Undo", "icon": "fa-rotate-left", "disabled": true },
+    { "label": "Redo", "icon": "fa-rotate-right", "disabled": true },
+    { "type": "separator" },
+    { "label": "Cut", "icon": "fa-scissors", "onClick": "cut" },
+    { "label": "Copy", "icon": "fa-copy", "onClick": "copy" }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Dropdown with Custom Alignment
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="User Menu" 
+        align="start"
+        icon="fa-user-circle"
+        :items='[
+          {"label": "Profile", "icon": "fa-user", "onClick": "viewProfile"},
+          {"label": "Settings", "icon": "fa-cog", "onClick": "openSettings"},
+          {"type": "separator"},
+          {"label": "Sign Out", "icon": "fa-sign-out", "onClick": "signOut"}
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "User Menu",
+  "align": "start",
+  "icon": "fa-user-circle",
+  "items": [
+    { "label": "Profile", "icon": "fa-user", "onClick": "viewProfile" },
+    { "label": "Settings", "icon": "fa-cog", "onClick": "openSettings" },
+    { "type": "separator" },
+    { "label": "Sign Out", "icon": "fa-sign-out", "onClick": "signOut" }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Full Width Dropdown
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Select Action" 
+        fullWidth="true"
+        :items='[
+          {"label": "Export to PDF", "icon": "fa-file-pdf", "onClick": "exportPDF"},
+          {"label": "Export to CSV", "icon": "fa-file-csv", "onClick": "exportCSV"},
+          {"label": "Export to Excel", "icon": "fa-file-excel", "onClick": "exportExcel"}
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Select Action",
+  "fullWidth": true,
+  "items": [
+    { "label": "Export to PDF", "icon": "fa-file-pdf", "onClick": "exportPDF" },
+    { "label": "Export to CSV", "icon": "fa-file-csv", "onClick": "exportCSV" },
+    {
+      "label": "Export to Excel",
+      "icon": "fa-file-excel",
+      "onClick": "exportExcel"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Dropdown with Action Options
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Share" 
+        icon="fa-share-nodes"
+        :items='[
+          {
+            "label": "Email",
+            "icon": "fa-envelope",
+            "onClick": {
+              "namedAction": "shareContent",
+              "actionOptions": {"method": "email"}
+            }
+          },
+          {
+            "label": "Copy Link",
+            "icon": "fa-link",
+            "onClick": {
+              "namedAction": "shareContent",
+              "actionOptions": {"method": "link"}
+            }
+          }
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Share",
+  "icon": "fa-share-nodes",
+  "items": [
+    {
+      "label": "Email",
+      "icon": "fa-envelope",
+      "onClick": {
+        "namedAction": "shareContent",
+        "actionOptions": { "method": "email" }
+      }
+    },
+    {
+      "label": "Copy Link",
+      "icon": "fa-link",
+      "onClick": {
+        "namedAction": "shareContent",
+        "actionOptions": { "method": "link" }
+      }
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Grouped Items with Action Options
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Dropdown" 
+        label="Add Role" 
+        icon="fa-user-plus"
+        :items='[
+          {
+            "type": "group",
+            "label": "Available Roles",
+            "items": [
+              {
+                "label": "Claimant",
+                "value": "claimant",
+                "icon": "fa-user",
+                "onClick": {
+                  "namedAction": "addRole",
+                  "actionOptions": {"role": "claimant"}
+                }
+              },
+              {
+                "label": "Attorney",
+                "value": "attorney",
+                "icon": "fa-gavel",
+                "onClick": {
+                  "namedAction": "addRole",
+                  "actionOptions": {"role": "attorney"}
+                }
+              },
+              {
+                "label": "Defense Firm",
+                "value": "defenseFirm",
+                "icon": "fa-building",
+                "disabled": true,
+                "onClick": {
+                  "namedAction": "addRole",
+                  "actionOptions": {"role": "defenseFirm"}
+                }
+              }
+            ]
+          }
+        ]'>
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Add Role",
+  "icon": "fa-user-plus",
+  "items": [
+    {
+      "type": "group",
+      "label": "Available Roles",
+      "items": [
+        {
+          "label": "Claimant",
+          "value": "claimant",
+          "icon": "fa-user",
+          "onClick": {
+            "namedAction": "addRole",
+            "actionOptions": { "role": "claimant" }
+          }
+        },
+        {
+          "label": "Attorney",
+          "value": "attorney",
+          "icon": "fa-gavel",
+          "onClick": {
+            "namedAction": "addRole",
+            "actionOptions": { "role": "attorney" }
+          }
+        },
+        {
+          "label": "Defense Firm",
+          "value": "defenseFirm",
+          "icon": "fa-building",
+          "disabled": true,
+          "onClick": {
+            "namedAction": "addRole",
+            "actionOptions": { "role": "defenseFirm" }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+---
+
+## Dropdown Styling
+
+The Dropdown component features a modern, accessible design with smooth animations and clear visual feedback.
+
+### Visual Structure
+
+The dropdown renders with the following structure:
+
+**Trigger Button:**
+
+- **Icon** (optional): Font Awesome icon on the left
+- **Label**: Button text
+- **Chevron**: Down arrow indicator on the right
+- **Container**: Rounded button with border and hover effects
+
+**Dropdown Menu:**
+
+- **Container**: Floating popover with border and shadow
+- **Items**: Clickable menu items with hover states
+- **Groups**: Section headers with muted styling
+- **Separators**: Horizontal dividers
+
+### Default Appearance
+
+```html
+<!-- Trigger Button -->
+<button
+  class="border-input bg-background inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm font-medium"
+>
+  <i class="fa-regular fa-bars"></i>
+  <span>Menu</span>
+  <i class="fa-regular fa-chevron-down"></i>
+</button>
+
+<!-- Dropdown Menu -->
+<div class="bg-popover absolute z-50 mt-2 min-w-48 rounded-md border shadow">
+  <div class="py-1">
+    <!-- Menu items here -->
+  </div>
+</div>
+```
+
+### Item States
+
+**Normal Item:**
+
+```html
+<button
+  class="hover:bg-accent flex w-full items-center gap-2 px-2 py-1.5 text-sm"
+>
+  <i class="fa-regular fa-pen"></i>
+  <span>Edit</span>
+</button>
+```
+
+**Disabled Item:**
+
+```html
+<button disabled class="pointer-events-none opacity-50">Disabled Item</button>
+```
+
+**Checkbox Item (Checked):**
+
+```html
+<button class="flex w-full items-center gap-2 px-2 py-1.5">
+  <span
+    class="bg-primary border-primary text-primary-foreground inline-flex h-3.5 w-3.5 items-center justify-center rounded border"
+  >
+    <i class="fa-regular fa-check"></i>
+  </span>
+  <span>Option</span>
+</button>
+```
+
+**Radio Item (Selected):**
+
+```html
+<button class="flex w-full items-center gap-2 px-2 py-1.5">
+  <span
+    class="border-primary inline-flex h-3.5 w-3.5 items-center justify-center rounded-full border"
+  >
+    <span class="bg-primary h-2 w-2 rounded-full"></span>
+  </span>
+  <span>Selected</span>
+</button>
+```
+
+**Group Header:**
+
+```html
+<div class="text-muted-foreground px-2 pt-2 pb-1 text-xs font-semibold">
+  Group Label
+</div>
+```
+
+**Separator:**
+
+```html
+<div class="border-border my-1 border-t"></div>
+```
+
+### Menu Alignment
+
+The dropdown menu's position is controlled by the `align` property:
+
+- **`align: "start"`**: `left-0 right-auto origin-top-left`
+- **`align: "center"`**: `left-1/2 -translate-x-1/2 origin-top`
+- **`align: "end"`**: `right-0 left-auto origin-top-right` (default)
+
+### Animation Behavior
+
+- **Menu appears**: Positioned absolutely below the trigger
+- **Hover**: Menu items highlight with background color change
+- **Keyboard navigation**: Escape key closes menu and returns focus to trigger
+
+### Theme Integration
+
+The component uses CSS custom properties for colors, allowing seamless integration with your application's theme:
+
+- `bg-background`, `text-foreground` - Base colors
+- `border-input`, `border-border` - Border colors
+- `bg-accent`, `text-accent-foreground` - Hover states
+- `bg-popover`, `text-popover-foreground` - Menu colors
+- `bg-primary`, `text-primary-foreground` - Active states
+- `text-muted-foreground` - Secondary text
+
+---
+
+## State Management
+
+The Dropdown component provides sophisticated state management for various interaction patterns.
+
+### Open/Close State
+
+The dropdown automatically manages its open/closed state using the `stateKey` property.
+
+**Default Behavior:**
+
+```javascript
+// State key defaults to: `dropdownState_${modelKey || 'default'}`
+// For example, if modelKey is "sortMenu":
+model.dropdownState_sortMenu = false // closed
+model.dropdownState_sortMenu = true // open
+```
+
+**Custom State Key:**
+
+```json
+{
+  "label": "Menu",
+  "stateKey": "myCustomMenuOpen",
+  "items": [...]
+}
+```
+
+**Automatic Management:**
+
+- Click trigger button → toggles state
+- Click menu item → closes menu (if `closeOnSelect` is true)
+- Press Escape → closes menu and returns focus to trigger
+- Radio item selection → always closes menu
+
+### Checkbox State
+
+Checkboxes maintain independent toggle states.
+
+**Default Checkbox Storage:**
+
+```javascript
+// Stored in an object at: `${stateKey}_checks`
+// For stateKey "dropdownState_filters":
+model.dropdownState_filters_checks = {
+  active: true,
+  pending: false,
+  completed: true,
+}
+```
+
+**Custom Checkbox Model:**
+
+```json
+{
+  "type": "checkbox",
+  "label": "Show Archived",
+  "value": "archived",
+  "modelKey": "filters.showArchived" // Stored at model.filters.showArchived
+}
+```
+
+**Implementation Pattern:**
+
+```javascript
+// In your onClick handler
+function updateFilter(options) {
+  // Options passed by the component include:
+  // - value: The item's value property
+  // - checked: Current checkbox state (true/false)
+  // - item: The full item object
+  // - Plus any custom actionOptions you specified
+
+  const { value, checked, item } = options
+
+  // The checkbox state is already updated by the component
+  // You can access it here for additional logic
+  console.log(`${value} is now ${checked ? 'checked' : 'unchecked'}`)
+
+  // Perform filtering logic
+  refreshData()
+}
+```
+
+### Radio State
+
+Radio items provide mutually exclusive selection.
+
+**Radio Storage:**
+
+```javascript
+// All radio items share the dropdown's modelKey
+// For modelKey "sortField":
+model.sortField = 'name' // User selected "Name"
+model.sortField = 'created' // User changed to "Date Created"
+```
+
+**Configuration:**
+
+```json
+{
+  "label": "Sort By",
+  "modelKey": "sortField", // Shared by all radio items
+  "items": [
+    { "type": "radio", "label": "Name", "value": "name" },
+    { "type": "radio", "label": "Date", "value": "date" }
+  ]
+}
+```
+
+**Implementation Pattern:**
+
+```javascript
+// In your onClick handler
+function updateSort(options) {
+  // Options passed by the component include:
+  // - value: The selected radio item's value
+  // - item: The full item object
+  // - Plus any custom actionOptions you specified
+
+  const { value, item } = options
+
+  // The radio value is already set by the component
+  // Access it for your sorting logic
+  const sortField = model.sortField // = value
+
+  // Perform sort
+  sortData(sortField)
+}
+```
+
+### State Initialization
+
+The component automatically initializes required state keys when mounted:
+
+```javascript
+// Initialization logic (handled automatically)
+if (typeof model[stateKey] === 'undefined') {
+  model[stateKey] = false // Menu starts closed
+}
+
+if (!model[stateKey + '_checks']) {
+  model[stateKey + '_checks'] = {} // Initialize checkbox storage
+}
+```
+
+### Best Practices
+
+**✅ Do:**
+
+- Use unique `stateKey` values for each dropdown
+- Use `modelKey` for checkboxes when state needs to persist across sessions
+- Provide `onClick` handlers to respond to item selections
+- Initialize radio `modelKey` with a default value if needed
+
+**❌ Don't:**
+
+- Manually manipulate checkbox states (let the component handle it)
+- Reuse the same `modelKey` for different radio groups
+- Mix radio items with different `modelKey` values in the same dropdown
+- Forget to handle state cleanup when removing dropdowns dynamically
