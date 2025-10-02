@@ -398,11 +398,16 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 ```html {{ title: 'HTML Component' }}
 <bfcomp name="Dropdown" 
         label="Actions" 
-        :items='[
-          {"label": "Edit", "value": "edit", "onClick": "handleEdit"},
-          {"label": "Delete", "value": "delete", "onClick": "handleDelete"}
-        ]'>
+        :items="model.actionsMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.actionsMenuItems = [
+  { label: 'Edit', value: 'edit', onClick: 'handleEdit' },
+  { label: 'Delete', value: 'delete', onClick: 'handleDelete' },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -424,13 +429,18 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 <bfcomp name="Dropdown" 
         label="Menu" 
         icon="fa-bars"
-        :items='[
-          {"label": "New", "icon": "fa-plus", "onClick": "createNew"},
-          {"label": "Save", "icon": "fa-floppy-disk", "onClick": "save"},
-          {"type": "separator"},
-          {"label": "Export", "icon": "fa-download", "onClick": "export"}
-        ]'>
+        :items="model.mainMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.mainMenuItems = [
+  { label: 'New', icon: 'fa-plus', onClick: 'createNew' },
+  { label: 'Save', icon: 'fa-floppy-disk', onClick: 'save' },
+  { type: 'separator' },
+  { label: 'Export', icon: 'fa-download', onClick: 'export' },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -455,12 +465,32 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 <bfcomp name="Dropdown" 
         label="Filters" 
         stateKey="filterMenuOpen"
-        :items='[
-          {"type": "checkbox", "label": "Active", "value": "active", "onClick": "updateFilter"},
-          {"type": "checkbox", "label": "Pending", "value": "pending", "onClick": "updateFilter"},
-          {"type": "checkbox", "label": "Completed", "value": "completed", "onClick": "updateFilter"}
-        ]'>
+        :items="model.filterMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.filterMenuItems = [
+  {
+    type: 'checkbox',
+    label: 'Active',
+    value: 'active',
+    onClick: 'updateFilter',
+  },
+  {
+    type: 'checkbox',
+    label: 'Pending',
+    value: 'pending',
+    onClick: 'updateFilter',
+  },
+  {
+    type: 'checkbox',
+    label: 'Completed',
+    value: 'completed',
+    onClick: 'updateFilter',
+  },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -499,12 +529,27 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 <bfcomp name="Dropdown" 
         label="Sort By" 
         modelKey="sortField"
-        :items='[
-          {"type": "radio", "label": "Name", "value": "name", "onClick": "updateSort"},
-          {"type": "radio", "label": "Date Created", "value": "created", "onClick": "updateSort"},
-          {"type": "radio", "label": "Date Modified", "value": "modified", "onClick": "updateSort"}
-        ]'>
+        :items="model.sortMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.sortMenuItems = [
+  { type: 'radio', label: 'Name', value: 'name', onClick: 'updateSort' },
+  {
+    type: 'radio',
+    label: 'Date Created',
+    value: 'created',
+    onClick: 'updateSort',
+  },
+  {
+    type: 'radio',
+    label: 'Date Modified',
+    value: 'modified',
+    onClick: 'updateSort',
+  },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -542,27 +587,32 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 ```html {{ title: 'HTML Component' }}
 <bfcomp name="Dropdown" 
         label="Options" 
-        :items='[
-          {
-            "type": "group",
-            "label": "File Actions",
-            "items": [
-              {"label": "New File", "icon": "fa-file", "onClick": "newFile"},
-              {"label": "Open File", "icon": "fa-folder-open", "onClick": "openFile"}
-            ]
-          },
-          {"type": "separator"},
-          {
-            "type": "group",
-            "label": "Edit Actions",
-            "items": [
-              {"label": "Cut", "icon": "fa-scissors", "shortcut": "⌘X", "onClick": "cut"},
-              {"label": "Copy", "icon": "fa-copy", "shortcut": "⌘C", "onClick": "copy"},
-              {"label": "Paste", "icon": "fa-paste", "shortcut": "⌘V", "onClick": "paste"}
-            ]
-          }
-        ]'>
+        :items="model.groupedMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.groupedMenuItems = [
+  {
+    type: 'group',
+    label: 'File Actions',
+    items: [
+      { label: 'New File', icon: 'fa-file', onClick: 'newFile' },
+      { label: 'Open File', icon: 'fa-folder-open', onClick: 'openFile' },
+    ],
+  },
+  { type: 'separator' },
+  {
+    type: 'group',
+    label: 'Edit Actions',
+    items: [
+      { label: 'Cut', icon: 'fa-scissors', shortcut: '⌘X', onClick: 'cut' },
+      { label: 'Copy', icon: 'fa-copy', shortcut: '⌘C', onClick: 'copy' },
+      { label: 'Paste', icon: 'fa-paste', shortcut: '⌘V', onClick: 'paste' },
+    ],
+  },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -618,14 +668,19 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 ```html {{ title: 'HTML Component' }}
 <bfcomp name="Dropdown" 
         label="Edit" 
-        :items='[
-          {"label": "Undo", "icon": "fa-rotate-left", "disabled": true},
-          {"label": "Redo", "icon": "fa-rotate-right", "disabled": true},
-          {"type": "separator"},
-          {"label": "Cut", "icon": "fa-scissors", "onClick": "cut"},
-          {"label": "Copy", "icon": "fa-copy", "onClick": "copy"}
-        ]'>
+        :items="model.editMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.editMenuItems = [
+  { label: 'Undo', icon: 'fa-rotate-left', disabled: true },
+  { label: 'Redo', icon: 'fa-rotate-right', disabled: true },
+  { type: 'separator' },
+  { label: 'Cut', icon: 'fa-scissors', onClick: 'cut' },
+  { label: 'Copy', icon: 'fa-copy', onClick: 'copy' },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -651,13 +706,18 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
         label="User Menu" 
         align="start"
         icon="fa-user-circle"
-        :items='[
-          {"label": "Profile", "icon": "fa-user", "onClick": "viewProfile"},
-          {"label": "Settings", "icon": "fa-cog", "onClick": "openSettings"},
-          {"type": "separator"},
-          {"label": "Sign Out", "icon": "fa-sign-out", "onClick": "signOut"}
-        ]'>
+        :items="model.userMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.userMenuItems = [
+  { label: 'Profile', icon: 'fa-user', onClick: 'viewProfile' },
+  { label: 'Settings', icon: 'fa-cog', onClick: 'openSettings' },
+  { type: 'separator' },
+  { label: 'Sign Out', icon: 'fa-sign-out', onClick: 'signOut' },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -683,12 +743,17 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 <bfcomp name="Dropdown" 
         label="Select Action" 
         fullWidth="true"
-        :items='[
-          {"label": "Export to PDF", "icon": "fa-file-pdf", "onClick": "exportPDF"},
-          {"label": "Export to CSV", "icon": "fa-file-csv", "onClick": "exportCSV"},
-          {"label": "Export to Excel", "icon": "fa-file-excel", "onClick": "exportExcel"}
-        ]'>
+        :items="model.exportMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.exportMenuItems = [
+  { label: 'Export to PDF', icon: 'fa-file-pdf', onClick: 'exportPDF' },
+  { label: 'Export to CSV', icon: 'fa-file-csv', onClick: 'exportCSV' },
+  { label: 'Export to Excel', icon: 'fa-file-excel', onClick: 'exportExcel' },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -716,25 +781,30 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 <bfcomp name="Dropdown" 
         label="Share" 
         icon="fa-share-nodes"
-        :items='[
-          {
-            "label": "Email",
-            "icon": "fa-envelope",
-            "onClick": {
-              "namedAction": "shareContent",
-              "actionOptions": {"method": "email"}
-            }
-          },
-          {
-            "label": "Copy Link",
-            "icon": "fa-link",
-            "onClick": {
-              "namedAction": "shareContent",
-              "actionOptions": {"method": "link"}
-            }
-          }
-        ]'>
+        :items="model.shareMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.shareMenuItems = [
+  {
+    label: 'Email',
+    icon: 'fa-envelope',
+    onClick: {
+      namedAction: 'shareContent',
+      actionOptions: { method: 'email' },
+    },
+  },
+  {
+    label: 'Copy Link',
+    icon: 'fa-link',
+    onClick: {
+      namedAction: 'shareContent',
+      actionOptions: { method: 'link' },
+    },
+  },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}
@@ -771,43 +841,48 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 <bfcomp name="Dropdown" 
         label="Add Role" 
         icon="fa-user-plus"
-        :items='[
-          {
-            "type": "group",
-            "label": "Available Roles",
-            "items": [
-              {
-                "label": "Claimant",
-                "value": "claimant",
-                "icon": "fa-user",
-                "onClick": {
-                  "namedAction": "addRole",
-                  "actionOptions": {"role": "claimant"}
-                }
-              },
-              {
-                "label": "Attorney",
-                "value": "attorney",
-                "icon": "fa-gavel",
-                "onClick": {
-                  "namedAction": "addRole",
-                  "actionOptions": {"role": "attorney"}
-                }
-              },
-              {
-                "label": "Defense Firm",
-                "value": "defenseFirm",
-                "icon": "fa-building",
-                "disabled": true,
-                "onClick": {
-                  "namedAction": "addRole",
-                  "actionOptions": {"role": "defenseFirm"}
-                }
-              }
-            ]
-          }
-        ]'>
+        :items="model.roleMenuItems">
 </bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.roleMenuItems = [
+  {
+    type: 'group',
+    label: 'Available Roles',
+    items: [
+      {
+        label: 'Claimant',
+        value: 'claimant',
+        icon: 'fa-user',
+        onClick: {
+          namedAction: 'addRole',
+          actionOptions: { role: 'claimant' },
+        },
+      },
+      {
+        label: 'Attorney',
+        value: 'attorney',
+        icon: 'fa-gavel',
+        onClick: {
+          namedAction: 'addRole',
+          actionOptions: { role: 'attorney' },
+        },
+      },
+      {
+        label: 'Defense Firm',
+        value: 'defenseFirm',
+        icon: 'fa-building',
+        disabled: true,
+        onClick: {
+          namedAction: 'addRole',
+          actionOptions: { role: 'defenseFirm' },
+        },
+      },
+    ],
+  },
+]
 ```
 
 ```json {{ title: 'JSON Configuration' }}

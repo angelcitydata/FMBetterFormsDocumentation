@@ -1,0 +1,1287 @@
+export const metadata = {
+  title: 'Accordion Component',
+  description:
+    'A collapsible content component for FM BetterForms that organizes information into expandable panels with smooth animations and flexible state management.',
+}
+
+# Accordion Component
+
+The Accordion component provides an elegant way to display collapsible content sections in your FM BetterForms application. It features smooth expand/collapse animations, single or multiple panel modes, state persistence, and full accessibility support for organizing complex information hierarchies. {{ className: 'lead' }}
+
+    This component manages panel state through the model system, supports
+    both single and multiple open panels, provides disabled states for
+    individual items, and includes smooth transitions for enhanced user experience.
+
+---
+
+## Component Properties
+
+### Core Configuration
+
+<Properties>
+  <Property name="items" type="array">
+    An array of accordion item objects that define the panels. Each item must have:
+    
+    - `id` (string) - Unique identifier for the item
+    - `title` (string) - The header text displayed in the trigger button
+    - `content` (string) - The content displayed when the panel is expanded
+    - `disabled` (boolean, optional) - Whether this item is disabled
+    
+    Default is an empty array `[]`.
+  </Property>
+  <Property name="type" type="string">
+    Determines how many panels can be open simultaneously. Default is `"single"`.
+
+    **Supported values:**
+
+    - `"single"` - Only one panel can be open at a time. Opening a new panel automatically closes the previously open panel.
+    - `"multiple"` - Multiple panels can be open simultaneously. Each panel toggles independently.
+
+  </Property>
+  <Property name="collapsible" type="boolean">
+    When true, allows closing the currently open panel in `"single"` mode by clicking it again. 
+    When false in `"single"` mode, at least one panel must always remain open.
+    
+    In `"multiple"` mode, this property has no effect as all panels can always be toggled.
+    
+    Default is `true`.
+  </Property>
+  <Property name="stateKey" type="string">
+    The key path in the form model where the accordion's open/closed state is stored. 
+    The state is stored as an object mapping item IDs to boolean values (true = open, false/undefined = closed).
+    
+    For example, with `stateKey: "accordion"`, the state might look like:
+    ```json
+    {
+      "accordion": {
+        "item-1": true,
+        "item-2": false
+      }
+    }
+    ```
+    
+    Default is `"accordion"`.
+  </Property>
+</Properties>
+
+### Display & Behavior Properties
+
+<Properties>
+  <Property name="idPrefix" type="string">
+    A prefix used for generating unique HTML element IDs for accordion triggers
+    and content regions. This is important for accessibility (ARIA) and for
+    avoiding ID conflicts when multiple accordions exist on the same page.
+    Element IDs follow the pattern: `{idPrefix}-{itemId}-trigger` and `
+    {idPrefix}-{itemId}-content`. Default is `"acc"`.
+  </Property>
+  <Property name="windowIndex" type="number">
+    Index of the window in the BetterForms window stack. Used for multi-window
+    applications to access the correct model state. Default is 0.
+  </Property>
+</Properties>
+
+---
+
+## Accordion Modes Guide
+
+The Accordion component offers two distinct modes for managing panel behavior, each designed for specific use cases in organizing and displaying content.
+
+### Mode Overview
+
+**Single Mode** (`type: "single"`)
+
+Only one panel can be open at a time. When a user clicks to open a new panel, any currently open panel automatically closes. This mode is ideal for:
+
+- Mutually exclusive content sections
+- Guided workflows or step-by-step processes
+- Settings or configuration panels where only one section should be active
+- FAQ sections where you want to focus attention on one answer at a time
+
+**Multiple Mode** (`type: "multiple"`)
+
+Multiple panels can be open simultaneously. Each panel toggles independently of the others. This mode is ideal for:
+
+- Comparing content across multiple sections
+- Advanced filtering or configuration options
+- Documentation with independent topics
+- Data exploration where users may need to reference multiple sections
+
+### Choosing the Right Mode
+
+Selecting the appropriate accordion mode helps create an intuitive user experience and guides users through your content effectively.
+
+**Use Single Mode When:**
+
+- Content sections are mutually exclusive or alternatives to each other
+- You want to maintain a clean, focused interface with minimal scrolling
+- Users typically only need to view one section at a time
+- The accordion represents a selection or choice (like selecting a payment method)
+- You want to guide users through content in a sequential manner
+
+**Use Multiple Mode When:**
+
+- Users need to compare or reference multiple sections simultaneously
+- Content sections are independent and complementary
+- Users might need information from several panels to complete a task
+- The accordion serves as a filter or advanced search interface
+- Content is reference-based (like a knowledge base or documentation)
+
+**Real-World Examples:**
+
+**Single Mode Use Cases:**
+
+- **FAQ Section**: Users read one question/answer at a time
+- **Checkout Steps**: Display one step (Shipping, Payment, Review) at a time
+- **Settings Categories**: Only one category (Profile, Privacy, Notifications) open
+- **Product Details**: Tabs-like behavior (Description, Specs, Reviews)
+
+**Multiple Mode Use Cases:**
+
+- **Advanced Filters**: Multiple filter categories (Price, Brand, Rating) open together
+- **Documentation**: Multiple related topics visible for reference
+- **Comparison Tool**: Different product features expanded side-by-side
+- **Form Sections**: Multiple independent sections of a long form
+
+```json {{ title: 'Mode Selection Examples' }}
+{
+  "FAQ": { "type": "single", "collapsible": true },
+  "Checkout Process": { "type": "single", "collapsible": false },
+  "Product Filters": { "type": "multiple" },
+  "Settings": { "type": "single", "collapsible": true },
+  "Documentation": { "type": "multiple" },
+  "Comparison": { "type": "multiple" }
+}
+```
+
+### Collapsible Behavior
+
+The `collapsible` property works in conjunction with the `type` property:
+
+**Single Mode + Collapsible (true)**:
+
+- Users can close the open panel by clicking it again
+- All panels can be closed simultaneously
+- Most flexible single-mode behavior
+
+**Single Mode + Collapsible (false)**:
+
+- At least one panel must always be open
+- Clicking the open panel does nothing
+- Useful for forced-choice scenarios
+
+**Multiple Mode**:
+
+- The `collapsible` property has no effect
+- All panels can always be toggled independently
+
+### Best Practices
+
+**✅ Do:**
+
+- Use single mode for mutually exclusive content
+- Use multiple mode when users need to compare or reference multiple sections
+- Set `collapsible: false` only when a selection must always be made
+- Consider mobile screen space when choosing modes
+- Use descriptive titles that clearly indicate panel content
+
+**❌ Don't:**
+
+- Use single mode when users frequently need to reference multiple sections
+- Use multiple mode for step-by-step processes
+- Overcomplicate with too many accordion items (consider pagination or grouping)
+- Nest accordions within accordions (creates poor UX)
+
+### Visual Feedback
+
+All accordion items include:
+
+- **Hover state** - Background color change on trigger button
+- **Chevron rotation** - Icon rotates 180° when panel opens
+- **Smooth transitions** - Animated expand/collapse with opacity fade
+- **Disabled state** - 50% opacity with no pointer events for disabled items
+- **Accessibility** - Full ARIA support with proper roles and attributes
+
+---
+
+## Usage Examples
+
+The Accordion component can be used in two ways: as JSON configuration objects or as HTML `<bfcomp>` elements. Both approaches provide the same functionality. The `items` array is typically defined in your model for dynamic content.
+
+### Basic Accordion (Single Mode)
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="single" 
+        collapsible="true" 
+        stateKey="faqAccordion" 
+        idPrefix="faq"
+        :items="model.faqItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.faqItems = [
+  {
+    id: 'item-1',
+    title: 'What is FM BetterForms?',
+    content:
+      'FM BetterForms is a powerful framework for building modern web applications with FileMaker.',
+  },
+  {
+    id: 'item-2',
+    title: 'How do I get started?',
+    content:
+      'Check out our quickstart guide to begin building your first BetterForms application.',
+  },
+  {
+    id: 'item-3',
+    title: 'Is there documentation?',
+    content:
+      'Yes! Comprehensive documentation is available for all components and features.',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "single",
+  "collapsible": true,
+  "stateKey": "faqAccordion",
+  "idPrefix": "faq",
+  "items": [
+    {
+      "id": "item-1",
+      "title": "What is FM BetterForms?",
+      "content": "FM BetterForms is a powerful framework for building modern web applications with FileMaker."
+    },
+    {
+      "id": "item-2",
+      "title": "How do I get started?",
+      "content": "Check out our quickstart guide to begin building your first BetterForms application."
+    },
+    {
+      "id": "item-3",
+      "title": "Is there documentation?",
+      "content": "Yes! Comprehensive documentation is available for all components and features."
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### FAQ Accordion
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="single" 
+        collapsible="true" 
+        stateKey="helpAccordion" 
+        idPrefix="help"
+        :items="model.helpItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.helpItems = [
+  {
+    id: 'pricing',
+    title: 'What are your pricing options?',
+    content:
+      'We offer flexible pricing plans to suit teams of all sizes. Contact our sales team for details.',
+  },
+  {
+    id: 'support',
+    title: 'What kind of support do you provide?',
+    content:
+      'We provide 24/7 email support, live chat during business hours, and comprehensive documentation.',
+  },
+  {
+    id: 'trial',
+    title: 'Do you offer a free trial?',
+    content:
+      'Yes! We offer a 14-day free trial with full access to all features.',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "single",
+  "collapsible": true,
+  "stateKey": "helpAccordion",
+  "idPrefix": "help",
+  "items": [
+    {
+      "id": "pricing",
+      "title": "What are your pricing options?",
+      "content": "We offer flexible pricing plans to suit teams of all sizes. Contact our sales team for details."
+    },
+    {
+      "id": "support",
+      "title": "What kind of support do you provide?",
+      "content": "We provide 24/7 email support, live chat during business hours, and comprehensive documentation."
+    },
+    {
+      "id": "trial",
+      "title": "Do you offer a free trial?",
+      "content": "Yes! We offer a 14-day free trial with full access to all features."
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Multiple Mode Accordion (Filters)
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="multiple" 
+        stateKey="filterAccordion" 
+        idPrefix="filter"
+        :items="model.filterItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.filterItems = [
+  {
+    id: 'price',
+    title: 'Price Range',
+    content: 'Filter by price: $0 - $1000+',
+  },
+  {
+    id: 'category',
+    title: 'Category',
+    content: 'Select product categories: Electronics, Clothing, Home & Garden',
+  },
+  {
+    id: 'rating',
+    title: 'Customer Rating',
+    content: 'Filter by rating: 1-5 stars',
+  },
+  {
+    id: 'availability',
+    title: 'Availability',
+    content: 'In Stock, Out of Stock, Pre-order',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "multiple",
+  "stateKey": "filterAccordion",
+  "idPrefix": "filter",
+  "items": [
+    {
+      "id": "price",
+      "title": "Price Range",
+      "content": "Filter by price: $0 - $1000+"
+    },
+    {
+      "id": "category",
+      "title": "Category",
+      "content": "Select product categories: Electronics, Clothing, Home & Garden"
+    },
+    {
+      "id": "rating",
+      "title": "Customer Rating",
+      "content": "Filter by rating: 1-5 stars"
+    },
+    {
+      "id": "availability",
+      "title": "Availability",
+      "content": "In Stock, Out of Stock, Pre-order"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Settings Accordion (Non-collapsible)
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="single" 
+        collapsible="false" 
+        stateKey="settingsAccordion" 
+        idPrefix="settings"
+        :items="model.settingsItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.settingsItems = [
+  {
+    id: 'profile',
+    title: 'Profile Settings',
+    content: 'Manage your profile information, avatar, and display name.',
+  },
+  {
+    id: 'security',
+    title: 'Security & Privacy',
+    content:
+      'Update password, enable two-factor authentication, and manage privacy settings.',
+  },
+  {
+    id: 'notifications',
+    title: 'Notifications',
+    content:
+      'Configure email notifications, push notifications, and alert preferences.',
+  },
+  {
+    id: 'billing',
+    title: 'Billing & Subscription',
+    content:
+      'View billing history, update payment methods, and manage your subscription.',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "single",
+  "collapsible": false,
+  "stateKey": "settingsAccordion",
+  "idPrefix": "settings",
+  "items": [
+    {
+      "id": "profile",
+      "title": "Profile Settings",
+      "content": "Manage your profile information, avatar, and display name."
+    },
+    {
+      "id": "security",
+      "title": "Security & Privacy",
+      "content": "Update password, enable two-factor authentication, and manage privacy settings."
+    },
+    {
+      "id": "notifications",
+      "title": "Notifications",
+      "content": "Configure email notifications, push notifications, and alert preferences."
+    },
+    {
+      "id": "billing",
+      "title": "Billing & Subscription",
+      "content": "View billing history, update payment methods, and manage your subscription."
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Accordion with Disabled Item
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="single" 
+        collapsible="true" 
+        stateKey="featuresAccordion" 
+        idPrefix="features"
+        :items="model.featureItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.featureItems = [
+  {
+    id: 'basic',
+    title: 'Basic Features',
+    content: 'Essential features available in all plans.',
+  },
+  {
+    id: 'premium',
+    title: 'Premium Features',
+    content: 'Advanced features for premium users.',
+    disabled: false,
+  },
+  {
+    id: 'enterprise',
+    title: 'Enterprise Features (Coming Soon)',
+    content: 'Enterprise-level features launching next month.',
+    disabled: true,
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "single",
+  "collapsible": true,
+  "stateKey": "featuresAccordion",
+  "idPrefix": "features",
+  "items": [
+    {
+      "id": "basic",
+      "title": "Basic Features",
+      "content": "Essential features available in all plans."
+    },
+    {
+      "id": "premium",
+      "title": "Premium Features",
+      "content": "Advanced features for premium users.",
+      "disabled": false
+    },
+    {
+      "id": "enterprise",
+      "title": "Enterprise Features (Coming Soon)",
+      "content": "Enterprise-level features launching next month.",
+      "disabled": true
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Documentation Accordion (Multiple Mode)
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="multiple" 
+        stateKey="docsAccordion" 
+        idPrefix="docs"
+        :items="model.docsItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.docsItems = [
+  {
+    id: 'installation',
+    title: 'Installation',
+    content:
+      'Step-by-step guide to installing and configuring FM BetterForms in your environment.',
+  },
+  {
+    id: 'components',
+    title: 'Components',
+    content:
+      'Learn about all available UI components: buttons, inputs, dropdowns, and more.',
+  },
+  {
+    id: 'api',
+    title: 'API Reference',
+    content:
+      'Complete API documentation with endpoints, parameters, and response formats.',
+  },
+  {
+    id: 'examples',
+    title: 'Code Examples',
+    content:
+      'Real-world examples and code snippets to help you get started quickly.',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "multiple",
+  "stateKey": "docsAccordion",
+  "idPrefix": "docs",
+  "items": [
+    {
+      "id": "installation",
+      "title": "Installation",
+      "content": "Step-by-step guide to installing and configuring FM BetterForms in your environment."
+    },
+    {
+      "id": "components",
+      "title": "Components",
+      "content": "Learn about all available UI components: buttons, inputs, dropdowns, and more."
+    },
+    {
+      "id": "api",
+      "title": "API Reference",
+      "content": "Complete API documentation with endpoints, parameters, and response formats."
+    },
+    {
+      "id": "examples",
+      "title": "Code Examples",
+      "content": "Real-world examples and code snippets to help you get started quickly."
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Product Information Accordion
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="single" 
+        collapsible="true" 
+        stateKey="productAccordion" 
+        idPrefix="product"
+        :items="model.productItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.productItems = [
+  {
+    id: 'description',
+    title: 'Description',
+    content:
+      'Detailed product description including features, specifications, and use cases.',
+  },
+  {
+    id: 'specs',
+    title: 'Technical Specifications',
+    content:
+      'Dimensions: 10x8x2 inches | Weight: 1.5 lbs | Materials: Aluminum, Plastic',
+  },
+  {
+    id: 'shipping',
+    title: 'Shipping & Returns',
+    content:
+      'Free shipping on orders over $50. 30-day return policy. Ships within 2-3 business days.',
+  },
+  {
+    id: 'reviews',
+    title: 'Customer Reviews',
+    content:
+      '4.5 stars based on 127 reviews. Customers love the quality and durability.',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "single",
+  "collapsible": true,
+  "stateKey": "productAccordion",
+  "idPrefix": "product",
+  "items": [
+    {
+      "id": "description",
+      "title": "Description",
+      "content": "Detailed product description including features, specifications, and use cases."
+    },
+    {
+      "id": "specs",
+      "title": "Technical Specifications",
+      "content": "Dimensions: 10x8x2 inches | Weight: 1.5 lbs | Materials: Aluminum, Plastic"
+    },
+    {
+      "id": "shipping",
+      "title": "Shipping & Returns",
+      "content": "Free shipping on orders over $50. 30-day return policy. Ships within 2-3 business days."
+    },
+    {
+      "id": "reviews",
+      "title": "Customer Reviews",
+      "content": "4.5 stars based on 127 reviews. Customers love the quality and durability."
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Task Management Accordion
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="single" 
+        collapsible="true" 
+        stateKey="taskAccordion" 
+        idPrefix="task"
+        :items="model.taskItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.taskItems = [
+  {
+    id: 'todo',
+    title: 'To Do (5)',
+    content:
+      'Tasks pending: Design mockups, Write documentation, Code review, Update dependencies, Test features',
+  },
+  {
+    id: 'inprogress',
+    title: 'In Progress (3)',
+    content:
+      'Active tasks: Implement authentication, Build dashboard, Fix reported bugs',
+  },
+  {
+    id: 'review',
+    title: 'In Review (2)',
+    content: 'Awaiting review: New feature PR, Performance optimization',
+  },
+  {
+    id: 'completed',
+    title: 'Completed (12)',
+    content:
+      'Recently completed: User registration, Email notifications, Database migration, API endpoints',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "single",
+  "collapsible": true,
+  "stateKey": "taskAccordion",
+  "idPrefix": "task",
+  "items": [
+    {
+      "id": "todo",
+      "title": "To Do (5)",
+      "content": "Tasks pending: Design mockups, Write documentation, Code review, Update dependencies, Test features"
+    },
+    {
+      "id": "inprogress",
+      "title": "In Progress (3)",
+      "content": "Active tasks: Implement authentication, Build dashboard, Fix reported bugs"
+    },
+    {
+      "id": "review",
+      "title": "In Review (2)",
+      "content": "Awaiting review: New feature PR, Performance optimization"
+    },
+    {
+      "id": "completed",
+      "title": "Completed (12)",
+      "content": "Recently completed: User registration, Email notifications, Database migration, API endpoints"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Customer Support Tickets
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="single" 
+        collapsible="true" 
+        stateKey="ticketAccordion" 
+        idPrefix="ticket"
+        :items="model.ticketItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items dynamically from FileMaker data
+// Example: Items could be populated from FileMaker records
+model.ticketItems = [
+  {
+    id: 'ticket-1001',
+    title: 'Ticket #1001 - Login Issues',
+    content:
+      'Customer reported unable to login. Status: In Progress. Assigned to: Sarah M. Priority: High',
+  },
+  {
+    id: 'ticket-1002',
+    title: 'Ticket #1002 - Feature Request',
+    content:
+      'Request for bulk export functionality. Status: Under Review. Assigned to: John D. Priority: Medium',
+  },
+  {
+    id: 'ticket-1003',
+    title: 'Ticket #1003 - Payment Error',
+    content:
+      'Payment processing error on checkout. Status: Resolved. Assigned to: Mike T. Priority: Critical',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "single",
+  "collapsible": true,
+  "stateKey": "ticketAccordion",
+  "idPrefix": "ticket",
+  "items": [
+    {
+      "id": "ticket-1001",
+      "title": "Ticket #1001 - Login Issues",
+      "content": "Customer reported unable to login. Status: In Progress. Assigned to: Sarah M. Priority: High"
+    },
+    {
+      "id": "ticket-1002",
+      "title": "Ticket #1002 - Feature Request",
+      "content": "Request for bulk export functionality. Status: Under Review. Assigned to: John D. Priority: Medium"
+    },
+    {
+      "id": "ticket-1003",
+      "title": "Ticket #1003 - Payment Error",
+      "content": "Payment processing error on checkout. Status: Resolved. Assigned to: Mike T. Priority: Critical"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Order Details Accordion
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="multiple" 
+        stateKey="orderAccordion" 
+        idPrefix="order"
+        :items="model.orderItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.orderItems = [
+  {
+    id: 'summary',
+    title: 'Order Summary',
+    content:
+      'Order #ORD-2024-1234 | Date: Oct 2, 2024 | Total: $247.99 | Status: Shipped',
+  },
+  {
+    id: 'items',
+    title: 'Items (3)',
+    content:
+      '1x Wireless Mouse ($29.99), 2x USB-C Cable ($15.00 each), 1x Laptop Stand ($187.00)',
+  },
+  {
+    id: 'shipping',
+    title: 'Shipping Information',
+    content:
+      'Tracking: 1Z999AA10123456784 | Carrier: UPS | Expected Delivery: Oct 5, 2024 | Address: 123 Main St, City, ST 12345',
+  },
+  {
+    id: 'payment',
+    title: 'Payment Details',
+    content:
+      'Method: Visa ending in 4242 | Subtotal: $232.99 | Shipping: $10.00 | Tax: $5.00 | Total: $247.99',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "multiple",
+  "stateKey": "orderAccordion",
+  "idPrefix": "order",
+  "items": [
+    {
+      "id": "summary",
+      "title": "Order Summary",
+      "content": "Order #ORD-2024-1234 | Date: Oct 2, 2024 | Total: $247.99 | Status: Shipped"
+    },
+    {
+      "id": "items",
+      "title": "Items (3)",
+      "content": "1x Wireless Mouse ($29.99), 2x USB-C Cable ($15.00 each), 1x Laptop Stand ($187.00)"
+    },
+    {
+      "id": "shipping",
+      "title": "Shipping Information",
+      "content": "Tracking: 1Z999AA10123456784 | Carrier: UPS | Expected Delivery: Oct 5, 2024 | Address: 123 Main St, City, ST 12345"
+    },
+    {
+      "id": "payment",
+      "title": "Payment Details",
+      "content": "Method: Visa ending in 4242 | Subtotal: $232.99 | Shipping: $10.00 | Tax: $5.00 | Total: $247.99"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Training Modules Accordion
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="single" 
+        collapsible="false" 
+        stateKey="trainingAccordion" 
+        idPrefix="training"
+        :items="model.trainingItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.trainingItems = [
+  {
+    id: 'module1',
+    title: 'Module 1: Getting Started ✓',
+    content:
+      'Introduction to the platform, account setup, and basic navigation. Status: Completed',
+    disabled: false,
+  },
+  {
+    id: 'module2',
+    title: 'Module 2: Core Features',
+    content:
+      'Learn about core functionality, creating projects, and managing tasks. Status: In Progress',
+    disabled: false,
+  },
+  {
+    id: 'module3',
+    title: 'Module 3: Advanced Techniques',
+    content:
+      'Advanced workflows, automation, and integrations. Status: Locked - Complete Module 2 first',
+    disabled: true,
+  },
+  {
+    id: 'module4',
+    title: 'Module 4: Best Practices',
+    content:
+      'Tips, tricks, and industry best practices. Status: Locked - Complete Module 3 first',
+    disabled: true,
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "single",
+  "collapsible": false,
+  "stateKey": "trainingAccordion",
+  "idPrefix": "training",
+  "items": [
+    {
+      "id": "module1",
+      "title": "Module 1: Getting Started ✓",
+      "content": "Introduction to the platform, account setup, and basic navigation. Status: Completed",
+      "disabled": false
+    },
+    {
+      "id": "module2",
+      "title": "Module 2: Core Features",
+      "content": "Learn about core functionality, creating projects, and managing tasks. Status: In Progress",
+      "disabled": false
+    },
+    {
+      "id": "module3",
+      "title": "Module 3: Advanced Techniques",
+      "content": "Advanced workflows, automation, and integrations. Status: Locked - Complete Module 2 first",
+      "disabled": true
+    },
+    {
+      "id": "module4",
+      "title": "Module 4: Best Practices",
+      "content": "Tips, tricks, and industry best practices. Status: Locked - Complete Module 3 first",
+      "disabled": true
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+### Event Schedule Accordion
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Accordion" 
+        type="multiple" 
+        stateKey="scheduleAccordion" 
+        idPrefix="schedule"
+        :items="model.scheduleItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define items in your model
+model.scheduleItems = [
+  {
+    id: 'day1',
+    title: 'Day 1 - Monday, Oct 7',
+    content:
+      '9:00 AM - Opening Keynote | 11:00 AM - Workshop A | 2:00 PM - Panel Discussion | 4:00 PM - Networking Session',
+  },
+  {
+    id: 'day2',
+    title: 'Day 2 - Tuesday, Oct 8',
+    content:
+      '9:00 AM - Technical Deep Dive | 11:00 AM - Workshop B | 2:00 PM - Case Studies | 4:00 PM - Q&A Session',
+  },
+  {
+    id: 'day3',
+    title: 'Day 3 - Wednesday, Oct 9',
+    content:
+      '9:00 AM - Best Practices | 11:00 AM - Hands-on Lab | 2:00 PM - Closing Keynote | 4:00 PM - Certificate Ceremony',
+  },
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "type": "multiple",
+  "stateKey": "scheduleAccordion",
+  "idPrefix": "schedule",
+  "items": [
+    {
+      "id": "day1",
+      "title": "Day 1 - Monday, Oct 7",
+      "content": "9:00 AM - Opening Keynote | 11:00 AM - Workshop A | 2:00 PM - Panel Discussion | 4:00 PM - Networking Session"
+    },
+    {
+      "id": "day2",
+      "title": "Day 2 - Tuesday, Oct 8",
+      "content": "9:00 AM - Technical Deep Dive | 11:00 AM - Workshop B | 2:00 PM - Case Studies | 4:00 PM - Q&A Session"
+    },
+    {
+      "id": "day3",
+      "title": "Day 3 - Wednesday, Oct 9",
+      "content": "9:00 AM - Best Practices | 11:00 AM - Hands-on Lab | 2:00 PM - Closing Keynote | 4:00 PM - Certificate Ceremony"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
+---
+
+## Accordion Styling
+
+The Accordion component features a clean, modern design with smooth expand/collapse animations and clear visual feedback. The styling provides excellent readability and maintains a consistent appearance across all states.
+
+### Visual Structure
+
+Each accordion item renders with the following structure:
+
+- **Trigger Button**: Clickable header with title text and chevron icon
+- **Title**: The panel heading displayed in the trigger
+- **Chevron Icon**: Font Awesome chevron that rotates 180° when panel opens
+- **Content Region**: Collapsible content area with smooth height/opacity transitions
+- **Container**: Card-style container with borders and dividers between items
+
+### Default Appearance
+
+```html
+<!-- Full accordion container -->
+<div
+  class="bg-card text-card-foreground border-border divide-border w-full divide-y overflow-hidden rounded-lg border"
+>
+  <!-- Individual accordion item -->
+  <div class="group">
+    <!-- Trigger button -->
+    <button
+      class="hover:bg-accent hover:text-accent-foreground flex w-full items-center justify-between gap-2 px-4 py-3 text-left transition-colors"
+    >
+      <span class="text-base font-medium">Item Title</span>
+      <i
+        class="fa-regular fa-chevron-down rotate-0 transition-transform duration-200"
+      ></i>
+    </button>
+
+    <!-- Content area -->
+    <div class="max-h-0 overflow-hidden opacity-0 transition-all duration-300">
+      <div class="text-muted-foreground px-4 pb-4 text-base">
+        Content goes here
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### State Variations
+
+**Closed Panel**:
+
+```html
+<!-- Chevron points down, content hidden -->
+<button aria-expanded="false">
+  <span>Item Title</span>
+  <i class="fa-regular fa-chevron-down rotate-0"></i>
+</button>
+<div class="max-h-0 opacity-0">
+  <div>Hidden content</div>
+</div>
+```
+
+**Open Panel**:
+
+```html
+<!-- Chevron rotated 180°, content visible -->
+<button aria-expanded="true">
+  <span>Item Title</span>
+  <i class="fa-regular fa-chevron-down rotate-180"></i>
+</button>
+<div class="max-h-96 opacity-100">
+  <div>Visible content</div>
+</div>
+```
+
+**Disabled Item**:
+
+```html
+<!-- 50% opacity, no pointer events -->
+<button disabled class="pointer-events-none opacity-50">
+  <span>Disabled Item</span>
+  <i class="fa-regular fa-chevron-down"></i>
+</button>
+```
+
+**Hover State**:
+
+```html
+<!-- Background color changes on hover -->
+<button class="hover:bg-accent hover:text-accent-foreground">
+  <span>Item Title</span>
+  <i class="fa-regular fa-chevron-down"></i>
+</button>
+```
+
+### Animation Behavior
+
+The accordion includes smooth CSS transitions for enhanced user experience:
+
+- **Chevron Rotation**: 180° rotation with 200ms duration when panel opens/closes
+- **Content Height**: Smooth max-height transition (0 to 96/24rem) over 300ms
+- **Opacity Fade**: Content fades in/out synchronized with height animation
+- **Hover Transition**: Smooth color transition on trigger button hover
+- **Performance**: Uses `will-change` for optimized animations
+
+### Accessibility Features
+
+The component includes full ARIA support for screen readers and keyboard navigation:
+
+- **`role="button"`** - Identifies triggers as interactive buttons
+- **`role="region"`** - Marks content areas as landmark regions
+- **`aria-expanded`** - Indicates whether panel is open (true) or closed (false)
+- **`aria-controls`** - Links trigger to its associated content region
+- **`aria-labelledby`** - Links content back to its trigger for context
+- **Unique IDs** - Generated using `idPrefix` for proper ARIA relationships
+
+### Theme Integration
+
+The component uses CSS custom properties for colors, allowing seamless integration with your application's theme:
+
+- `bg-card`, `text-card-foreground` - Card background and text colors
+- `border-border` - Border and divider colors
+- `bg-accent`, `text-accent-foreground` - Hover state colors
+- `text-muted-foreground` - Content text color for reduced emphasis
+
+---
+
+## State Management
+
+The Accordion component manages panel open/closed state through the BetterForms model system, providing reactive updates and persistence.
+
+### How State Works
+
+The accordion stores its state in the form model at the path specified by `stateKey`:
+
+1. **State Storage**: State is stored as an object with item IDs as keys and booleans as values
+2. **Reactive Updates**: Vue reactivity system automatically updates the UI when state changes
+3. **Single vs Multiple**: Behavior differs based on the `type` property
+4. **Atomic Updates**: State changes use single object assignment to avoid rendering flickers
+
+### State Structure
+
+```javascript
+// Example state in model
+model.accordionState = {
+  'item-1': true, // open
+  'item-2': false, // closed
+  'item-3': true, // open
+}
+```
+
+### Single Mode Behavior
+
+In single mode, only one panel can be open at a time:
+
+```javascript
+// Opening a new panel closes the current one
+// Before: { "item-1": true, "item-2": false }
+// User clicks item-2
+// After:  { "item-2": true }
+
+// With collapsible: true, clicking open panel closes it
+// Before: { "item-1": true }
+// User clicks item-1 again
+// After:  { }
+
+// With collapsible: false, clicking open panel does nothing
+// Before: { "item-1": true }
+// User clicks item-1 again
+// After:  { "item-1": true } (no change)
+```
+
+### Multiple Mode Behavior
+
+In multiple mode, each panel toggles independently:
+
+```javascript
+// Each panel can be opened/closed without affecting others
+// Before: { "item-1": true, "item-2": false }
+// User clicks item-2
+// After:  { "item-1": true, "item-2": true }
+
+// User clicks item-1
+// After:  { "item-1": false, "item-2": true }
+```
+
+### Programmatic Control
+
+You can control accordion state programmatically through the model:
+
+```javascript
+// Open a specific panel (single mode)
+model.myAccordion = { 'panel-3': true }
+
+// Open multiple panels (multiple mode)
+model.myAccordion = {
+  'panel-1': true,
+  'panel-3': true,
+}
+
+// Close all panels
+model.myAccordion = {}
+
+// Toggle a panel
+const currentState = model.myAccordion || {}
+model.myAccordion = {
+  ...currentState,
+  'panel-2': !currentState['panel-2'],
+}
+```
+
+### Best Practices
+
+**✅ Do:**
+
+- Use descriptive `stateKey` values for multiple accordions on the same page
+- Use unique item IDs within each accordion
+- Initialize state in your model if you want panels open by default
+- Use single mode for mutually exclusive content
+- Use multiple mode when users need to reference multiple sections
+
+**❌ Don't:**
+
+- Reuse the same `stateKey` for different accordions (state will conflict)
+- Use the same item IDs across different accordions with the same `stateKey`
+- Manually manipulate DOM classes (let Vue handle the reactivity)
+- Nest accordions within accordion content (poor UX and accessibility)

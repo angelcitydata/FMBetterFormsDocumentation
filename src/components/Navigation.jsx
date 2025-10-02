@@ -197,26 +197,16 @@ function NavigationGroup({ group, className }) {
 export const navigation = [
   {
     title: 'How To',
-    links: [
-      { title: 'Filtering', href: '/fmbf-how-to/filtering' },
-      // { title: 'Quickstart', href: '/quickstart' },
-      // { title: 'SDKs', href: '/sdks' },
-      // { title: 'Authentication', href: '/authentication' },
-      // { title: 'Pagination', href: '/pagination' },
-      // { title: 'Errors', href: '/errors' },
-      // { title: 'Webhooks', href: '/webhooks' },
-    ],
+    links: [{ title: 'Filtering', href: '/fmbf-how-to/filtering' }],
   },
   {
     title: 'Components',
     links: [
+      { title: 'Accordion', href: '/fmbf-components/accordion' },
+      { title: 'Alert Dialog', href: '/fmbf-components/alertDialog' },
       { title: 'Button', href: '/fmbf-components/button' },
       { title: 'Dropdown', href: '/fmbf-components/dropdown' },
       { title: 'Input', href: '/fmbf-components/input' },
-      // { title: 'Conversations', href: '/fmbf-components/conversations' },
-      // { title: 'Messages', href: '/fmbf-components/messages' },
-      // { title: 'Groups', href: '/fmbf-components/groups' },
-      // { title: 'Attachments', href: '/fmbf-components/attachments' },
     ],
   },
 ]

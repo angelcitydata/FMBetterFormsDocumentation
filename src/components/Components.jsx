@@ -5,11 +5,41 @@ import Link from 'next/link'
 
 import { GridPattern } from '@/components/GridPattern'
 import { Heading } from '@/components/Heading'
+import { BellIcon } from '@/components/icons/BellIcon'
 import { CheckIcon } from '@/components/icons/CheckIcon'
 import { DocumentIcon } from '@/components/icons/DocumentIcon'
 import { ListIcon } from '@/components/icons/ListIcon'
+import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
 
 const resources = [
+  {
+    href: '/fmbf-components/accordion',
+    name: 'Accordion',
+    description:
+      'A collapsible content component that organizes information into expandable panels with smooth animations.',
+    icon: SquaresPlusIcon,
+    pattern: {
+      y: 22,
+      squares: [
+        [0, 1],
+        [1, 2],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/alertDialog',
+    name: 'Alert Dialog',
+    description:
+      'A modal dialog component for displaying important messages, confirmations, and alerts with customizable action buttons.',
+    icon: BellIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [0, 2],
+        [1, 4],
+      ],
+    },
+  },
   {
     href: '/fmbf-components/button',
     name: 'Button',
