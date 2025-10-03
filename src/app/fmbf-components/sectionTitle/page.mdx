@@ -1,0 +1,415 @@
+export const metadata = {
+  title: 'Section Title Component',
+  description:
+    'A compact section heading component for FM BetterForms that displays subsection titles with optional subtitles using medium typography for detailed content organization and hierarchy.',
+}
+
+# Section Title Component
+
+The Section Title component provides a compact, semantic heading for subsections and field groups in your FM BetterForms application. It features medium typography with optional subtitle support, making it perfect for detailed content organization and establishing clear subsection hierarchy. {{ className: 'lead' }}
+
+    This component is the smallest heading in a family of title components including Page Title and Content Title,
+    each designed for specific content hierarchy levels with consistent styling and accessibility.
+
+---
+
+## Component Properties
+
+### Content Properties
+
+<Properties>
+  <Property name="title" type="string">
+    The section title text to display. This text appears in bold font weight
+    with large text size (2xl) and primary foreground color. Used for subsection headings
+    and field group titles. Example: `"Personal Details"`, `"Contact Information"`, `"Preferences"`.
+    Required property.
+  </Property>
+  <Property name="subtitle" type="string">
+    The optional subtitle text displayed below the main title. This text appears in base text size
+    with muted foreground color. Used to provide additional context or description for the section.
+    Example: `"Enter your basic information"`, `"Provide your contact details"`.
+    Default is empty string.
+  </Property>
+</Properties>
+
+---
+
+## Component Structure
+
+The Section Title component provides a compact, semantic heading structure with medium typography and optional subtitle support. It's designed to work as the smallest heading in a content hierarchy alongside Page Title and Content Title components.
+
+### Title Hierarchy
+
+The Section Title component serves as the smallest heading in the content hierarchy:
+
+1. **[Page Title](/fmbf-components/pageTitle)** - Main page heading (largest, most prominent)
+2. **[Content Title](/fmbf-components/contentTitle)** - Section and subsection headings (medium size, semibold)
+3. **Section Title** - Subsection and field group headings (smaller size) - *Current component*
+
+### Visual Structure
+
+- **Container**: Flex column layout with bottom margin spacing
+- **Title Text**: Bold, large text (2xl) with primary foreground color
+- **Subtitle Text**: Base text size with muted foreground color (optional)
+- **Spacing**: Consistent bottom margin for content separation
+
+### Responsive Design
+
+The Section Title component is designed to be responsive and accessible:
+
+- **Flexible Width**: Titles expand to fill their container width
+- **Consistent Spacing**: Standard bottom margin spacing for content separation
+- **Accessible Typography**: Proper heading hierarchy and text contrast
+- **Semantic HTML**: Uses semantic span elements for proper content structure
+
+---
+
+## Usage Examples
+
+The Section Title component is configured using title and optional subtitle properties. Here are common usage patterns for different section scenarios.
+
+### Basic Section Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="SectionTitle" title="Personal Details">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic section title in your model
+model.personalDetailsTitle = {
+  title: "Personal Details",
+  subtitle: ""
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Personal Details",
+  "subtitle": ""
+}
+```
+
+</CodeGroup>
+
+### Section Title with Subtitle
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="SectionTitle" 
+        title="Contact Information" 
+        subtitle="Provide your contact details">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define section title with subtitle in your model
+model.contactInfoTitle = {
+  title: "Contact Information",
+  subtitle: "Provide your contact details"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Contact Information",
+  "subtitle": "Provide your contact details"
+}
+```
+
+</CodeGroup>
+
+### Field Group Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="SectionTitle" 
+        title="Preferences" 
+        subtitle="Configure your application settings">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define field group title in your model
+model.preferencesTitle = {
+  title: "Preferences",
+  subtitle: "Configure your application settings"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Preferences",
+  "subtitle": "Configure your application settings"
+}
+```
+
+</CodeGroup>
+
+### Form Section Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="SectionTitle" 
+        title="Billing Address" 
+        subtitle="Enter your billing information">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define form section title in your model
+model.billingAddressTitle = {
+  title: "Billing Address",
+  subtitle: "Enter your billing information"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Billing Address",
+  "subtitle": "Enter your billing information"
+}
+```
+
+</CodeGroup>
+
+### Account Section Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="SectionTitle" 
+        title="Security Settings" 
+        subtitle="Manage your account security">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define account section title in your model
+model.securitySettingsTitle = {
+  title: "Security Settings",
+  subtitle: "Manage your account security"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Security Settings",
+  "subtitle": "Manage your account security"
+}
+```
+
+</CodeGroup>
+
+---
+
+## Component Styling
+
+The Section Title component features a compact, accessible design with medium typography and optional subtitle support. The styling provides excellent readability and maintains a professional appearance for subsection headings.
+
+### Visual Structure
+
+The Section Title renders with the following structure:
+
+- **Container**: Flex column layout with bottom margin spacing
+- **Title Text**: Bold, large text (2xl) with primary foreground color
+- **Subtitle Text**: Base text size with muted foreground color (optional)
+
+### Default Appearance
+
+```html
+<!-- Section Title Structure -->
+<div class="flex flex-col mb-4">
+  <span class="font-bold text-2xl text-foreground">Section Title</span>
+  <span class="text-base text-muted-foreground">Section Subtitle</span>
+</div>
+```
+
+### Typography and Colors
+
+The Section Title uses consistent typography and color schemes:
+
+```html
+<!-- Container Layout -->
+<div class="flex flex-col mb-4">
+  <!-- Title Styling -->
+  <span class="font-bold text-2xl text-foreground">Title Text</span>
+  <!-- Subtitle Styling -->
+  <span class="text-base text-muted-foreground">Subtitle Text</span>
+</div>
+```
+
+### Spacing and Layout
+
+The Section Title uses consistent spacing:
+
+```html
+<!-- Container Spacing -->
+<div class="flex flex-col mb-4">
+  <span class="font-bold text-2xl text-foreground">Title</span>
+  <span class="text-base text-muted-foreground">Subtitle</span>
+</div>
+```
+
+### CSS Classes
+
+The component uses the following CSS classes:
+
+- `flex flex-col` - Flexbox column layout for the container
+- `mb-4` - Bottom margin spacing (1rem)
+- `font-bold` - Bold font weight (700)
+- `text-2xl` - Large text size (1.5rem)
+- `text-base` - Base text size (1rem)
+- `text-foreground` - Primary text color using theme variables
+- `text-muted-foreground` - Muted text color using theme variables
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses semantic span elements for proper content structure
+- **Color Contrast** - Ensures sufficient contrast using theme foreground colors
+- **Screen Reader Support** - Proper text structure for assistive technologies
+- **Responsive Design** - Adapts to different screen sizes and orientations
+- **Typography Hierarchy** - Clear visual hierarchy for content scanning
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `text-foreground` - Primary text color from theme
+- `text-muted-foreground` - Muted text color from theme
+- `font-bold` - Consistent bold font weight
+- `text-2xl` - Large text size for subsection headings
+- `text-base` - Base text size for subtitles
+- `mb-4` - Standard bottom margin spacing
+- `flex flex-col` - Consistent flexbox layout
+
+---
+
+## Related Components
+
+The Section Title component is part of a family of title components designed for different hierarchy levels:
+
+### Title Component Hierarchy
+
+1. **[Page Title](/fmbf-components/pageTitle)** - Main page headings (largest, most prominent)
+2. **[Content Title](/fmbf-components/contentTitle)** - Section and subsection headings (medium size, semibold)
+3. **Section Title** - Subsection and field group headings (smaller size) - *Current component*
+
+### When to Use Each Component
+
+**Use Page Title for:**
+- Main page headings
+- Primary navigation titles
+- Top-level content sections
+- Page identification
+- Application entry points
+
+**Use Content Title for:**
+- Content section headings
+- Form subsection titles
+- Content area divisions
+- Mid-level content organization
+
+**Use Section Title for:**
+- Field group headings
+- Subsection titles
+- Small content divisions
+- Detailed content organization
+- Form field groupings
+
+---
+
+## Best Practices
+
+When using the Section Title component, follow these guidelines for optimal user experience and consistent design.
+
+### Content Guidelines
+
+**✅ Do:**
+
+- Keep titles concise and descriptive (1-4 words)
+- Use clear, action-oriented titles when appropriate
+- Maintain consistent terminology across your application
+- Use Section Titles for subsection and field group identification
+- Follow the title hierarchy (Page Title → Content Title → Section Title)
+- Use subtitles to provide context when helpful
+
+**❌ Don't:**
+
+- Use overly long titles that break the layout
+- Mix different terminology for similar content types
+- Create titles that don't clearly indicate section purpose
+- Use Section Title for main page headings (use Page Title instead)
+- Use Section Title for major content sections (use Content Title instead)
+- Overuse subtitles when they don't add value
+
+### Content Structure
+
+**Title Guidelines:**
+- Use descriptive, clear titles that indicate section purpose
+- Keep titles consistent with your application's voice
+- Avoid generic titles like "Section" or "Group"
+- Use title case for consistency
+- Keep titles scannable and easy to understand
+- Make titles specific to the content they describe
+
+**Subtitle Guidelines:**
+- Use subtitles to provide additional context when helpful
+- Keep subtitles concise and descriptive
+- Use subtitles to explain the section's purpose or requirements
+- Avoid redundant information between title and subtitle
+- Use sentence case for readability
+
+### Layout and Design
+
+**✅ Do:**
+
+- Use Section Titles to organize related form fields
+- Maintain consistent spacing between title and content
+- Align titles with other interface elements
+- Consider the visual hierarchy with other title components
+- Use Section Titles to establish clear content grouping
+
+**❌ Don't:**
+
+- Create titles that are too wide or too narrow
+- Place titles in locations that disrupt content flow
+- Use inconsistent spacing between title and content
+- Create titles with excessive white space
+- Use Section Titles for major content divisions
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for title text
+- Test with screen readers to ensure proper reading order
+- Use descriptive titles that clearly indicate section content
+- Maintain consistent heading hierarchy with other title components
+- Provide meaningful content structure
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create titles with poor color contrast
+- Use generic or unclear titles
+- Forget to test with assistive technologies
+- Create titles that are difficult to scan
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use Section Titles for static or semi-static content
+- Consider the total number of titles on a page
+- Use appropriate model keys for title data
+- Implement efficient data loading for title content
+
+**❌ Don't:**
+
+- Use Section Titles for frequently changing content without proper state management
+- Overload pages with too many titles that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create titles that require excessive data fetching

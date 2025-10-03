@@ -214,6 +214,7 @@ export const navigation = [
       { title: 'Dropdown', href: '/fmbf-components/dropdown' },
       { title: 'Input', href: '/fmbf-components/input' },
       { title: 'Page Title', href: '/fmbf-components/pageTitle' },
+      { title: 'Section Title', href: '/fmbf-components/sectionTitle' },
     ],
   },
 ]

@@ -61,20 +61,6 @@ const resources = [
     },
   },
   {
-    href: '/fmbf-components/buttonBar',
-    name: 'Button Bar',
-    description:
-      'A segmented control component for selecting between multiple options with customizable variants, orientation, and keyboard navigation.',
-    icon: ChevronRightLeftIcon,
-    pattern: {
-      y: -6,
-      squares: [
-        [-1, 2],
-        [1, 3],
-      ],
-    },
-  },
-  {
     href: '/fmbf-components/button',
     name: 'Button',
     description:
@@ -84,6 +70,20 @@ const resources = [
       y: 16,
       squares: [
         [0, 1],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/buttonBar',
+    name: 'Button Bar',
+    description:
+      'A segmented control component for selecting between multiple options with customizable variants, orientation, and keyboard navigation.',
+    icon: ChevronRightLeftIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [-1, 2],
         [1, 3],
       ],
     },
@@ -131,6 +131,20 @@ const resources = [
     },
   },
   {
+    href: '/fmbf-components/contentTitle',
+    name: 'Content Title',
+    description:
+      'A simple, semantic heading component for content sections with consistent typography and spacing for improved content hierarchy.',
+    icon: DocumentIcon,
+    pattern: {
+      y: 16,
+      squares: [
+        [0, 1],
+        [1, 3],
+      ],
+    },
+  },
+  {
     href: '/fmbf-components/dropdown',
     name: 'Dropdown',
     description:
@@ -145,11 +159,11 @@ const resources = [
     },
   },
   {
-    href: '/fmbf-components/contentTitle',
-    name: 'Content Title',
+    href: '/fmbf-components/input',
+    name: 'Input',
     description:
-      'A simple, semantic heading component for content sections with consistent typography and spacing for improved content hierarchy.',
-    icon: DocumentIcon,
+      'Learn about the input component and how to create, retrieve, update, delete, and list inputs.',
+    icon: ChatBubbleIcon,
     pattern: {
       y: 16,
       squares: [
@@ -173,11 +187,11 @@ const resources = [
     },
   },
   {
-    href: '/fmbf-components/input',
-    name: 'Input',
+    href: '/fmbf-components/sectionTitle',
+    name: 'Section Title',
     description:
-      'Learn about the input component and how to create, retrieve, update, delete, and list inputs.',
-    icon: ChatBubbleIcon,
+      'A compact section heading component that displays subsection titles with optional subtitles using medium typography for detailed content organization.',
+    icon: DocumentIcon,
     pattern: {
       y: 16,
       squares: [
