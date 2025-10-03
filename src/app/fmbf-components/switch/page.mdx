@@ -1,0 +1,687 @@
+export const metadata = {
+  title: 'Switch Component',
+  description:
+    'An interactive switch component for FM BetterForms that allows users to toggle between on/off states with support for labels, descriptions, and keyboard accessibility.',
+}
+
+# Switch Component
+
+The Switch component provides an interactive form control for boolean (on/off) selections in your FM BetterForms application. It features a clean, accessible design with support for labels and descriptions, making it perfect for settings, preferences, and feature toggles. {{ className: 'lead' }}
+
+    This component supports boolean state toggling with customizable labels and descriptions,
+    flexible label positioning, keyboard navigation, and comprehensive accessibility features
+    for optimal user experience.
+
+---
+
+## Component Properties
+
+### Core Properties
+
+<Properties>
+  <Property name="modelKey" type="string">
+    The key used to bind the switch value to the form model. This property
+    determines which field in the model will store the boolean switch state.
+    Example: `"notificationsEnabled"`, `"darkMode"`.
+    Default is `"switchEnabled"`.
+  </Property>
+  <Property name="label" type="string">
+    The text label displayed with the switch. This text appears next to the switch
+    and describes what the switch controls.
+    Example: `"Enable notifications"`, `"Dark mode"`.
+    Default is empty string (not displayed).
+  </Property>
+  <Property name="description" type="string">
+    Optional descriptive text displayed below the label. This provides additional
+    context about what the switch controls or its effects.
+    Example: `"Receive email notifications for important updates"`, `"Switch to dark theme"`.
+    Default is empty string (not displayed).
+  </Property>
+  <Property name="labelPosition" type="string">
+    Controls the position of the label relative to the switch. Can be left or right.
+    Example: `"left"`, `"right"`.
+    Default is `"right"`.
+  </Property>
+  <Property name="disabled" type="boolean|string">
+    Controls whether the switch is disabled. Can be boolean or string values
+    that evaluate to disabled state. When disabled, the switch cannot be toggled.
+    Example: `true`, `"true"`, `"1"`, `"on"`, `"yes"`.
+    Default is `false`.
+  </Property>
+</Properties>
+
+### Action Properties
+
+<Properties>
+  <Property name="namedAction" type="string">
+    Optional action to trigger when the switch state changes. This allows
+    for custom behavior when the switch is toggled on or off.
+    Example: `"updateNotifications"`, `"toggleTheme"`.
+    Default is empty string.
+  </Property>
+  <Property name="actionOptions" type="object">
+    Configuration options passed to the named action when triggered.
+    This object can contain any data needed for the action execution.
+    Example: `{"update": true, "setting": "notifications"}`.
+    Default is empty object `{}`.
+  </Property>
+</Properties>
+
+### Technical Properties
+
+<Properties>
+  <Property name="windowIndex" type="number">
+    The index of the window containing this switch component. Used for
+    accessing the correct form model in multi-window applications.
+    Example: `0`, `1`, `2`.
+    Default is `0`.
+  </Property>
+</Properties>
+
+---
+
+## Switch States and Behavior
+
+The Switch component supports boolean state toggling and provides comprehensive interaction handling for optimal user experience.
+
+### State Types
+
+The switch can have two states:
+
+1. **Off State** - Default state, switch is in the off position (left side)
+2. **On State** - Switch is in the on position (right side), showing active styling
+3. **Disabled** - Switch is disabled, cannot be toggled
+
+### Interaction Behavior
+
+- **Click/Tap**: Toggles the switch between on and off states
+- **Keyboard Navigation**: Space or Enter toggles the switch state
+- **Toggle Action**: Clicking the switch changes its state and updates the model
+- **Disabled State**: When disabled, no interactions are possible
+
+### State Transitions
+
+- **Off → On**: User clicks the switch or presses Space/Enter when focused
+- **On → Off**: User clicks the switch again or presses Space/Enter when focused
+- **Any State → Disabled**: Controlled by the `disabled` property
+- **Keyboard Toggle**: Space or Enter keys toggle the switch state
+
+### Data Binding and Model Integration
+
+The switch component binds its boolean state to the form model using the `modelKey` property. When the state changes, the corresponding model field is automatically updated.
+
+**Model Integration:**
+- The `modelKey` property specifies which field in the model stores the boolean switch state
+- Switch value is stored as a boolean (true for on, false for off)
+- The model is automatically updated when the user toggles the switch
+- The switch reflects the current model value on initialization
+
+**Data Flow:**
+1. User interacts with switch (click, keyboard)
+2. Component updates its visual state to show the new position
+3. Model field (specified by `modelKey`) is updated with the boolean state
+4. Any configured actions are triggered via `namedAction`
+
+**Example Model Structure:**
+```javascript
+// Model with switch fields
+model = {
+  notificationsEnabled: false,    // Basic switch
+  darkMode: true,                 // Switch with default on state
+  autoSave: false,                // Switch with action
+  publicProfile: true             // Complete switch
+}
+```
+
+---
+
+## Usage Examples
+
+The Switch component is configured using JSON objects with properties for form interaction. Here are common usage patterns for different scenarios.
+
+### Basic Switch
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Switch" 
+        modelKey="notificationsEnabled"
+        label="Enable notifications"
+        description="Receive email notifications for important updates"
+        labelPosition="right">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic switch in your model
+model.notificationsEnabled = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "notificationsEnabled",
+  "label": "Enable notifications",
+  "description": "Receive email notifications for important updates",
+  "labelPosition": "right",
+  "disabled": false
+}
+```
+
+</CodeGroup>
+
+### Switch with Left Label Position
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Switch" 
+        modelKey="darkMode"
+        label="Dark mode"
+        description="Switch to dark theme for better viewing in low light"
+        labelPosition="left">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define switch with left label in your model
+model.darkMode = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "darkMode",
+  "label": "Dark mode",
+  "description": "Switch to dark theme for better viewing in low light",
+  "labelPosition": "left",
+  "disabled": false
+}
+```
+
+</CodeGroup>
+
+### Disabled Switch
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Switch" 
+        modelKey="autoSave"
+        label="Auto-save"
+        description="Automatically save changes as you work"
+        disabled="true">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define disabled switch in your model
+model.autoSave = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "autoSave",
+  "label": "Auto-save",
+  "description": "Automatically save changes as you work",
+  "labelPosition": "right",
+  "disabled": true
+}
+```
+
+</CodeGroup>
+
+### Switch with Action
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Switch" 
+        modelKey="publicProfile"
+        label="Public profile"
+        description="Make your profile visible to other users"
+        namedAction="updateProfileVisibility"
+        actionOptions='{"update": true, "setting": "visibility"}'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define switch with action in your model
+model.publicProfile = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "publicProfile",
+  "label": "Public profile",
+  "description": "Make your profile visible to other users",
+  "labelPosition": "right",
+  "namedAction": "updateProfileVisibility",
+  "actionOptions": {"update": true, "setting": "visibility"},
+  "disabled": false
+}
+```
+
+</CodeGroup>
+
+### Complete Switch Example
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Switch" 
+        modelKey="advancedFeatures"
+        label="Advanced features"
+        description="Enable advanced editing and collaboration features"
+        labelPosition="right"
+        windowIndex="0"
+        namedAction="updateFeatureSettings"
+        actionOptions='{"validate": true, "updateUI": true}'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define complete switch in your model
+model.advancedFeatures = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "advancedFeatures",
+  "label": "Advanced features",
+  "description": "Enable advanced editing and collaboration features",
+  "labelPosition": "right",
+  "windowIndex": 0,
+  "namedAction": "updateFeatureSettings",
+  "actionOptions": {"validate": true, "updateUI": true},
+  "disabled": false
+}
+```
+
+</CodeGroup>
+
+### Real-World Settings Panel Example
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Switch" 
+        modelKey="emailNotifications" 
+        label="Email notifications"
+        description="Receive email updates about your account">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define email notifications setting in your model
+model.emailNotifications = true
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "emailNotifications",
+  "label": "Email notifications",
+  "description": "Receive email updates about your account",
+  "labelPosition": "right",
+  "disabled": false
+}
+```
+
+</CodeGroup>
+
+---
+
+## Switch Styling
+
+The Switch component features a clean, accessible design with consistent spacing and clear visual hierarchy. The styling provides excellent usability and maintains a professional appearance for form interactions.
+
+### Visual Structure
+
+The switch renders with the following structure:
+
+- **Wrapper Container**: Inline flex container with label and switch
+- **Switch Button**: Toggle button with role="switch" and aria-checked
+- **Switch Track**: Rounded background track that changes color based on state
+- **Switch Thumb**: Circular thumb that slides between positions
+- **Label Content**: Label and optional description text
+
+### Default Appearance
+
+```html
+<!-- Switch Structure -->
+<label class="inline-flex items-center gap-3 select-none">
+  <!-- Switch Button -->
+  <button
+    type="button"
+    role="switch"
+    aria-checked="false"
+    class="inline-flex h-6 w-11 items-center justify-start rounded-full border border-input p-0.5 transition-colors focus:outline-none focus:ring-2 focus:ring-ring disabled:pointer-events-none bg-input"
+  >
+    <!-- Switch Thumb -->
+    <span
+      aria-hidden="true"
+      class="h-5 w-5 rounded-full bg-background shadow transform transition-transform translate-x-0"
+    ></span>
+  </button>
+
+  <!-- Label Content -->
+  <span class="flex flex-col -translate-y-[1px] will-change-transform">
+    <span class="text-sm font-medium text-foreground">Switch Label</span>
+    <span class="text-xs text-muted-foreground">Optional description</span>
+  </span>
+</label>
+```
+
+### State-Based Styling
+
+The switch adapts its appearance based on the current state:
+
+**Off State**:
+```html
+<button class="bg-input">
+  <span class="translate-x-0"></span>
+</button>
+```
+
+**On State**:
+```html
+<button class="bg-primary">
+  <span class="translate-x-5"></span>
+</button>
+```
+
+**Disabled State**:
+```html
+<label class="opacity-60 cursor-not-allowed">
+  <button class="disabled:pointer-events-none">
+    <!-- Disabled switch styling -->
+  </button>
+</label>
+```
+
+**Left Label Position**:
+```html
+<label class="inline-flex items-center gap-3 select-none">
+  <!-- Label appears before switch -->
+  <span class="flex flex-col -translate-y-[1px]">
+    <span class="text-sm font-medium text-foreground">Label</span>
+  </span>
+  <button class="inline-flex h-6 w-11 ...">
+    <!-- Switch appears after label -->
+  </button>
+</label>
+```
+
+### Typography and Colors
+
+The switch uses consistent typography and color schemes:
+
+```html
+<!-- Label Styling -->
+<span class="text-sm font-medium text-foreground">
+  Switch Label
+</span>
+
+<!-- Description Styling -->
+<span class="text-xs text-muted-foreground">
+  Optional description text
+</span>
+
+<!-- Switch Track Colors -->
+<button class="bg-input">  <!-- Off state background -->
+<button class="bg-primary">  <!-- On state background -->
+
+<!-- Switch Thumb Colors -->
+<span class="bg-background shadow">  <!-- Thumb background -->
+```
+
+### Spacing and Layout
+
+The switch uses consistent spacing throughout:
+
+```html
+<!-- Container Spacing -->
+<label class="inline-flex items-center gap-3 select-none">
+  <!-- 12px gap between switch and label -->
+  
+  <!-- Switch Dimensions -->
+  <button class="inline-flex h-6 w-11 items-center justify-start rounded-full border border-input p-0.5">
+    <!-- 24px height, 44px width, 2px padding -->
+  </button>
+  
+  <!-- Label Spacing -->
+  <span class="flex flex-col -translate-y-[1px] will-change-transform">
+    <!-- -1px vertical translation for alignment -->
+  </span>
+</div>
+```
+
+### Interactive States
+
+The switch provides clear visual feedback for all interaction states:
+
+```html
+<!-- Focus State -->
+<button class="focus:outline-none focus:ring-2 focus:ring-ring">
+  <!-- 2px focus ring for keyboard navigation -->
+</button>
+
+<!-- Hover State -->
+<button class="transition-colors">
+  <!-- Smooth color transitions on state change -->
+</button>
+
+<!-- Disabled State -->
+<label class="opacity-60 cursor-not-allowed">
+  <button class="disabled:pointer-events-none">
+    <!-- 60% opacity and not-allowed cursor -->
+  </button>
+</label>
+
+<!-- On State -->
+<button class="bg-primary">
+  <span class="translate-x-5">
+    <!-- Thumb moved to right position -->
+  </span>
+</button>
+```
+
+### Switch System
+
+The switch uses a sliding thumb mechanism with track background:
+
+```html
+<!-- Switch Track Structure -->
+<button class="inline-flex h-6 w-11 items-center justify-start rounded-full border border-input p-0.5">
+  <!-- Track (44px x 24px) with 2px padding -->
+  <span class="h-5 w-5 rounded-full bg-background shadow transform transition-transform">
+    <!-- Thumb (20px x 20px) -->
+  </span>
+</button>
+
+<!-- On State -->
+<span class="translate-x-5">
+  <!-- Thumb moved 20px to the right -->
+</span>
+
+<!-- Off State -->
+<span class="translate-x-0">
+  <!-- Thumb in left position -->
+</span>
+```
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses `<button>` with `role="switch"` for proper semantics
+- **ARIA Attributes** - `aria-checked` reflects current state (true/false), proper labeling
+- **Keyboard Support** - Space and Enter keys toggle the switch state
+- **Screen Reader Support** - Proper labeling and state announcements for switch
+- **Focus Management** - Clear focus indicators with ring styling
+- **Switch Accessibility** - `role="switch"` with proper aria-checked state management
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `bg-primary` - Primary background color for switch track when on
+- `bg-input` - Background color for switch track when off
+- `bg-background` - Background color for switch thumb
+- `border-input` - Border color for switch track
+- `text-foreground` - Primary text color for labels
+- `text-muted-foreground` - Secondary text color for descriptions
+- `ring-ring` - Focus ring color
+- `rounded-full` - Circular border radius for switch track and thumb
+- `transition-colors` - Smooth color transitions
+- `transition-transform` - Smooth thumb movement
+- `opacity-60` - Disabled state opacity
+- `shadow` - Shadow for switch thumb
+
+---
+
+## Best Practices
+
+When using the Switch component, follow these guidelines for optimal user experience and consistent form design.
+
+### Label and Content Guidelines
+
+**✅ Do:**
+
+- Write clear, descriptive labels that explain what the switch controls
+- Use consistent terminology across all switches in a form
+- Keep labels concise but informative (typically 1-4 words)
+- Provide helpful descriptions for complex settings
+- Use positive language that clearly indicates the switch's purpose
+
+**❌ Don't:**
+
+- Use vague labels like "Enable" or "Toggle"
+- Write overly long labels that break the layout
+- Mix different terminology for similar switches
+- Create switches with unclear or ambiguous labels
+- Use negative language that requires mental translation
+
+### Label Structure
+
+**Switch Label Guidelines:**
+- Use descriptive labels that explain what the switch controls
+- Keep labels consistent with your application's voice
+- Avoid generic labels like "Enable" or "Toggle"
+- Use sentence case for readability
+- Make labels self-explanatory
+
+**Description Guidelines:**
+- Provide additional context for complex settings
+- Use descriptions to explain consequences of the switch state
+- Keep descriptions concise and scannable
+- Only include descriptions when they add value
+- Use consistent formatting for similar descriptions
+
+**Label Position Guidelines:**
+- Use right position (default) for most switches
+- Use left position when the switch is part of a larger control group
+- Maintain consistent label positioning within the same form
+- Consider the visual hierarchy when choosing label position
+
+### Form Layout and Design
+
+**✅ Do:**
+
+- Group related switches logically
+- Maintain consistent spacing between switches
+- Align switches with other form elements
+- Consider the visual hierarchy of multiple switches
+- Use switches for boolean (on/off) settings
+- Choose appropriate label position for the context
+
+**❌ Don't:**
+
+- Create switches that are too close together
+- Overcrowd forms with too many switches
+- Use inconsistent spacing between switches
+- Place switches in locations that disrupt form flow
+- Use switches for multiple choice selections (use radio groups instead)
+- Mix switches with radio groups for the same decision
+
+### State Management
+
+**✅ Do:**
+
+- Use meaningful model keys that describe the setting
+- Initialize switch values appropriately (usually false for off state)
+- Handle state changes with proper boolean updates
+- Use actions for complex state changes
+- Provide clear feedback for state changes
+
+**❌ Don't:**
+
+- Use generic model keys like "value" or "setting"
+- Forget to initialize switch values
+- Ignore boolean state requirements
+- Create switches without proper state handling
+- Use switches for non-boolean data
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for all text elements
+- Test with screen readers to ensure proper announcements
+- Use descriptive labels that clearly indicate what the switch controls
+- Maintain proper focus management and keyboard navigation
+- Provide clear labels for screen readers
+- Test Space and Enter key functionality
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create switches with poor color contrast
+- Use generic or unclear labels
+- Forget to test with assistive technologies
+- Create switches that are difficult to interact with
+- Forget to provide proper labeling
+
+### Label Position Usage
+
+**✅ Do:**
+
+- Use right position (default) for most switches
+- Use left position when the switch is part of a larger control group
+- Consider screen width when choosing label position
+- Maintain consistent label positioning within the same form
+- Ensure labels are easily readable in both positions
+
+**❌ Don't:**
+
+- Use left position unnecessarily when right position works better
+- Mix label positions within the same form without good reason
+- Create layouts that are difficult to read
+- Forget to consider mobile responsiveness
+- Use inconsistent label positioning
+
+### Action Integration
+
+**✅ Do:**
+
+- Use named actions for complex switch behaviors
+- Provide meaningful action options
+- Handle action failures gracefully
+- Use actions for real-time updates
+- Document custom actions clearly
+
+**❌ Don't:**
+
+- Use actions for simple state changes
+- Create actions without proper error handling
+- Use generic action names
+- Forget to provide action options when needed
+- Create actions that conflict with switch behavior
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use switches for boolean form interactions
+- Consider the total number of switches on a page
+- Use appropriate model keys for switch data
+- Implement efficient state management for switch states
+
+**❌ Don't:**
+
+- Use switches for frequently changing content without proper state management
+- Overload pages with too many switches that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create switches that require excessive data fetching

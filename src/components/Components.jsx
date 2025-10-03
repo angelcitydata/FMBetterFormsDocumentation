@@ -18,6 +18,7 @@ import { ClipboardIcon } from '@/components/icons/ClipboardIcon'
 import { RadioGroupIcon } from '@/components/icons/RadioGroupIcon'
 import { ShapesIcon } from '@/components/icons/ShapesIcon'
 import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
+import { SwitchIcon } from '@/components/icons/SwitchIcon'
 import { TagIcon } from '@/components/icons/TagIcon'
 
 const resources = [
@@ -241,6 +242,20 @@ const resources = [
       y: 16,
       squares: [
         [0, 1],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/switch',
+    name: 'Switch',
+    description:
+      'An interactive switch component for boolean (on/off) selections with support for labels, descriptions, and keyboard accessibility.',
+    icon: SwitchIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [-1, 2],
         [1, 3],
       ],
     },
