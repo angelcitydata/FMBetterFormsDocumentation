@@ -214,6 +214,7 @@ export const navigation = [
       { title: 'Divider', href: '/fmbf-components/divider' },
       { title: 'Dropdown', href: '/fmbf-components/dropdown' },
       { title: 'Input', href: '/fmbf-components/input' },
+      { title: 'Info Card', href: '/fmbf-components/infoCard' },
       { title: 'Page Title', href: '/fmbf-components/pageTitle' },
       { title: 'Section Title', href: '/fmbf-components/sectionTitle' },
     ],

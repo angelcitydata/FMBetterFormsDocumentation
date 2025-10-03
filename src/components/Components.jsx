@@ -14,6 +14,7 @@ import { DividerIcon } from '@/components/icons/DividerIcon'
 import { DocumentIcon } from '@/components/icons/DocumentIcon'
 import { ListIcon } from '@/components/icons/ListIcon'
 import { MagnifyingGlassIcon } from '@/components/icons/MagnifyingGlassIcon'
+import { ClipboardIcon } from '@/components/icons/ClipboardIcon'
 import { ShapesIcon } from '@/components/icons/ShapesIcon'
 import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
 import { TagIcon } from '@/components/icons/TagIcon'
@@ -169,6 +170,20 @@ const resources = [
       y: -6,
       squares: [
         [-1, 2],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/infoCard',
+    name: 'Info Card',
+    description:
+      'A data visualization component for displaying key metrics with formatted values, trend indicators, and contextual information.',
+    icon: ClipboardIcon,
+    pattern: {
+      y: 16,
+      squares: [
+        [0, 1],
         [1, 3],
       ],
     },

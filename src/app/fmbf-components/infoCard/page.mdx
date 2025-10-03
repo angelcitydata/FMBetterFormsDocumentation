@@ -1,0 +1,645 @@
+export const metadata = {
+  title: 'Info Card Component',
+  description:
+    'A data visualization component for FM BetterForms that displays key metrics with formatted values, trend indicators, and contextual information in a clean, accessible card layout.',
+}
+
+# Info Card Component
+
+The Info Card component provides a data visualization container for displaying key metrics and statistics in your FM BetterForms application. It features a clean, accessible layout with formatted values, trend indicators, and contextual information, making it perfect for presenting important data points and performance metrics in a visually appealing format. {{ className: 'lead' }}
+
+    This component supports data visualization with customizable titles, formatted values,
+    trend indicators with percentage changes, and contextual body text for providing
+    additional insights about the displayed metrics.
+
+---
+
+## Component Properties
+
+### Data Properties
+
+<Properties>
+  <Property name="title" type="string">
+    The main title displayed at the top of the info card. This text appears in smaller
+    font size with muted foreground color. Example: `"Average Order"`, `"Total Revenue"`.
+    Default is empty string.
+  </Property>
+  <Property name="value" type="number">
+    The primary numeric value to display prominently in the card. This value is
+    formatted according to the valueFormat property. Example: `1732`, `45.67`.
+    Default is 0.
+  </Property>
+  <Property name="valueFormat" type="string">
+    The format type for displaying the value. Options: `"currency"`, `"percentage"`, or `"number"`.
+    Currency uses USD formatting, percentage expects decimal values 0-1, number uses standard formatting.
+    Example: `"currency"`, `"percentage"`, `"number"`.
+    Default is "number".
+  </Property>
+  <Property name="percentage" type="string">
+    The percentage change value to display in the trend badge. Can be a decimal string
+    (e.g., "0.125" for 12.5%) or percentage string (e.g., "12.5%"). Example: `"12.5%"`, `"0.125"`.
+    Default is null.
+  </Property>
+  <Property name="direction" type="string">
+    The direction of the trend indicator. Options: `"up"` or `"down"`. Determines
+    the arrow icon and color of the percentage badge. Example: `"up"`, `"down"`.
+    Default is empty string.
+  </Property>
+  <Property name="bodyText" type="string">
+    The main descriptive text displayed below the value. This text appears in
+    semibold font with standard foreground color. Example: `"Trending up this period"`.
+    Default is empty string.
+  </Property>
+  <Property name="bodySubText" type="string">
+    Additional contextual information displayed below the body text. This text
+    appears in medium font with muted foreground color. Example: `"Compared to $1,539.70 in 2024."`.
+    Default is empty string.
+  </Property>
+</Properties>
+
+---
+
+## Info Card Layout Structure
+
+The Info Card component features a clean, structured layout that organizes data hierarchically. The component automatically adapts its display based on the content provided, showing only relevant sections.
+
+### Content Hierarchy
+
+The info card displays content in the following order:
+
+1. **Header Section** - Title and trend badge displayed horizontally at the top
+2. **Value Section** - Large, prominently displayed formatted value
+3. **Body Section** - Descriptive text and contextual information (conditionally rendered)
+
+### Visual Structure
+
+- **Container**: Full-width card with background, border, padding, and rounded corners
+- **Header Section**: Contains title and trend badge in a horizontal flex layout
+- **Value Section**: Large formatted value display with appropriate number formatting
+- **Body Section**: Contains body text and sub-text with conditional rendering
+
+### Responsive Design
+
+The info card component is designed to be responsive and accessible:
+
+- **Full Width**: Cards expand to fill their container width
+- **Flexible Height**: Cards adjust height based on content
+- **Consistent Spacing**: Standard padding and gap spacing throughout
+- **Accessible Typography**: Proper text hierarchy and contrast for data visualization
+
+---
+
+## Usage Examples
+
+The Info Card component is configured using JSON objects with properties for data visualization. Here are common usage patterns for different scenarios.
+
+### Basic Info Card
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="InfoCard" 
+        title="Total Revenue"
+        value="125000"
+        valueFormat="currency"
+        bodyText="Monthly revenue target achieved">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic info card in your model
+model.revenueCard = {
+  title: "Total Revenue",
+  value: 125000,
+  valueFormat: "currency",
+  bodyText: "Monthly revenue target achieved",
+  bodySubText: "",
+  percentage: null,
+  direction: ""
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Total Revenue",
+  "value": 125000,
+  "valueFormat": "currency",
+  "bodyText": "Monthly revenue target achieved",
+  "bodySubText": "",
+  "percentage": null,
+  "direction": ""
+}
+```
+
+</CodeGroup>
+
+### Info Card with Trend Indicator
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="InfoCard" 
+        title="Average Order"
+        value="1732"
+        valueFormat="currency"
+        percentage="12.5%"
+        direction="up"
+        bodyText="Trending up this period"
+        bodySubText="Compared to $1,539.70 in 2024.">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define info card with trend in your model
+model.averageOrderCard = {
+  title: "Average Order",
+  value: 1732,
+  valueFormat: "currency",
+  percentage: "12.5%",
+  direction: "up",
+  bodyText: "Trending up this period",
+  bodySubText: "Compared to $1,539.70 in 2024."
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Average Order",
+  "value": 1732,
+  "valueFormat": "currency",
+  "percentage": "12.5%",
+  "direction": "up",
+  "bodyText": "Trending up this period",
+  "bodySubText": "Compared to $1,539.70 in 2024."
+}
+```
+
+</CodeGroup>
+
+### Info Card with Percentage Format
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="InfoCard" 
+        title="Conversion Rate"
+        value="0.0845"
+        valueFormat="percentage"
+        percentage="5.2%"
+        direction="up"
+        bodyText="Improved conversion this quarter">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define info card with percentage format in your model
+model.conversionCard = {
+  title: "Conversion Rate",
+  value: 0.0845,
+  valueFormat: "percentage",
+  percentage: "5.2%",
+  direction: "up",
+  bodyText: "Improved conversion this quarter",
+  bodySubText: ""
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Conversion Rate",
+  "value": 0.0845,
+  "valueFormat": "percentage",
+  "percentage": "5.2%",
+  "direction": "up",
+  "bodyText": "Improved conversion this quarter",
+  "bodySubText": ""
+}
+```
+
+</CodeGroup>
+
+### Minimal Info Card
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="InfoCard" 
+        title="Active Users"
+        value="2847"
+        valueFormat="number">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define minimal info card in your model
+model.activeUsersCard = {
+  title: "Active Users",
+  value: 2847,
+  valueFormat: "number",
+  bodyText: "",
+  bodySubText: "",
+  percentage: null,
+  direction: ""
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Active Users",
+  "value": 2847,
+  "valueFormat": "number",
+  "bodyText": "",
+  "bodySubText": "",
+  "percentage": null,
+  "direction": ""
+}
+```
+
+</CodeGroup>
+
+### Info Card with Downward Trend
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="InfoCard" 
+        title="Customer Satisfaction"
+        value="0.782"
+        valueFormat="percentage"
+        percentage="3.1%"
+        direction="down"
+        bodyText="Slight decline from last month"
+        bodySubText="Survey responses from 1,247 customers">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define info card with downward trend in your model
+model.satisfactionCard = {
+  title: "Customer Satisfaction",
+  value: 0.782,
+  valueFormat: "percentage",
+  percentage: "3.1%",
+  direction: "down",
+  bodyText: "Slight decline from last month",
+  bodySubText: "Survey responses from 1,247 customers"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Customer Satisfaction",
+  "value": 0.782,
+  "valueFormat": "percentage",
+  "percentage": "3.1%",
+  "direction": "down",
+  "bodyText": "Slight decline from last month",
+  "bodySubText": "Survey responses from 1,247 customers"
+}
+```
+
+</CodeGroup>
+
+### Complete Info Card Example
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="InfoCard" 
+        title="Monthly Growth"
+        value="0.125"
+        valueFormat="percentage"
+        percentage="8.3%"
+        direction="up"
+        bodyText="Strong growth trajectory"
+        bodySubText="Compared to previous quarter performance">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define complete info card in your model
+model.growthCard = {
+  title: "Monthly Growth",
+  value: 0.125,
+  valueFormat: "percentage",
+  percentage: "8.3%",
+  direction: "up",
+  bodyText: "Strong growth trajectory",
+  bodySubText: "Compared to previous quarter performance"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Monthly Growth",
+  "value": 0.125,
+  "valueFormat": "percentage",
+  "percentage": "8.3%",
+  "direction": "up",
+  "bodyText": "Strong growth trajectory",
+  "bodySubText": "Compared to previous quarter performance"
+}
+```
+
+</CodeGroup>
+
+---
+
+## Info Card Styling
+
+The Info Card component features a clean, accessible design with consistent spacing and clear visual hierarchy. The styling provides excellent readability and maintains a professional appearance for data visualization.
+
+### Visual Structure
+
+The info card renders with the following structure:
+
+- **Container**: Full-width card with background, border, padding, and rounded corners
+- **Header Section**: Horizontal flex layout containing title and trend badge
+- **Value Section**: Large formatted value display
+- **Body Section**: Conditional content area for descriptive text
+
+### Default Appearance
+
+```html
+<!-- Info Card Structure -->
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border gap-2">
+  <!-- Header Section -->
+  <div class="flex justify-between items-center">
+    <h3 class="text-muted-foreground text-sm font-medium">Card Title</h3>
+    <!-- Trend Badge (conditional) -->
+    <span class="inline-flex items-center gap-1.5 w-fit select-none text-sm font-medium px-2.5 py-1 border transition-colors rounded-md bg-transparent border-border text-success">
+      <i class="fa-regular fa-arrow-trend-up"></i>
+      +12.5%
+    </span>
+  </div>
+
+  <!-- Value Section -->
+  <span class="text-foreground font-bold text-4xl">$1,732.00</span>
+
+  <!-- Body Section -->
+  <div class="flex flex-col my-4 gap-0.5">
+    <span class="text-sm font-semibold text-foreground">Trending up this period</span>
+    <span class="text-sm font-medium text-muted-foreground whitespace-pre-line">Compared to $1,539.70 in 2024.</span>
+  </div>
+</div>
+```
+
+### Content Layout
+
+The info card adapts its layout based on the content provided:
+
+**Minimal Info Card (Title and Value Only)**:
+```html
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border gap-2">
+  <div class="flex justify-between items-center">
+    <h3 class="text-muted-foreground text-sm font-medium">Active Users</h3>
+  </div>
+  <span class="text-foreground font-bold text-4xl">2,847</span>
+</div>
+```
+
+**Info Card with Trend Badge**:
+```html
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border gap-2">
+  <div class="flex justify-between items-center">
+    <h3 class="text-muted-foreground text-sm font-medium">Average Order</h3>
+    <span class="inline-flex items-center gap-1.5 w-fit select-none text-sm font-medium px-2.5 py-1 border transition-colors rounded-md bg-transparent border-border text-success">
+      <i class="fa-regular fa-arrow-trend-up"></i>
+      +12.5%
+    </span>
+  </div>
+  <span class="text-foreground font-bold text-4xl">$1,732.00</span>
+</div>
+```
+
+**Complete Info Card with Body Text**:
+```html
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border gap-2">
+  <div class="flex justify-between items-center">
+    <h3 class="text-muted-foreground text-sm font-medium">Average Order</h3>
+    <span class="inline-flex items-center gap-1.5 w-fit select-none text-sm font-medium px-2.5 py-1 border transition-colors rounded-md bg-transparent border-border text-success">
+      <i class="fa-regular fa-arrow-trend-up"></i>
+      +12.5%
+    </span>
+  </div>
+  <span class="text-foreground font-bold text-4xl">$1,732.00</span>
+  <div class="flex flex-col my-4 gap-0.5">
+    <span class="text-sm font-semibold text-foreground">Trending up this period</span>
+    <span class="text-sm font-medium text-muted-foreground whitespace-pre-line">Compared to $1,539.70 in 2024.</span>
+  </div>
+</div>
+```
+
+### Typography and Colors
+
+The info card uses consistent typography and color schemes:
+
+```html
+<!-- Container Colors -->
+<div class="bg-card text-card-foreground border border-border">
+  <!-- Title Styling -->
+  <h3 class="text-muted-foreground text-sm font-medium">Title</h3>
+  
+  <!-- Trend Badge Styling -->
+  <span class="text-success">+12.5%</span>
+  
+  <!-- Value Styling -->
+  <span class="text-foreground font-bold text-4xl">$1,732.00</span>
+  
+  <!-- Body Text Styling -->
+  <span class="text-sm font-semibold text-foreground">Body text</span>
+  
+  <!-- Sub Text Styling -->
+  <span class="text-sm font-medium text-muted-foreground">Sub text</span>
+</div>
+```
+
+### Spacing and Layout
+
+The info card uses consistent spacing throughout:
+
+```html
+<!-- Container Spacing -->
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border gap-2">
+  <!-- Header Section Spacing -->
+  <div class="flex justify-between items-center">
+    <h3 class="text-muted-foreground text-sm font-medium">Title</h3>
+    <span class="inline-flex items-center gap-1.5 w-fit select-none text-sm font-medium px-2.5 py-1 border transition-colors rounded-md bg-transparent border-border">
+      +12.5%
+    </span>
+  </div>
+  
+  <!-- Value Section Spacing -->
+  <span class="text-foreground font-bold text-4xl">$1,732.00</span>
+  
+  <!-- Body Section Spacing -->
+  <div class="flex flex-col my-4 gap-0.5">
+    <span class="text-sm font-semibold text-foreground">Body text</span>
+    <span class="text-sm font-medium text-muted-foreground whitespace-pre-line">Sub text</span>
+  </div>
+</div>
+```
+
+### Conditional Rendering
+
+Content sections are conditionally rendered based on available data:
+
+```html
+<!-- Trend badge condition -->
+<span
+  v-if="schema.percentage !== null && schema.percentage !== undefined && !isNaN(Number(schema.percentage))"
+  class="inline-flex items-center gap-1.5 w-fit select-none text-sm font-medium px-2.5 py-1 border transition-colors rounded-md bg-transparent border-border"
+  :class="schema.direction === 'up' ? 'text-success' : 'text-destructive'"
+>
+  <i
+    class="fa-regular"
+    :class="schema.direction === 'up' ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'"
+  ></i>
+  {{ schema.direction === 'up' ? '+' : '-' }}
+  {{ new Intl.NumberFormat('en-US', { style: 'percent', minimumFractionDigits: 1 }).format(Number(schema.percentage) || 0) }}
+</span>
+
+<!-- Body text condition -->
+<div v-if="!_.isEmpty(_.trim(schema.bodyText))" class="flex flex-col my-4 gap-0.5">
+  <span class="text-sm font-semibold text-foreground">{{ schema.bodyText }}</span>
+  <span 
+v-if="!_.isEmpty(_.trim(schema.bodySubText))" 
+class="text-sm font-medium text-muted-foreground whitespace-pre-line"
+>
+{{ schema.bodySubText }}
+</span>
+</div>
+```
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses proper heading structure with `<h3>` elements for titles
+- **Color Contrast** - Ensures sufficient contrast between text and background colors
+- **Screen Reader Support** - Proper text hierarchy and ARIA labels for assistive technologies
+- **Responsive Design** - Adapts to different screen sizes and orientations
+- **Focus Management** - Clear visual hierarchy for data scanning
+- **Keyboard Navigation** - All interactive elements are keyboard accessible
+- **Alternative Text** - Trend icons include proper ARIA labels
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `bg-card` - Card background color
+- `text-card-foreground` - Card text color
+- `text-foreground` - Primary text color (used for values and body text)
+- `text-muted-foreground` - Secondary text color (used for titles)
+- `text-success` - Success color for upward trends
+- `text-destructive` - Destructive color for downward trends
+- `border-border` - Card border color
+- `rounded-lg` - Consistent border radius
+- `p-4` - Standard padding
+- `gap-2` - Container spacing
+- `gap-1.5` - Badge icon spacing
+- `gap-0.5` - Body text spacing
+- `my-4` - Body section vertical spacing
+
+---
+
+## Best Practices
+
+When using the Info Card component, follow these guidelines for optimal user experience and consistent design.
+
+### Content Guidelines
+
+**✅ Do:**
+
+- Keep titles concise and descriptive (1-4 words)
+- Use clear, meaningful titles that indicate the metric type
+- Write body text that provides context or insights about the data
+- Use body sub-text to add comparison or additional context
+- Maintain consistent terminology across your application
+- Use info cards to display key performance indicators and metrics
+
+**❌ Don't:**
+
+- Use overly long titles that break the card layout
+- Include redundant information between title and body text
+- Write body text that doesn't provide additional insights
+- Mix different terminology for similar metric types
+- Create info cards with unrelated or scattered data
+
+### Content Structure
+
+**Title Guidelines:**
+- Use descriptive, metric-focused titles (e.g., "Total Revenue", "Active Users")
+- Keep titles consistent with your application's voice
+- Avoid generic titles like "Data" or "Metrics"
+- Use title case for consistency
+
+**Value Guidelines:**
+- Ensure values are properly formatted according to their type
+- Use appropriate precision for the data being displayed
+- Consider the scale of numbers when choosing format
+- Validate that values are meaningful and accurate
+
+**Body Text Guidelines:**
+- Write clear, concise insights about the displayed metric
+- Use body text to explain trends or provide context
+- Keep descriptions short for better readability
+- Only include body text when it adds meaningful insights
+
+**Trend Indicator Guidelines:**
+- Use trend indicators to show performance changes
+- Ensure percentage values are accurate and meaningful
+- Choose appropriate direction (up/down) based on context
+- Consider the time period for trend calculations
+
+### Layout and Design
+
+**✅ Do:**
+
+- Use info cards to display key metrics and KPIs
+- Maintain consistent spacing between cards
+- Align cards with other dashboard elements
+- Consider the visual hierarchy of multiple cards
+- Use info cards to create dashboard layouts
+- Group related metrics together
+
+**❌ Don't:**
+
+- Create cards that are too wide or too narrow
+- Overcrowd dashboards with too many cards
+- Use inconsistent spacing between cards
+- Place cards in locations that disrupt content flow
+- Create cards with excessive white space
+- Mix info cards with other card types inconsistently
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for all text elements
+- Test with screen readers to ensure proper reading order
+- Use descriptive titles that clearly indicate the metric type
+- Maintain consistent text hierarchy
+- Provide meaningful data structure
+- Include ARIA labels for trend indicators
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create cards with poor color contrast
+- Use generic or unclear titles
+- Forget to test with assistive technologies
+- Create cards that are difficult to scan
+- Use color alone to indicate trends
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use info cards for metrics that update at reasonable intervals
+- Consider the total number of cards on a dashboard
+- Use appropriate model keys for metric data
+- Implement efficient data loading for metric calculations
+- Cache calculated values when appropriate
+
+**❌ Don't:**
+
+- Use info cards for real-time data without proper state management
+- Overload dashboards with too many cards that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create cards that require excessive data fetching or calculations
+- Update cards too frequently without debouncing
