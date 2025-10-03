@@ -337,6 +337,119 @@ model.growthCard = {
 
 </CodeGroup>
 
+### Dashboard Layout Example
+
+<CodeGroup>
+```html {{ title: 'Dashboard Grid Layout' }}
+<div class="hidden lg:!grid grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
+    <bfcomp v-for="card in model.infoCardData" 
+            name="InfoCard" 
+            :title="card.title" 
+            :percentage="card.percentage" 
+            :value="card.value" 
+            :direction="card.direction" 
+            :bodyText="card.bodyText" 
+            :bodySubText="card.bodySubText" 
+            :valueFormat="card.valueFormat">
+    </bfcomp>
+</div>
+```
+
+```javascript {{ title: 'Dashboard Data Model' }}
+// Define dashboard data in your model
+model.infoCardData = [
+  {
+    title: "Total Cases",
+    subtitle: "Active pipeline",
+    value: 37,
+    valueFormat: "number",
+    percentage: 3.2857142857142856,
+    direction: "up",
+    bodyText: "26 active, 11 funded/closed.",
+    bodySubText: "2025: 30\n2024: 7"
+  },
+  {
+    title: "Upcoming Follow Ups",
+    subtitle: "Through end of next month",
+    value: 18,
+    valueFormat: "number",
+    percentage: null,
+    direction: null,
+    bodyText: "18 cases need follow up before the end of next month.",
+    bodySubText: "Oct 3 — Davis v. Harbor Freightlines\nThis week: 4\nThis month: 17\nNext month: 1"
+  },
+  {
+    title: "Upcoming Fundings",
+    subtitle: "Through end of next month",
+    value: 19,
+    valueFormat: "number",
+    percentage: null,
+    direction: "up",
+    bodyText: "19 cases with fund dates before the end of next month.",
+    bodySubText: "Oct 6 — Hartley v. Metro Transit\nThis month: 6\nNext month: 13"
+  },
+  {
+    title: "Funded Amount",
+    subtitle: "Total disbursed YTD 2025",
+    value: 790850,
+    valueFormat: "currency",
+    percentage: 0.285099122521937,
+    direction: "up",
+    bodyText: "4 cases funded YTD (LY YTD: 4).",
+    bodySubText: "2025: $790,850.00\n2024: $615,400.00"
+  }
+]
+```
+
+```json {{ title: 'Dashboard JSON Configuration' }}
+{
+  "infoCardData": [
+    {
+      "title": "Total Cases",
+      "subtitle": "Active pipeline",
+      "value": 37,
+      "valueFormat": "number",
+      "percentage": 3.2857142857142856,
+      "direction": "up",
+      "bodyText": "26 active, 11 funded/closed.",
+      "bodySubText": "2025: 30\n2024: 7"
+    },
+    {
+      "title": "Upcoming Follow Ups",
+      "subtitle": "Through end of next month",
+      "value": 18,
+      "valueFormat": "number",
+      "percentage": null,
+      "direction": null,
+      "bodyText": "18 cases need follow up before the end of next month.",
+      "bodySubText": "Oct 3 — Davis v. Harbor Freightlines\nThis week: 4\nThis month: 17\nNext month: 1"
+    },
+    {
+      "title": "Upcoming Fundings",
+      "subtitle": "Through end of next month",
+      "value": 19,
+      "valueFormat": "number",
+      "percentage": null,
+      "direction": "up",
+      "bodyText": "19 cases with fund dates before the end of next month.",
+      "bodySubText": "Oct 6 — Hartley v. Metro Transit\nThis month: 6\nNext month: 13"
+    },
+    {
+      "title": "Funded Amount",
+      "subtitle": "Total disbursed YTD 2025",
+      "value": 790850,
+      "valueFormat": "currency",
+      "percentage": 0.285099122521937,
+      "direction": "up",
+      "bodyText": "4 cases funded YTD (LY YTD: 4).",
+      "bodySubText": "2025: $790,850.00\n2024: $615,400.00"
+    }
+  ]
+}
+```
+
+</CodeGroup>
+
 ---
 
 ## Info Card Styling
@@ -596,6 +709,8 @@ When using the Info Card component, follow these guidelines for optimal user exp
 - Consider the visual hierarchy of multiple cards
 - Use info cards to create dashboard layouts
 - Group related metrics together
+- Use responsive grid layouts (e.g., `grid-cols-1 md:grid-cols-2 lg:grid-cols-4`)
+- Implement proper breakpoints for different screen sizes
 
 **❌ Don't:**
 
@@ -605,6 +720,7 @@ When using the Info Card component, follow these guidelines for optimal user exp
 - Place cards in locations that disrupt content flow
 - Create cards with excessive white space
 - Mix info cards with other card types inconsistently
+- Forget to test responsive behavior on different devices
 
 ### Accessibility Considerations
 
