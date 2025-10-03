@@ -1,0 +1,490 @@
+export const metadata = {
+  title: 'Text Area Component',
+  description:
+    'A comprehensive text area component for FM BetterForms with auto-growing capabilities, character counting, validation, and seamless integration with the FM BetterForms model system.',
+}
+
+# Text Area Component
+
+The Text Area component is an advanced multi-line text input control that provides auto-growing capabilities, character counting, validation, and seamless integration with the FM BetterForms model system. {{ className: 'lead' }}
+
+This component automatically adjusts its height based on content, supports character limits with real-time counting, handles validation states, and provides extensive customization options for multi-line text input scenarios.
+
+---
+
+## Component Properties
+
+### Display & Layout Properties
+
+<Properties>
+  <Property name="label" type="string">
+    The label text displayed above the text area field. Shows with a red asterisk if the field is required.
+  </Property>
+  <Property name="placeholder" type="string">
+    Placeholder text displayed when the text area is empty.
+  </Property>
+  <Property name="fullWidth" type="boolean">
+    When true, the text area takes the full width of its container. When false, uses minimum width.
+  </Property>
+  <Property name="size" type="string">
+    Controls the text size of the text area. Options: "sm" (text-sm), "md" (text-sm), "lg" (text-base). Default is "md".
+  </Property>
+  <Property name="prefix" type="string">
+    Text displayed before the text area content.
+  </Property>
+  <Property name="suffix" type="string">
+    Text displayed after the text area content.
+  </Property>
+  <Property name="minWidth" type="string">
+    Minimum width for the text area when not full width. Default is "28ch".
+  </Property>
+</Properties>
+
+### Text Area Behavior Properties
+
+<Properties>
+  <Property name="rows" type="number">
+    Initial number of visible text lines. Default is 3.
+  </Property>
+  <Property name="maxLength" type="number">
+    Maximum number of characters allowed in the text area.
+  </Property>
+  <Property name="required" type="boolean">
+    When true, displays a red asterisk next to the label and adds HTML5 required validation.
+  </Property>
+  <Property name="readOnly" type="boolean">
+    When true, the text area cannot be edited but can be focused and its value copied.
+  </Property>
+  <Property name="isDisabled" type="boolean">
+    When true, the text area is disabled and cannot be interacted with. Applies opacity styling.
+  </Property>
+  <Property name="autoGrow" type="boolean">
+    When true, the text area automatically grows in height as content is added. Default is false.
+  </Property>
+  <Property name="maxRows" type="number">
+    Maximum number of rows when autoGrow is enabled. When exceeded, shows scrollbar.
+  </Property>
+  <Property name="spellcheck" type="boolean">
+    Enables browser spell checking. Default is true.
+  </Property>
+  <Property name="autoCapitalize" type="string">
+    Controls automatic capitalization. Options: "none", "sentences" (default), "words", "characters".
+  </Property>
+  <Property name="autoCorrect" type="string">
+    Controls automatic correction. Options: "on" (default), "off".
+  </Property>
+  <Property name="wrap" type="string">
+    Controls text wrapping behavior. Options: "soft" (default), "hard", "off".
+  </Property>
+</Properties>
+
+### Character Counter Properties
+
+<Properties>
+  <Property name="showCounter" type="boolean">
+    When true and maxLength is set, displays a character counter showing current/max characters.
+  </Property>
+</Properties>
+
+### Data Binding Properties
+
+<Properties>
+  <Property name="modelKey" type="string">
+    The key path in the form model where the text area value is stored. Supports nested paths like "user.profile.bio". Default is "textValue".
+  </Property>
+  <Property name="windowIndex" type="number">
+    Index of the window in the BetterForms window stack. Used for multi-window applications. Default is 0.
+  </Property>
+</Properties>
+
+### Action Properties
+
+<Properties>
+  <Property name="inputAction" type="string">
+    Named action to trigger on every input change. Receives the current value and event object.
+  </Property>
+  <Property name="namedAction" type="string">
+    Named action to trigger when Enter key is pressed in the text area field.
+  </Property>
+  <Property name="submitOnEnter" type="boolean">
+    When true, prevents newline insertion on Enter key press and triggers namedAction instead.
+  </Property>
+</Properties>
+
+### Validation & Feedback Properties
+
+<Properties>
+  <Property name="errorMessage" type="string">
+    Error message to display below the text area. When present, applies error styling (red border and text).
+  </Property>
+  <Property name="successMessage" type="string">
+    Success message to display below the text area. When present and no error exists, applies success styling (green border and text).
+  </Property>
+</Properties>
+
+---
+
+## Auto-Grow Behavior
+
+The Text Area component supports automatic height adjustment based on content through the `autoGrow` property:
+
+### How Auto-Grow Works
+
+1. **`autoGrow`** enables automatic height adjustment as content is added
+2. **`maxRows`** sets a maximum height limit before showing scrollbars
+3. **Real-time adjustment** occurs on every input change
+4. **Scroll behavior** activates when content exceeds `maxRows`
+
+### Auto-Grow Configuration
+
+```json {{ title: 'Auto-Grow Example' }}
+{
+  "label": "Description",
+  "autoGrow": true,
+  "maxRows": 10,
+  "rows": 3,
+  "modelKey": "product.description"
+  // Result: Starts at 3 rows, grows up to 10 rows, then scrolls
+}
+```
+
+### Best Practices for Auto-Grow
+
+**✅ Do:**
+- Set `rows` to a reasonable starting height (2-4 rows)
+- Use `maxRows` to prevent excessive height growth
+- Consider the content type when setting limits
+
+**❌ Don't:**
+- Set `maxRows` too low for long-form content
+- Forget to set `maxRows` for very long content
+- Use auto-grow for single-line inputs (use Input component instead)
+
+**💡 Performance Note:**
+Auto-grow recalculates height on every input change. For very large text areas, consider using fixed height with scrollbars instead.
+
+---
+
+## Usage Examples
+
+The Text Area component can be used in two ways: as JSON configuration objects or as HTML `<bfcomp>` elements. Both approaches provide the same functionality.
+
+### Basic Text Area
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="TextArea" 
+        modelKey="contact.notes" 
+        label="Notes" 
+        placeholder="Enter notes..." 
+        fullWidth="true">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Description",
+  "placeholder": "Enter description...",
+  "modelKey": "product.description",
+  "rows": 4,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Auto-Growing Text Area
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="TextArea" 
+        modelKey="article.content" 
+        label="Article Content" 
+        placeholder="Write your article..." 
+        autoGrow="true"
+        maxRows="20"
+        rows="5">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Article Content",
+  "placeholder": "Write your article...",
+  "modelKey": "article.content",
+  "autoGrow": true,
+  "maxRows": 20,
+  "rows": 5,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Text Area with Character Counter
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="TextArea" 
+        modelKey="feedback.message" 
+        label="Feedback Message" 
+        placeholder="Share your feedback..." 
+        maxLength="500"
+        showCounter="true"
+        rows="4">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Feedback Message",
+  "placeholder": "Share your feedback...",
+  "modelKey": "feedback.message",
+  "maxLength": 500,
+  "showCounter": true,
+  "rows": 4,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Required Text Area with Validation
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="TextArea" 
+        modelKey="user.bio" 
+        label="Biography" 
+        placeholder="Tell us about yourself..." 
+        required="true"
+        rows="6"
+        maxLength="1000">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Biography",
+  "placeholder": "Tell us about yourself...",
+  "modelKey": "user.bio",
+  "required": true,
+  "rows": 6,
+  "maxLength": 1000,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Disabled Text Area
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="TextArea" 
+        modelKey="system.logs" 
+        label="System Logs" 
+        placeholder="System logs will appear here..." 
+        isDisabled="true"
+        rows="8">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "System Logs",
+  "placeholder": "System logs will appear here...",
+  "modelKey": "system.logs",
+  "isDisabled": true,
+  "rows": 8,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Text Area with Actions
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="TextArea" 
+        modelKey="message.content" 
+        label="Message" 
+        placeholder="Type your message..." 
+        inputAction="autoSave"
+        namedAction="sendMessage"
+        rows="5">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Message",
+  "placeholder": "Type your message...",
+  "modelKey": "message.content",
+  "inputAction": "autoSave",
+  "namedAction": "sendMessage",
+  "rows": 5,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Text Area with Prefix and Suffix
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="TextArea" 
+        modelKey="code.snippet" 
+        label="Code Snippet" 
+        placeholder="Enter your code..." 
+        prefix="```"
+        suffix="```"
+        rows="6">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Code Snippet",
+  "placeholder": "Enter your code...",
+  "modelKey": "code.snippet",
+  "prefix": "```",
+  "suffix": "```",
+  "rows": 6,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+### Text Area with Submit on Enter
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="TextArea" 
+        modelKey="chat.message" 
+        label="Chat Message" 
+        placeholder="Type your message and press Enter to send..." 
+        submitOnEnter="true"
+        namedAction="sendChatMessage"
+        rows="3">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Chat Message",
+  "placeholder": "Type your message and press Enter to send...",
+  "modelKey": "chat.message",
+  "submitOnEnter": true,
+  "namedAction": "sendChatMessage",
+  "rows": 3,
+  "fullWidth": true
+}
+```
+</CodeGroup>
+
+---
+
+## Text Area Styling
+
+The Text Area component renders with a consistent, modern appearance that adapts to your form's theme. Here's what you can expect from the component styling:
+
+### Visual Structure
+
+The component renders as a structured text area container with the following visual hierarchy:
+
+- **Label**: Positioned above the text area field with appropriate spacing
+- **Text Area Container**: A bordered text area box with rounded corners and proper padding
+- **Prefix/Suffix**: Styled text elements positioned inside the text area container
+- **Placeholder**: Subtle text that appears when the text area is empty
+- **Character Counter**: Displays current/max characters when enabled
+
+### Default Appearance
+
+```html
+<!-- Renders as a clean, bordered text area with label -->
+<div class="textarea-group">
+  <label>Description</label>
+  <div class="textarea-container">
+    <textarea placeholder="Enter description..." rows="3"></textarea>
+  </div>
+</div>
+```
+
+### Styled Variations
+
+**With Prefix** (e.g., Code Snippet):
+```html
+<!-- ``` symbol appears inside the text area on the left -->
+<div class="textarea-container">
+  <span class="prefix">```</span>
+  <textarea rows="6"></textarea>
+</div>
+```
+
+**With Suffix** (e.g., Code Snippet):
+```html
+<!-- ``` symbol appears inside the text area on the right -->
+<div class="textarea-container">
+  <textarea rows="6"></textarea>
+  <span class="suffix">```</span>
+</div>
+```
+
+**With Character Counter**:
+```html
+<!-- Character counter appears below the text area -->
+<div class="textarea-container">
+  <textarea maxlength="500"></textarea>
+</div>
+<div class="counter">150 / 500</div>
+```
+
+### Responsive Behavior
+
+- **Full Width**: When `fullWidth="true"`, the text area expands to fill its container
+- **Auto-Grow**: When `autoGrow="true"`, the text area height adjusts based on content
+- **Focus States**: Clear visual feedback when the text area receives focus
+- **Error States**: Validation errors are displayed with appropriate styling
+- **Disabled States**: Disabled text areas show reduced opacity and cannot be interacted with
+
+### Theme Integration
+
+The component styling integrates seamlessly with your form's overall design system and supports consistent spacing, colors, and typography throughout your application.
+
+---
+
+## Text Area Behavior Details
+
+### Character Counting
+
+The component provides real-time character counting when `showCounter` and `maxLength` are enabled:
+
+- **Real-time updates** as the user types
+- **Format**: "current / max" (e.g., "150 / 500")
+- **Positioned** in the bottom-right corner of the text area area
+- **Updates** on every input change
+
+### Auto-Grow Implementation
+
+When `autoGrow` is enabled, the text area automatically adjusts its height:
+
+- **Dynamic height calculation** based on content
+- **Maximum height limit** enforced by `maxRows`
+- **Scroll behavior** when content exceeds maximum height
+- **Performance optimized** with efficient DOM updates
+
+### Validation States
+
+The component supports multiple validation states:
+
+- **Default**: Standard border and styling
+- **Error**: Red border and error message display
+- **Success**: Green border and success message display
+- **Disabled**: Reduced opacity and no interaction
+- **Read-only**: Content can be selected but not edited
+
+### Mobile Optimization
+
+The text area is optimized for mobile devices:
+
+- **Touch-friendly** sizing and spacing
+- **Appropriate keyboard** for text input
+- **Responsive behavior** across different screen sizes
+- **Accessibility support** for screen readers and assistive technologies

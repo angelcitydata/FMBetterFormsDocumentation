@@ -21,6 +21,7 @@ import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
 import { SwitchIcon } from '@/components/icons/SwitchIcon'
 import { TabsIcon } from '@/components/icons/TabsIcon'
 import { TagIcon } from '@/components/icons/TagIcon'
+import { TextAreaIcon } from '@/components/icons/TextAreaIcon'
 
 const resources = [
   {
@@ -257,6 +258,20 @@ const resources = [
       y: -6,
       squares: [
         [-1, 2],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/textArea',
+    name: 'Text Area',
+    description:
+      'A comprehensive text area component with auto-growing capabilities, character counting, validation, and seamless integration with the FM BetterForms model system.',
+    icon: TextAreaIcon,
+    pattern: {
+      y: 16,
+      squares: [
+        [0, 1],
         [1, 3],
       ],
     },

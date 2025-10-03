@@ -220,6 +220,7 @@ export const navigation = [
       { title: 'Section Title', href: '/fmbf-components/sectionTitle' },
       { title: 'Switch', href: '/fmbf-components/switch' },
       { title: 'Tabs', href: '/fmbf-components/tabs' },
+      { title: 'Text Area', href: '/fmbf-components/textArea' },
     ],
   },
 ]
