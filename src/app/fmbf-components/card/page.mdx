@@ -1,0 +1,509 @@
+export const metadata = {
+  title: 'Card Component',
+  description:
+    'A flexible content container component for FM BetterForms that displays structured information with title, subtitle, body text, and optional fields in a clean, accessible card layout.',
+}
+
+# Card Component
+
+The Card component provides a flexible content container for displaying structured information in your FM BetterForms application. It features a clean, accessible layout with title, subtitle, body text, and optional fields, making it perfect for organizing and presenting content in a visually appealing format. {{ className: 'lead' }}
+
+    This component supports structured content display with customizable title and subtitle,
+    optional body text, and a flexible field system for organizing related information
+    in a consistent, accessible card layout.
+
+---
+
+## Component Properties
+
+### Content Properties
+
+<Properties>
+  <Property name="title" type="string">
+    The main title displayed at the top of the card. This text appears in bold
+    and uses the primary foreground color. Example: `"User Profile"`, `"Order Summary"`.
+    Default is empty string.
+  </Property>
+  <Property name="subtitle" type="string">
+    The subtitle displayed below the title. This text appears in smaller font
+    size with muted foreground color. Example: `"Personal Information"`, `"Items in cart"`.
+    Default is empty string.
+  </Property>
+  <Property name="bodyText" type="string">
+    The main body content of the card. This text appears in regular font size
+    with standard foreground color. Only displayed if not empty or whitespace.
+    Example: `"Complete your profile to get started"`, `"Review your order details"`.
+    Default is empty string.
+  </Property>
+  <Property name="fields" type="array">
+    Array of field objects to display within the card. Each field can contain
+    various properties for displaying structured data. Currently supports empty array.
+    Example: `[]` (empty array for now, future expansion planned).
+    Default is empty array.
+  </Property>
+</Properties>
+
+---
+
+## Card Layout Structure
+
+The Card component features a clean, structured layout that organizes content hierarchically. The component automatically adapts its display based on the content provided, showing only relevant sections.
+
+### Content Hierarchy
+
+The card displays content in the following order:
+
+1. **Title** - Main heading displayed at the top in bold text
+2. **Subtitle** - Secondary heading below the title in smaller, muted text
+3. **Body Text** - Main content area (only shown if content exists)
+4. **Fields** - Structured data fields (currently supports empty array)
+
+### Visual Structure
+
+- **Container**: Full-width card with background, border, padding, and rounded corners
+- **Header Section**: Contains title and subtitle in a vertical flex layout
+- **Body Section**: Contains body text with conditional rendering
+- **Fields Section**: Reserved for future field rendering functionality
+
+### Responsive Design
+
+The card component is designed to be responsive and accessible:
+
+- **Full Width**: Cards expand to fill their container width
+- **Flexible Height**: Cards adjust height based on content
+- **Consistent Spacing**: Standard padding and gap spacing throughout
+- **Accessible Typography**: Proper heading hierarchy and text contrast
+
+---
+
+## Usage Examples
+
+The Card component is configured using JSON objects with properties for content display. Here are common usage patterns for different scenarios.
+
+### Basic Card
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Card" 
+        title="Welcome"
+        subtitle="Get started with your account"
+        bodyText="Complete your profile to begin using all features.">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic card in your model
+model.welcomeCard = {
+  title: "Welcome",
+  subtitle: "Get started with your account",
+  bodyText: "Complete your profile to begin using all features.",
+  fields: []
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Welcome",
+  "subtitle": "Get started with your account",
+  "bodyText": "Complete your profile to begin using all features.",
+  "fields": []
+}
+```
+
+</CodeGroup>
+
+### Card with Title and Subtitle Only
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Card" 
+        title="User Profile"
+        subtitle="Personal Information">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define card with title and subtitle in your model
+model.userProfileCard = {
+  title: "User Profile",
+  subtitle: "Personal Information",
+  bodyText: "",
+  fields: []
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "User Profile",
+  "subtitle": "Personal Information",
+  "bodyText": "",
+  "fields": []
+}
+```
+
+</CodeGroup>
+
+### Card with Body Text
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Card" 
+        title="Order Summary"
+        subtitle="Items in your cart"
+        bodyText="Please review your order details before proceeding to checkout.">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define card with body text in your model
+model.orderSummaryCard = {
+  title: "Order Summary",
+  subtitle: "Items in your cart",
+  bodyText: "Please review your order details before proceeding to checkout.",
+  fields: []
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Order Summary",
+  "subtitle": "Items in your cart",
+  "bodyText": "Please review your order details before proceeding to checkout.",
+  "fields": []
+}
+```
+
+</CodeGroup>
+
+### Minimal Card
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Card" 
+        title="Quick Info">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define minimal card in your model
+model.quickInfoCard = {
+  title: "Quick Info",
+  subtitle: "",
+  bodyText: "",
+  fields: []
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Quick Info",
+  "subtitle": "",
+  "bodyText": "",
+  "fields": []
+}
+```
+
+</CodeGroup>
+
+### Informational Card
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Card" 
+        title="System Status"
+        subtitle="Current Status"
+        bodyText="All systems are operational and running smoothly.">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define informational card in your model
+model.systemStatusCard = {
+  title: "System Status",
+  subtitle: "Current Status",
+  bodyText: "All systems are operational and running smoothly.",
+  fields: []
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "System Status",
+  "subtitle": "Current Status",
+  "bodyText": "All systems are operational and running smoothly.",
+  "fields": []
+}
+```
+
+</CodeGroup>
+
+### Card with All Properties
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Card" 
+        title="Complete Example"
+        subtitle="All properties included"
+        bodyText="This card demonstrates all available properties and their usage."
+        fields='[]'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define complete card in your model
+model.completeExampleCard = {
+  title: "Complete Example",
+  subtitle: "All properties included",
+  bodyText: "This card demonstrates all available properties and their usage.",
+  fields: []
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Complete Example",
+  "subtitle": "All properties included",
+  "bodyText": "This card demonstrates all available properties and their usage.",
+  "fields": []
+}
+```
+
+</CodeGroup>
+
+---
+
+## Card Styling
+
+The Card component features a clean, accessible design with consistent spacing and clear visual hierarchy. The styling provides excellent readability and maintains a professional appearance for content presentation.
+
+### Visual Structure
+
+The card renders with the following structure:
+
+- **Container**: Full-width card with background, border, padding, and rounded corners
+- **Header Section**: Vertical flex layout containing title and subtitle
+- **Body Section**: Conditional content area for body text
+- **Fields Section**: Reserved area for future field rendering
+
+### Default Appearance
+
+```html
+<!-- Card Structure -->
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border">
+  <!-- Header Section -->
+  <div class="flex flex-col gap-1">
+    <h3 class="text-foreground font-bold">Card Title</h3>
+    <h4 class="text-sm text-muted-foreground font-medium">Card Subtitle</h4>
+  </div>
+
+  <!-- Body Section -->
+  <div class="flex my-2">
+    <span class="text-base text-foreground">Card body text content</span>
+  </div>
+</div>
+```
+
+### Content Layout
+
+The card adapts its layout based on the content provided:
+
+**Title Only**:
+```html
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border">
+  <div class="flex flex-col gap-1">
+    <h3 class="text-foreground font-bold">Card Title</h3>
+  </div>
+</div>
+```
+
+**Title and Subtitle**:
+```html
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border">
+  <div class="flex flex-col gap-1">
+    <h3 class="text-foreground font-bold">Card Title</h3>
+    <h4 class="text-sm text-muted-foreground font-medium">Card Subtitle</h4>
+  </div>
+</div>
+```
+
+**With Body Text**:
+```html
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border">
+  <div class="flex flex-col gap-1">
+    <h3 class="text-foreground font-bold">Card Title</h3>
+    <h4 class="text-sm text-muted-foreground font-medium">Card Subtitle</h4>
+  </div>
+  <div class="flex my-2">
+    <span class="text-base text-foreground">Body text content</span>
+  </div>
+</div>
+```
+
+### Typography and Colors
+
+The card uses consistent typography and color schemes:
+
+```html
+<!-- Container Colors -->
+<div class="bg-card text-card-foreground border border-border">
+  <!-- Title Styling -->
+  <h3 class="text-foreground font-bold">Title</h3>
+  
+  <!-- Subtitle Styling -->
+  <h4 class="text-sm text-muted-foreground font-medium">Subtitle</h4>
+  
+  <!-- Body Text Styling -->
+  <span class="text-base text-foreground">Body text</span>
+</div>
+```
+
+### Spacing and Layout
+
+The card uses consistent spacing throughout:
+
+```html
+<!-- Container Spacing -->
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border">
+  <!-- Header Section Spacing -->
+  <div class="flex flex-col gap-1">
+    <h3 class="text-foreground font-bold">Title</h3>
+    <h4 class="text-sm text-muted-foreground font-medium">Subtitle</h4>
+  </div>
+  
+  <!-- Body Section Spacing -->
+  <div class="flex my-2">
+    <span class="text-base text-foreground">Body text</span>
+  </div>
+</div>
+```
+
+### Conditional Rendering
+
+Body text is only rendered when content exists:
+
+```html
+<!-- Body text condition -->
+<div v-if="!_.isEmpty(_.trim(schema.bodyText))" class="flex my-2">
+  <span class="text-base text-foreground">{{schema.bodyText}}</span>
+</div>
+```
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses proper heading hierarchy with `<h3>` and `<h4>` elements
+- **Color Contrast** - Ensures sufficient contrast between text and background colors
+- **Screen Reader Support** - Proper heading structure for assistive technologies
+- **Responsive Design** - Adapts to different screen sizes and orientations
+- **Focus Management** - Clear visual hierarchy for content scanning
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `bg-card` - Card background color
+- `text-card-foreground` - Card text color
+- `text-foreground` - Primary text color
+- `text-muted-foreground` - Secondary text color
+- `border-border` - Card border color
+- `rounded-lg` - Consistent border radius
+- `p-4` - Standard padding
+- `gap-1` - Header section spacing
+- `my-2` - Body section spacing
+
+---
+
+## Best Practices
+
+When using the Card component, follow these guidelines for optimal user experience and consistent design.
+
+### Content Guidelines
+
+**✅ Do:**
+
+- Keep titles concise and descriptive (1-5 words)
+- Use subtitles to provide context or categorization
+- Write clear, scannable body text that adds value
+- Maintain consistent terminology across your application
+- Use cards to group related information logically
+
+**❌ Don't:**
+
+- Use overly long titles that break the card layout
+- Include redundant information between title and subtitle
+- Write body text that doesn't provide additional value
+- Mix different terminology for similar content types
+- Create cards with unrelated or scattered information
+
+### Content Structure
+
+**Title Guidelines:**
+- Use descriptive, action-oriented titles when appropriate
+- Keep titles consistent with your application's voice
+- Avoid generic titles like "Information" or "Details"
+- Use title case for consistency
+
+**Subtitle Guidelines:**
+- Provide context or categorization information
+- Use subtitles to explain the purpose or scope
+- Keep subtitles shorter than titles
+- Use sentence case for readability
+
+**Body Text Guidelines:**
+- Write clear, concise explanations or descriptions
+- Use body text to provide additional context
+- Keep paragraphs short for better readability
+- Only include body text when it adds value
+
+### Layout and Design
+
+**✅ Do:**
+
+- Use cards to group related information
+- Maintain consistent spacing between cards
+- Align cards with other interface elements
+- Consider the visual hierarchy of multiple cards
+- Use cards to break up long content sections
+
+**❌ Don't:**
+
+- Create cards that are too wide or too narrow
+- Overcrowd pages with too many cards
+- Use inconsistent spacing between cards
+- Place cards in locations that disrupt content flow
+- Create cards with excessive white space
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for all text elements
+- Test with screen readers to ensure proper reading order
+- Use descriptive titles that clearly indicate content
+- Maintain consistent heading hierarchy
+- Provide meaningful content structure
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create cards with poor color contrast
+- Use generic or unclear titles
+- Forget to test with assistive technologies
+- Create cards that are difficult to scan
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use cards for static or semi-static content
+- Consider the total number of cards on a page
+- Use appropriate model keys for card data
+- Implement efficient data loading for card content
+
+**❌ Don't:**
+
+- Use cards for frequently changing content without proper state management
+- Overload pages with too many cards that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create cards that require excessive data fetching

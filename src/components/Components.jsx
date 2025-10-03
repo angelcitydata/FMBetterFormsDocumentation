@@ -10,6 +10,7 @@ import { CheckIcon } from '@/components/icons/CheckIcon'
 import { ChevronRightLeftIcon } from '@/components/icons/ChevronRightLeftIcon'
 import { DocumentIcon } from '@/components/icons/DocumentIcon'
 import { ListIcon } from '@/components/icons/ListIcon'
+import { ShapesIcon } from '@/components/icons/ShapesIcon'
 import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
 import { TagIcon } from '@/components/icons/TagIcon'
 
@@ -94,6 +95,20 @@ const resources = [
       y: -6,
       squares: [
         [-1, 2],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/card',
+    name: 'Card',
+    description:
+      'A flexible content container component for displaying structured information with title, subtitle, body text, and optional fields.',
+    icon: ShapesIcon,
+    pattern: {
+      y: 16,
+      squares: [
+        [0, 1],
         [1, 3],
       ],
     },

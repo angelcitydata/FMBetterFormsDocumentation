@@ -207,6 +207,7 @@ export const navigation = [
       { title: 'Badge', href: '/fmbf-components/badge' },
       { title: 'Button', href: '/fmbf-components/button' },
       { title: 'Button Bar', href: '/fmbf-components/buttonBar' },
+      { title: 'Card', href: '/fmbf-components/card' },
       { title: 'Dropdown', href: '/fmbf-components/dropdown' },
       { title: 'Input', href: '/fmbf-components/input' },
     ],
