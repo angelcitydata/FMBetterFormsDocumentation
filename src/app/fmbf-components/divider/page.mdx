@@ -1,0 +1,372 @@
+export const metadata = {
+  title: 'Divider Component',
+  description:
+    'A flexible divider component for FM BetterForms that creates visual separation between content sections with multiple border styles including solid, dashed, and dotted variants.',
+}
+
+# Divider Component
+
+The Divider component provides visual separation between content sections in your FM BetterForms application. It features multiple border styles and consistent spacing, making it perfect for organizing content and improving visual hierarchy throughout your forms. {{ className: 'lead' }}
+
+    This component supports three variants: solid (default), dashed, and dotted borders,
+    each designed for different visual separation needs with consistent spacing and accessibility.
+
+---
+
+## Component Properties
+
+### Visual Properties
+
+<Properties>
+  <Property name="variant" type="string">
+    The border style variant for the divider. Controls the visual appearance of the divider line.
+    Options: `"default"` (solid border), `"dashed"` (dashed border), `"dotted"` (dotted border).
+    Default value is `"default"`. Used to create different visual separation styles between content sections.
+    Example: `"default"`, `"dashed"`, `"dotted"`.
+  </Property>
+</Properties>
+
+---
+
+## Component Structure
+
+The Divider component provides a semantic horizontal rule element with consistent styling and spacing. It's designed to create clear visual separation between content sections with multiple border style options.
+
+### Border Variants
+
+The Divider component supports three border style variants:
+
+1. **Default** - Solid border line (most common, strong separation)
+2. **Dashed** - Dashed border line (medium separation, decorative)
+3. **Dotted** - Dotted border line (subtle separation, minimal)
+
+### Visual Structure
+
+- **Element**: Semantic `<hr>` element for proper content structure
+- **Border**: Configurable border style (solid, dashed, or dotted)
+- **Spacing**: Consistent vertical margin for content separation
+- **Width**: Full width with self-stretch alignment
+
+### Responsive Design
+
+The Divider component is designed to be responsive and accessible:
+
+- **Full Width**: Dividers expand to fill their container width
+- **Consistent Spacing**: Standard margin spacing for content separation
+- **Semantic HTML**: Uses semantic `<hr>` element for proper content structure
+- **Theme Integration**: Uses theme border colors for consistent styling
+
+---
+
+## Usage Examples
+
+The Divider component is configured using a variant property to control the border style. Here are common usage patterns for different separation scenarios.
+
+### Default Divider (Solid)
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Divider" variant="default">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define default divider in your model
+model.sectionDivider = {
+  variant: "default"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "variant": "default"
+}
+```
+
+</CodeGroup>
+
+### Dashed Divider
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Divider" variant="dashed">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define dashed divider in your model
+model.subsectionDivider = {
+  variant: "dashed"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "variant": "dashed"
+}
+```
+
+</CodeGroup>
+
+### Dotted Divider
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Divider" variant="dotted">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define dotted divider in your model
+model.subtleDivider = {
+  variant: "dotted"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "variant": "dotted"
+}
+```
+
+</CodeGroup>
+
+### Form Section Separation
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Divider" variant="default">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define form section divider in your model
+model.formSectionDivider = {
+  variant: "default"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "variant": "default"
+}
+```
+
+</CodeGroup>
+
+### Content Group Separation
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Divider" variant="dashed">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define content group divider in your model
+model.contentGroupDivider = {
+  variant: "dashed"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "variant": "dashed"
+}
+```
+
+</CodeGroup>
+
+---
+
+## Component Styling
+
+The Divider component features a clean, accessible design with consistent spacing and multiple border styles. The styling provides clear visual separation and maintains a professional appearance for content organization.
+
+### Visual Structure
+
+The Divider renders with the following structure:
+
+- **Element**: Semantic `<hr>` element for proper content structure
+- **Border**: Configurable border style with theme colors
+- **Spacing**: Consistent vertical margin for content separation
+
+### Default Appearance
+
+```html
+<!-- Divider Structure (Default) -->
+<hr class="w-full self-stretch border border-border my-4" />
+```
+
+### Border Variants
+
+The Divider supports three border style variants:
+
+```html
+<!-- Default (Solid) Border -->
+<hr class="w-full self-stretch border border-border my-4" />
+
+<!-- Dashed Border -->
+<hr class="w-full self-stretch border border-border border-dashed my-4" />
+
+<!-- Dotted Border -->
+<hr class="w-full self-stretch border border-border border-dotted my-4" />
+```
+
+### Spacing and Layout
+
+The Divider uses consistent spacing and layout:
+
+```html
+<!-- Full Width with Standard Spacing -->
+<hr class="w-full self-stretch border border-border my-4" />
+```
+
+### CSS Classes
+
+The component uses the following CSS classes:
+
+- `w-full` - Full width of container
+- `self-stretch` - Stretch to fill available space
+- `border` - Base border styling
+- `border-border` - Theme border color
+- `my-4` - Vertical margin spacing (1rem top and bottom)
+- `border-dashed` - Dashed border style (when variant="dashed")
+- `border-dotted` - Dotted border style (when variant="dotted")
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses semantic `<hr>` element for proper content structure
+- **Screen Reader Support** - Proper horizontal rule semantics for assistive technologies
+- **Visual Separation** - Clear visual separation for content organization
+- **Theme Integration** - Consistent border colors using theme variables
+- **Responsive Design** - Adapts to different screen sizes and orientations
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `border-border` - Theme border color for consistent styling
+- `my-4` - Standard vertical margin spacing
+- `w-full` - Full width for consistent layout
+- `self-stretch` - Flexible stretching for container alignment
+
+---
+
+## Related Components
+
+The Divider component works well with other layout and organizational components to create clear content structure:
+
+### Layout Components
+
+1. **[Page Title](/fmbf-components/pageTitle)** - Main page headings for section identification
+2. **[Content Title](/fmbf-components/contentTitle)** - Section headings for content organization
+3. **[Section Title](/fmbf-components/sectionTitle)** - Subsection headings for detailed organization
+4. **Divider** - Visual separation between content sections - *Current component*
+
+### When to Use Divider
+
+**Use Default Divider for:**
+- Strong separation between major content sections
+- Form section divisions
+- Clear visual breaks in content flow
+- Primary content organization
+
+**Use Dashed Divider for:**
+- Medium separation between related content groups
+- Decorative content breaks
+- Subsection organization
+- Visual variety in content layout
+
+**Use Dotted Divider for:**
+- Subtle separation between closely related content
+- Minimal visual breaks
+- Content grouping without strong emphasis
+- Clean, understated design
+
+---
+
+## Best Practices
+
+When using the Divider component, follow these guidelines for optimal user experience and consistent design.
+
+### Visual Guidelines
+
+**✅ Do:**
+
+- Use dividers to create clear visual separation between content sections
+- Choose appropriate variants based on separation strength needed
+- Maintain consistent spacing around dividers
+- Use dividers to organize related content groups
+- Follow a logical hierarchy (stronger dividers for major sections)
+
+**❌ Don't:**
+
+- Overuse dividers and create visual clutter
+- Mix different divider variants inconsistently
+- Place dividers too close together
+- Use dividers as decorative elements without functional purpose
+- Create excessive visual breaks that disrupt content flow
+
+### Variant Selection
+
+**Border Style Guidelines:**
+- Use default (solid) for major content section separation
+- Use dashed for medium separation between related groups
+- Use dotted for subtle separation of closely related content
+- Maintain consistency in variant usage across similar content types
+- Consider the visual weight and importance of separation needed
+
+### Layout and Design
+
+**✅ Do:**
+
+- Use dividers to organize content into logical sections
+- Maintain consistent spacing between dividers and content
+- Align dividers with other interface elements
+- Consider the visual hierarchy with other layout components
+- Use dividers to break up long content sections
+
+**❌ Don't:**
+
+- Create dividers that are too prominent or distracting
+- Overcrowd pages with too many dividers
+- Use inconsistent spacing around dividers
+- Place dividers in locations that disrupt content flow
+- Create dividers with excessive visual weight
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Use semantic `<hr>` elements for proper content structure
+- Ensure dividers provide meaningful visual separation
+- Test with screen readers to ensure proper content organization
+- Use consistent divider styling for predictable user experience
+- Provide clear content structure and organization
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create dividers that are too subtle to be noticed
+- Use dividers inconsistently across the application
+- Forget to test with assistive technologies
+- Create dividers that don't improve content organization
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use dividers for static content organization
+- Consider the total number of dividers on a page
+- Use appropriate model keys for divider configuration
+- Implement efficient rendering for divider components
+
+**❌ Don't:**
+
+- Use dividers for frequently changing content without proper state management
+- Overload pages with too many dividers that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create dividers that require excessive data fetching

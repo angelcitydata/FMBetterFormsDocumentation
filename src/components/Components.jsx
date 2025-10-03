@@ -10,6 +10,7 @@ import { ChatBubbleIcon } from '@/components/icons/ChatBubbleIcon'
 import { CheckIcon } from '@/components/icons/CheckIcon'
 import { CheckboxIcon } from '@/components/icons/CheckboxIcon'
 import { ChevronRightLeftIcon } from '@/components/icons/ChevronRightLeftIcon'
+import { DividerIcon } from '@/components/icons/DividerIcon'
 import { DocumentIcon } from '@/components/icons/DocumentIcon'
 import { ListIcon } from '@/components/icons/ListIcon'
 import { MagnifyingGlassIcon } from '@/components/icons/MagnifyingGlassIcon'
@@ -136,6 +137,20 @@ const resources = [
     description:
       'A simple, semantic heading component for content sections with consistent typography and spacing for improved content hierarchy.',
     icon: DocumentIcon,
+    pattern: {
+      y: 16,
+      squares: [
+        [0, 1],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/divider',
+    name: 'Divider',
+    description:
+      'A flexible divider component that creates visual separation between content sections with multiple border styles including solid, dashed, and dotted variants.',
+    icon: DividerIcon,
     pattern: {
       y: 16,
       squares: [
