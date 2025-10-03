@@ -216,6 +216,7 @@ export const navigation = [
       { title: 'Input', href: '/fmbf-components/input' },
       { title: 'Info Card', href: '/fmbf-components/infoCard' },
       { title: 'Page Title', href: '/fmbf-components/pageTitle' },
+      { title: 'Radio Group', href: '/fmbf-components/radioGroup' },
       { title: 'Section Title', href: '/fmbf-components/sectionTitle' },
     ],
   },

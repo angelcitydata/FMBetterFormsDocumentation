@@ -1,0 +1,792 @@
+export const metadata = {
+  title: 'Radio Group Component',
+  description:
+    'An interactive radio group component for FM BetterForms that allows users to select a single option from multiple choices with support for vertical and horizontal layouts, labels, descriptions, and keyboard accessibility.',
+}
+
+# Radio Group Component
+
+The Radio Group component provides an interactive form control for single-choice selections in your FM BetterForms application. It features a clean, accessible design with support for vertical and horizontal layouts, making it perfect for forms, surveys, and preference selections. {{ className: 'lead' }}
+
+    This component supports single selection from multiple options with customizable labels and descriptions,
+    flexible layout options, keyboard navigation, and comprehensive accessibility features
+    for optimal user experience.
+
+---
+
+## Component Properties
+
+### Core Properties
+
+<Properties>
+  <Property name="modelKey" type="string">
+    The key used to bind the radio group value to the form model. This property
+    determines which field in the model will store the selected option value.
+    Example: `"preferredContact"`, `"shippingMethod"`.
+    Default is `"radio"`.
+  </Property>
+  <Property name="label" type="string">
+    The text label displayed above the radio group. This text appears in bold
+    and serves as the group label for the radio options.
+    Example: `"Preferred contact method"`, `"Shipping options"`.
+    Default is empty string (not displayed).
+  </Property>
+  <Property name="groupLabel" type="string">
+    The accessible label for the radio group. This text is used for screen readers
+    and accessibility purposes to describe the group of radio options.
+    Example: `"Choose your preferred contact method"`, `"Select shipping option"`.
+    Default is `"Options"` or uses the `label` property if provided.
+  </Property>
+  <Property name="direction" type="string">
+    Controls the layout direction of the radio group options. Can be vertical
+    (stacked) or horizontal (side by side).
+    Example: `"vertical"`, `"horizontal"`.
+    Default is `"vertical"`.
+  </Property>
+  <Property name="disabled" type="boolean|string">
+    Controls whether the entire radio group is disabled. Can be boolean or string values
+    that evaluate to disabled state. When disabled, no options can be selected.
+    Example: `true`, `"true"`, `"1"`, `"on"`, `"yes"`.
+    Default is `false`.
+  </Property>
+  <Property name="items" type="array">
+    Array of radio button options. Each item contains properties for displaying
+    individual radio button choices with labels and descriptions.
+    Example: `[{"label": "Email", "value": "email"}, {"label": "Phone", "value": "phone"}]`.
+    Default is empty array.
+  </Property>
+</Properties>
+
+### Action Properties
+
+<Properties>
+  <Property name="namedAction" type="string">
+    Optional action to trigger when the radio group selection changes. This allows
+    for custom behavior when a different option is selected.
+    Example: `"validateForm"`, `"updateShippingCost"`.
+    Default is empty string.
+  </Property>
+  <Property name="actionOptions" type="object">
+    Configuration options passed to the named action when triggered.
+    This object can contain any data needed for the action execution.
+    Example: `{"validate": true, "field": "shipping"}`.
+    Default is empty object `{}`.
+  </Property>
+</Properties>
+
+### Technical Properties
+
+<Properties>
+  <Property name="windowIndex" type="number">
+    The index of the window containing this radio group component. Used for
+    accessing the correct form model in multi-window applications.
+    Example: `0`, `1`, `2`.
+    Default is `0`.
+  </Property>
+  <Property name="id" type="string">
+    Optional unique identifier for the radio group element. If not provided,
+    will be generated from modelKey or windowIndex.
+    Example: `"contact-method-group"`, `"shipping-options-group"`.
+    Default is auto-generated.
+  </Property>
+</Properties>
+
+---
+
+## Radio Group States and Behavior
+
+The Radio Group component supports single selection from multiple options and provides comprehensive interaction handling for optimal user experience.
+
+### State Types
+
+The radio group can have one selected option:
+
+1. **No Selection** - Default state, no options are selected
+2. **Selected** - One option is selected, showing filled radio button with dot
+3. **Disabled** - Entire group is disabled, no options can be selected
+
+### Interaction Behavior
+
+- **Click/Tap**: Selects the clicked option and deselects any previously selected option
+- **Keyboard Navigation**: Arrow keys move between options, Space or Enter selects the focused option
+- **Option Click**: Clicking any option selects it and deselects others
+- **Disabled State**: When disabled, no interactions are possible
+
+### State Transitions
+
+- **No Selection → Selected**: User clicks an option or navigates and selects with keyboard
+- **Selected → Different Selection**: User clicks another option or navigates to it
+- **Any State → Disabled**: Controlled by the `disabled` property
+- **Horizontal Navigation**: Left/Right arrow keys move between options
+- **Vertical Navigation**: Up/Down arrow keys move between options
+
+### Data Binding and Model Integration
+
+The radio group component binds its selected value to the form model using the `modelKey` property. When the selection changes, the corresponding model field is automatically updated.
+
+**Model Integration:**
+- The `modelKey` property specifies which field in the model stores the selected option value
+- Radio group value is stored as a string value (the `value` property of the selected item)
+- The model is automatically updated when the user selects a different option
+- The `items` array contains all available options with their labels and values
+
+**Data Flow:**
+1. User interacts with radio group (click, keyboard navigation)
+2. Component updates its visual state to show the new selection
+3. Model field (specified by `modelKey`) is updated with the selected option's value
+4. Any configured actions are triggered via `namedAction`
+
+**Example Model Structure:**
+```javascript
+// Model with radio group fields
+model = {
+  preferredContact: "",          // Basic radio group
+  shippingMethod: "standard",    // Radio group with default selection
+  paymentType: "",               // Radio group with action
+  subscriptionTier: "basic"      // Complete radio group
+}
+```
+
+---
+
+## Usage Examples
+
+The Radio Group component is configured using JSON objects with properties for form interaction. Here are common usage patterns for different scenarios.
+
+### Basic Radio Group
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="RadioGroup" 
+        modelKey="preferredContact"
+        label="Preferred contact method"
+        groupLabel="Choose your preferred contact method"
+        direction="vertical"
+        items='[{"label": "Email", "value": "email"}, {"label": "Phone", "value": "phone"}, {"label": "Text", "value": "text"}]'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic radio group in your model
+model.preferredContact = ""
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "preferredContact",
+  "label": "Preferred contact method",
+  "groupLabel": "Choose your preferred contact method",
+  "direction": "vertical",
+  "disabled": false,
+  "items": [
+    {"label": "Email", "value": "email"},
+    {"label": "Phone", "value": "phone"},
+    {"label": "Text", "value": "text"}
+  ]
+}
+```
+
+</CodeGroup>
+
+### Radio Group with Descriptions
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="RadioGroup" 
+        modelKey="shippingMethod"
+        label="Shipping options"
+        groupLabel="Select your preferred shipping method"
+        direction="vertical"
+        items='[{"label": "Standard", "value": "standard", "description": "5-7 business days"}, {"label": "Express", "value": "express", "description": "2-3 business days"}, {"label": "Overnight", "value": "overnight", "description": "Next business day"}]'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define radio group with descriptions in your model
+model.shippingMethod = ""
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "shippingMethod",
+  "label": "Shipping options",
+  "groupLabel": "Select your preferred shipping method",
+  "direction": "vertical",
+  "disabled": false,
+  "items": [
+    {"label": "Standard", "value": "standard", "description": "5-7 business days"},
+    {"label": "Express", "value": "express", "description": "2-3 business days"},
+    {"label": "Overnight", "value": "overnight", "description": "Next business day"}
+  ]
+}
+```
+
+</CodeGroup>
+
+### Disabled Radio Group
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="RadioGroup" 
+        modelKey="adminLevel"
+        label="Administrator level"
+        groupLabel="Select your administrator access level"
+        direction="vertical"
+        disabled="true"
+        items='[{"label": "Basic", "value": "basic"}, {"label": "Advanced", "value": "advanced"}, {"label": "Super", "value": "super"}]'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define disabled radio group in your model
+model.adminLevel = ""
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "adminLevel",
+  "label": "Administrator level",
+  "groupLabel": "Select your administrator access level",
+  "direction": "vertical",
+  "disabled": true,
+  "items": [
+    {"label": "Basic", "value": "basic"},
+    {"label": "Advanced", "value": "advanced"},
+    {"label": "Super", "value": "super"}
+  ]
+}
+```
+
+</CodeGroup>
+
+### Horizontal Radio Group
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="RadioGroup" 
+        modelKey="priority"
+        label="Priority level"
+        groupLabel="Select the priority level"
+        direction="horizontal"
+        items='[{"label": "Low", "value": "low"}, {"label": "Medium", "value": "medium"}, {"label": "High", "value": "high"}, {"label": "Urgent", "value": "urgent"}]'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define horizontal radio group in your model
+model.priority = ""
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "priority",
+  "label": "Priority level",
+  "groupLabel": "Select the priority level",
+  "direction": "horizontal",
+  "disabled": false,
+  "items": [
+    {"label": "Low", "value": "low"},
+    {"label": "Medium", "value": "medium"},
+    {"label": "High", "value": "high"},
+    {"label": "Urgent", "value": "urgent"}
+  ]
+}
+```
+
+</CodeGroup>
+
+### Radio Group with Action
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="RadioGroup" 
+        modelKey="paymentType"
+        label="Payment method"
+        groupLabel="Choose your payment method"
+        direction="vertical"
+        namedAction="updatePaymentInfo"
+        actionOptions='{"validate": true, "updateCost": true}'
+        items='[{"label": "Credit Card", "value": "credit", "description": "Visa, MasterCard, American Express"}, {"label": "PayPal", "value": "paypal", "description": "Pay with your PayPal account"}, {"label": "Bank Transfer", "value": "bank", "description": "Direct bank transfer"}]'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define radio group with action in your model
+model.paymentType = ""
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "paymentType",
+  "label": "Payment method",
+  "groupLabel": "Choose your payment method",
+  "direction": "vertical",
+  "namedAction": "updatePaymentInfo",
+  "actionOptions": {"validate": true, "updateCost": true},
+  "disabled": false,
+  "items": [
+    {"label": "Credit Card", "value": "credit", "description": "Visa, MasterCard, American Express"},
+    {"label": "PayPal", "value": "paypal", "description": "Pay with your PayPal account"},
+    {"label": "Bank Transfer", "value": "bank", "description": "Direct bank transfer"}
+  ]
+}
+```
+
+</CodeGroup>
+
+### Complete Radio Group Example
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="RadioGroup" 
+        modelKey="subscriptionTier"
+        label="Subscription tier"
+        groupLabel="Choose your subscription level"
+        direction="vertical"
+        id="subscription-selector"
+        windowIndex="0"
+        namedAction="updateSubscription"
+        actionOptions='{"validate": true, "updateFeatures": true}'
+        items='[{"label": "Basic", "value": "basic", "description": "Essential features for individuals"}, {"label": "Professional", "value": "professional", "description": "Advanced features for professionals"}, {"label": "Enterprise", "value": "enterprise", "description": "Full features for organizations"}]'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define complete radio group in your model
+model.subscriptionTier = ""
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "subscriptionTier",
+  "label": "Subscription tier",
+  "groupLabel": "Choose your subscription level",
+  "direction": "vertical",
+  "id": "subscription-selector",
+  "windowIndex": 0,
+  "namedAction": "updateSubscription",
+  "actionOptions": {"validate": true, "updateFeatures": true},
+  "disabled": false,
+  "items": [
+    {"label": "Basic", "value": "basic", "description": "Essential features for individuals"},
+    {"label": "Professional", "value": "professional", "description": "Advanced features for professionals"},
+    {"label": "Enterprise", "value": "enterprise", "description": "Full features for organizations"}
+  ]
+}
+```
+
+</CodeGroup>
+
+### Real-World Notification Preferences Example
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Radio Group" 
+        modelKey="radioGroupSelection" 
+        stateKey="comboBoxState" 
+        :items="model.radioGroupOptions">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define notification preferences in your model
+model.radioGroupOptions = [
+  {"label": "Email", "value": "email"},
+  {"label": "SMS", "value": "sms"},
+  {"label": "Push Notification", "value": "push"}
+]
+model.radioGroupSelection = ""
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "radioGroupSelection",
+  "stateKey": "comboBoxState",
+  "items": [
+    {"label": "Email", "value": "email"},
+    {"label": "SMS", "value": "sms"},
+    {"label": "Push Notification", "value": "push"}
+  ]
+}
+```
+
+</CodeGroup>
+
+---
+
+## Radio Group Styling
+
+The Radio Group component features a clean, accessible design with consistent spacing and clear visual hierarchy. The styling provides excellent usability and maintains a professional appearance for form interactions.
+
+### Visual Structure
+
+The radio group renders with the following structure:
+
+- **Wrapper Container**: Full width container with optional label
+- **Radio Group**: Container with role="radiogroup" and aria-label
+- **Radio Options**: Individual button elements with radio role
+- **Radio Control**: Circular button with state-based styling
+- **Option Content**: Label and optional description text
+
+### Default Appearance
+
+```html
+<!-- Radio Group Structure -->
+<div class="w-full">
+  <!-- Group Label -->
+  <label class="mb-1 block text-sm font-medium text-foreground">
+    Choose one
+  </label>
+
+  <!-- Radio Group Container -->
+  <div
+    id="rg_0_options"
+    role="radiogroup"
+    aria-label="Choose one"
+    aria-disabled="false"
+    class="w-full flex flex-col gap-2"
+  >
+    <!-- Radio Option -->
+    <div class="group/radio relative">
+      <button
+        type="button"
+        role="radio"
+        aria-checked="false"
+        class="w-full inline-flex items-start gap-3 rounded-md border px-3 py-2 text-left text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground border-input hover:bg-accent hover:text-accent-foreground"
+      >
+        <!-- Radio Control -->
+        <span class="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full border border-input bg-background">
+          <span class="h-2 w-2 rounded-full transition-opacity opacity-0 bg-primary"></span>
+        </span>
+
+        <!-- Option Content -->
+        <span class="flex flex-col">
+          <span class="text-foreground font-semibold leading-5">Option 1</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+### State-Based Styling
+
+The radio group adapts its appearance based on the current state:
+
+**Unselected State**:
+```html
+<button class="bg-card text-foreground border-input">
+  <span class="rounded-full border border-input bg-background">
+    <span class="rounded-full transition-opacity opacity-0 bg-primary"></span>
+  </span>
+</button>
+```
+
+**Selected State**:
+```html
+<button class="bg-card text-foreground border-input">
+  <span class="rounded-full border border-input bg-background">
+    <span class="rounded-full transition-opacity opacity-100 bg-primary"></span>
+  </span>
+</button>
+```
+
+**Disabled State**:
+```html
+<button class="disabled:opacity-50 disabled:cursor-not-allowed">
+  <!-- State-specific styling with disabled appearance -->
+</button>
+```
+
+**Horizontal Layout**:
+```html
+<div class="w-full flex flex-wrap gap-3">
+  <button class="min-w-[12rem] ...">
+    <!-- Horizontal radio options -->
+  </button>
+</div>
+```
+
+### Typography and Colors
+
+The radio group uses consistent typography and color schemes:
+
+```html
+<!-- Group Label Styling -->
+<label class="mb-1 block text-sm font-medium text-foreground">
+  Choose one
+</label>
+
+<!-- Option Label Styling -->
+<span class="text-foreground font-semibold leading-5">
+  Option Label
+</span>
+
+<!-- Description Styling -->
+<span class="text-xs text-muted-foreground leading-4">
+  Optional description text
+</span>
+
+<!-- Radio Button Colors -->
+<span class="bg-primary">  <!-- Selected dot -->
+<span class="bg-background border-input">  <!-- Unselected background -->
+```
+
+### Spacing and Layout
+
+The radio group uses consistent spacing throughout:
+
+```html
+<!-- Container Spacing -->
+<div class="w-full">
+  <!-- Group Label Spacing -->
+  <label class="mb-1 block text-sm font-medium">
+    <!-- 4px bottom margin -->
+  </label>
+  
+  <!-- Radio Group Spacing -->
+  <div class="w-full flex flex-col gap-2">
+    <!-- 8px gap between radio options -->
+  </div>
+  
+  <!-- Option Spacing -->
+  <button class="inline-flex items-start gap-3 px-3 py-2">
+    <!-- 12px gap between radio control and content -->
+    <!-- 12px horizontal padding, 8px vertical padding -->
+  </button>
+</div>
+```
+
+### Interactive States
+
+The radio group provides clear visual feedback for all interaction states:
+
+```html
+<!-- Focus State -->
+<button class="focus:outline-none focus:ring-2 focus:ring-ring">
+  <!-- 2px focus ring for keyboard navigation -->
+</button>
+
+<!-- Hover State -->
+<button class="hover:bg-accent hover:text-accent-foreground transition-colors">
+  <!-- Background and text color changes on hover -->
+</button>
+
+<!-- Disabled State -->
+<button class="disabled:opacity-50 disabled:cursor-not-allowed">
+  <!-- 50% opacity and not-allowed cursor -->
+</button>
+
+<!-- Selected State -->
+<span class="opacity-100 bg-primary">
+  <!-- Selected radio button dot -->
+</span>
+```
+
+### Radio Button System
+
+The radio group uses circular radio buttons with dot indicators:
+
+```html
+<!-- Radio Button Structure -->
+<span class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-input bg-background">
+  <!-- Outer circle (16px x 16px) -->
+  <span class="h-2 w-2 rounded-full transition-opacity bg-primary">
+    <!-- Inner dot (8px x 8px) -->
+  </span>
+</span>
+
+<!-- Selected State -->
+<span class="opacity-100 bg-primary">
+  <!-- Visible dot for selected option -->
+</span>
+
+<!-- Unselected State -->
+<span class="opacity-0 bg-primary">
+  <!-- Hidden dot for unselected option -->
+</span>
+```
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses `<button>` with `role="radio"` for proper semantics
+- **ARIA Attributes** - `aria-checked` reflects current state (true/false), `aria-label` for group description
+- **Keyboard Support** - Arrow keys navigate, Space and Enter select options
+- **Screen Reader Support** - Proper labeling and state announcements for radio group
+- **Focus Management** - Clear focus indicators with ring styling
+- **Group Accessibility** - `role="radiogroup"` with proper aria-label for the entire group
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `bg-primary` - Primary background color for selected radio dot
+- `bg-background` - Background color for radio button circle
+- `border-input` - Border color for radio button circle
+- `bg-card` - Card background color for option buttons
+- `text-foreground` - Primary text color for labels
+- `text-muted-foreground` - Secondary text color for descriptions
+- `ring-ring` - Focus ring color
+- `rounded-full` - Circular border radius for radio buttons
+- `transition-colors` - Smooth color transitions
+- `opacity-50` - Disabled state opacity
+- `hover:bg-accent` - Hover background color for options
+
+---
+
+## Best Practices
+
+When using the Radio Group component, follow these guidelines for optimal user experience and consistent form design.
+
+### Label and Content Guidelines
+
+**✅ Do:**
+
+- Write clear, descriptive labels that explain each option
+- Use consistent terminology across all options in a group
+- Keep option labels concise but informative (typically 1-4 words)
+- Provide helpful descriptions for complex options
+- Use meaningful group labels that describe the selection purpose
+
+**❌ Don't:**
+
+- Use vague labels like "Option 1" or "Choice A"
+- Write overly long labels that break the layout
+- Mix different terminology for options in the same group
+- Create radio groups with unclear or ambiguous option labels
+- Use negative language that requires mental translation
+
+### Label Structure
+
+**Group Label Guidelines:**
+- Use descriptive group labels that explain the selection purpose
+- Keep group labels consistent with your application's voice
+- Avoid generic labels like "Options" or "Choices"
+- Use sentence case for readability
+- Make group labels self-explanatory
+
+**Option Label Guidelines:**
+- Use clear, distinct labels for each option
+- Keep option labels consistent within the group
+- Avoid generic labels like "Option 1" or "Choice A"
+- Use sentence case for readability
+- Make option labels self-explanatory
+
+**Description Guidelines:**
+- Provide additional context for complex options
+- Use descriptions to explain consequences of the choice
+- Keep descriptions concise and scannable
+- Only include descriptions when they add value
+- Use consistent formatting for similar descriptions
+
+### Form Layout and Design
+
+**✅ Do:**
+
+- Group related radio options logically
+- Maintain consistent spacing between radio groups
+- Align radio groups with other form elements
+- Consider the visual hierarchy of multiple radio groups
+- Use radio groups for single-choice selections
+- Choose appropriate layout direction (vertical for many options, horizontal for few)
+
+**❌ Don't:**
+
+- Create radio groups that are too close together
+- Overcrowd forms with too many radio groups
+- Use inconsistent spacing between radio groups
+- Place radio groups in locations that disrupt form flow
+- Use radio groups for multiple selections (use checkboxes instead)
+- Mix radio groups with checkboxes for the same decision
+
+### State Management
+
+**✅ Do:**
+
+- Use meaningful model keys that describe the selection
+- Initialize radio group values appropriately (usually empty string or default option)
+- Handle selection changes with proper state updates
+- Use actions for complex state changes
+- Provide clear feedback for selection changes
+
+**❌ Don't:**
+
+- Use generic model keys like "value" or "option"
+- Forget to initialize radio group values
+- Ignore selection state requirements
+- Create radio groups without proper state handling
+- Use radio groups for non-single-choice data
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for all text elements
+- Test with screen readers to ensure proper announcements
+- Use descriptive labels that clearly indicate each option
+- Maintain proper focus management and keyboard navigation
+- Provide clear group labels for screen readers
+- Test arrow key navigation between options
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create radio groups with poor color contrast
+- Use generic or unclear labels
+- Forget to test with assistive technologies
+- Create radio groups that are difficult to interact with
+- Forget to provide proper group labeling
+
+### Layout Direction Usage
+
+**✅ Do:**
+
+- Use vertical layout for many options (4+ options)
+- Use horizontal layout for few options (2-4 options)
+- Consider screen width when choosing layout direction
+- Maintain consistent spacing between options
+- Ensure options are easily clickable in both layouts
+
+**❌ Don't:**
+
+- Use horizontal layout for many options that would wrap
+- Use vertical layout for very few options unnecessarily
+- Create layouts that are difficult to navigate
+- Forget to consider mobile responsiveness
+- Mix layout directions within the same form unnecessarily
+
+### Action Integration
+
+**✅ Do:**
+
+- Use named actions for complex radio group behaviors
+- Provide meaningful action options
+- Handle action failures gracefully
+- Use actions for real-time updates
+- Document custom actions clearly
+
+**❌ Don't:**
+
+- Use actions for simple state changes
+- Create actions without proper error handling
+- Use generic action names
+- Forget to provide action options when needed
+- Create actions that conflict with radio group behavior
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use radio groups for single-choice form interactions
+- Consider the total number of radio groups on a page
+- Use appropriate model keys for radio group data
+- Implement efficient state management for radio group selections
+
+**❌ Don't:**
+
+- Use radio groups for frequently changing content without proper state management
+- Overload pages with too many radio groups that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create radio groups that require excessive data fetching

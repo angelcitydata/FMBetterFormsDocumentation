@@ -15,6 +15,7 @@ import { DocumentIcon } from '@/components/icons/DocumentIcon'
 import { ListIcon } from '@/components/icons/ListIcon'
 import { MagnifyingGlassIcon } from '@/components/icons/MagnifyingGlassIcon'
 import { ClipboardIcon } from '@/components/icons/ClipboardIcon'
+import { RadioGroupIcon } from '@/components/icons/RadioGroupIcon'
 import { ShapesIcon } from '@/components/icons/ShapesIcon'
 import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
 import { TagIcon } from '@/components/icons/TagIcon'
@@ -212,6 +213,20 @@ const resources = [
       y: 16,
       squares: [
         [0, 1],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/radioGroup',
+    name: 'Radio Group',
+    description:
+      'An interactive radio group component for single-choice selections with support for vertical and horizontal layouts, labels, descriptions, and keyboard accessibility.',
+    icon: RadioGroupIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [-1, 2],
         [1, 3],
       ],
     },
