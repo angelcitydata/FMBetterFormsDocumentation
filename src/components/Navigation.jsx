@@ -219,6 +219,7 @@ export const navigation = [
       { title: 'Radio Group', href: '/fmbf-components/radioGroup' },
       { title: 'Section Title', href: '/fmbf-components/sectionTitle' },
       { title: 'Switch', href: '/fmbf-components/switch' },
+      { title: 'Tabs', href: '/fmbf-components/tabs' },
     ],
   },
 ]

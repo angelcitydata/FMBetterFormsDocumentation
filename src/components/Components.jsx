@@ -19,6 +19,7 @@ import { RadioGroupIcon } from '@/components/icons/RadioGroupIcon'
 import { ShapesIcon } from '@/components/icons/ShapesIcon'
 import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
 import { SwitchIcon } from '@/components/icons/SwitchIcon'
+import { TabsIcon } from '@/components/icons/TabsIcon'
 import { TagIcon } from '@/components/icons/TagIcon'
 
 const resources = [
@@ -252,6 +253,20 @@ const resources = [
     description:
       'An interactive switch component for boolean (on/off) selections with support for labels, descriptions, and keyboard accessibility.',
     icon: SwitchIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [-1, 2],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/tabs',
+    name: 'Tabs',
+    description:
+      'A flexible tabs component that organizes content into tabbed sections with support for multiple variants, orientations, and keyboard navigation.',
+    icon: TabsIcon,
     pattern: {
       y: -6,
       squares: [

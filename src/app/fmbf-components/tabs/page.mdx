@@ -1,0 +1,857 @@
+export const metadata = {
+  title: 'Tabs Component',
+  description:
+    'A flexible tabs component for FM BetterForms that organizes content into tabbed sections with support for multiple variants, orientations, and keyboard navigation.',
+}
+
+# Tabs Component
+
+The Tabs component provides an organized way to display multiple sections of content in a tabbed interface for your FM BetterForms application. It features multiple variants, flexible orientation options, and comprehensive accessibility features for optimal user experience. {{ className: 'lead' }}
+
+    This component supports multiple tab variants (underline, solid, pill), flexible orientation
+    (horizontal/vertical), keyboard navigation, and comprehensive accessibility features
+    for optimal content organization.
+
+---
+
+## Component Properties
+
+### Core Properties
+
+<Properties>
+  <Property name="modelKey" type="string">
+    The key used to bind the active tab value to the form model. This property
+    determines which field in the model will store the currently selected tab value.
+    Example: `"activeTab"`, `"selectedSection"`, `"tabSelection"`.
+    Default is `"activeTab"`.
+  </Property>
+  <Property name="items" type="array">
+    Array of tab objects defining the available tabs. Each tab object should contain
+    label, value, and optionally icon and disabled properties.
+    Example: `[{"label": "General", "value": "general"}, {"label": "Settings", "value": "settings"}]`.
+    Default is empty array `[]`.
+  </Property>
+  <Property name="defaultValue" type="string">
+    The default tab value to be selected when the component initializes.
+    This should match one of the values in the items array.
+    Example: `"general"`, `"settings"`, `"activity"`.
+    Default is `"activity"`.
+  </Property>
+  <Property name="variant" type="string">
+    Controls the visual style of the tabs. Available options are underline, solid, and pill.
+    Example: `"underline"`, `"solid"`, `"pill"`.
+    Default is `"underline"`.
+  </Property>
+  <Property name="orientation" type="string">
+    Controls the layout orientation of the tabs. Can be horizontal or vertical.
+    Example: `"horizontal"`, `"vertical"`.
+    Default is `"horizontal"`.
+  </Property>
+</Properties>
+
+### Action Properties
+
+<Properties>
+  <Property name="onChange" type="string">
+    Optional action to trigger when the active tab changes. This allows
+    for custom behavior when a tab is selected.
+    Example: `"updateTabContent"`, `"loadTabData"`.
+    Default is empty string.
+  </Property>
+</Properties>
+
+### Technical Properties
+
+<Properties>
+  <Property name="windowIndex" type="number">
+    The index of the window containing this tabs component. Used for
+    accessing the correct form model in multi-window applications.
+    Example: `0`, `1`, `2`.
+    Default is `0`.
+  </Property>
+  <Property name="idPrefix" type="string">
+    Prefix for generating unique IDs for tab elements. Used for accessibility
+    and DOM element identification.
+    Example: `"tabs"`, `"navigation"`, `"sections"`.
+    Default is `"tabs"`.
+  </Property>
+</Properties>
+
+---
+
+## Tab States and Behavior
+
+The Tabs component supports multiple tab selection states and provides comprehensive interaction handling for optimal user experience.
+
+### State Types
+
+The tabs component can have multiple states:
+
+1. **Active Tab** - Currently selected tab, showing active styling
+2. **Inactive Tabs** - Non-selected tabs, showing inactive styling
+3. **Disabled Tabs** - Individual tabs that are disabled and cannot be selected
+4. **Default State** - Initial tab selection based on `defaultValue` property
+
+### Interaction Behavior
+
+- **Click/Tap**: Selects the clicked tab and makes it active
+- **Keyboard Navigation**: Arrow keys navigate between tabs, Enter/Space selects
+- **Tab Selection**: Clicking a tab changes the active state and updates the model
+- **Disabled Tabs**: When a tab is disabled, it cannot be selected
+- **Home/End Keys**: Jump to first/last available tab
+
+### State Transitions
+
+- **Inactive → Active**: User clicks a tab or navigates with keyboard and selects
+- **Active → Inactive**: User selects a different tab
+- **Any State → Disabled**: Controlled by the `disabled` property on individual tab items
+- **Keyboard Navigation**: Arrow keys move focus, Enter/Space selects the focused tab
+
+### Data Binding and Model Integration
+
+The tabs component binds its active tab value to the form model using the `modelKey` property. When the active tab changes, the corresponding model field is automatically updated.
+
+**Model Integration:**
+- The `modelKey` property specifies which field in the model stores the active tab value
+- Tab value is stored as a string matching one of the tab item values
+- The model is automatically updated when the user selects a different tab
+- The tabs reflect the current model value on initialization
+
+**Data Flow:**
+1. User interacts with tabs (click, keyboard navigation)
+2. Component updates its visual state to show the new active tab
+3. Model field (specified by `modelKey`) is updated with the selected tab value
+4. Any configured actions are triggered via `onChange`
+
+**Example Model Structure:**
+```javascript
+// Model with tabs fields
+model = {
+  activeTab: "general",           // Basic tabs
+  selectedSection: "settings",    // Tabs with custom model key
+  tabSelection: "activity",       // Tabs with default value
+  tabItems: [                     // Tab items array
+    {"label": "General", "value": "general"},
+    {"label": "Settings", "value": "settings"},
+    {"label": "Activity", "value": "activity"}
+  ]
+}
+```
+
+---
+
+## Usage Examples
+
+The Tabs component is configured using JSON objects with properties for form interaction. Here are common usage patterns for different scenarios.
+
+### Basic Tabs
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Tabs" 
+        modelKey="activeTab"
+        :items="model.tabItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic tabs in your model
+model.activeTab = "general"
+model.tabItems = [
+  {"label": "General", "value": "general"},
+  {"label": "Settings", "value": "settings"},
+  {"label": "Profile", "value": "profile"}
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "activeTab",
+  "items": [
+    {"label": "General", "value": "general"},
+    {"label": "Settings", "value": "settings"},
+    {"label": "Profile", "value": "profile"}
+  ],
+  "defaultValue": "general",
+  "variant": "underline",
+  "orientation": "horizontal"
+}
+```
+
+</CodeGroup>
+
+### Tabs with Icons
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Tabs" 
+        modelKey="tabSelection"
+        :items="model.tabItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define tabs with icons in your model
+model.tabSelection = "caseInfo"
+model.tabItems = [
+  {"label": "Case Info", "value": "caseInfo", "icon": "fa-briefcase"},
+  {"label": "Parties", "value": "parties", "icon": "fa-users"},
+  {"label": "Dates", "value": "dates", "icon": "fa-calendar-days"},
+  {"label": "Notes", "value": "notes", "icon": "fa-notes"}
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "tabSelection",
+  "items": [
+    {"label": "Case Info", "value": "caseInfo", "icon": "fa-briefcase"},
+    {"label": "Parties", "value": "parties", "icon": "fa-users"},
+    {"label": "Dates", "value": "dates", "icon": "fa-calendar-days"},
+    {"label": "Notes", "value": "notes", "icon": "fa-notes"}
+  ],
+  "defaultValue": "caseInfo",
+  "variant": "underline"
+}
+```
+
+</CodeGroup>
+
+### Solid Variant Tabs
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Tabs" 
+        modelKey="selectedSection"
+        variant="solid"
+        :items="model.sectionItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define solid variant tabs in your model
+model.selectedSection = "overview"
+model.sectionItems = [
+  {"label": "Overview", "value": "overview"},
+  {"label": "Details", "value": "details"},
+  {"label": "History", "value": "history"}
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "selectedSection",
+  "items": [
+    {"label": "Overview", "value": "overview"},
+    {"label": "Details", "value": "details"},
+    {"label": "History", "value": "history"}
+  ],
+  "defaultValue": "overview",
+  "variant": "solid",
+  "orientation": "horizontal"
+}
+```
+
+</CodeGroup>
+
+### Pill Variant Tabs
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Tabs" 
+        modelKey="activeView"
+        variant="pill"
+        :items="model.viewItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define pill variant tabs in your model
+model.activeView = "grid"
+model.viewItems = [
+  {"label": "Grid View", "value": "grid"},
+  {"label": "List View", "value": "list"},
+  {"label": "Card View", "value": "card"}
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "activeView",
+  "items": [
+    {"label": "Grid View", "value": "grid"},
+    {"label": "List View", "value": "list"},
+    {"label": "Card View", "value": "card"}
+  ],
+  "defaultValue": "grid",
+  "variant": "pill",
+  "orientation": "horizontal"
+}
+```
+
+</CodeGroup>
+
+### Vertical Orientation Tabs
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Tabs" 
+        modelKey="navigationTab"
+        orientation="vertical"
+        variant="solid"
+        :items="model.navItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define vertical tabs in your model
+model.navigationTab = "dashboard"
+model.navItems = [
+  {"label": "Dashboard", "value": "dashboard", "icon": "fa-chart-line"},
+  {"label": "Projects", "value": "projects", "icon": "fa-folder"},
+  {"label": "Team", "value": "team", "icon": "fa-users"},
+  {"label": "Settings", "value": "settings", "icon": "fa-cog"}
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "navigationTab",
+  "items": [
+    {"label": "Dashboard", "value": "dashboard", "icon": "fa-chart-line"},
+    {"label": "Projects", "value": "projects", "icon": "fa-folder"},
+    {"label": "Team", "value": "team", "icon": "fa-users"},
+    {"label": "Settings", "value": "settings", "icon": "fa-cog"}
+  ],
+  "defaultValue": "dashboard",
+  "variant": "solid",
+  "orientation": "vertical"
+}
+```
+
+</CodeGroup>
+
+### Tabs with Disabled Items
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Tabs" 
+        modelKey="currentTab"
+        :items="model.tabItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define tabs with disabled items in your model
+model.currentTab = "available"
+model.tabItems = [
+  {"label": "Available", "value": "available"},
+  {"label": "Coming Soon", "value": "comingSoon", "disabled": true},
+  {"label": "Beta", "value": "beta", "disabled": true},
+  {"label": "Archive", "value": "archive"}
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "currentTab",
+  "items": [
+    {"label": "Available", "value": "available"},
+    {"label": "Coming Soon", "value": "comingSoon", "disabled": true},
+    {"label": "Beta", "value": "beta", "disabled": true},
+    {"label": "Archive", "value": "archive"}
+  ],
+  "defaultValue": "available",
+  "variant": "underline"
+}
+```
+
+</CodeGroup>
+
+### Complete Tabs Example with Action
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Tabs" 
+        modelKey="activeSection"
+        variant="pill"
+        orientation="horizontal"
+        windowIndex="0"
+        onChange="updateTabContent"
+        :items="model.sectionItems">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define complete tabs in your model
+model.activeSection = "overview"
+model.sectionItems = [
+  {"label": "Overview", "value": "overview", "icon": "fa-chart-pie"},
+  {"label": "Analytics", "value": "analytics", "icon": "fa-chart-line"},
+  {"label": "Reports", "value": "reports", "icon": "fa-file-alt"},
+  {"label": "Settings", "value": "settings", "icon": "fa-cog"}
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "activeSection",
+  "items": [
+    {"label": "Overview", "value": "overview", "icon": "fa-chart-pie"},
+    {"label": "Analytics", "value": "analytics", "icon": "fa-chart-line"},
+    {"label": "Reports", "value": "reports", "icon": "fa-file-alt"},
+    {"label": "Settings", "value": "settings", "icon": "fa-cog"}
+  ],
+  "defaultValue": "overview",
+  "variant": "pill",
+  "orientation": "horizontal",
+  "windowIndex": 0,
+  "onChange": "updateTabContent"
+}
+```
+
+</CodeGroup>
+
+---
+
+## Tabs Styling
+
+The Tabs component features a clean, accessible design with multiple variants and consistent spacing. The styling provides excellent usability and maintains a professional appearance for content organization.
+
+### Visual Structure
+
+The tabs render with the following structure:
+
+- **Tablist Container**: Flex container with role="tablist" and aria-orientation
+- **Tab Buttons**: Individual tab buttons with role="tab" and aria-selected
+- **Tab Content**: Tab labels with optional icons
+- **Active Indicator**: Visual indicator for the active tab (underline, background, etc.)
+
+### Default Appearance (Underline Variant)
+
+```html
+<!-- Tabs Structure -->
+<div class="w-full">
+  <!-- Tablist -->
+  <div
+    role="tablist"
+    aria-orientation="horizontal"
+    class="flex flex-row gap-1"
+  >
+    <!-- Tab Buttons -->
+    <button
+      type="button"
+      role="tab"
+      aria-selected="true"
+      tabindex="0"
+      class="relative inline-flex items-center gap-2 text-sm font-medium transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none px-4 py-2 text-foreground after:absolute after:left-0 after:-bottom-[1px] after:h-0.5 after:w-full after:content-[''] after:bg-primary"
+    >
+      <i class="fa-regular text-[12px] fa-briefcase"></i>
+      <span>Tab Label</span>
+    </button>
+  </div>
+</div>
+```
+
+### Variant-Based Styling
+
+The tabs adapt their appearance based on the selected variant:
+
+**Underline Variant (Default)**:
+```html
+<div class="flex flex-row gap-1">
+  <button class="text-foreground after:bg-primary">
+    <!-- Active tab with underline -->
+  </button>
+  <button class="text-muted-foreground hover:text-foreground after:bg-transparent">
+    <!-- Inactive tab without underline -->
+  </button>
+</div>
+```
+
+**Solid Variant**:
+```html
+<div class="flex flex-row gap-1 bg-muted/40 p-1 rounded-md">
+  <button class="bg-background text-foreground rounded-md border border-input shadow-sm">
+    <!-- Active tab with solid background -->
+  </button>
+  <button class="text-muted-foreground hover:text-foreground rounded-md">
+    <!-- Inactive tab -->
+  </button>
+</div>
+```
+
+**Pill Variant**:
+```html
+<div class="flex flex-row gap-1 bg-muted/40 p-1 rounded-full">
+  <button class="bg-primary text-primary-foreground rounded-full">
+    <!-- Active tab with pill background -->
+  </button>
+  <button class="text-muted-foreground hover:text-foreground rounded-full">
+    <!-- Inactive tab -->
+  </button>
+</div>
+```
+
+### Orientation-Based Styling
+
+The tabs adapt their layout based on the orientation:
+
+**Horizontal Orientation (Default)**:
+```html
+<div class="flex flex-row gap-1" aria-orientation="horizontal">
+  <button class="px-4 py-2">
+    <!-- Horizontal tab buttons -->
+  </button>
+</div>
+```
+
+**Vertical Orientation**:
+```html
+<div class="flex flex-col gap-1" aria-orientation="vertical">
+  <button class="px-3 py-2">
+    <!-- Vertical tab buttons -->
+  </button>
+</div>
+```
+
+### State-Based Styling
+
+The tabs adapt their appearance based on the current state:
+
+**Active Tab**:
+```html
+<button 
+  aria-selected="true" 
+  tabindex="0"
+  class="text-foreground after:bg-primary"
+>
+  <!-- Active tab styling -->
+</button>
+```
+
+**Inactive Tab**:
+```html
+<button 
+  aria-selected="false" 
+  tabindex="-1"
+  class="text-muted-foreground hover:text-foreground after:bg-transparent"
+>
+  <!-- Inactive tab styling -->
+</button>
+```
+
+**Disabled Tab**:
+```html
+<button 
+  disabled="true"
+  class="opacity-50 pointer-events-none"
+>
+  <!-- Disabled tab styling -->
+</button>
+```
+
+### Typography and Colors
+
+The tabs use consistent typography and color schemes:
+
+```html
+<!-- Tab Label Styling -->
+<span class="text-sm font-medium">
+  Tab Label
+</span>
+
+<!-- Icon Styling -->
+<i class="fa-regular text-[12px] fa-briefcase"></i>
+
+<!-- Active Tab Colors -->
+<button class="text-foreground">  <!-- Active tab text -->
+<button class="after:bg-primary">  <!-- Active tab underline -->
+
+<!-- Inactive Tab Colors -->
+<button class="text-muted-foreground hover:text-foreground">  <!-- Inactive tab text -->
+<button class="after:bg-transparent">  <!-- Inactive tab underline -->
+```
+
+### Spacing and Layout
+
+The tabs use consistent spacing throughout:
+
+```html
+<!-- Container Spacing -->
+<div class="flex flex-row gap-1">
+  <!-- 4px gap between tabs -->
+  
+  <!-- Tab Button Dimensions -->
+  <button class="px-4 py-2">
+    <!-- Horizontal: 16px horizontal padding, 8px vertical padding -->
+  </button>
+  
+  <!-- Vertical Tab Button Dimensions -->
+  <button class="px-3 py-2">
+    <!-- Vertical: 12px horizontal padding, 8px vertical padding -->
+  </button>
+  
+  <!-- Icon and Text Spacing -->
+  <button class="inline-flex items-center gap-2">
+    <!-- 8px gap between icon and text -->
+  </button>
+</div>
+```
+
+### Interactive States
+
+The tabs provide clear visual feedback for all interaction states:
+
+```html
+<!-- Focus State -->
+<button class="focus:outline-none">
+  <!-- Clear focus outline for keyboard navigation -->
+</button>
+
+<!-- Hover State -->
+<button class="transition-colors hover:text-foreground">
+  <!-- Smooth color transitions on hover -->
+</button>
+
+<!-- Disabled State -->
+<button class="disabled:opacity-50 disabled:pointer-events-none">
+  <!-- 50% opacity and no pointer events when disabled -->
+</button>
+
+<!-- Active State -->
+<button class="text-foreground after:bg-primary">
+  <!-- Active tab with primary color and underline -->
+</button>
+```
+
+### Variant System
+
+The tabs use different visual systems for each variant:
+
+```html
+<!-- Underline Variant -->
+<button class="after:absolute after:left-0 after:-bottom-[1px] after:h-0.5 after:w-full after:content-['']">
+  <!-- Underline indicator system -->
+</button>
+
+<!-- Solid Variant -->
+<div class="bg-muted/40 p-1 rounded-md">
+  <button class="bg-background text-foreground rounded-md border border-input shadow-sm">
+    <!-- Solid background system -->
+  </button>
+</div>
+
+<!-- Pill Variant -->
+<div class="bg-muted/40 p-1 rounded-full">
+  <button class="bg-primary text-primary-foreground rounded-full">
+    <!-- Pill background system -->
+  </button>
+</div>
+```
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses `<div>` with `role="tablist"` and `<button>` with `role="tab"` for proper semantics
+- **ARIA Attributes** - `aria-selected` reflects current state (true/false), `aria-orientation` for layout direction
+- **Keyboard Support** - Arrow keys navigate between tabs, Home/End jump to first/last tab
+- **Screen Reader Support** - Proper labeling and state announcements for tabs
+- **Focus Management** - Clear focus indicators and proper tabindex management
+- **Tab Accessibility** - `role="tab"` with proper aria-selected state management
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `bg-primary` - Primary background color for active tabs (pill/solid variants)
+- `text-primary-foreground` - Text color for active tabs (pill variant)
+- `bg-background` - Background color for active tabs (solid variant)
+- `border-input` - Border color for active tabs (solid variant)
+- `text-foreground` - Primary text color for active tabs
+- `text-muted-foreground` - Secondary text color for inactive tabs
+- `bg-muted/40` - Background color for tab containers (solid/pill variants)
+- `rounded-md` - Border radius for solid variant containers
+- `rounded-full` - Border radius for pill variant containers and buttons
+- `transition-colors` - Smooth color transitions
+- `opacity-50` - Disabled state opacity
+- `shadow-sm` - Shadow for active tabs (solid variant)
+
+---
+
+## Best Practices
+
+When using the Tabs component, follow these guidelines for optimal user experience and consistent content organization.
+
+### Tab Content and Labeling
+
+**✅ Do:**
+
+- Write clear, descriptive tab labels that explain the content section
+- Use consistent terminology across all tabs in a group
+- Keep labels concise but informative (typically 1-3 words)
+- Use icons to enhance tab recognition when appropriate
+- Group related content logically into tabs
+
+**❌ Don't:**
+
+- Use vague labels like "More" or "Other"
+- Write overly long labels that break the layout
+- Mix different terminology for similar content sections
+- Create tabs with unclear or ambiguous labels
+- Use too many tabs (typically 3-7 tabs work best)
+
+### Tab Structure
+
+**Tab Label Guidelines:**
+- Use descriptive labels that explain the tab's content
+- Keep labels consistent with your application's voice
+- Avoid generic labels like "Tab 1" or "Section A"
+- Use sentence case for readability
+- Make labels self-explanatory
+
+**Icon Guidelines:**
+- Use icons to enhance tab recognition and visual hierarchy
+- Choose icons that clearly represent the tab content
+- Keep icon usage consistent across all tabs in a group
+- Use FontAwesome icons for consistency
+- Don't rely solely on icons without text labels
+
+**Content Organization Guidelines:**
+- Group related content into logical tab sections
+- Ensure each tab has meaningful, substantial content
+- Avoid creating tabs with minimal or empty content
+- Use tabs to reduce cognitive load and organize information
+- Consider the user's workflow when organizing tab content
+
+### Variant and Orientation Selection
+
+**✅ Do:**
+
+- Use underline variant for most content organization scenarios
+- Use solid variant for settings panels or configuration sections
+- Use pill variant for view switching or mode selection
+- Use horizontal orientation for most use cases
+- Use vertical orientation for navigation or sidebar layouts
+- Choose variants that match your application's design system
+
+**❌ Don't:**
+
+- Mix different variants within the same tab group
+- Use pill variant for content organization (use for actions instead)
+- Choose vertical orientation without sufficient space
+- Use variants that don't match your application's visual style
+- Create inconsistent tab styling across your application
+
+### Form Layout and Design
+
+**✅ Do:**
+
+- Group related tabs logically
+- Maintain consistent spacing and alignment
+- Consider the visual hierarchy of tab content
+- Use tabs to organize complex forms or content sections
+- Ensure tabs are easily accessible and clickable
+- Provide clear visual feedback for active/inactive states
+
+**❌ Don't:**
+
+- Create tabs that are too close together
+- Overcrowd interfaces with too many tabs
+- Use inconsistent spacing between tab groups
+- Place tabs in locations that disrupt content flow
+- Use tabs for simple, single-purpose content
+- Create tabs that are difficult to interact with on mobile
+
+### State Management
+
+**✅ Do:**
+
+- Use meaningful model keys that describe the active tab
+- Initialize tab values appropriately (usually the first tab)
+- Handle tab changes with proper string updates
+- Use onChange actions for complex tab behaviors
+- Provide clear feedback for tab state changes
+
+**❌ Don't:**
+
+- Use generic model keys like "value" or "active"
+- Forget to initialize tab values
+- Ignore string state requirements for tab values
+- Create tabs without proper state handling
+- Use tabs for non-string data
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for all tab elements
+- Test with screen readers to ensure proper tab announcements
+- Use descriptive labels that clearly indicate tab content
+- Maintain proper focus management and keyboard navigation
+- Provide clear visual indicators for active/inactive states
+- Test arrow key navigation and Home/End functionality
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey tab state
+- Create tabs with poor color contrast
+- Use generic or unclear tab labels
+- Forget to test with assistive technologies
+- Create tabs that are difficult to navigate with keyboard
+- Forget to provide proper ARIA attributes
+
+### Orientation Usage
+
+**✅ Do:**
+
+- Use horizontal orientation for most content organization
+- Use vertical orientation for navigation or sidebar layouts
+- Consider screen width when choosing orientation
+- Maintain consistent orientation within the same interface
+- Ensure tabs are easily readable in both orientations
+
+**❌ Don't:**
+
+- Use vertical orientation unnecessarily when horizontal works better
+- Mix orientations within the same interface without good reason
+- Create layouts that are difficult to read on mobile
+- Forget to consider responsive design implications
+- Use inconsistent orientation across your application
+
+### Action Integration
+
+**✅ Do:**
+
+- Use onChange actions for complex tab behaviors
+- Handle tab changes that require data loading or updates
+- Provide meaningful feedback for tab actions
+- Use actions for real-time content updates
+- Document custom tab actions clearly
+
+**❌ Don't:**
+
+- Use actions for simple tab switching
+- Create actions without proper error handling
+- Use generic action names
+- Forget to handle loading states for tab content
+- Create actions that conflict with tab navigation
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use tabs to organize content and reduce initial page load
+- Consider lazy loading content for inactive tabs
+- Use appropriate model keys for tab data
+- Implement efficient state management for tab states
+- Limit the number of tabs to maintain good performance
+
+**❌ Don't:**
+
+- Load all tab content simultaneously if it's heavy
+- Create too many tabs that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create tabs that require excessive data fetching on each switch
+- Ignore performance implications of tab content loading
