@@ -411,6 +411,183 @@ model.managerComboState = { open: false, q: '', active: -1 }
 
 </CodeGroup>
 
+### Real-World Company Selection Example
+
+This example demonstrates a real-world use case with a large dataset of companies, showing how the Combobox component handles extensive option lists with search functionality.
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Combobox" 
+        modelKey="selectedCompany"
+        label="Select Company"
+        placeholder="Search for a company..."
+        id="company-selector"
+        windowIndex="0"
+        namedAction="loadCompanyDetails"
+        actionOptions='{"loadContacts": true, "loadHistory": true}'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define company selection combobox in your model
+model.selectedCompany = null
+model.companyComboState = { open: false, q: '', active: -1 }
+
+// Real-world company options array
+model.companySelectOptions = [
+  {"label": "AeroRisk", "value": "05cc5ba3-6feb-42b9-ad9b-60dcd1c739ae"},
+  {"label": "Alvarez & James", "value": "3cb16b66-fcb1-4bc3-b87c-82a02c105992"},
+  {"label": "Alvarez & King", "value": "281c9bc6-e625-410c-805e-0fd75b227ca5"},
+  {"label": "Alvarez Trial Firm", "value": "a90cb148-0193-4ef0-acac-52dd53f339cf"},
+  {"label": "Apex Risk", "value": "d3a9d505-d845-4e25-b018-8730d054ff1b"},
+  {"label": "Baker & Shaw", "value": "a40fbdef-ca6a-452a-a0cf-5b5963e5ff7b"},
+  {"label": "Barlow & Flynn", "value": "b630ad2a-00ee-414b-8bc6-8b32bb0664e4"},
+  {"label": "Beaumont & Fisher", "value": "229213b1-eed8-443c-974d-1806ab1a66e0"},
+  {"label": "Bell & Kramer", "value": "2f64e18a-3dc1-4607-ab14-91a36c0f130f"},
+  {"label": "Bennett & Yu", "value": "48fee69d-4a7d-4d34-a225-e79eec3f7c63"},
+  {"label": "Broadview Risk", "value": "e37165a1-fa65-4062-bbed-3bd1be60c4f6"},
+  {"label": "Brooks & Anders", "value": "37dee179-ece4-4940-9431-5c12f50dc49c"},
+  {"label": "Cabrera & West", "value": "45837f2b-4bcb-409e-b6fb-2832a995cbbd"},
+  {"label": "Callahan & West", "value": "6c3888be-486e-455a-958c-f610a9d1ee93"},
+  {"label": "Carter & Feldman", "value": "bae345c2-53e7-49c0-8aef-bba90ec00aa1"},
+  {"label": "Carter Trial Group", "value": "170248be-0487-4c26-9a36-86cc51eeecba"},
+  {"label": "CityShield", "value": "5c350154-3b78-49ce-aff5-1c8d58fed8a2"},
+  {"label": "Coleman Trial Group", "value": "19373060-858a-40f4-a3f1-418effe2bf76"},
+  {"label": "Collins Injury Law", "value": "6ee6d5dd-6d56-44bd-a886-8c5a02021e60"},
+  {"label": "Collins Trial Group", "value": "d39775dd-3c15-4537-8e4e-c59f3c0e81a5"},
+  {"label": "CoreShield", "value": "3b95c8a3-d62b-464c-9db4-f58650a4cb2a"},
+  {"label": "CoreVista", "value": "0531af8b-02eb-4cf3-abd6-331775cd748b"},
+  {"label": "Cunningham & Dale", "value": "3c863942-c0c7-4dfa-898c-ee1b66197974"},
+  {"label": "Dalton & Kerr", "value": "3b9a6185-eac4-4e89-ae3d-c602217496c6"},
+  {"label": "Dawson & Li", "value": "f3f008d9-6735-4d0f-bd1b-c5af2dc7d3c3"},
+  {"label": "Denton & Lowe", "value": "2ada146e-1db7-4c1e-87a0-44ad13a4a139"},
+  {"label": "Desai Law", "value": "9f60106f-d4bb-4e16-965d-8ee287eae8f8"},
+  {"label": "Ellis & Cole", "value": "f4855aa5-1474-436f-846a-8e8217fa27e4"},
+  {"label": "Evermark", "value": "557c7bff-7440-4706-a634-ae80bddddd59"},
+  {"label": "Foster & Wynn", "value": "73609ba7-0937-48a8-b846-3e42ac472dff"},
+  {"label": "Grant Legal", "value": "fe8cd9dd-9b0d-4652-abb0-d7cbbaf737dc"},
+  {"label": "Grayson, Holt & Page", "value": "60655b78-bb64-4462-b288-b27ca6b04343"},
+  {"label": "Harbor & Co.", "value": "4f730220-2e72-4991-aab3-9f14c9b43cb5"},
+  {"label": "Harrigan & Stone", "value": "35f7fa3c-c7f1-4f3e-b9c2-a899209bf4d6"},
+  {"label": "Hayes & Bloom", "value": "61e95bd5-f358-4954-9b29-68532f301c0e"},
+  {"label": "Hayes & Porter", "value": "149dc681-9cad-4389-a344-a9eb54a04011"},
+  {"label": "Holland & Franks", "value": "1e5776dd-60f4-4ff5-af8c-c32b13733630"},
+  {"label": "James & McNeil", "value": "969ef317-ebe6-4c1a-9e26-7752a0204fb2"},
+  {"label": "Jenkins & Orr", "value": "af1d3645-2f8b-4d09-b084-881cf42aef89"},
+  {"label": "Jensen & Ortiz", "value": "5428909c-4609-4a21-b465-8cd24a986709"},
+  {"label": "Keaton & Moss", "value": "1c9713a3-80bf-4f68-b3c4-3af513d83773"},
+  {"label": "Kendrick & Lowe", "value": "16ea42ca-3b7b-4b17-b194-0b7fe26edcc0"},
+  {"label": "Kim & Oster", "value": "27e309d5-0a45-4fee-a9c7-50b83b2ea8d1"},
+  {"label": "Lewis & Grant", "value": "98303897-ac14-46f1-a476-3ac343a0491e"},
+  {"label": "Lowe & Denton", "value": "38fae975-cb3f-4250-a540-50f0b8183702"},
+  {"label": "McCallister, Boyd & Lee", "value": "f4167398-63be-4014-8147-07174c0f0ff8"},
+  {"label": "Meridian Brokers", "value": "83fc6c43-4a12-40be-83af-74c9c164a509"},
+  {"label": "Miller & Vance", "value": "7c1d1461-603c-46d9-b7a6-103860a69a0a"},
+  {"label": "Morgan Injury Law", "value": "5c0333b1-56fd-452c-8d78-adf305dbfcde"},
+  {"label": "Morrison & Hale", "value": "8f8c6ceb-c293-4899-973f-d9cc3b0c1ae4"},
+  {"label": "Nash & Porter", "value": "815d8457-1425-4aef-809e-6143a974a87d"},
+  {"label": "Nelson & Carr", "value": "c9f68d21-790f-4476-9f68-b65c3fdbee33"},
+  {"label": "Nolan & Pierce", "value": "1a4ef5d0-1b86-4e94-bd5c-8bd890cc3e10"},
+  {"label": "Northgate", "value": "e0803323-40f4-42bc-9f23-b11ddb175b65"},
+  {"label": "Northway", "value": "e88c3a01-0dfb-4c11-abdb-67183c51878d"},
+  {"label": "Oceanic Risk", "value": "8e5b38da-d3e8-4493-8c0a-2dcd545e91a7"},
+  {"label": "Optimum Risk", "value": "c1b80962-b2b6-44fa-9491-49f2e33fd191"},
+  {"label": "Ortega & Hyde", "value": "55bfd386-be00-479f-9272-492e0c139952"},
+  {"label": "Park Injury Law", "value": "7d0201c6-54a6-48ae-9281-2d21983a264c"},
+  {"label": "Parker, Sloane & Day", "value": "f245023c-91a8-4141-810b-15e9e100a938"},
+  {"label": "Patel & Knox", "value": "6ea5b4f5-28b1-4f18-a5ca-1b38f498a561"},
+  {"label": "Perez & Cross", "value": "224f86e7-a706-480c-b15b-337d62f08e4b"},
+  {"label": "Price Trial Law", "value": "dd9cfc90-73f3-4225-880e-a5acb4adef1c"},
+  {"label": "Rahman Trial Group", "value": "5cbc00e1-2c16-45b1-8b7a-938cbc8b306f"},
+  {"label": "RailGuard", "value": "684660c8-4c27-4a0d-9d87-70e964982679"},
+  {"label": "Reed & Stanton", "value": "cb4d5369-4b9d-4f36-a53d-9c303dae543b"},
+  {"label": "Rivera Law", "value": "3e2b3456-e8db-418b-8fd4-d0df79e900c1"},
+  {"label": "Rixon Insurance", "value": "898cd3a8-9cf8-4155-8b62-5d751f24c121"},
+  {"label": "Romero Law", "value": "769fde86-bc17-4a54-b059-1363bcaf97b7"},
+  {"label": "Ross & Patel", "value": "3628621d-6a4f-469d-9296-d4409f5fcae2"},
+  {"label": "Rowe & Bishop", "value": "4c680214-243f-4e9d-bb8a-867b47dad355"},
+  {"label": "Ruiz & Vega", "value": "bc1347bb-b9fd-4221-90fd-a1bf8d01d21f"},
+  {"label": "Salazar Injury Group", "value": "a309d897-3297-4ac7-9637-551049a218f5"},
+  {"label": "SchoolRisk Partners", "value": "17ed497d-7fac-4cc8-8b34-531d4e109344"},
+  {"label": "Soto & Marks", "value": "ae3b6888-43cc-4732-807e-d28575e1df8d"},
+  {"label": "Stonebridge Risk", "value": "3a5c4516-1b2d-4659-b99f-2fdfc3ac52da"},
+  {"label": "SummitPoint Risk", "value": "b7670fb4-aaf0-4542-8a4a-7e6b059290b3"},
+  {"label": "Sutter & James", "value": "57aefb0a-e3e6-4269-add8-a799992ce745"},
+  {"label": "Talley & Cross", "value": "e385b4c2-bf6c-4315-9ce9-966bee4731e0"},
+  {"label": "Thompson & Reddick LLP", "value": "cb109067-b4b0-4a68-8fb7-69b3fc1d706b"},
+  {"label": "Turner & Shaw", "value": "8f648db4-9b1c-46f5-b11a-0dc1795318dc"},
+  {"label": "Walcott & Reed", "value": "8523d1af-59c6-44c8-9cfc-ffa7c03dd3fe"},
+  {"label": "Ward Injury Law", "value": "1087b480-21d1-471a-939f-75d72dc4baed"},
+  {"label": "Wright & Barlow", "value": "efb1e668-4166-4207-9f05-17d7b5c514c6"},
+  {"label": "MetLife", "value": "df143fd2-ca3f-42de-983c-7d5e70702da1"},
+  {"label": "Pacific Life", "value": "cc2b3f5d-50e2-4152-a13a-0ffd63696513"},
+  {"label": "Prudential", "value": "c26b147e-ceeb-471e-9d5b-2c0fad29de28"},
+  {"label": "New York Life", "value": "345cbae5-4da3-4c70-9f64-d7ae5d660998"},
+  {"label": "United of Omaha", "value": "9d2bae65-5a18-4f97-9c02-0046b76b3593"},
+  {"label": "Berkshire Hathaway Life", "value": "7d71cd64-3af1-4f88-945d-57caa1c2b7eb"},
+  {"label": "Metro Transit", "value": "2570b217-3b84-43df-b4e9-ba7defcebf28"},
+  {"label": "Northline Logistics", "value": "8ccc39d2-2f37-47e5-816c-d03b225c5bd6"},
+  {"label": "City of Riverview", "value": "036d5146-3733-4126-924a-f1a66b979507"},
+  {"label": "Evergreen Grocery", "value": "cf69cdf5-c720-410a-bf84-5bcca898e302"},
+  {"label": "Horizon Trucking", "value": "64ee6b0c-cf29-4d8a-9c4a-065ad0a21877"},
+  {"label": "Arcadia Health", "value": "474a65ca-681c-452a-8896-72495b6f609a"},
+  {"label": "StarRide Share", "value": "c88d0aad-7aaa-4618-b104-78d25e30f643"},
+  {"label": "Apex Construction", "value": "b53d47a4-a684-419a-aab1-a3f17102de75"},
+  {"label": "Valley Unified School District", "value": "7b69765f-9042-4e77-8ff9-cc65107de36c"},
+  {"label": "Westwind Delivery", "value": "b45739d3-86b9-4798-93a0-64edb5afa801"},
+  {"label": "River City Clinic", "value": "c2b023ee-89f6-4db7-a92e-8b9e50ef8d81"},
+  {"label": "Pine County", "value": "b878b1a4-e1a2-4886-831e-90f1a67cfc49"},
+  {"label": "TriStar Airlines", "value": "1694f8c2-283c-4923-9650-1a932aa55f7a"},
+  {"label": "SunState Utilities", "value": "3578891c-1690-49d4-8ca9-f2fbd04d33ef"},
+  {"label": "Harbor Freightlines", "value": "7b3e2036-d2c4-4e64-aeb3-cd7f45d87a6e"},
+  {"label": "City Transit Authority", "value": "a7d967e9-3f2e-4e9e-a685-74597ff335f5"},
+  {"label": "Clearview Medical", "value": "337f3eb4-5c65-47aa-81a1-f310b4e07ce8"},
+  {"label": "NorthPeak Resorts", "value": "cd88c3ca-cc11-4557-80fa-99125c84151b"},
+  {"label": "Seaside Cruises", "value": "a57463f1-c47e-4bb6-8bf5-b3de2bdab7a3"},
+  {"label": "EverGreen Foods", "value": "3d1efe87-e3fb-43b5-ae14-060979688171"},
+  {"label": "Skyline Delivery", "value": "4ce0b6ed-70ed-4a05-b1ce-a2e3dfceae36"},
+  {"label": "SunRail", "value": "e7e85c14-ffff-45be-92fc-6478b86e30fb"},
+  {"label": "Apex Airlines", "value": "e885f31d-13cf-4bdc-a950-da98fa6f7f24"},
+  {"label": "NorthStar Retail", "value": "e2b5b683-70a7-43e7-970b-3c78bcb56e9e"},
+  {"label": "Blue Harbor Lines", "value": "684c2efc-a27d-4904-b252-7d4aa4fbc91f"},
+  {"label": "NorthPoint Hospital", "value": "30dd2411-ce9e-4478-82fd-6a5c3b5c4903"},
+  {"label": "City Parks Dept.", "value": "6f262d94-235b-4a28-8c7f-42a83b37a143"},
+  {"label": "Evergreen Freight", "value": "dd4c80d4-70d5-4a65-baa1-c7c4b44f0cff"},
+  {"label": "Granite Haulers", "value": "2af9a226-b62f-48f4-b0fb-544abb3d536b"},
+  {"label": "Summit City Schools", "value": "ea1550d8-9696-49e0-93bf-8229cdd309da"},
+  {"label": "City Transit", "value": "b945eac4-0654-45c1-b8fc-2bc097341828"},
+  {"label": "Ridgeview Foods", "value": "e5429bca-71cc-4bf7-b79d-66b08f5e5a8c"},
+  {"label": "North Shore Hospital", "value": "d1ff86e0-3d58-4682-977c-cba68410f267"},
+  {"label": "AeroLift", "value": "35c4158c-dd05-4449-8a95-5cc63240149e"}
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "selectedCompany",
+  "label": "Select Company",
+  "placeholder": "Search for a company...",
+  "items": "companySelectOptions",
+  "namedAction": "loadCompanyDetails",
+  "actionOptions": {"loadContacts": true, "loadHistory": true},
+  "disabled": false,
+  "emptyText": "No companies found.",
+  "stateKey": "companyComboState",
+  "windowIndex": 0
+}
+```
+
+</CodeGroup>
+
+**Key Features of This Example:**
+
+- **Large Dataset**: Demonstrates handling of 100+ company options with UUID values
+- **Search Functionality**: Users can type to filter through the extensive company list
+- **Real-World Data**: Uses actual company names and UUID identifiers
+- **Action Integration**: Triggers company detail loading when a selection is made
+- **Performance**: Shows how the component handles large option lists efficiently
+- **User Experience**: Provides clear placeholder text and empty state messaging
+
 ---
 
 ## Combobox Styling
