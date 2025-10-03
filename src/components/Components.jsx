@@ -7,9 +7,11 @@ import { GridPattern } from '@/components/GridPattern'
 import { Heading } from '@/components/Heading'
 import { BellIcon } from '@/components/icons/BellIcon'
 import { CheckIcon } from '@/components/icons/CheckIcon'
+import { ChevronRightLeftIcon } from '@/components/icons/ChevronRightLeftIcon'
 import { DocumentIcon } from '@/components/icons/DocumentIcon'
 import { ListIcon } from '@/components/icons/ListIcon'
 import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
+import { TagIcon } from '@/components/icons/TagIcon'
 
 const resources = [
   {
@@ -37,6 +39,34 @@ const resources = [
       squares: [
         [0, 2],
         [1, 4],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/badge',
+    name: 'Badge',
+    description:
+      'A versatile badge component for displaying labels, status indicators, and notifications with customizable variants and icons.',
+    icon: TagIcon,
+    pattern: {
+      y: 16,
+      squares: [
+        [0, 1],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/buttonBar',
+    name: 'Button Bar',
+    description:
+      'A segmented control component for selecting between multiple options with customizable variants, orientation, and keyboard navigation.',
+    icon: ChevronRightLeftIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [-1, 2],
+        [1, 3],
       ],
     },
   },

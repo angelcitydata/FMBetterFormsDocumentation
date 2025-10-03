@@ -1,0 +1,626 @@
+export const metadata = {
+  title: 'Button Bar Component',
+  description:
+    'A segmented control component for FM BetterForms that displays multiple options in a horizontal or vertical layout with customizable variants, full-width support, and keyboard navigation.',
+}
+
+# Button Bar Component
+
+The Button Bar component provides a segmented control interface for selecting between multiple options in your FM BetterForms application. It features customizable variants (pill, solid, rounded, underline), horizontal or vertical orientation, full-width support, and comprehensive keyboard navigation for creating intuitive selection interfaces. {{ className: 'lead' }}
+
+    This component supports multiple visual variants, optional icons for each option,
+    disabled states, named actions on selection, and accessible keyboard navigation
+    for creating tab-like interfaces and option selectors.
+
+---
+
+## Component Properties
+
+### Content Properties
+
+<Properties>
+  <Property name="items" type="array">
+    Array of objects defining the available options in the button bar. Each item
+    should have a `label` (display text) and `value` (stored value). Optional
+    properties include `icon` (Font Awesome class) and `disabled` (boolean).
+    Example: `[{label: "Option 1", value: "opt1"}, {label: "Option 2", value: "opt2"}]`
+  </Property>
+  <Property name="modelKey" type="string">
+    The model key where the selected value will be stored. This should match
+    a property in your model object. Example: `"selectedOption"`, `"rangeChoice"`.
+    Default is `"segValue"`.
+  </Property>
+  <Property name="variant" type="string">
+    The visual style variant of the button bar. Controls the appearance and
+    selection styling. Available variants: `"underline"`, `"pill"`, `"solid"`,
+    `"rounded"`. Default is `"underline"`.
+  </Property>
+</Properties>
+
+### Appearance Properties
+
+<Properties>
+  <Property name="orientation" type="string">
+    The layout orientation of the button bar. When `"horizontal"`, buttons
+    are arranged in a row. When `"vertical"`, buttons are stacked vertically.
+    Default is `"horizontal"`.
+  </Property>
+  <Property name="fullWidth" type="boolean">
+    Whether the button bar should expand to fill the full width of its container.
+    When `true`, buttons will stretch evenly to fill the available space.
+    Default is `false`.
+  </Property>
+  <Property name="schema" type="string">
+    The color scheme for the component. Controls the active state colors.
+    Available schemes: `"neutral"`, `"primary"`, `"secondary"`, `"destructive"`,
+    `"success"`, `"warning"`, `"info"`. Default is `"neutral"`.
+  </Property>
+</Properties>
+
+### Behavior Properties
+
+<Properties>
+  <Property name="onChange" type="string">
+    The named action to trigger when a button is selected. The action will
+    receive the selected value and index as parameters. Example: `"onOptionChange"`,
+    `"updateSelection"`. Default is empty string.
+  </Property>
+  <Property name="windowIndex" type="number">
+    Index of the window in the BetterForms window stack. Used for multi-window
+    applications to access the correct model state. Default is 0.
+  </Property>
+</Properties>
+
+---
+
+## Button Bar Variants
+
+The Button Bar component supports multiple visual variants that control the appearance and selection styling. Each variant provides a distinct look for different use cases and contexts.
+
+### Available Variants
+
+- **`underline`** - Text-based buttons with underline indicator for active state (default)
+- **`pill`** - Rounded pill-shaped buttons with background highlight for active state
+- **`solid`** - Solid background buttons with rounded corners
+- **`rounded`** - Buttons with rounded corners and background highlight
+
+### Variant Usage Guidelines
+
+- Use **`underline`** for tab-like interfaces and subtle selection indicators
+- Use **`pill`** for modern, mobile-friendly interfaces with clear selection states
+- Use **`solid`** for prominent selection interfaces that need strong visual feedback
+- Use **`rounded`** for balanced interfaces that need clear selection without being too bold
+
+### Color Schemes
+
+The component also supports different color schemes for the active state:
+
+- **`neutral`** - Default scheme with background and border (default)
+- **`primary`** - Primary brand colors
+- **`secondary`** - Secondary/muted colors
+- **`destructive`** - Red/danger colors for destructive actions
+- **`success`** - Green colors for success states
+- **`warning`** - Yellow/amber colors for warnings
+- **`info`** - Blue colors for informational content
+
+---
+
+## Usage Examples
+
+The Button Bar component is configured using JSON objects with properties for options, styling, and behavior. Here are common usage patterns for different scenarios.
+
+### Basic Button Bar
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ButtonBar" 
+        items='[{"label": "Option 1", "value": "opt1"}, {"label": "Option 2", "value": "opt2"}]'
+        modelKey="selectedOption">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define button bar in your model
+model.optionSelector = {
+  items: [
+    {label: "Option 1", value: "opt1"},
+    {label: "Option 2", value: "opt2"}
+  ],
+  modelKey: "selectedOption"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "items": [
+    {"label": "Option 1", "value": "opt1"},
+    {"label": "Option 2", "value": "opt2"}
+  ],
+  "modelKey": "selectedOption"
+}
+```
+
+</CodeGroup>
+
+### Button Bar with Icons
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ButtonBar" 
+        items='[{"label": "Home", "value": "home", "icon": "fa-home"}, {"label": "Profile", "value": "profile", "icon": "fa-user"}]'
+        variant="pill"
+        modelKey="currentView">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define button bar with icons in your model
+model.navigationBar = {
+  items: [
+    {label: "Home", value: "home", icon: "fa-home"},
+    {label: "Profile", value: "profile", icon: "fa-user"}
+  ],
+  variant: "pill",
+  modelKey: "currentView"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "items": [
+    {"label": "Home", "value": "home", "icon": "fa-home"},
+    {"label": "Profile", "value": "profile", "icon": "fa-user"}
+  ],
+  "variant": "pill",
+  "modelKey": "currentView"
+}
+```
+
+</CodeGroup>
+
+### Full-Width Button Bar
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ButtonBar" 
+        items='[{"label": "Small", "value": "small"}, {"label": "Medium", "value": "medium"}, {"label": "Large", "value": "large"}]'
+        variant="solid"
+        fullWidth="true"
+        modelKey="size">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define full-width button bar in your model
+model.sizeSelector = {
+  items: [
+    {label: "Small", value: "small"},
+    {label: "Medium", value: "medium"},
+    {label: "Large", value: "large"}
+  ],
+  variant: "solid",
+  fullWidth: true,
+  modelKey: "size"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "items": [
+    {"label": "Small", value: "small"},
+    {"label": "Medium", value: "medium"},
+    {"label": "Large", value: "large"}
+  ],
+  "variant": "solid",
+  "fullWidth": true,
+  "modelKey": "size"
+}
+```
+
+</CodeGroup>
+
+### Vertical Button Bar
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ButtonBar" 
+        items='[{"label": "Settings", "value": "settings"}, {"label": "Help", "value": "help"}, {"label": "About", "value": "about"}]'
+        orientation="vertical"
+        variant="rounded"
+        modelKey="menuSelection">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define vertical button bar in your model
+model.sideMenu = {
+  items: [
+    {label: "Settings", value: "settings"},
+    {label: "Help", value: "help"},
+    {label: "About", value: "about"}
+  ],
+  orientation: "vertical",
+  variant: "rounded",
+  modelKey: "menuSelection"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "items": [
+    {"label": "Settings", value: "settings"},
+    {"label": "Help", value: "help"},
+    {"label": "About", value: "about"}
+  ],
+  "orientation": "vertical",
+  "variant": "rounded",
+  "modelKey": "menuSelection"
+}
+```
+
+</CodeGroup>
+
+### Button Bar with Disabled Options
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ButtonBar" 
+        items='[{"label": "Active", "value": "active"}, {"label": "Disabled", "value": "disabled", "disabled": true}, {"label": "Another", "value": "another"}]'
+        variant="pill"
+        schema="primary"
+        modelKey="status">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define button bar with disabled options in your model
+model.statusBar = {
+  items: [
+    {label: "Active", value: "active"},
+    {label: "Disabled", value: "disabled", disabled: true},
+    {label: "Another", value: "another"}
+  ],
+  variant: "pill",
+  schema: "primary",
+  modelKey: "status"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "items": [
+    {"label": "Active", value: "active"},
+    {"label": "Disabled", value: "disabled", "disabled": true},
+    {"label": "Another", value: "another"}
+  ],
+  "variant": "pill",
+  "schema": "primary",
+  "modelKey": "status"
+}
+```
+
+</CodeGroup>
+
+### Button Bar with Change Handler
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ButtonBar" 
+        items='[{"label": "Tab 1", "value": "tab1"}, {"label": "Tab 2", "value": "tab2"}, {"label": "Tab 3", "value": "tab3"}]'
+        variant="underline"
+        onChange="onTabChange"
+        modelKey="activeTab">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define button bar with change handler in your model
+model.tabBar = {
+  items: [
+    {label: "Tab 1", value: "tab1"},
+    {label: "Tab 2", value: "tab2"},
+    {label: "Tab 3", value: "tab3"}
+  ],
+  variant: "underline",
+  onChange: "onTabChange",
+  modelKey: "activeTab"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "items": [
+    {"label": "Tab 1", value: "tab1"},
+    {"label": "Tab 2", value: "tab2"},
+    {"label": "Tab 3", value: "tab3"}
+  ],
+  "variant": "underline",
+  "onChange": "onTabChange",
+  "modelKey": "activeTab"
+}
+```
+
+</CodeGroup>
+
+---
+
+## Button Bar Styling
+
+The Button Bar component features a flexible, accessible design with consistent spacing and clear visual hierarchy. The styling provides excellent usability and maintains a clean appearance for option selection interfaces.
+
+### Visual Structure
+
+The button bar renders with the following structure:
+
+- **Container**: Flex container with gap spacing, background, padding, and rounded corners
+- **Buttons**: Individual button elements with role="tab" for accessibility
+- **Icons**: Optional Font Awesome icons with regular weight
+- **Labels**: Text content with medium font weight
+
+### Default Appearance (Underline Variant)
+
+```html
+<!-- Button Bar Structure -->
+<div role="tablist" aria-orientation="horizontal" class="flex gap-1 w-fit">
+  <!-- Button -->
+  <button
+    type="button"
+    role="tab"
+    aria-selected="true"
+    tabindex="0"
+    class="relative inline-flex items-center justify-center text-sm font-medium transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none px-4 py-2 text-foreground after:absolute after:left-0 after:-bottom-[1px] after:h-0.5 after:w-full after:content-[''] after:bg-primary"
+  >
+    <!-- Icon -->
+    <i class="fa-regular text-[12px] mr-1 fa-home"></i>
+    
+    <!-- Label -->
+    <span>Home</span>
+  </button>
+</div>
+```
+
+### Variant Styling
+
+Each variant applies different container and button styling:
+
+**Underline (default)**:
+```html
+<!-- Container -->
+<div class="flex gap-1 w-fit">
+
+<!-- Active Button -->
+<button class="text-foreground after:absolute after:left-0 after:-bottom-[1px] after:h-0.5 after:w-full after:content-[''] after:bg-primary">Button</button>
+
+<!-- Inactive Button -->
+<button class="text-muted-foreground hover:text-foreground">Button</button>
+</div>
+```
+
+**Pill Variant**:
+```html
+<!-- Container -->
+<div class="flex gap-1 bg-muted/40 p-1 rounded-full w-fit">
+
+<!-- Active Button -->
+<button class="bg-background text-foreground border border-input shadow-sm rounded-full">Button</button>
+
+<!-- Inactive Button -->
+<button class="text-muted-foreground hover:text-foreground rounded-full">Button</button>
+</div>
+```
+
+**Solid Variant**:
+```html
+<!-- Container -->
+<div class="flex gap-1 bg-muted/40 p-1 rounded-md w-fit">
+
+<!-- Active Button -->
+<button class="bg-background text-foreground border border-input shadow-sm rounded-md">Button</button>
+
+<!-- Inactive Button -->
+<button class="text-muted-foreground hover:text-foreground rounded-md">Button</button>
+</div>
+```
+
+**Rounded Variant**:
+```html
+<!-- Container -->
+<div class="flex gap-1 bg-muted/40 p-1 rounded-md w-fit">
+
+<!-- Active Button -->
+<button class="bg-background text-foreground border border-input shadow-sm rounded-md">Button</button>
+
+<!-- Inactive Button -->
+<button class="text-muted-foreground hover:text-foreground rounded-md">Button</button>
+</div>
+```
+
+### Color Schemes
+
+Each color scheme applies different active state colors:
+
+```html
+<!-- Neutral Scheme (default) -->
+<button class="bg-background text-foreground border border-input shadow-sm">Button</button>
+
+<!-- Primary Scheme -->
+<button class="bg-primary text-primary-foreground">Button</button>
+
+<!-- Secondary Scheme -->
+<button class="bg-secondary text-secondary-foreground">Button</button>
+
+<!-- Destructive Scheme -->
+<button class="bg-destructive text-destructive-foreground">Button</button>
+
+<!-- Success Scheme -->
+<button class="bg-success text-foreground">Button</button>
+
+<!-- Warning Scheme -->
+<button class="bg-warning text-foreground">Button</button>
+
+<!-- Info Scheme -->
+<button class="bg-info text-foreground">Button</button>
+```
+
+### Orientation Variations
+
+**Horizontal (default)**:
+```html
+<div class="flex gap-1">
+  <button class="px-4 py-2">Button 1</button>
+  <button class="px-4 py-2">Button 2</button>
+</div>
+```
+
+**Vertical**:
+```html
+<div class="flex flex-col gap-1">
+  <button class="px-3 py-2">Button 1</button>
+  <button class="px-3 py-2">Button 2</button>
+</div>
+```
+
+### Full-Width Styling
+
+When `fullWidth` is true, buttons stretch to fill available space:
+
+```html
+<div class="flex gap-1 w-full">
+  <button class="flex-1 min-w-0 px-4 py-2">Button 1</button>
+  <button class="flex-1 min-w-0 px-4 py-2">Button 2</button>
+</div>
+```
+
+### Icon Styling
+
+Icons use Font Awesome with regular weight and small size:
+
+```html
+<!-- Button with Icon -->
+<button class="relative inline-flex items-center justify-center text-sm font-medium px-4 py-2">
+  <i class="fa-regular text-[12px] mr-1 fa-home"></i>
+  <span>Home</span>
+</button>
+```
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses `<div role="tablist">` and `<button role="tab">`
+- **ARIA Attributes** - `aria-orientation`, `aria-selected`, `tabindex`
+- **Keyboard Navigation** - Arrow keys, Home, End for navigation
+- **Focus Management** - Only active tab is focusable (`tabindex="0"`)
+- **Screen Reader Support** - Proper roles and states for assistive technologies
+
+### Keyboard Navigation
+
+The component supports full keyboard navigation:
+
+- **Arrow Keys** - Navigate between options (Left/Right for horizontal, Up/Down for vertical)
+- **Home** - Jump to first enabled option
+- **End** - Jump to last enabled option
+- **Tab** - Move focus to/from the component
+- **Enter/Space** - Activate selected option
+
+### Theme Integration
+
+The component uses CSS custom properties for colors:
+
+- `bg-muted/40` - Container background
+- `text-foreground`, `text-muted-foreground` - Text colors
+- `bg-background`, `border-input` - Active state colors
+- `transition-colors` - Smooth color transitions
+- `focus:outline-none` - Custom focus styling
+
+---
+
+## Best Practices
+
+When using the Button Bar component, follow these guidelines for optimal user experience and consistent design.
+
+### Content Guidelines
+
+**✅ Do:**
+
+- Keep button labels concise and descriptive (1-3 words)
+- Use consistent terminology across your application
+- Choose appropriate variants that match the interface context
+- Use icons that enhance understanding of the button purpose
+- Limit the number of options to avoid overwhelming users (3-7 options recommended)
+
+**❌ Don't:**
+
+- Use overly long text that breaks the button layout
+- Mix different terminology for similar actions
+- Use variants that don't match the interface context
+- Overuse icons or use irrelevant icons
+- Create button bars with too many options that become difficult to navigate
+
+### Variant Selection
+
+**Interface Types:**
+- `underline` - Tab interfaces, navigation menus, subtle selection
+- `pill` - Modern interfaces, mobile-friendly, clear selection states
+- `solid` - Prominent selection interfaces, strong visual feedback
+- `rounded` - Balanced interfaces, clear selection without being too bold
+
+**Color Schemes:**
+- `neutral` - Default scheme, general purpose interfaces
+- `primary` - High importance, featured content selection
+- `secondary` - Medium importance, standard content selection
+- `destructive` - Destructive actions, warning states
+- `success` - Success states, positive actions
+- `warning` - Warning states, attention-required actions
+- `info` - Informational content, tips and guidance
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast between text and background
+- Test with screen readers to ensure proper reading order
+- Provide clear, descriptive labels for all buttons
+- Test keyboard navigation thoroughly
+- Use appropriate ARIA roles and attributes
+
+**❌ Don't:**
+
+- Rely solely on color to convey information
+- Create buttons that are too small to interact with on mobile devices
+- Forget to test keyboard navigation
+- Use disabled options without providing alternative ways to access the information
+- Overload the interface with too many options
+
+### Layout Guidelines
+
+**✅ Do:**
+
+- Use horizontal orientation for most interfaces (default)
+- Use vertical orientation for sidebars and narrow spaces
+- Consider full-width layout for equal importance options
+- Maintain consistent spacing between buttons
+- Align button bars with other interface elements
+
+**❌ Don't:**
+
+- Mix orientations within the same interface
+- Create button bars that break on smaller screens
+- Use inconsistent spacing or alignment
+- Place button bars in locations that are difficult to access
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use button bars for static or semi-static option sets
+- Implement efficient named actions for change handlers
+- Consider the total number of button bars on a page for performance
+- Use appropriate model keys to avoid conflicts
+
+**❌ Don't:**
+
+- Use button bars for frequently changing content without proper state management
+- Create button bars without implementing the corresponding named actions
+- Overload pages with too many button bars that impact rendering performance
+- Use generic model keys that might conflict with other components

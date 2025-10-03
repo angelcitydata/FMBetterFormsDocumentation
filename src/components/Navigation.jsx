@@ -204,7 +204,9 @@ export const navigation = [
     links: [
       { title: 'Accordion', href: '/fmbf-components/accordion' },
       { title: 'Alert Dialog', href: '/fmbf-components/alertDialog' },
+      { title: 'Badge', href: '/fmbf-components/badge' },
       { title: 'Button', href: '/fmbf-components/button' },
+      { title: 'Button Bar', href: '/fmbf-components/buttonBar' },
       { title: 'Dropdown', href: '/fmbf-components/dropdown' },
       { title: 'Input', href: '/fmbf-components/input' },
     ],

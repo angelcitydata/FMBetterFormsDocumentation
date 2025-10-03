@@ -1,0 +1,485 @@
+export const metadata = {
+  title: 'Badge Component',
+  description:
+    'A versatile badge component for FM BetterForms that displays labels, status indicators, and notifications with customizable variants, icons, and dismissible functionality.',
+}
+
+# Badge Component
+
+The Badge component provides a compact way to display labels, status indicators, and notifications in your FM BetterForms application. It features customizable variants, optional icons, pill or rounded shapes, and dismissible functionality for creating clear visual indicators and user feedback. {{ className: 'lead' }}
+
+    This component supports multiple color variants, left and right icons,
+    dismissible functionality with named actions, and responsive design
+    for displaying status, categories, and important information.
+
+---
+
+## Component Properties
+
+### Content Properties
+
+<Properties>
+  <Property name="label" type="string">
+    The text content displayed in the badge. This should be concise and
+    descriptive of the status, category, or information being conveyed.
+    Example: `"Active"`, `"Pending"`, `"New"`, `"Beta"`
+  </Property>
+  <Property name="variant" type="string">
+    The visual style variant of the badge. Controls the background color,
+    text color, and border styling. Available variants: `"default"`,
+    `"primary"`, `"secondary"`, `"destructive"`, `"outline"`, `"success"`,
+    `"warning"`, `"info"`. Default is `"default"`.
+  </Property>
+  <Property name="icon" type="string">
+    Font Awesome icon class for the left side of the badge. Example:
+    `"fa-check"`, `"fa-star"`, `"fa-bell"`. Default is empty string.
+  </Property>
+  <Property name="iconRight" type="string">
+    Font Awesome icon class for the right side of the badge. Example:
+    `"fa-arrow-right"`, `"fa-external-link"`. Default is empty string.
+  </Property>
+</Properties>
+
+### Appearance Properties
+
+<Properties>
+  <Property name="pill" type="boolean">
+    Whether the badge should have fully rounded corners (pill shape) or
+    slightly rounded corners. When `true`, the badge uses `rounded-full`.
+    When `false`, it uses `rounded-md`. Default is `false`.
+  </Property>
+  <Property name="dismissible" type="boolean">
+    Whether the badge should display a dismiss button (X) on the right side.
+    When `true`, a small X button appears that can trigger a named action.
+    Default is `false`.
+  </Property>
+</Properties>
+
+### Behavior Properties
+
+<Properties>
+  <Property name="namedAction" type="string">
+    The named action to trigger when the dismiss button is clicked. Only
+    relevant when `dismissible` is `true`. Example: `"removeBadge"`,
+    `"clearNotification"`. Default is empty string.
+  </Property>
+  <Property name="actionOptions" type="object">
+    Additional options or parameters to pass to the named action when
+    the dismiss button is clicked. Default is empty object `{}`.
+  </Property>
+  <Property name="windowIndex" type="number">
+    Index of the window in the BetterForms window stack. Used for multi-window
+    applications to access the correct model state. Default is 0.
+  </Property>
+</Properties>
+
+---
+
+## Badge Variants
+
+The Badge component supports multiple visual variants that control the appearance and color scheme. Each variant provides a distinct look for different use cases and contexts.
+
+### Available Variants
+
+- **`default`** - Dark background with light text (default)
+- **`primary`** - Primary brand color background
+- **`secondary`** - Secondary/muted background color
+- **`destructive`** - Red/danger color for errors or warnings
+- **`outline`** - Transparent background with border
+- **`success`** - Green color for success states
+- **`warning`** - Yellow/amber color for warnings
+- **`info`** - Blue color for informational content
+
+### Variant Usage Guidelines
+
+- Use **`primary`** for important status indicators
+- Use **`success`** for completed states or positive actions
+- Use **`warning`** for pending states or attention-required items
+- Use **`destructive`** for errors, deletions, or critical issues
+- Use **`info`** for informational badges or tips
+- Use **`outline`** for subtle indicators that don't need emphasis
+- Use **`default`** for general-purpose badges
+
+---
+
+## Usage Examples
+
+The Badge component is configured using JSON objects with properties for text, styling, icons, and behavior. Here are common usage patterns for different scenarios.
+
+### Basic Status Badge
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Badge" 
+        label="Active" 
+        variant="success">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define badge in your model
+model.statusBadge = {
+  label: 'Active',
+  variant: 'success'
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Active",
+  "variant": "success"
+}
+```
+
+</CodeGroup>
+
+### Badge with Icon
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Badge" 
+        label="New" 
+        variant="primary"
+        icon="fa-star">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define badge with icon in your model
+model.newBadge = {
+  label: 'New',
+  variant: 'primary',
+  icon: 'fa-star'
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "New",
+  "variant": "primary",
+  "icon": "fa-star"
+}
+```
+
+</CodeGroup>
+
+### Dismissible Notification Badge
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Badge" 
+        label="Notification" 
+        variant="info"
+        icon="fa-bell"
+        dismissible="true"
+        namedAction="clearNotification">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define dismissible badge in your model
+model.notificationBadge = {
+  label: 'Notification',
+  variant: 'info',
+  icon: 'fa-bell',
+  dismissible: true,
+  namedAction: 'clearNotification'
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Notification",
+  "variant": "info",
+  "icon": "fa-bell",
+  "dismissible": true,
+  "namedAction": "clearNotification"
+}
+```
+
+</CodeGroup>
+
+### Pill-Shaped Badge
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Badge" 
+        label="Beta" 
+        variant="warning"
+        pill="true">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define pill-shaped badge in your model
+model.betaBadge = {
+  label: 'Beta',
+  variant: 'warning',
+  pill: true
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Beta",
+  "variant": "warning",
+  "pill": true
+}
+```
+
+</CodeGroup>
+
+### Badge with Right Icon
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Badge" 
+        label="External Link" 
+        variant="outline"
+        iconRight="fa-external-link">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define badge with right icon in your model
+model.linkBadge = {
+  label: 'External Link',
+  variant: 'outline',
+  iconRight: 'fa-external-link'
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "External Link",
+  "variant": "outline",
+  "iconRight": "fa-external-link"
+}
+```
+
+</CodeGroup>
+
+### Error Status Badge
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Badge" 
+        label="Error" 
+        variant="destructive"
+        icon="fa-exclamation-triangle">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define error badge in your model
+model.errorBadge = {
+  label: 'Error',
+  variant: 'destructive',
+  icon: 'fa-exclamation-triangle'
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "label": "Error",
+  "variant": "destructive",
+  "icon": "fa-exclamation-triangle"
+}
+```
+
+</CodeGroup>
+
+---
+
+## Badge Styling
+
+The Badge component features a compact, inline design with consistent spacing and clear visual hierarchy. The styling provides excellent readability and maintains a clean appearance for status indicators and labels.
+
+### Visual Structure
+
+The badge renders with the following structure:
+
+- **Container**: Inline-flex span with gap spacing, rounded corners, padding, and border
+- **Left Icon**: Optional Font Awesome icon with regular weight
+- **Label**: Text content with medium font weight
+- **Right Icon**: Optional Font Awesome icon with regular weight
+- **Dismiss Button**: Optional X button for dismissible badges
+
+### Default Appearance
+
+```html
+<!-- Badge Structure -->
+<span class="inline-flex items-center gap-1.5 w-fit select-none text-xs font-medium px-2.5 py-1 border transition-colors rounded-md bg-foreground text-background border-transparent">
+  <!-- Left Icon -->
+  <i class="fa-regular fa-check"></i>
+  
+  <!-- Label -->
+  <span>Active</span>
+  
+  <!-- Right Icon -->
+  <i class="fa-regular fa-arrow-right"></i>
+  
+  <!-- Dismiss Button -->
+  <button class="ml-1 inline-flex h-4 w-4 items-center justify-center rounded focus:outline-none focus:ring-2 focus:ring-ring hover:bg-accent hover:text-accent-foreground" aria-label="Remove badge">
+    <i class="fa-regular fa-xmark text-[10px]"></i>
+  </button>
+</span>
+```
+
+### Variant Styling
+
+Each variant applies different color schemes:
+
+```html
+<!-- Default Variant -->
+<span class="bg-foreground text-background border-transparent">Badge</span>
+
+<!-- Primary Variant -->
+<span class="bg-primary text-primary-foreground border-transparent">Badge</span>
+
+<!-- Secondary Variant -->
+<span class="bg-secondary text-secondary-foreground border-transparent">Badge</span>
+
+<!-- Destructive Variant -->
+<span class="bg-destructive text-destructive-foreground border-transparent">Badge</span>
+
+<!-- Outline Variant -->
+<span class="bg-transparent text-foreground border-border">Badge</span>
+
+<!-- Success Variant -->
+<span class="bg-success text-foreground border-transparent">Badge</span>
+
+<!-- Warning Variant -->
+<span class="bg-warning text-foreground border-transparent">Badge</span>
+
+<!-- Info Variant -->
+<span class="bg-info text-foreground border-transparent">Badge</span>
+```
+
+### Shape Variations
+
+The badge supports two shape options:
+
+**Rounded (default)**:
+```html
+<span class="rounded-md">Badge</span>
+```
+
+**Pill-shaped**:
+```html
+<span class="rounded-full">Badge</span>
+```
+
+### Icon Styling
+
+Icons use Font Awesome with regular weight:
+
+```html
+<!-- Left Icon -->
+<i class="fa-regular fa-check"></i>
+
+<!-- Right Icon -->
+<i class="fa-regular fa-external-link"></i>
+
+<!-- Dismiss Icon -->
+<i class="fa-regular fa-xmark text-[10px]"></i>
+```
+
+### Dismissible Badge
+
+When `dismissible` is true, a small X button appears:
+
+```html
+<button
+  type="button"
+  class="ml-1 inline-flex h-4 w-4 items-center justify-center rounded focus:outline-none focus:ring-2 focus:ring-ring hover:bg-accent hover:text-accent-foreground"
+  aria-label="Remove badge"
+>
+  <i class="fa-regular fa-xmark text-[10px]"></i>
+</button>
+```
+
+### Accessibility Features
+
+The component includes accessibility support:
+
+- **Semantic HTML** - Uses `<span>` for inline content
+- **ARIA Labels** - Dismiss button includes `aria-label="Remove badge"`
+- **Focus Management** - Dismiss button supports keyboard navigation
+- **Screen Reader Support** - Proper labeling for assistive technologies
+
+### Theme Integration
+
+The component uses CSS custom properties for colors:
+
+- `bg-foreground`, `text-background` - Default variant colors
+- `bg-primary`, `text-primary-foreground` - Primary variant colors
+- `bg-destructive`, `text-destructive-foreground` - Destructive variant colors
+- `border-border` - Border color for outline variant
+- `transition-colors` - Smooth color transitions on hover
+
+---
+
+## Best Practices
+
+When using the Badge component, follow these guidelines for optimal user experience and consistent design.
+
+### Content Guidelines
+
+**✅ Do:**
+
+- Keep badge text concise and descriptive (1-3 words)
+- Use consistent terminology across your application
+- Choose appropriate variants that match the content meaning
+- Use icons that enhance understanding of the badge purpose
+
+**❌ Don't:**
+
+- Use overly long text that breaks the badge layout
+- Mix different terminology for similar states
+- Use variants that don't match the content context
+- Overuse icons or use irrelevant icons
+
+### Variant Selection
+
+**Status Indicators:**
+- `success` - Completed, active, approved states
+- `warning` - Pending, attention-required states  
+- `destructive` - Error, failed, deleted states
+- `info` - Informational, neutral states
+
+**Priority Levels:**
+- `primary` - High importance, featured content
+- `secondary` - Medium importance, standard content
+- `outline` - Low importance, subtle indicators
+- `default` - General purpose, neutral content
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast between text and background
+- Use dismissible badges sparingly and provide alternative ways to access the information
+- Test with screen readers to ensure proper reading order
+- Provide clear labels for dismiss buttons
+
+**❌ Don't:**
+
+- Rely solely on color to convey information
+- Use dismissible badges for critical information
+- Create badges that are too small to interact with on mobile devices
+- Forget to test keyboard navigation for dismissible badges
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use badges for static or semi-static content
+- Implement efficient named actions for dismissible badges
+- Consider the total number of badges on a page for performance
+
+**❌ Don't:**
+
+- Use badges for frequently changing content without proper state management
+- Create dismissible badges without implementing the corresponding named actions
+- Overload pages with too many badges that impact rendering performance
