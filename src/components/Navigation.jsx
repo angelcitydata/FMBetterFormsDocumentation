@@ -210,8 +210,10 @@ export const navigation = [
       { title: 'Card', href: '/fmbf-components/card' },
       { title: 'Checkbox', href: '/fmbf-components/checkbox' },
       { title: 'Combobox', href: '/fmbf-components/combobox' },
+      { title: 'Content Title', href: '/fmbf-components/contentTitle' },
       { title: 'Dropdown', href: '/fmbf-components/dropdown' },
       { title: 'Input', href: '/fmbf-components/input' },
+      { title: 'Page Title', href: '/fmbf-components/pageTitle' },
     ],
   },
 ]

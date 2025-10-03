@@ -1,0 +1,369 @@
+export const metadata = {
+  title: 'Content Title Component',
+  description:
+    'A simple, semantic heading component for FM BetterForms that displays content titles with consistent typography and spacing for improved content hierarchy and readability.',
+}
+
+# Content Title Component
+
+The Content Title component provides a simple, semantic heading for content sections in your FM BetterForms application. It features consistent typography and spacing, making it perfect for creating clear content hierarchy and improving readability throughout your forms. {{ className: 'lead' }}
+
+    This component is part of a family of title components including Page Title and Section Title,
+    each designed for specific content hierarchy levels with consistent styling and accessibility.
+
+---
+
+## Component Properties
+
+### Content Properties
+
+<Properties>
+  <Property name="title" type="string">
+    The content title text to display. This text appears in semibold font weight
+    with large text size and primary foreground color. Used for content section headings
+    and subsection titles. Example: `"User Information"`, `"Contact Details"`, `"Preferences"`.
+    Required property.
+  </Property>
+</Properties>
+
+---
+
+## Component Structure
+
+The Content Title component provides a simple, semantic heading structure with consistent styling and spacing. It's designed to work as part of a content hierarchy alongside Page Title and Section Title components.
+
+### Title Hierarchy
+
+The Content Title component serves as a mid-level heading in the content hierarchy:
+
+1. **Page Title** - Main page heading (largest, most prominent)
+2. **Content Title** - Section and subsection headings (medium size, semibold)
+3. **Section Title** - Subsection and field group headings (smaller size)
+
+### Visual Structure
+
+- **Container**: Flex column layout with consistent vertical spacing
+- **Title Text**: Semibold, large text with primary foreground color
+- **Spacing**: Standard margin for content separation
+
+### Responsive Design
+
+The Content Title component is designed to be responsive and accessible:
+
+- **Flexible Width**: Titles expand to fill their container width
+- **Consistent Spacing**: Standard margin spacing for content separation
+- **Accessible Typography**: Proper heading hierarchy and text contrast
+- **Semantic HTML**: Uses semantic span element for proper content structure
+
+---
+
+## Usage Examples
+
+The Content Title component is configured using a simple title property. Here are common usage patterns for different content scenarios.
+
+### Basic Content Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ContentTitle" title="User Information">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define content title in your model
+model.userInfoTitle = {
+  title: "User Information"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "User Information"
+}
+```
+
+</CodeGroup>
+
+### Contact Details Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ContentTitle" title="Contact Details">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define contact details title in your model
+model.contactDetailsTitle = {
+  title: "Contact Details"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Contact Details"
+}
+```
+
+</CodeGroup>
+
+### Preferences Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ContentTitle" title="Preferences">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define preferences title in your model
+model.preferencesTitle = {
+  title: "Preferences"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Preferences"
+}
+```
+
+</CodeGroup>
+
+### Order Summary Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ContentTitle" title="Order Summary">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define order summary title in your model
+model.orderSummaryTitle = {
+  title: "Order Summary"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Order Summary"
+}
+```
+
+</CodeGroup>
+
+### Billing Information Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="ContentTitle" title="Billing Information">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define billing information title in your model
+model.billingInfoTitle = {
+  title: "Billing Information"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Billing Information"
+}
+```
+
+</CodeGroup>
+
+---
+
+## Component Styling
+
+The Content Title component features a clean, accessible design with consistent typography and spacing. The styling provides excellent readability and maintains a professional appearance for content section headings.
+
+### Visual Structure
+
+The Content Title renders with the following structure:
+
+- **Container**: Flex column layout with consistent vertical spacing
+- **Title Text**: Semibold, large text with primary foreground color
+
+### Default Appearance
+
+```html
+<!-- Content Title Structure -->
+<div class="flex flex-col my-4">
+  <span class="font-semibold text-lg text-foreground">Content Title</span>
+</div>
+```
+
+### Typography and Colors
+
+The Content Title uses consistent typography and color schemes:
+
+```html
+<!-- Container Layout -->
+<div class="flex flex-col my-4">
+  <!-- Title Styling -->
+  <span class="font-semibold text-lg text-foreground">Title Text</span>
+</div>
+```
+
+### Spacing and Layout
+
+The Content Title uses consistent spacing:
+
+```html
+<!-- Container Spacing -->
+<div class="flex flex-col my-4">
+  <span class="font-semibold text-lg text-foreground">Title</span>
+</div>
+```
+
+### CSS Classes
+
+The component uses the following CSS classes:
+
+- `flex flex-col` - Flexbox column layout for the container
+- `my-4` - Vertical margin spacing (1rem top and bottom)
+- `font-semibold` - Semibold font weight (600)
+- `text-lg` - Large text size (1.125rem)
+- `text-foreground` - Primary text color using theme variables
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses semantic span element for proper content structure
+- **Color Contrast** - Ensures sufficient contrast using theme foreground colors
+- **Screen Reader Support** - Proper text structure for assistive technologies
+- **Responsive Design** - Adapts to different screen sizes and orientations
+- **Typography Hierarchy** - Clear visual hierarchy for content scanning
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `text-foreground` - Primary text color from theme
+- `font-semibold` - Consistent semibold font weight
+- `text-lg` - Large text size for content headings
+- `my-4` - Standard vertical margin spacing
+- `flex flex-col` - Consistent flexbox layout
+
+---
+
+## Related Components
+
+The Content Title component is part of a family of title components designed for different hierarchy levels:
+
+### Title Component Hierarchy
+
+1. **[Page Title](/fmbf-components/pageTitle)** - Main page headings (largest, most prominent)
+2. **Content Title** - Section and subsection headings (medium size, semibold) - *Current component*
+3. **[Section Title](/fmbf-components/sectionTitle)** - Subsection and field group headings (smaller size)
+
+### When to Use Each Component
+
+**Use Page Title for:**
+- Main page headings
+- Primary navigation titles
+- Top-level content sections
+- Page identification
+
+**Use Content Title for:**
+- Content section headings
+- Form subsection titles
+- Content area divisions
+- Mid-level content organization
+
+**Use Section Title for:**
+- Field group headings
+- Subsection titles
+- Small content divisions
+- Detailed content organization
+
+---
+
+## Best Practices
+
+When using the Content Title component, follow these guidelines for optimal user experience and consistent design.
+
+### Content Guidelines
+
+**✅ Do:**
+
+- Keep titles concise and descriptive (1-4 words)
+- Use clear, action-oriented titles when appropriate
+- Maintain consistent terminology across your application
+- Use Content Titles to organize related content sections
+- Follow the title hierarchy (Page Title → Content Title → Section Title)
+
+**❌ Don't:**
+
+- Use overly long titles that break the layout
+- Mix different terminology for similar content types
+- Create titles that don't clearly indicate content purpose
+- Use Content Title for main page headings (use Page Title instead)
+- Use Content Title for field groups (use Section Title instead)
+
+### Content Structure
+
+**Title Guidelines:**
+- Use descriptive, clear titles that indicate content purpose
+- Keep titles consistent with your application's voice
+- Avoid generic titles like "Information" or "Details"
+- Use title case for consistency
+- Keep titles scannable and easy to understand
+
+### Layout and Design
+
+**✅ Do:**
+
+- Use Content Titles to organize content sections
+- Maintain consistent spacing between titles and content
+- Align titles with other interface elements
+- Consider the visual hierarchy with other title components
+- Use Content Titles to break up long content sections
+
+**❌ Don't:**
+
+- Create titles that are too wide or too narrow
+- Overcrowd pages with too many Content Titles
+- Use inconsistent spacing between titles
+- Place titles in locations that disrupt content flow
+- Create titles with excessive white space
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for title text
+- Test with screen readers to ensure proper reading order
+- Use descriptive titles that clearly indicate content
+- Maintain consistent heading hierarchy with other title components
+- Provide meaningful content structure
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create titles with poor color contrast
+- Use generic or unclear titles
+- Forget to test with assistive technologies
+- Create titles that are difficult to scan
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use Content Titles for static or semi-static content
+- Consider the total number of titles on a page
+- Use appropriate model keys for title data
+- Implement efficient data loading for title content
+
+**❌ Don't:**
+
+- Use Content Titles for frequently changing content without proper state management
+- Overload pages with too many titles that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create titles that require excessive data fetching

@@ -145,6 +145,34 @@ const resources = [
     },
   },
   {
+    href: '/fmbf-components/contentTitle',
+    name: 'Content Title',
+    description:
+      'A simple, semantic heading component for content sections with consistent typography and spacing for improved content hierarchy.',
+    icon: DocumentIcon,
+    pattern: {
+      y: 16,
+      squares: [
+        [0, 1],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/pageTitle',
+    name: 'Page Title',
+    description:
+      'A prominent page heading component that displays main page titles with optional subtitles using large, bold typography for clear page identification.',
+    icon: DocumentIcon,
+    pattern: {
+      y: 16,
+      squares: [
+        [0, 1],
+        [1, 3],
+      ],
+    },
+  },
+  {
     href: '/fmbf-components/input',
     name: 'Input',
     description:

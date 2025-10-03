@@ -1,0 +1,416 @@
+export const metadata = {
+  title: 'Page Title Component',
+  description:
+    'A prominent page heading component for FM BetterForms that displays main page titles with optional subtitles using large, bold typography for clear page identification and hierarchy.',
+}
+
+# Page Title Component
+
+The Page Title component provides a prominent, semantic heading for main page content in your FM BetterForms application. It features large, bold typography with optional subtitle support, making it perfect for page identification and establishing clear content hierarchy. {{ className: 'lead' }}
+
+    This component is the primary heading in a family of title components including Content Title and Section Title,
+    each designed for specific content hierarchy levels with consistent styling and accessibility.
+
+---
+
+## Component Properties
+
+### Content Properties
+
+<Properties>
+  <Property name="title" type="string">
+    The main page title text to display. This text appears in bold font weight
+    with extra large text size (4xl) and primary foreground color. Used for main page headings
+    and primary navigation titles. Example: `"User Dashboard"`, `"Settings"`, `"Profile"`.
+    Required property.
+  </Property>
+  <Property name="subtitle" type="string">
+    The optional subtitle text displayed below the main title. This text appears in large text size (xl)
+    with muted foreground color. Used to provide additional context or description for the page.
+    Example: `"Manage your account settings"`, `"View and edit your profile information"`.
+    Default is empty string.
+  </Property>
+</Properties>
+
+---
+
+## Component Structure
+
+The Page Title component provides a prominent, semantic heading structure with large typography and optional subtitle support. It's designed to work as the primary heading in a content hierarchy alongside Content Title and Section Title components.
+
+### Title Hierarchy
+
+The Page Title component serves as the top-level heading in the content hierarchy:
+
+1. **Page Title** - Main page heading (largest, most prominent) - *Current component*
+2. **[Content Title](/fmbf-components/contentTitle)** - Section and subsection headings (medium size, semibold)
+3. **[Section Title](/fmbf-components/sectionTitle)** - Subsection and field group headings (smaller size)
+
+### Visual Structure
+
+- **Container**: Flex column layout with gap spacing and vertical padding
+- **Title Text**: Bold, extra large text (4xl) with primary foreground color
+- **Subtitle Text**: Large text (xl) with muted foreground color (optional)
+- **Spacing**: Consistent gap and padding for content separation
+
+### Responsive Design
+
+The Page Title component is designed to be responsive and accessible:
+
+- **Flexible Width**: Titles expand to fill their container width
+- **Consistent Spacing**: Standard gap and padding spacing for content separation
+- **Accessible Typography**: Proper heading hierarchy and text contrast
+- **Semantic HTML**: Uses semantic span elements for proper content structure
+
+---
+
+## Usage Examples
+
+The Page Title component is configured using title and optional subtitle properties. Here are common usage patterns for different page scenarios.
+
+### Basic Page Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="PageTitle" title="Dashboard">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic page title in your model
+model.dashboardTitle = {
+  title: "Dashboard",
+  subtitle: ""
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Dashboard",
+  "subtitle": ""
+}
+```
+
+</CodeGroup>
+
+### Page Title with Subtitle
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="PageTitle" 
+        title="User Settings" 
+        subtitle="Manage your account preferences and security">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define page title with subtitle in your model
+model.userSettingsTitle = {
+  title: "User Settings",
+  subtitle: "Manage your account preferences and security"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "User Settings",
+  "subtitle": "Manage your account preferences and security"
+}
+```
+
+</CodeGroup>
+
+### Profile Page Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="PageTitle" 
+        title="My Profile" 
+        subtitle="View and edit your personal information">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define profile page title in your model
+model.profileTitle = {
+  title: "My Profile",
+  subtitle: "View and edit your personal information"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "My Profile",
+  "subtitle": "View and edit your personal information"
+}
+```
+
+</CodeGroup>
+
+### Settings Page Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="PageTitle" 
+        title="System Settings" 
+        subtitle="Configure application preferences and options">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define settings page title in your model
+model.systemSettingsTitle = {
+  title: "System Settings",
+  subtitle: "Configure application preferences and options"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "System Settings",
+  "subtitle": "Configure application preferences and options"
+}
+```
+
+</CodeGroup>
+
+### Reports Page Title
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="PageTitle" 
+        title="Reports" 
+        subtitle="View analytics and generate custom reports">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define reports page title in your model
+model.reportsTitle = {
+  title: "Reports",
+  subtitle: "View analytics and generate custom reports"
+}
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "title": "Reports",
+  "subtitle": "View analytics and generate custom reports"
+}
+```
+
+</CodeGroup>
+
+---
+
+## Component Styling
+
+The Page Title component features a prominent, accessible design with large typography and optional subtitle support. The styling provides excellent readability and maintains a professional appearance for main page headings.
+
+### Visual Structure
+
+The Page Title renders with the following structure:
+
+- **Container**: Flex column layout with gap spacing and vertical padding
+- **Title Text**: Bold, extra large text (4xl) with primary foreground color
+- **Subtitle Text**: Large text (xl) with muted foreground color (optional)
+
+### Default Appearance
+
+```html
+<!-- Page Title Structure -->
+<div class="flex flex-col gap-1 py-4">
+  <span class="font-bold text-4xl text-foreground">Page Title</span>
+  <span class="text-xl text-muted-foreground">Page Subtitle</span>
+</div>
+```
+
+### Typography and Colors
+
+The Page Title uses consistent typography and color schemes:
+
+```html
+<!-- Container Layout -->
+<div class="flex flex-col gap-1 py-4">
+  <!-- Title Styling -->
+  <span class="font-bold text-4xl text-foreground">Title Text</span>
+  <!-- Subtitle Styling -->
+  <span class="text-xl text-muted-foreground">Subtitle Text</span>
+</div>
+```
+
+### Spacing and Layout
+
+The Page Title uses consistent spacing:
+
+```html
+<!-- Container Spacing -->
+<div class="flex flex-col gap-1 py-4">
+  <span class="font-bold text-4xl text-foreground">Title</span>
+  <span class="text-xl text-muted-foreground">Subtitle</span>
+</div>
+```
+
+### CSS Classes
+
+The component uses the following CSS classes:
+
+- `flex flex-col` - Flexbox column layout for the container
+- `gap-1` - Small gap spacing between title and subtitle (0.25rem)
+- `py-4` - Vertical padding spacing (1rem top and bottom)
+- `font-bold` - Bold font weight (700)
+- `text-4xl` - Extra large text size (2.25rem)
+- `text-xl` - Large text size (1.25rem)
+- `text-foreground` - Primary text color using theme variables
+- `text-muted-foreground` - Muted text color using theme variables
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses semantic span elements for proper content structure
+- **Color Contrast** - Ensures sufficient contrast using theme foreground colors
+- **Screen Reader Support** - Proper text structure for assistive technologies
+- **Responsive Design** - Adapts to different screen sizes and orientations
+- **Typography Hierarchy** - Clear visual hierarchy for content scanning
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `text-foreground` - Primary text color from theme
+- `text-muted-foreground` - Muted text color from theme
+- `font-bold` - Consistent bold font weight
+- `text-4xl` - Extra large text size for main headings
+- `text-xl` - Large text size for subtitles
+- `gap-1` - Small gap spacing between elements
+- `py-4` - Standard vertical padding spacing
+- `flex flex-col` - Consistent flexbox layout
+
+---
+
+## Related Components
+
+The Page Title component is part of a family of title components designed for different hierarchy levels:
+
+### Title Component Hierarchy
+
+1. **Page Title** - Main page headings (largest, most prominent) - *Current component*
+2. **[Content Title](/fmbf-components/contentTitle)** - Section and subsection headings (medium size, semibold)
+3. **[Section Title](/fmbf-components/sectionTitle)** - Subsection and field group headings (smaller size)
+
+### When to Use Each Component
+
+**Use Page Title for:**
+- Main page headings
+- Primary navigation titles
+- Top-level content sections
+- Page identification
+- Application entry points
+
+**Use Content Title for:**
+- Content section headings
+- Form subsection titles
+- Content area divisions
+- Mid-level content organization
+
+**Use Section Title for:**
+- Field group headings
+- Subsection titles
+- Small content divisions
+- Detailed content organization
+
+---
+
+## Best Practices
+
+When using the Page Title component, follow these guidelines for optimal user experience and consistent design.
+
+### Content Guidelines
+
+**✅ Do:**
+
+- Keep titles concise and descriptive (1-3 words)
+- Use clear, action-oriented titles when appropriate
+- Maintain consistent terminology across your application
+- Use Page Titles for main page identification
+- Follow the title hierarchy (Page Title → Content Title → Section Title)
+- Use subtitles to provide context when helpful
+
+**❌ Don't:**
+
+- Use overly long titles that break the layout
+- Mix different terminology for similar content types
+- Create titles that don't clearly indicate page purpose
+- Use Page Title for section headings (use Content Title instead)
+- Use Page Title for field groups (use Section Title instead)
+- Overuse subtitles when they don't add value
+
+### Content Structure
+
+**Title Guidelines:**
+- Use descriptive, clear titles that indicate page purpose
+- Keep titles consistent with your application's voice
+- Avoid generic titles like "Page" or "Home"
+- Use title case for consistency
+- Keep titles scannable and easy to understand
+- Make titles memorable and distinctive
+
+**Subtitle Guidelines:**
+- Use subtitles to provide additional context when helpful
+- Keep subtitles concise and descriptive
+- Use subtitles to explain the page's purpose or scope
+- Avoid redundant information between title and subtitle
+- Use sentence case for readability
+
+### Layout and Design
+
+**✅ Do:**
+
+- Use Page Titles at the top of each page
+- Maintain consistent spacing between title and content
+- Align titles with other interface elements
+- Consider the visual hierarchy with other title components
+- Use Page Titles to establish clear page identity
+
+**❌ Don't:**
+
+- Create titles that are too wide or too narrow
+- Place titles in locations that disrupt content flow
+- Use inconsistent spacing between title and content
+- Create titles with excessive white space
+- Use multiple Page Titles on the same page
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for title text
+- Test with screen readers to ensure proper reading order
+- Use descriptive titles that clearly indicate page content
+- Maintain consistent heading hierarchy with other title components
+- Provide meaningful content structure
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create titles with poor color contrast
+- Use generic or unclear titles
+- Forget to test with assistive technologies
+- Create titles that are difficult to scan
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use Page Titles for static or semi-static content
+- Consider the total number of titles on a page
+- Use appropriate model keys for title data
+- Implement efficient data loading for title content
+
+**❌ Don't:**
+
+- Use Page Titles for frequently changing content without proper state management
+- Overload pages with too many titles that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create titles that require excessive data fetching
