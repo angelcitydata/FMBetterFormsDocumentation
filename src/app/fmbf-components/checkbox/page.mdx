@@ -1,0 +1,635 @@
+export const metadata = {
+  title: 'Checkbox Component',
+  description:
+    'An interactive checkbox component for FM BetterForms that allows users to select or deselect options with support for indeterminate state, labels, descriptions, and keyboard accessibility.',
+}
+
+# Checkbox Component
+
+The Checkbox component provides an interactive form control for binary choices in your FM BetterForms application. It features a clean, accessible design with support for checked, unchecked, and indeterminate states, making it perfect for forms, settings, and user preferences. {{ className: 'lead' }}
+
+    This component supports binary state management with customizable labels and descriptions,
+    indeterminate state handling, keyboard navigation, and comprehensive accessibility features
+    for optimal user experience.
+
+---
+
+## Component Properties
+
+### Core Properties
+
+<Properties>
+  <Property name="modelKey" type="string">
+    The key used to bind the checkbox value to the form model. This property
+    determines which field in the model will store the checkbox state.
+    Example: `"agreeToTerms"`, `"newsletterSubscription"`.
+    Default is `"comboValue"`.
+  </Property>
+  <Property name="label" type="string">
+    The text label displayed next to the checkbox. This text appears in bold
+    and serves as the clickable label for the checkbox.
+    Example: `"I agree to the terms and conditions"`, `"Subscribe to newsletter"`.
+    Default is `"Checkbox"`.
+  </Property>
+  <Property name="description" type="string">
+    Optional descriptive text displayed below the label. This text appears in
+    smaller font size with muted foreground color to provide additional context.
+    Example: `"You can unsubscribe at any time"`, `"Required to proceed"`.
+    Default is empty string (not displayed).
+  </Property>
+  <Property name="disabled" type="boolean|string">
+    Controls whether the checkbox is disabled. Can be boolean or string values
+    that evaluate to disabled state. When disabled, the checkbox cannot be
+    interacted with and appears with reduced opacity.
+    Example: `true`, `"true"`, `"1"`, `"on"`, `"yes"`.
+    Default is `false`.
+  </Property>
+  <Property name="indeterminate" type="boolean">
+    Sets the checkbox to an indeterminate state, typically used when a parent
+    checkbox controls multiple child checkboxes with mixed states.
+    Example: `true` (shows minus icon), `false` (normal state).
+    Default is `false`.
+  </Property>
+</Properties>
+
+### Action Properties
+
+<Properties>
+  <Property name="namedAction" type="string">
+    Optional action to trigger when the checkbox state changes. This allows
+    for custom behavior when the checkbox is toggled.
+    Example: `"validateForm"`, `"updateParentState"`.
+    Default is empty string.
+  </Property>
+  <Property name="actionOptions" type="object">
+    Configuration options passed to the named action when triggered.
+    This object can contain any data needed for the action execution.
+    Example: `{"validate": true, "field": "email"}`.
+    Default is empty object `{}`.
+  </Property>
+</Properties>
+
+### Technical Properties
+
+<Properties>
+  <Property name="windowIndex" type="number">
+    The index of the window containing this checkbox component. Used for
+    accessing the correct form model in multi-window applications.
+    Example: `0`, `1`, `2`.
+    Default is `0`.
+  </Property>
+  <Property name="id" type="string">
+    Optional unique identifier for the checkbox element. If not provided,
+    will be generated from modelKey or windowIndex.
+    Example: `"terms-checkbox"`, `"newsletter-opt-in"`.
+    Default is auto-generated.
+  </Property>
+</Properties>
+
+---
+
+## Checkbox States and Behavior
+
+The Checkbox component supports three distinct states and provides comprehensive interaction handling for optimal user experience.
+
+### State Types
+
+The checkbox can exist in three states:
+
+1. **Unchecked** - Default state, shows empty checkbox with border
+2. **Checked** - Selected state, shows filled checkbox with checkmark icon
+3. **Indeterminate** - Mixed state, shows filled checkbox with minus icon
+
+### Interaction Behavior
+
+- **Click/Tap**: Toggles between checked and unchecked states
+- **Keyboard**: Space or Enter keys toggle the state
+- **Label Click**: Clicking the label text also toggles the checkbox
+- **Disabled State**: When disabled, no interactions are possible
+
+### State Transitions
+
+- **Unchecked → Checked**: User clicks or presses space/enter
+- **Checked → Unchecked**: User clicks or presses space/enter again
+- **Indeterminate → Checked**: User clicks (indeterminate becomes checked)
+- **Any State → Disabled**: Controlled by the `disabled` property
+
+---
+
+## Usage Examples
+
+The Checkbox component is configured using JSON objects with properties for form interaction. Here are common usage patterns for different scenarios.
+
+### Basic Checkbox
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Checkbox" 
+        modelKey="agreeToTerms"
+        label="I agree to the terms and conditions">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic checkbox in your model
+model.agreeToTerms = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "agreeToTerms",
+  "label": "I agree to the terms and conditions",
+  "disabled": false,
+  "indeterminate": false
+}
+```
+
+</CodeGroup>
+
+### Checkbox with Description
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Checkbox" 
+        modelKey="newsletterSubscription"
+        label="Subscribe to newsletter"
+        description="You can unsubscribe at any time">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define checkbox with description in your model
+model.newsletterSubscription = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "newsletterSubscription",
+  "label": "Subscribe to newsletter",
+  "description": "You can unsubscribe at any time",
+  "disabled": false,
+  "indeterminate": false
+}
+```
+
+</CodeGroup>
+
+### Disabled Checkbox
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Checkbox" 
+        modelKey="adminOnly"
+        label="Administrator access"
+        description="Contact admin to enable"
+        disabled="true">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define disabled checkbox in your model
+model.adminOnly = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "adminOnly",
+  "label": "Administrator access",
+  "description": "Contact admin to enable",
+  "disabled": true,
+  "indeterminate": false
+}
+```
+
+</CodeGroup>
+
+### Indeterminate Checkbox
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Checkbox" 
+        modelKey="selectAll"
+        label="Select all items"
+        indeterminate="true">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define indeterminate checkbox in your model
+model.selectAll = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "selectAll",
+  "label": "Select all items",
+  "disabled": false,
+  "indeterminate": true
+}
+```
+
+</CodeGroup>
+
+### Checkbox with Action
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Checkbox" 
+        modelKey="autoSave"
+        label="Enable auto-save"
+        description="Automatically save changes every 5 minutes"
+        namedAction="toggleAutoSave"
+        actionOptions='{"interval": 300000}'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define checkbox with action in your model
+model.autoSave = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "autoSave",
+  "label": "Enable auto-save",
+  "description": "Automatically save changes every 5 minutes",
+  "namedAction": "toggleAutoSave",
+  "actionOptions": {"interval": 300000},
+  "disabled": false,
+  "indeterminate": false
+}
+```
+
+</CodeGroup>
+
+### Complete Checkbox Example
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Checkbox" 
+        modelKey="premiumFeatures"
+        label="Enable premium features"
+        description="Unlock advanced functionality with premium subscription"
+        id="premium-toggle"
+        windowIndex="0"
+        namedAction="updateFeatureSet"
+        actionOptions='{"tier": "premium"}'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define complete checkbox in your model
+model.premiumFeatures = false
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "premiumFeatures",
+  "label": "Enable premium features",
+  "description": "Unlock advanced functionality with premium subscription",
+  "id": "premium-toggle",
+  "windowIndex": 0,
+  "namedAction": "updateFeatureSet",
+  "actionOptions": {"tier": "premium"},
+  "disabled": false,
+  "indeterminate": false
+}
+```
+
+</CodeGroup>
+
+---
+
+## Checkbox Styling
+
+The Checkbox component features a clean, accessible design with consistent spacing and clear visual hierarchy. The styling provides excellent usability and maintains a professional appearance for form interactions.
+
+### Visual Structure
+
+The checkbox renders with the following structure:
+
+- **Wrapper Container**: Horizontal flex layout with gap spacing
+- **Checkbox Control**: Interactive button element with state-based styling
+- **Icon Overlay**: FontAwesome icons for checked/indeterminate states
+- **Label Section**: Clickable label and optional description text
+
+### Default Appearance
+
+```html
+<!-- Checkbox Structure -->
+<div class="flex items-start gap-3 select-none my-4">
+  <!-- Checkbox Control -->
+  <button
+    type="button"
+    role="checkbox"
+    aria-checked="false"
+    class="relative inline-flex h-5 w-5 items-center justify-center rounded
+           outline-none transition-colors
+           focus:ring-2 focus:ring-ring
+           disabled:opacity-50 disabled:cursor-not-allowed
+           bg-card border border-input"
+  >
+    <!-- Icon Overlay -->
+    <span class="pointer-events-none absolute inset-0 flex items-center justify-center 
+                 rounded text-white transition-opacity opacity-0">
+      <i class="fa-solid fa-check text-[10px]"></i>
+    </span>
+  </button>
+
+  <!-- Label Section -->
+  <div class="flex flex-col gap-1 mt-[2px]">
+    <button type="button" class="text-left cursor-pointer block text-sm font-semibold 
+                                text-foreground disabled:cursor-not-allowed disabled:opacity-50">
+      Checkbox Label
+    </button>
+  </div>
+</div>
+```
+
+### State-Based Styling
+
+The checkbox adapts its appearance based on the current state:
+
+**Unchecked State**:
+```html
+<button class="bg-card border border-input">
+  <span class="opacity-0">
+    <i class="fa-solid fa-check text-[10px]"></i>
+  </span>
+</button>
+```
+
+**Checked State**:
+```html
+<button class="bg-primary border border-primary">
+  <span class="opacity-100">
+    <i class="fa-solid fa-check text-[10px]"></i>
+  </span>
+</button>
+```
+
+**Indeterminate State**:
+```html
+<button class="bg-primary border border-primary">
+  <span class="opacity-100">
+    <i class="fa-solid fa-minus text-[10px]"></i>
+  </span>
+</button>
+```
+
+**Disabled State**:
+```html
+<button class="disabled:opacity-50 disabled:cursor-not-allowed">
+  <!-- State-specific styling with disabled appearance -->
+</button>
+```
+
+### Typography and Colors
+
+The checkbox uses consistent typography and color schemes:
+
+```html
+<!-- Label Styling -->
+<button class="text-sm font-semibold text-foreground">
+  Checkbox Label
+</button>
+
+<!-- Description Styling -->
+<span class="text-xs text-muted-foreground">
+  Optional description text
+</span>
+
+<!-- Checkbox Colors -->
+<button class="bg-primary border border-primary">  <!-- Checked/Indeterminate -->
+<button class="bg-card border border-input">       <!-- Unchecked -->
+```
+
+### Spacing and Layout
+
+The checkbox uses consistent spacing throughout:
+
+```html
+<!-- Container Spacing -->
+<div class="flex items-start gap-3 select-none my-4">
+  <!-- Checkbox Control Spacing -->
+  <button class="h-5 w-5 items-center justify-center rounded">
+    <!-- 20px x 20px checkbox with centered content -->
+  </button>
+  
+  <!-- Label Section Spacing -->
+  <div class="flex flex-col gap-1 mt-[2px]">
+    <!-- 4px gap between label and description -->
+    <!-- 2px top margin for alignment -->
+  </div>
+</div>
+```
+
+### Interactive States
+
+The checkbox provides clear visual feedback for all interaction states:
+
+```html
+<!-- Focus State -->
+<button class="focus:ring-2 focus:ring-ring">
+  <!-- 2px focus ring for keyboard navigation -->
+</button>
+
+<!-- Hover State (implicit) -->
+<button class="transition-colors">
+  <!-- Smooth color transitions on state changes -->
+</button>
+
+<!-- Disabled State -->
+<button class="disabled:opacity-50 disabled:cursor-not-allowed">
+  <!-- 50% opacity and not-allowed cursor -->
+</button>
+```
+
+### Icon System
+
+The checkbox uses FontAwesome icons for state indication:
+
+```html
+<!-- Check Icon (Checked State) -->
+<i class="fa-solid fa-check text-[10px]"></i>
+
+<!-- Minus Icon (Indeterminate State) -->
+<i class="fa-solid fa-minus text-[10px]"></i>
+
+<!-- Icon Styling -->
+<span class="text-white transition-opacity">
+  <!-- White icons with smooth opacity transitions -->
+</span>
+```
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses `<button>` with `role="checkbox"` for proper semantics
+- **ARIA Attributes** - `aria-checked` reflects current state (true/false/mixed)
+- **Keyboard Support** - Space and Enter keys toggle the checkbox
+- **Screen Reader Support** - Proper labeling and state announcements
+- **Focus Management** - Clear focus indicators with ring styling
+- **Clickable Labels** - Entire label area is clickable for better UX
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `bg-primary` - Primary background color for checked state
+- `border-primary` - Primary border color for checked state
+- `bg-card` - Card background color for unchecked state
+- `border-input` - Input border color for unchecked state
+- `text-foreground` - Primary text color for labels
+- `text-muted-foreground` - Secondary text color for descriptions
+- `ring-ring` - Focus ring color
+- `rounded` - Consistent border radius
+- `transition-colors` - Smooth color transitions
+- `opacity-50` - Disabled state opacity
+
+---
+
+## Best Practices
+
+When using the Checkbox component, follow these guidelines for optimal user experience and consistent form design.
+
+### Label and Content Guidelines
+
+**✅ Do:**
+
+- Write clear, descriptive labels that explain the choice
+- Use positive language when possible (e.g., "Enable notifications" vs "Disable notifications")
+- Keep labels concise but informative (typically 2-8 words)
+- Use consistent terminology across your application
+- Provide helpful descriptions for complex options
+
+**❌ Don't:**
+
+- Use vague labels like "Option 1" or "Check here"
+- Write overly long labels that break the layout
+- Use negative language that requires mental translation
+- Mix different terminology for similar choices
+- Create checkboxes with unclear or ambiguous labels
+
+### Label Structure
+
+**Label Guidelines:**
+- Use action-oriented language when appropriate
+- Keep labels consistent with your application's voice
+- Avoid generic labels like "Check" or "Select"
+- Use sentence case for readability
+- Make labels self-explanatory
+
+**Description Guidelines:**
+- Provide additional context for complex options
+- Use descriptions to explain consequences of the choice
+- Keep descriptions concise and scannable
+- Only include descriptions when they add value
+- Use consistent formatting for similar descriptions
+
+### Form Layout and Design
+
+**✅ Do:**
+
+- Group related checkboxes logically
+- Maintain consistent spacing between checkboxes
+- Align checkboxes with other form elements
+- Consider the visual hierarchy of multiple checkboxes
+- Use checkboxes for binary choices and settings
+
+**❌ Don't:**
+
+- Create checkboxes that are too close together
+- Overcrowd forms with too many checkboxes
+- Use inconsistent spacing between checkboxes
+- Place checkboxes in locations that disrupt form flow
+- Use checkboxes for non-binary choices (use radio buttons instead)
+
+### State Management
+
+**✅ Do:**
+
+- Use meaningful model keys that describe the choice
+- Initialize checkbox values appropriately (usually `false`)
+- Handle indeterminate states for parent/child relationships
+- Use actions for complex state changes
+- Provide clear feedback for state changes
+
+**❌ Don't:**
+
+- Use generic model keys like "value" or "option"
+- Forget to initialize checkbox values
+- Ignore indeterminate state requirements
+- Create checkboxes without proper state handling
+- Use checkboxes for non-binary data
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for all text elements
+- Test with screen readers to ensure proper announcements
+- Use descriptive labels that clearly indicate the choice
+- Maintain proper focus management
+- Provide keyboard navigation support
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create checkboxes with poor color contrast
+- Use generic or unclear labels
+- Forget to test with assistive technologies
+- Create checkboxes that are difficult to interact with
+
+### Indeterminate State Usage
+
+**✅ Do:**
+
+- Use indeterminate state for parent checkboxes controlling multiple children
+- Provide clear visual indication of mixed states
+- Handle indeterminate to checked transitions properly
+- Use consistent icons for indeterminate states
+- Explain indeterminate behavior to users when needed
+
+**❌ Don't:**
+
+- Use indeterminate state for single-choice scenarios
+- Forget to handle indeterminate state transitions
+- Use inconsistent icons for indeterminate states
+- Create confusing indeterminate behaviors
+- Overuse indeterminate states unnecessarily
+
+### Action Integration
+
+**✅ Do:**
+
+- Use named actions for complex checkbox behaviors
+- Provide meaningful action options
+- Handle action failures gracefully
+- Use actions for real-time updates
+- Document custom actions clearly
+
+**❌ Don't:**
+
+- Use actions for simple state changes
+- Create actions without proper error handling
+- Use generic action names
+- Forget to provide action options when needed
+- Create actions that conflict with checkbox behavior
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use checkboxes for form interactions and settings
+- Consider the total number of checkboxes on a page
+- Use appropriate model keys for checkbox data
+- Implement efficient state management for checkbox groups
+
+**❌ Don't:**
+
+- Use checkboxes for frequently changing content without proper state management
+- Overload pages with too many checkboxes that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create checkboxes that require excessive data fetching

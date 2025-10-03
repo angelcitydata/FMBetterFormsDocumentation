@@ -6,7 +6,9 @@ import Link from 'next/link'
 import { GridPattern } from '@/components/GridPattern'
 import { Heading } from '@/components/Heading'
 import { BellIcon } from '@/components/icons/BellIcon'
+import { ChatBubbleIcon } from '@/components/icons/ChatBubbleIcon'
 import { CheckIcon } from '@/components/icons/CheckIcon'
+import { CheckboxIcon } from '@/components/icons/CheckboxIcon'
 import { ChevronRightLeftIcon } from '@/components/icons/ChevronRightLeftIcon'
 import { DocumentIcon } from '@/components/icons/DocumentIcon'
 import { ListIcon } from '@/components/icons/ListIcon'
@@ -86,20 +88,6 @@ const resources = [
     },
   },
   {
-    href: '/fmbf-components/dropdown',
-    name: 'Dropdown',
-    description:
-      'A flexible dropdown menu component supporting checkboxes, radio buttons, groups, and custom actions.',
-    icon: ListIcon,
-    pattern: {
-      y: -6,
-      squares: [
-        [-1, 2],
-        [1, 3],
-      ],
-    },
-  },
-  {
     href: '/fmbf-components/card',
     name: 'Card',
     description:
@@ -114,11 +102,39 @@ const resources = [
     },
   },
   {
+    href: '/fmbf-components/checkbox',
+    name: 'Checkbox',
+    description:
+      'An interactive checkbox component for binary choices with support for checked, unchecked, and indeterminate states.',
+    icon: CheckboxIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [-1, 2],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/dropdown',
+    name: 'Dropdown',
+    description:
+      'A flexible dropdown menu component supporting checkboxes, radio buttons, groups, and custom actions.',
+    icon: ListIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [-1, 2],
+        [1, 3],
+      ],
+    },
+  },
+  {
     href: '/fmbf-components/input',
     name: 'Input',
     description:
       'Learn about the input component and how to create, retrieve, update, delete, and list inputs.',
-    icon: DocumentIcon,
+    icon: ChatBubbleIcon,
     pattern: {
       y: 16,
       squares: [
