@@ -3,9 +3,9 @@ import { Components } from '@/components/Components'
 import { HeroPattern } from '@/components/HeroPattern'
 
 export const metadata = {
-  title: 'API Documentation',
+  title: 'FMBetterForms Documentation',
   description:
-    'Learn everything there is to know about the Protocol API and integrate Protocol into your product.',
+    'Complete documentation for FMBetterForms - a modern component library for building beautiful, interactive FileMaker applications.',
 }
 
 export const sections = [
@@ -15,9 +15,21 @@ export const sections = [
 
 <HeroPattern />
 
-# FMBetterForms At Angel City Data
+# FMBetterForms Documentation
 
-This site contains documentation about how
+FMBetterForms is a cloud-based platform designed specifically for FileMaker developers. It provides a comprehensive framework with interactive UI components that enable you to build beautiful, responsive, and user-friendly web applications that integrate seamlessly with your FileMaker solutions. {{ className: 'lead' }}
+
+## What is FMBetterForms?
+
+FMBetterForms is a cloud-based Software as a Service (SaaS) platform designed to help FileMaker developers create modern, responsive web applications without requiring extensive knowledge of web technologies. It operates independently of FileMaker's Web Viewer technology and offers:
+
+- **Pre-built Components**: Ready-to-use UI elements like buttons, inputs, dropdowns, and more
+- **Modern Design**: Clean, professional styling with built-in animations and interactions
+- **Easy Integration**: Simple JSON configuration or HTML-like syntax for rapid development
+- **Consistent UX**: Standardized component behavior across your entire application
+- **Responsive Design**: Components that work seamlessly across different screen sizes
+- **Cloud Platform**: Hosted Platform as a Service (PaaS) environment with minimal installation requirements
+- **FileMaker Integration**: Seamless integration with FileMaker's Data API and XML gateway
 
 {/* <div className="not-prose mt-6 mb-16 flex gap-3">
   <Button href="/quickstart" arrow="right">
@@ -28,15 +40,44 @@ This site contains documentation about how
   </Button>
 </div> */}
 
-## Getting started {{ anchor: false }}
+## Getting Started {{ anchor: false }}
 
-To get started, create a new application in your [developer settings](#), then read about how to make requests for the resources you need to access using our HTTP APIs or dedicated client SDKs. When your integration is ready to go live, publish it to our [integrations directory](#) to reach the Protocol community. {{ className: 'lead' }}
+FMBetterForms components can be used in two ways: as JSON configuration objects or as HTML-like `<bfcomp>` elements. Both approaches provide the same functionality, so you can choose what works best for your development workflow. {{ className: 'lead' }}
 
-<div className="not-prose">
-  <Button href="/sdks" variant="text" arrow="right">
-    <>Get your API key</>
-  </Button>
-</div>
+### Quick Example
+
+Here's how you might create a simple button component:
+
+<CodeGroup>
+```html {{ title: 'HTML Component Syntax' }}
+<bfcomp name="Button" 
+        label="Save Changes" 
+        variant="primary" 
+        icon="fa-floppy-disk" 
+        namedAction="saveRecord">
+</bfcomp>
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "name": "Button",
+  "label": "Save Changes",
+  "variant": "primary",
+  "icon": "fa-floppy-disk",
+  "namedAction": "saveRecord"
+}
+```
+</CodeGroup>
+
+### Key Features
+
+- **Named Actions**: Components trigger FileMaker script actions through the named action system
+- **Loading States**: Built-in support for showing loading indicators during async operations
+- **Icon Support**: Font Awesome icons integrated seamlessly with all components
+- **Theme Integration**: Consistent styling that matches your application's design
+- **State Management**: Components automatically handle disabled, loading, and interactive states
+- **Model System**: Reactive data binding with app-level and page-level models for state management
+- **Multi-Window Support**: Built-in support for complex applications with multiple windows and card windows
 
 <Guides />
 
