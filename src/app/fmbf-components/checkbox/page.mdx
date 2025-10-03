@@ -50,6 +50,15 @@ The Checkbox component provides an interactive form control for binary choices i
     Example: `true` (shows minus icon), `false` (normal state).
     Default is `false`.
   </Property>
+  <Property name="items" type="array">
+    Array of items for checkbox list functionality. Each item can contain
+    properties for displaying structured checkbox options. Currently supports
+    empty array for future expansion of checkbox list features.
+    We are evaluating planned support for multiple items per checkbox to support
+    a single field with an array of values.
+    Example: `[]` (empty array for now, future expansion planned).
+    Default is empty array.
+  </Property>
 </Properties>
 
 ### Action Properties
@@ -114,6 +123,35 @@ The checkbox can exist in three states:
 - **Indeterminate → Checked**: User clicks (indeterminate becomes checked)
 - **Any State → Disabled**: Controlled by the `disabled` property
 
+### Data Binding and Model Integration
+
+The checkbox component binds its state to the form model using the `modelKey` property. When the checkbox state changes, the corresponding model field is automatically updated.
+
+**Model Integration:**
+- The `modelKey` property specifies which field in the model stores the checkbox state
+- Checkbox state is stored as a boolean value (`true` for checked, `false` for unchecked)
+- The model is automatically updated when the user interacts with the checkbox
+- The `items` array is reserved for future checkbox list functionality
+
+**Data Flow:**
+1. User interacts with checkbox (click, keyboard)
+2. Component toggles its visual state
+3. Model field (specified by `modelKey`) is updated with boolean value
+4. Any configured actions are triggered via `namedAction`
+
+**Example Model Structure:**
+```javascript
+// Model with checkbox fields
+model = {
+  agreeToTerms: false,           // Basic checkbox
+  newsletterSubscription: false, // Checkbox with description
+  adminOnly: false,              // Disabled checkbox
+  selectAll: false,              // Indeterminate checkbox
+  autoSave: false,               // Checkbox with action
+  premiumFeatures: false         // Complete checkbox
+}
+```
+
 ---
 
 ## Usage Examples
@@ -140,7 +178,8 @@ model.agreeToTerms = false
   "modelKey": "agreeToTerms",
   "label": "I agree to the terms and conditions",
   "disabled": false,
-  "indeterminate": false
+  "indeterminate": false,
+  "items": []
 }
 ```
 
@@ -168,7 +207,8 @@ model.newsletterSubscription = false
   "label": "Subscribe to newsletter",
   "description": "You can unsubscribe at any time",
   "disabled": false,
-  "indeterminate": false
+  "indeterminate": false,
+  "items": []
 }
 ```
 
@@ -197,7 +237,8 @@ model.adminOnly = false
   "label": "Administrator access",
   "description": "Contact admin to enable",
   "disabled": true,
-  "indeterminate": false
+  "indeterminate": false,
+  "items": []
 }
 ```
 
@@ -224,7 +265,8 @@ model.selectAll = false
   "modelKey": "selectAll",
   "label": "Select all items",
   "disabled": false,
-  "indeterminate": true
+  "indeterminate": true,
+  "items": []
 }
 ```
 
@@ -256,7 +298,8 @@ model.autoSave = false
   "namedAction": "toggleAutoSave",
   "actionOptions": {"interval": 300000},
   "disabled": false,
-  "indeterminate": false
+  "indeterminate": false,
+  "items": []
 }
 ```
 
@@ -292,7 +335,8 @@ model.premiumFeatures = false
   "namedAction": "updateFeatureSet",
   "actionOptions": {"tier": "premium"},
   "disabled": false,
-  "indeterminate": false
+  "indeterminate": false,
+  "items": []
 }
 ```
 

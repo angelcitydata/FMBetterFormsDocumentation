@@ -12,6 +12,7 @@ import { CheckboxIcon } from '@/components/icons/CheckboxIcon'
 import { ChevronRightLeftIcon } from '@/components/icons/ChevronRightLeftIcon'
 import { DocumentIcon } from '@/components/icons/DocumentIcon'
 import { ListIcon } from '@/components/icons/ListIcon'
+import { MagnifyingGlassIcon } from '@/components/icons/MagnifyingGlassIcon'
 import { ShapesIcon } from '@/components/icons/ShapesIcon'
 import { SquaresPlusIcon } from '@/components/icons/SquaresPlusIcon'
 import { TagIcon } from '@/components/icons/TagIcon'
@@ -107,6 +108,20 @@ const resources = [
     description:
       'An interactive checkbox component for binary choices with support for checked, unchecked, and indeterminate states.',
     icon: CheckboxIcon,
+    pattern: {
+      y: -6,
+      squares: [
+        [-1, 2],
+        [1, 3],
+      ],
+    },
+  },
+  {
+    href: '/fmbf-components/combobox',
+    name: 'Combobox',
+    description:
+      'An interactive dropdown component with search functionality for selecting from a list of options with keyboard navigation.',
+    icon: MagnifyingGlassIcon,
     pattern: {
       y: -6,
       squares: [

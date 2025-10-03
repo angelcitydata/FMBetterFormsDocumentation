@@ -1,0 +1,826 @@
+export const metadata = {
+  title: 'Combobox Component',
+  description:
+    'An interactive dropdown component for FM BetterForms that allows users to search and select from a list of options with keyboard navigation, filtering, and comprehensive accessibility features.',
+}
+
+# Combobox Component
+
+The Combobox component provides an interactive dropdown control for selecting from a list of options in your FM BetterForms application. It features a searchable interface with keyboard navigation, filtering capabilities, and comprehensive accessibility features, making it perfect for forms requiring single selection from multiple options. {{ className: 'lead' }}
+
+    This component supports searchable option lists with customizable labels and placeholders,
+    keyboard navigation with arrow keys and Enter selection, real-time filtering, and comprehensive
+    accessibility features for optimal user experience.
+
+---
+
+## Component Properties
+
+### Core Properties
+
+<Properties>
+  <Property name="modelKey" type="string">
+    The key used to bind the selected combobox value to the form model. This property
+    determines which field in the model will store the selected option value.
+    Example: `"selectedCountry"`, `"userRole"`, `"categoryId"`.
+    Default is `"comboValue"`.
+  </Property>
+  <Property name="label" type="string">
+    The text label displayed above the combobox. This text appears in bold
+    and serves as the accessible label for the dropdown.
+    Example: `"Select Country"`, `"Choose User Role"`, `"Pick Category"`.
+    Default is empty string (not displayed).
+  </Property>
+  <Property name="placeholder" type="string">
+    The placeholder text displayed in the combobox trigger when no option is selected.
+    This text appears in muted color to guide user interaction.
+    Example: `"Select an option…"`, `"Choose from list…"`, `"Pick a value…"`.
+    Default is `"Select an option…"`.
+  </Property>
+  <Property name="disabled" type="boolean|string">
+    Controls whether the combobox is disabled. Can be boolean or string values
+    that evaluate to disabled state. When disabled, the combobox cannot be
+    interacted with and appears with reduced opacity.
+    Example: `true`, `"true"`, `"1"`, `"on"`, `"yes"`.
+    Default is `false`.
+  </Property>
+  <Property name="items" type="array">
+    Array of option objects for the combobox dropdown. Each item should contain
+    `label` and `value` properties, with optional `icon` and `disabled` properties.
+    Example: `[{"label": "Option 1", "value": "opt1"}, {"label": "Option 2", "value": "opt2", "disabled": true}]`.
+    Default is empty array.
+  </Property>
+  <Property name="emptyText" type="string">
+    The text displayed when no options match the search query or when the items array is empty.
+    This provides user feedback for empty states.
+    Example: `"No results found."`, `"No options available."`, `"Try a different search."`.
+    Default is `"No results found."`.
+  </Property>
+</Properties>
+
+### Action Properties
+
+<Properties>
+  <Property name="namedAction" type="string">
+    Optional action to trigger when an option is selected. This allows
+    for custom behavior when the combobox selection changes.
+    Example: `"validateForm"`, `"updateRelatedFields"`, `"loadDependentData"`.
+    Default is empty string.
+  </Property>
+  <Property name="actionOptions" type="object">
+    Configuration options passed to the named action when triggered.
+    This object can contain any data needed for the action execution.
+    Example: `{"validate": true, "field": "email"}`.
+    Default is empty object `{}`.
+  </Property>
+</Properties>
+
+### Technical Properties
+
+<Properties>
+  <Property name="windowIndex" type="number">
+    The index of the window containing this combobox component. Used for
+    accessing the correct form model in multi-window applications.
+    Example: `0`, `1`, `2`.
+    Default is `0`.
+  </Property>
+  <Property name="stateKey" type="string">
+    The key used to store the combobox internal state (open/closed, search query, active index)
+    in the form model. This allows for multiple comboboxes on the same form.
+    Example: `"countryComboState"`, `"roleComboState"`.
+    Default is `"comboState"`.
+  </Property>
+</Properties>
+
+---
+
+## Combobox States and Behavior
+
+The Combobox component supports multiple interaction states and provides comprehensive search and selection handling for optimal user experience.
+
+### State Types
+
+The combobox can exist in several states:
+
+1. **Closed** - Default state, shows trigger button with placeholder or selected value
+2. **Open** - Dropdown is visible with search input and options list
+3. **Searching** - User is typing in the search input, filtering options in real-time
+4. **Selected** - An option has been chosen and displayed in the trigger
+5. **Empty** - No options match the search query or items array is empty
+6. **Disabled** - Component cannot be interacted with
+
+### Interaction Behavior
+
+- **Click/Tap**: Opens dropdown when closed, selects option when open
+- **Keyboard Navigation**: Arrow keys navigate options, Enter selects, Escape closes
+- **Search**: Real-time filtering of options as user types
+- **Mouse**: Hover highlights options, click selects and closes dropdown
+- **Disabled State**: When disabled, no interactions are possible
+
+### State Transitions
+
+- **Closed → Open**: User clicks trigger button
+- **Open → Closed**: User selects option, clicks outside, or presses Escape
+- **Searching**: User types in search input, options filter automatically
+- **Option Selection**: Selected value updates model and closes dropdown
+- **Any State → Disabled**: Controlled by the `disabled` property
+
+### Data Binding and Model Integration
+
+The combobox component binds its selected value to the form model using the `modelKey` property. When an option is selected, the corresponding model field is automatically updated with the option's value.
+
+**Model Integration:**
+- The `modelKey` property specifies which field in the model stores the selected option value
+- Selected value is stored as the `value` property of the chosen option item
+- The model is automatically updated when the user selects an option
+- The `stateKey` property manages internal dropdown state (open/closed, search query, active index)
+- The `items` array defines the available options with `label` and `value` properties
+
+**Data Flow:**
+1. User clicks trigger button to open dropdown
+2. User types in search input to filter options (optional)
+3. User navigates options with arrow keys or mouse
+4. User selects option with click or Enter key
+5. Model field (specified by `modelKey`) is updated with selected option value
+6. Dropdown closes and any configured actions are triggered via `namedAction`
+
+**Example Model Structure:**
+```javascript
+// Model with combobox fields and state
+model = {
+  selectedCountry: "us",         // Selected option value
+  userRole: "admin",             // Selected role value
+  categoryId: null,              // No selection yet
+  comboState: {                  // Internal dropdown state
+    open: false,
+    q: "",
+    active: -1
+  },
+  countryComboState: {           // Separate state for multiple comboboxes
+    open: false,
+    q: "",
+    active: -1
+  }
+}
+```
+
+---
+
+## Usage Examples
+
+The Combobox component is configured using JSON objects with properties for form interaction. Here are common usage patterns for different scenarios.
+
+### Basic Combobox
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Combobox" 
+        modelKey="selectedCountry"
+        label="Select Country"
+        placeholder="Choose a country...">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define basic combobox in your model
+model.selectedCountry = null
+model.comboState = { open: false, q: '', active: -1 }
+
+// Define options for the combobox
+const countryOptions = [
+  { label: "United States", value: "us" },
+  { label: "Canada", value: "ca" },
+  { label: "United Kingdom", value: "uk" },
+  { label: "Germany", value: "de" },
+  { label: "France", value: "fr" }
+]
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "selectedCountry",
+  "label": "Select Country",
+  "placeholder": "Choose a country...",
+  "items": [
+    {"label": "United States", "value": "us"},
+    {"label": "Canada", "value": "ca"},
+    {"label": "United Kingdom", "value": "uk"},
+    {"label": "Germany", "value": "de"},
+    {"label": "France", "value": "fr"}
+  ],
+  "disabled": false,
+  "emptyText": "No results found.",
+  "stateKey": "comboState",
+  "windowIndex": 0
+}
+```
+
+</CodeGroup>
+
+### Combobox with Icons
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Combobox" 
+        modelKey="userRole"
+        label="Select User Role"
+        placeholder="Choose a role...">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define combobox with icons in your model
+model.userRole = null
+model.roleComboState = { open: false, q: '', active: -1 }
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "userRole",
+  "label": "Select User Role",
+  "placeholder": "Choose a role...",
+  "items": [
+    {"label": "Administrator", "value": "admin", "icon": "fa-user-shield"},
+    {"label": "Editor", "value": "editor", "icon": "fa-user-edit"},
+    {"label": "Viewer", "value": "viewer", "icon": "fa-user"},
+    {"label": "Guest", "value": "guest", "icon": "fa-user-times"}
+  ],
+  "disabled": false,
+  "emptyText": "No roles found.",
+  "stateKey": "roleComboState",
+  "windowIndex": 0
+}
+```
+
+</CodeGroup>
+
+### Disabled Combobox
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Combobox" 
+        modelKey="restrictedCategory"
+        label="Restricted Category"
+        placeholder="Contact admin to enable"
+        disabled="true">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define disabled combobox in your model
+model.restrictedCategory = null
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "restrictedCategory",
+  "label": "Restricted Category",
+  "placeholder": "Contact admin to enable",
+  "items": [
+    {"label": "Premium Category", "value": "premium"},
+    {"label": "VIP Category", "value": "vip"},
+    {"label": "Admin Category", "value": "admin"}
+  ],
+  "disabled": true,
+  "emptyText": "No categories available.",
+  "stateKey": "restrictedComboState",
+  "windowIndex": 0
+}
+```
+
+</CodeGroup>
+
+### Combobox with Action
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Combobox" 
+        modelKey="selectedRegion"
+        label="Select Region"
+        placeholder="Choose your region..."
+        namedAction="loadRegionalData"
+        actionOptions='{"loadCities": true}'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define combobox with action in your model
+model.selectedRegion = null
+model.regionComboState = { open: false, q: '', active: -1 }
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "selectedRegion",
+  "label": "Select Region",
+  "placeholder": "Choose your region...",
+  "items": [
+    {"label": "North America", "value": "na"},
+    {"label": "Europe", "value": "eu"},
+    {"label": "Asia Pacific", "value": "apac"},
+    {"label": "Latin America", "value": "latam"}
+  ],
+  "namedAction": "loadRegionalData",
+  "actionOptions": {"loadCities": true},
+  "disabled": false,
+  "emptyText": "No regions found.",
+  "stateKey": "regionComboState",
+  "windowIndex": 0
+}
+```
+
+</CodeGroup>
+
+### Combobox with Disabled Options
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Combobox" 
+        modelKey="subscriptionTier"
+        label="Select Subscription Tier"
+        placeholder="Choose your plan...">
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define combobox with disabled options in your model
+model.subscriptionTier = null
+model.subscriptionComboState = { open: false, q: '', active: -1 }
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "subscriptionTier",
+  "label": "Select Subscription Tier",
+  "placeholder": "Choose your plan...",
+  "items": [
+    {"label": "Free Plan", "value": "free"},
+    {"label": "Basic Plan", "value": "basic"},
+    {"label": "Pro Plan", "value": "pro"},
+    {"label": "Enterprise Plan", "value": "enterprise", "disabled": true}
+  ],
+  "disabled": false,
+  "emptyText": "No plans available.",
+  "stateKey": "subscriptionComboState",
+  "windowIndex": 0
+}
+```
+
+</CodeGroup>
+
+### Complete Combobox Example
+
+<CodeGroup>
+```html {{ title: 'HTML Component' }}
+<bfcomp name="Combobox" 
+        modelKey="departmentManager"
+        label="Select Department Manager"
+        placeholder="Choose a manager..."
+        id="manager-selector"
+        windowIndex="0"
+        namedAction="updateDepartmentInfo"
+        actionOptions='{"updatePermissions": true, "sendNotification": true}'>
+</bfcomp>
+```
+
+```javascript {{ title: 'Model Definition' }}
+// Define complete combobox in your model
+model.departmentManager = null
+model.managerComboState = { open: false, q: '', active: -1 }
+```
+
+```json {{ title: 'JSON Configuration' }}
+{
+  "modelKey": "departmentManager",
+  "label": "Select Department Manager",
+  "placeholder": "Choose a manager...",
+  "items": [
+    {"label": "John Smith", "value": "john.smith", "icon": "fa-user-tie"},
+    {"label": "Sarah Johnson", "value": "sarah.johnson", "icon": "fa-user-tie"},
+    {"label": "Mike Davis", "value": "mike.davis", "icon": "fa-user-tie"},
+    {"label": "Lisa Wilson", "value": "lisa.wilson", "icon": "fa-user-tie", "disabled": true}
+  ],
+  "namedAction": "updateDepartmentInfo",
+  "actionOptions": {"updatePermissions": true, "sendNotification": true},
+  "disabled": false,
+  "emptyText": "No managers available.",
+  "stateKey": "managerComboState",
+  "windowIndex": 0
+}
+```
+
+</CodeGroup>
+
+---
+
+## Combobox Styling
+
+The Combobox component features a clean, accessible design with consistent spacing and clear visual hierarchy. The styling provides excellent usability and maintains a professional appearance for dropdown interactions with search functionality.
+
+### Visual Structure
+
+The combobox renders with the following structure:
+
+- **Wrapper Container**: Full-width container with optional label
+- **Trigger Button**: Interactive button showing selected value or placeholder
+- **Dropdown Popover**: Positioned overlay with search input and options list
+- **Search Input**: Text input for filtering options with magnifying glass icon
+- **Options List**: Scrollable list of selectable options with hover/active states
+- **Option Items**: Individual clickable options with icons and selection indicators
+
+### Default Appearance
+
+```html
+<!-- Combobox Structure -->
+<div class="w-full">
+  <!-- Optional Label -->
+  <label class="mb-1 block text-sm font-medium text-foreground">
+    Select Country
+    <span class="text-destructive"> *</span>
+  </label>
+
+  <div class="relative w-full">
+    <!-- Trigger Button -->
+    <button
+      type="button"
+      class="w-full inline-flex items-center justify-between gap-2 rounded-md border border-input bg-card text-foreground px-3 py-2 text-sm shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      <span class="truncate text-left">Select an option…</span>
+      <i class="fa-regular fa-chevron-down text-muted-foreground"></i>
+    </button>
+
+    <!-- Dropdown Popover -->
+    <div class="absolute inset-x-0 z-50 mt-2 w-full rounded-md border border-border bg-popover text-popover-foreground shadow-lg">
+      <!-- Search Input -->
+      <div class="p-2 border-b border-border">
+        <div class="relative">
+          <i class="fa-regular fa-magnifying-glass absolute left-2 top-2.5 text-muted-foreground text-xs"></i>
+          <input
+            type="text"
+            class="w-full rounded-md bg-background text-foreground placeholder:text-muted-foreground pl-7 pr-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            placeholder="Search…"
+          />
+        </div>
+      </div>
+
+      <!-- Options List -->
+      <div class="max-h-64 overflow-auto py-1">
+        <button
+          type="button"
+          class="w-full flex items-center gap-2 px-3 py-2 text-left text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+        >
+          <i class="fa-regular fa-user text-xs"></i>
+          <span class="truncate">United States</span>
+          <i class="ml-auto fa-regular fa-check text-xs"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### State-Based Styling
+
+The combobox adapts its appearance based on the current state:
+
+**Closed State (No Selection)**:
+```html
+<button class="bg-card border border-input hover:bg-accent hover:text-accent-foreground">
+  <span class="truncate text-left">Select an option…</span>
+  <i class="fa-regular fa-chevron-down text-muted-foreground"></i>
+</button>
+```
+
+**Closed State (With Selection)**:
+```html
+<button class="bg-card border border-input hover:bg-accent hover:text-accent-foreground">
+  <span class="truncate text-left">United States</span>
+  <i class="fa-regular fa-chevron-down text-muted-foreground"></i>
+</button>
+```
+
+**Open State (Dropdown Visible)**:
+```html
+<div class="absolute inset-x-0 z-50 mt-2 w-full rounded-md border border-border bg-popover text-popover-foreground shadow-lg">
+  <!-- Search input and options list -->
+</div>
+```
+
+**Option Hover State**:
+```html
+<button class="bg-accent text-accent-foreground">
+  <i class="fa-regular fa-user text-xs"></i>
+  <span class="truncate">United States</span>
+</button>
+```
+
+**Option Selected State**:
+```html
+<button class="bg-muted">
+  <i class="fa-regular fa-user text-xs"></i>
+  <span class="truncate">United States</span>
+  <i class="ml-auto fa-regular fa-check text-xs"></i>
+</button>
+```
+
+**Disabled State**:
+```html
+<button class="disabled:opacity-50 disabled:cursor-not-allowed">
+  <!-- Disabled appearance with reduced opacity -->
+</button>
+```
+
+### Typography and Colors
+
+The combobox uses consistent typography and color schemes:
+
+```html
+<!-- Label Styling -->
+<label class="text-sm font-medium text-foreground">
+  Select Country
+</label>
+
+<!-- Trigger Button Styling -->
+<button class="text-sm text-foreground">
+  <span class="truncate text-left">Select an option…</span>
+</button>
+
+<!-- Option Text Styling -->
+<span class="text-sm text-left">United States</span>
+
+<!-- Color Schemes -->
+<button class="bg-card border border-input">           <!-- Default trigger -->
+<button class="hover:bg-accent hover:text-accent-foreground">  <!-- Hover state -->
+<div class="bg-popover text-popover-foreground">      <!-- Dropdown background -->
+<button class="bg-accent text-accent-foreground">     <!-- Option hover -->
+<button class="bg-muted">                             <!-- Selected option -->
+```
+
+### Spacing and Layout
+
+The combobox uses consistent spacing throughout:
+
+```html
+<!-- Container Spacing -->
+<div class="w-full">
+  <!-- Label Spacing -->
+  <label class="mb-1 block text-sm font-medium text-foreground">
+    <!-- 4px bottom margin -->
+  </label>
+
+  <!-- Trigger Button Spacing -->
+  <button class="px-3 py-2 gap-2">
+    <!-- 12px horizontal padding, 8px vertical padding, 8px gap -->
+  </button>
+
+  <!-- Dropdown Spacing -->
+  <div class="mt-2 w-full">
+    <!-- 8px top margin -->
+  </div>
+
+  <!-- Search Input Spacing -->
+  <div class="p-2">
+    <!-- 8px padding around search area -->
+  </div>
+
+  <!-- Options Spacing -->
+  <div class="py-1">
+    <button class="px-3 py-2 gap-2">
+      <!-- 12px horizontal, 8px vertical padding, 8px gap -->
+    </button>
+  </div>
+</div>
+```
+
+### Interactive States
+
+The combobox provides clear visual feedback for all interaction states:
+
+```html
+<!-- Trigger Focus State -->
+<button class="focus:outline-none focus:ring-2 focus:ring-ring">
+  <!-- 2px focus ring for keyboard navigation -->
+</button>
+
+<!-- Trigger Hover State -->
+<button class="hover:bg-accent hover:text-accent-foreground transition-colors">
+  <!-- Background color change on hover -->
+</button>
+
+<!-- Search Input Focus -->
+<input class="focus:outline-none focus:ring-2 focus:ring-ring">
+  <!-- 2px focus ring for search input -->
+</input>
+
+<!-- Option Hover State -->
+<button class="hover:bg-accent hover:text-accent-foreground transition-colors">
+  <!-- Background color change on option hover -->
+</button>
+
+<!-- Disabled State -->
+<button class="disabled:opacity-50 disabled:cursor-not-allowed">
+  <!-- 50% opacity and not-allowed cursor -->
+</button>
+```
+
+### Icon System
+
+The combobox uses FontAwesome icons for various UI elements:
+
+```html
+<!-- Chevron Down Icon (Trigger Button) -->
+<i class="fa-regular fa-chevron-down text-muted-foreground"></i>
+
+<!-- Search Icon (Search Input) -->
+<i class="fa-regular fa-magnifying-glass text-muted-foreground text-xs"></i>
+
+<!-- Check Icon (Selected Option) -->
+<i class="fa-regular fa-check text-xs"></i>
+
+<!-- Option Icons (Custom Icons) -->
+<i class="fa-regular fa-user text-xs"></i>
+<i class="fa-regular fa-user-shield text-xs"></i>
+<i class="fa-regular fa-user-edit text-xs"></i>
+
+<!-- Icon Styling -->
+<i class="text-muted-foreground">  <!-- Muted color for UI icons -->
+<i class="text-xs">                <!-- Small size for inline icons -->
+```
+
+### Accessibility Features
+
+The component includes comprehensive accessibility support:
+
+- **Semantic HTML** - Uses `<button>` for trigger and `<input>` for search with proper form semantics
+- **ARIA Attributes** - Proper labeling and state management for dropdown interactions
+- **Keyboard Support** - Arrow keys for navigation, Enter for selection, Escape to close
+- **Screen Reader Support** - Proper labeling and option announcements
+- **Focus Management** - Clear focus indicators and logical tab order
+- **Search Functionality** - Real-time filtering with accessible search input
+- **Option Navigation** - Keyboard-accessible option selection and highlighting
+
+### Theme Integration
+
+The component uses CSS custom properties for consistent theming:
+
+- `bg-card` - Card background color for trigger button
+- `border-input` - Input border color for trigger and search input
+- `bg-popover` - Popover background color for dropdown
+- `text-popover-foreground` - Text color for dropdown content
+- `bg-accent` - Accent background color for hover states
+- `text-accent-foreground` - Text color for accent backgrounds
+- `bg-muted` - Muted background color for selected options
+- `text-foreground` - Primary text color for labels and options
+- `text-muted-foreground` - Secondary text color for placeholders and icons
+- `ring-ring` - Focus ring color for keyboard navigation
+- `rounded` - Consistent border radius
+- `transition-colors` - Smooth color transitions
+- `opacity-50` - Disabled state opacity
+
+---
+
+## Best Practices
+
+When using the Combobox component, follow these guidelines for optimal user experience and consistent form design.
+
+### Label and Content Guidelines
+
+**✅ Do:**
+
+- Write clear, descriptive labels that explain what to select
+- Use action-oriented language (e.g., "Select Country", "Choose Category")
+- Keep labels concise but informative (typically 2-4 words)
+- Use consistent terminology across your application
+- Provide helpful placeholder text to guide user interaction
+
+**❌ Don't:**
+
+- Use vague labels like "Select Option" or "Choose Item"
+- Write overly long labels that break the layout
+- Use ambiguous language that doesn't specify the selection type
+- Mix different terminology for similar selection fields
+- Create comboboxes with unclear or generic labels
+
+### Option Structure
+
+**Option Guidelines:**
+- Use clear, descriptive labels for each option
+- Keep labels consistent with your application's voice
+- Avoid generic labels like "Option 1" or "Item A"
+- Use sentence case for readability
+- Make option labels self-explanatory
+
+**Placeholder Guidelines:**
+- Provide helpful placeholder text that guides user interaction
+- Use descriptive placeholders that explain the selection type
+- Keep placeholders concise and actionable
+- Only include placeholders when they add value
+- Use consistent formatting for similar comboboxes
+
+### Form Layout and Design
+
+**✅ Do:**
+
+- Group related comboboxes logically
+- Maintain consistent spacing between comboboxes
+- Align comboboxes with other form elements
+- Consider the visual hierarchy of multiple dropdowns
+- Use comboboxes for single selection from multiple options
+
+**❌ Don't:**
+
+- Create comboboxes that are too close together
+- Overcrowd forms with too many dropdowns
+- Use inconsistent spacing between comboboxes
+- Place comboboxes in locations that disrupt form flow
+- Use comboboxes for binary choices (use checkboxes instead)
+
+### State Management
+
+**✅ Do:**
+
+- Use meaningful model keys that describe the selection
+- Initialize combobox values appropriately (usually `null` or empty string)
+- Handle search state and active option tracking
+- Use actions for complex selection changes
+- Provide clear feedback for selection changes
+
+**❌ Don't:**
+
+- Use generic model keys like "value" or "selection"
+- Forget to initialize combobox values
+- Ignore search state management for multiple comboboxes
+- Create comboboxes without proper state handling
+- Use comboboxes for binary data (use checkboxes instead)
+
+### Accessibility Considerations
+
+**✅ Do:**
+
+- Ensure sufficient color contrast for all text elements
+- Test with screen readers to ensure proper announcements
+- Use descriptive labels that clearly indicate the selection type
+- Maintain proper focus management and tab order
+- Provide keyboard navigation support for dropdown interaction
+
+**❌ Don't:**
+
+- Rely solely on visual styling to convey information
+- Create comboboxes with poor color contrast
+- Use generic or unclear labels and placeholders
+- Forget to test with assistive technologies
+- Create comboboxes that are difficult to interact with
+
+### Search Functionality
+
+**✅ Do:**
+
+- Use search functionality for comboboxes with many options (10+ items)
+- Provide clear visual indication of search state and results
+- Handle search filtering properly with real-time updates
+- Use consistent search icons and placeholder text
+- Explain search behavior to users when needed
+
+**❌ Don't:**
+
+- Use search for comboboxes with few options (less than 10 items)
+- Forget to handle search state transitions
+- Use inconsistent search icons or placeholders
+- Create confusing search behaviors
+- Overuse search functionality unnecessarily
+
+### Action Integration
+
+**✅ Do:**
+
+- Use named actions for complex combobox behaviors (e.g., loading dependent data)
+- Provide meaningful action options
+- Handle action failures gracefully
+- Use actions for real-time updates and dependent field population
+- Document custom actions clearly
+
+**❌ Don't:**
+
+- Use actions for simple selection changes
+- Create actions without proper error handling
+- Use generic action names
+- Forget to provide action options when needed
+- Create actions that conflict with combobox behavior
+
+### Performance Tips
+
+**✅ Do:**
+
+- Use comboboxes for single selection from multiple options
+- Consider the total number of comboboxes on a page
+- Use appropriate model keys for combobox data
+- Implement efficient state management for combobox groups
+- Limit the number of options in each combobox (consider pagination for large lists)
+
+**❌ Don't:**
+
+- Use comboboxes for frequently changing content without proper state management
+- Overload pages with too many comboboxes that impact rendering performance
+- Use generic model keys that might conflict with other components
+- Create comboboxes that require excessive data fetching
+- Include too many options in a single combobox (use search functionality instead)

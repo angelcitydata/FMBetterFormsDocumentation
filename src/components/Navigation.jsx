@@ -209,6 +209,7 @@ export const navigation = [
       { title: 'Button Bar', href: '/fmbf-components/buttonBar' },
       { title: 'Card', href: '/fmbf-components/card' },
       { title: 'Checkbox', href: '/fmbf-components/checkbox' },
+      { title: 'Combobox', href: '/fmbf-components/combobox' },
       { title: 'Dropdown', href: '/fmbf-components/dropdown' },
       { title: 'Input', href: '/fmbf-components/input' },
     ],
