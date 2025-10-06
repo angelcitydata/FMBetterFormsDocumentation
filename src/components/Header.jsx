@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { forwardRef } from 'react'
 
-import { Button } from '@/components/Button'
 import { Logo } from '@/components/Logo'
 import {
   MobileNavigation,
@@ -70,18 +69,13 @@ export const Header = forwardRef(function Header({ className, ...props }, ref) {
       <div className="flex items-center gap-5">
         <nav className="hidden md:block">
           <ul role="list" className="flex items-center gap-8">
-            <TopLevelNavItem href="/">API</TopLevelNavItem>
-            <TopLevelNavItem href="#">Documentation</TopLevelNavItem>
-            <TopLevelNavItem href="#">Support</TopLevelNavItem>
+            <TopLevelNavItem href="/">Documentation</TopLevelNavItem>
           </ul>
         </nav>
         <div className="hidden md:block md:h-5 md:w-px md:bg-zinc-900/10 md:dark:bg-white/15" />
         <div className="flex gap-4">
           <MobileSearch />
           <ThemeToggle />
-        </div>
-        <div className="hidden min-[416px]:contents">
-          <Button href="#">Sign in</Button>
         </div>
       </div>
     </motion.div>
