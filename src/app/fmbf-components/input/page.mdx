@@ -632,41 +632,9 @@ The complete component schema for the Input component. Copy and paste this code 
 
 4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
 
-5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
 
-6. **Replace HTML Code**: Copy the HTML template from the user-provided HTML and replace all the existing code in the HTML section.
+5. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
 
-   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+6. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
 
-7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
 
-8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
-
-### Schema Properties Reference
-
-- **`label`**: Text displayed above the input field
-- **`placeholder`**: Placeholder text when input is empty
-- **`type`**: HTML input type (text, email, password, etc.)
-- **`format`**: Special formatting mode (currency, phone, date, ssn, integer, number, percent)
-- **`modelKey`**: Model path where value is stored
-- **`icon`**: Font Awesome icon on the left
-- **`iconRight`**: Font Awesome icon on the right
-- **`prefix`**: Text before input value
-- **`suffix`**: Text after input value
-- **`fullWidth`**: Whether input takes full container width
-- **`size`**: Text size (sm, md, lg)
-- **`required`**: Whether field is required
-- **`readOnly`**: Whether input is read-only
-- **`isDisabled`**: Whether input is disabled
-- **`maxLength`**: Maximum character length
-- **`allowNegative`**: Allow negative values for numeric formats
-- **`storeAsNumber`**: Store numeric values as numbers instead of strings
-- **`phoneMaxDigits`**: Maximum digits for phone format
-- **`ssnMaxDigits`**: Maximum digits for SSN format
-- **`storeMasked`**: Store masked value for phone/SSN
-- **`dateStoreISO`**: Store dates in ISO format
-- **`inputAction`**: Named action on input change
-- **`namedAction`**: Named action on Enter key press
-- **`errorMessage`**: Error message to display
-- **`successMessage`**: Success message to display
-- **`windowIndex`**: Window index for multi-window apps
