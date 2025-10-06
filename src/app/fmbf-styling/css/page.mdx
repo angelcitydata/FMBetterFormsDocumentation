@@ -1,0 +1,423 @@
+export const metadata = {
+  title: 'CSS',
+  description:
+    'Complete CSS code for styling FM BetterForms applications.',
+}
+
+# CSS
+
+The site CSS contains all the custom styles, resets, and component-specific styling needed for your BetterForms application. {{ className: 'lead' }}
+
+---
+
+## Complete Code
+
+Copy the entire code block below and paste it into the **Site CSS** section of your BetterForms app.
+
+To access this section:
+1. Click the **Styling** tab in the left sidebar of your app
+2. Paste this code in the **Site CSS** code block
+
+<CodeGroup>
+```css title="Site CSS"
+/* Loader and Spinner */
+.loader,
+.spinner {
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overflow-auto {
+    overflow-x: hidden;
+}
+
+/* Typography */
+.main-contet-wrapper,
+body {
+    font-family: "DM Sans", "sans-serif", Helvetica, Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: var(--background-color);
+}
+
+/* Hide scrollbars (cross-browser) while preserving scroll */
+.no-scrollbar {
+    /* Firefox */
+    scrollbar-width: none;
+    /* IE/Edge (legacy) */
+    -ms-overflow-style: none;
+}
+
+/* Chrome, Safari, Edge (Chromium), Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* TAILWINDS Resets / BF FIXES */
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.375em;
+}
+
+h3 {
+    font-size: 1.125em;
+}
+
+h4 {
+    font-size: 1em;
+}
+
+h5 {
+    font-size: 0.875em;
+}
+
+h6 {
+    font-size: 0.750em;
+}
+
+p {
+    margin-bottom: 0.714em;
+}
+
+.sweet-action-close svg {
+    display: inline;
+}
+
+.inline .radio-list label {
+    display: unset !important;
+    margin-right: 10px;
+}
+
+.mb-0.mb-0 {
+    margin-bottom: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: "DM Sans", "sans-serif", Helvetica, Arial, sans-serif;
+}
+
+.main-content-wrapper,
+body {
+    background: var(--white-color);
+}
+
+/* Div debugger */
+.outline-debug * {
+    outline: 1px solid default !important;
+    outline-offset: -1px !important;
+}
+
+a:hover {
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+/* Replace sr-only with this */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+    border: 0;
+    padding: 0;
+    margin: -1px;
+}
+
+/* Multiselect Component Styling */
+.multiselect {
+    background-color: var(--bg-card);
+}
+
+.multiselect__option {
+    font-size: 18px !important;
+}
+
+.multiselect__option.multiselect__option--highlight.multiselect__option--selected {
+    background-color: #F87171;
+}
+
+.multiselect__option.multiselect__option--highlight {
+    background-color: #34D399;
+}
+
+.multiselect {
+    color: rgb(2, 6, 23) !important;
+    border-radius: 0.5rem !important;
+    border: 2px solid rgb(226, 232, 240) !important;
+}
+
+.multiselect__input {
+    font-size: 14px !important;
+}
+
+.multiselect__single {
+    font-size: 1rem !important;
+    background-color: transparent !important;
+    color: rgb(2, 6, 23) !important;
+}
+
+.multiselect--disabled {
+    color: rgb(100, 116, 139) !important;
+    background-color: rgb(226, 232, 240) !important;
+    border: 2px solid rgb(226, 232, 240) !important;
+    opacity: 100%;
+}
+
+.multiselect__tags {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.multiselect__select--disabled {
+    background-color: rgb(226, 232, 240) !important;
+}
+
+.multiselect--disabled .multiselect__select {
+    background-color: transparent !important;
+}
+
+/* NAVIGATION CUSTOMIZATIONS */
+.theme-default .sidebar-left .nav > li.open > a,
+.theme-default .sidebar-left .nav > li > a:hover,
+.theme-default .sidebar-left .nav > li.active > a,
+.theme-default .sidebar-left .nav > li.active > a:focus,
+.theme-default .sidebar-left .nav > li.active > a:hover {
+    color: var(--primary-color) !important;
+    background-color: var(--white-color) !important;
+    border-radius: var(--radius, 0.375rem);
+}
+
+.theme-default .sidebar-left {
+    background-color: var(--background-color) !important;
+}
+
+.sidebar .nav a,
+.sidebar .nav > li > .nav-sub > li > a {
+    text-decoration: none;
+    font-weight: 400;
+    color: var(--text-primary) !important;
+}
+
+.sidebar-left .nav > li > a:focus,
+.sidebar .nav > li > .nav-sub > li > a:focus {
+    color: var(--primary-color) !important;
+    background-color: var(--white-color) !important;
+    font-weight: 600;
+}
+
+/* Optional: ensure icons inherit the link color */
+.sidebar .nav a i,
+.sidebar .nav > li > .nav-sub > li > a i {
+    color: currentColor !important;
+}
+
+/* NAVIGATION CUSTOMIZATIONS END */
+
+/* TABLE STYLING */
+tr {
+    border-bottom-width: 1px;
+}
+
+.table>thead>tr>th {
+    background-color: var(--background-color);
+}
+
+.VueTables__heading {
+    color: rgba(17, 24, 39, 1);
+    font-size: 12px;
+}
+
+.table>tbody>tr>td {
+    border-top: 0px !important;
+    color: var(--text-primary);
+}
+
+.VueTables__sort-icon.pull-right {
+    float: none !important;
+}
+```
+</CodeGroup>
+
+---
+
+## What This Code Includes
+
+### Global Styles & Resets
+- **Body & Layout** - Sets up the main layout structure with proper overflow handling
+- **Typography** - Configures DM Sans font family across all headings and body text
+- **Heading Sizes** - Resets heading sizes (h1-h6) for consistent typography
+- **Paragraph Spacing** - Adjusts paragraph margins for better readability
+
+### Utility Classes
+
+#### `.no-scrollbar`
+Hides scrollbars across all browsers while preserving scroll functionality:
+- Works in Firefox, Chrome, Safari, Edge, and Opera
+- Maintains scroll behavior without visual scrollbars
+
+#### `.visually-hidden`
+Accessible way to hide content visually while keeping it available for screen readers:
+- Replaces the old `.sr-only` class
+- Follows modern accessibility best practices
+
+#### `.outline-debug`
+Development utility for visualizing element boundaries:
+- Adds outlines to all child elements
+- Helpful for debugging layout issues
+
+### Component Styling
+
+#### Multiselect Components
+Complete styling for multiselect dropdown components:
+- Custom colors for selected and highlighted options
+- Disabled state styling
+- Border and background customization
+- Responsive font sizing
+
+#### Navigation Customization
+Sidebar and navigation menu styling:
+- Active state colors using CSS variables
+- Hover effects with smooth transitions
+- Focus states for accessibility
+- Icon color inheritance
+
+#### Table Styling
+VueTables and standard table formatting:
+- Header background colors
+- Row borders and spacing
+- Column sorting icon positioning
+- Text colors using CSS variables
+
+### CSS Variables Used
+
+The code references these CSS variables defined in the DOM Header:
+- `--background-color` - Sidebar and general background
+- `--white-color` - Primary white/light background
+- `--primary-color` - Brand primary color for links and active states
+- `--text-primary` - Primary text color
+- `--radius` - Border radius for rounded corners
+
+---
+
+## Customization
+
+You can customize various aspects of this CSS to match your needs:
+
+### Change Multiselect Colors
+
+```css
+/* Modify highlight colors */
+.multiselect__option.multiselect__option--highlight {
+    background-color: #your-color; /* Change from green (#34D399) */
+}
+
+.multiselect__option.multiselect__option--highlight.multiselect__option--selected {
+    background-color: #your-color; /* Change from red (#F87171) */
+}
+```
+
+### Adjust Typography Sizes
+
+```css
+/* Modify heading sizes */
+h1 { font-size: 2em; }      /* Make larger */
+h2 { font-size: 1.75em; }   /* Make larger */
+```
+
+### Customize Navigation
+
+```css
+/* Change navigation hover effect */
+.theme-default .sidebar-left .nav > li > a:hover {
+  color: var(--your-custom-color) !important;
+  background-color: var(--your-custom-bg) !important;
+}
+```
+
+---
+
+## Important Notes
+
+### Font Family Dependency
+This CSS uses the **DM Sans** font family, which is loaded in the DOM Header code. Make sure you've applied the [DOM Header code](/fmbf-styling/dom-header) first.
+
+### CSS Variable References
+Many styles reference CSS variables defined in the DOM Header's theme system. The CSS won't work correctly without the DOM Header code applied.
+
+### Browser Compatibility
+All styles are compatible with modern browsers:
+- ✅ Chrome 90+
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+
+---
+
+## Development Tools
+
+### Debugging Layouts
+
+Use the `.outline-debug` class during development to visualize element boundaries:
+
+```html
+<!-- Add to any container to debug child elements -->
+<div class="outline-debug">
+  <!-- All children will have visible outlines -->
+</div>
+```
+
+### Hiding Scrollbars
+
+Use `.no-scrollbar` when you want scrollable content without visible scrollbars:
+
+```html
+<!-- Scrollable content without scrollbars -->
+<div class="overflow-auto no-scrollbar">
+  <!-- Your scrollable content -->
+</div>
+```
+
+### Accessible Hidden Content
+
+Use `.visually-hidden` for screen-reader-only content:
+
+```html
+<!-- Visible to screen readers, hidden visually -->
+<span class="visually-hidden">Additional context for screen readers</span>
+```
+
+---
+
+## Next Steps
+
+After applying this CSS:
+
+1. **Save your changes** in the BetterForms Styling section
+2. **Hard refresh** any active page previews (see [Before you begin](/fmbf-styling/before-you-begin))
+3. **Test your application** to ensure styles are applied correctly
+4. **Customize colors** by modifying the CSS variables in the [DOM Header](/fmbf-styling/dom-header)

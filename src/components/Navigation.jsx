@@ -200,6 +200,14 @@ export const navigation = [
     links: [{ title: 'Filtering', href: '/fmbf-how-to/filtering' }],
   },
   {
+    title: 'Styling',
+    links: [
+      { title: 'Before you begin', href: '/fmbf-styling/before-you-begin' },
+      { title: 'DOM Header', href: '/fmbf-styling/dom-header' },
+      { title: 'CSS', href: '/fmbf-styling/css' },
+    ],
+  },
+  {
     title: 'Components',
     links: [
       { title: 'Accordion', href: '/fmbf-components/accordion' },

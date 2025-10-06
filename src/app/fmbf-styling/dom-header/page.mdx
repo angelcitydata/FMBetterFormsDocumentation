@@ -1,0 +1,532 @@
+export const metadata = {
+  title: 'DOM Header',
+  description:
+    'Complete DOM Header code for FM BetterForms applications.',
+}
+
+# DOM Header
+
+The DOM Header contains all the essential meta tags, stylesheets, scripts, and theme configuration needed for your BetterForms application. {{ className: 'lead' }}
+
+---
+
+## Complete Code
+
+Copy the entire code block below and paste it into the **DOM Header Insertions - Load first** section of your BetterForms app.
+
+To access this section:
+1. Click the **Settings** tab in the left sidebar of your app
+2. Click the **DOM Header Insertions** tab at the top
+3. Paste this code in the **Load first** code block
+
+<CodeGroup>
+```html title="DOM Header - Load First"
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="<%= /Mobi|Android|iPhone|iPad|iPod/i.test(ua)
+    ? 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover'
+    : 'width=device-width, initial-scale=1, viewport-fit=cover' %>">
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Order and invoicing portal for DHX clientele." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="DHX Client Portal" />
+    <meta property="og:description" content="Order and invoicing portal for DHX clientele." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yoursite.com" />
+    <meta property="og:image" content="https://yoursite.com/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DHX Client Portal" />
+    <meta name="twitter:description" content="Order and invoicing portal for DHX clientele." />
+    <meta name="twitter:image" content="https://yoursite.com/og-image.jpg" />
+
+    <!-- Favicon / PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- V-Calendar (Used for Date Pickers) -->
+    <script src="
+https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/lib/v-calendar.umd.min.js
+"></script>
+    <link href="
+https://cdn.jsdelivr.net/npm/v-calendar@2.4.2/src/styles/base.min.css
+" rel="stylesheet">
+
+    <!-- Vue-DateTime -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/1.25.0/luxon.min.js" integrity="sha512-OyrI249ZRX2hY/1CAD+edQR90flhuXqYqjNYFJAiflsKsMxpUYg5kbDDAVA8Vp0HMlPG/aAl1tFASi1h4eRoQw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/vue-datetime@1.0.0-beta.14/dist/vue-datetime.css">
+    <script src="https://unpkg.com/vue-datetime@1.0.0-beta.13/dist/vue-datetime.js"></script>
+
+    <!-- Shoelace UI -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.17.1/cdn/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.17.1/cdn/shoelace-autoloader.js"></script>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/e756ddf7fb.js" crossorigin="anonymous"></script>
+
+    <!-- Uppy (optional) -->
+    <script src="https://releases.transloadit.com/uppy/v3.7.0/uppy.min.js"></script>
+    <link href="https://releases.transloadit.com/uppy/v3.7.0/uppy.min.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind Theme Config -->
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '[data-theme="dark"]'], // keeps compatibility if you ever use `dark:` utilities
+            theme: {
+                container: {
+                    center: true,
+                    padding: '1rem',
+                    screens: {
+                        '2xl': '1280px'
+                    }
+                },
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Ubuntu', 'Cantarell', 'Noto Sans', 'Helvetica Neue', 'Arial', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol']
+                    },
+                    colors: {
+                        background: "oklch(var(--background) / <alpha-value>)",
+                        foreground: "oklch(var(--foreground) / <alpha-value>)",
+                        "tertiary-foreground": "oklch(var(--tertiary-foreground) / <alpha-value>)",
+
+                        card: "oklch(var(--card) / <alpha-value>)",
+                        "card-foreground": "oklch(var(--card-foreground) / <alpha-value>)",
+
+                        popover: "oklch(var(--popover) / <alpha-value>)",
+                        "popover-foreground": "oklch(var(--popover-foreground) / <alpha-value>)",
+
+                        primary: "oklch(var(--primary) / <alpha-value>)",
+                        "primary-foreground": "oklch(var(--primary-foreground) / <alpha-value>)",
+                        "primary-hover": "oklch(var(--primary-hover) / <alpha-value>)",
+                        "primary-active": "oklch(var(--primary-active) / <alpha-value>)",
+
+                        secondary: "oklch(var(--secondary) / <alpha-value>)",
+                        "secondary-foreground": "oklch(var(--secondary-foreground) / <alpha-value>)",
+                        "secondary-hover": "oklch(var(--secondary-hover) / <alpha-value>)",
+                        "secondary-active": "oklch(var(--secondary-active) / <alpha-value>)",
+
+                        muted: "oklch(var(--muted) / <alpha-value>)",
+                        "muted-foreground": "oklch(var(--muted-foreground) / <alpha-value>)",
+
+                        accent: "oklch(var(--accent) / <alpha-value>)",
+                        "accent-foreground": "oklch(var(--accent-foreground) / <alpha-value>)",
+
+                        destructive: "oklch(var(--destructive) / <alpha-value>)",
+                        "destructive-foreground": "oklch(var(--destructive-foreground) / <alpha-value>)",
+                        "destructive-hover": "oklch(var(--destructive-hover) / <alpha-value>)",
+                        "destructive-active": "oklch(var(--destructive-active) / <alpha-value>)",
+
+                        border: "oklch(var(--border) / <alpha-value>)",
+                        input: "oklch(var(--input) / <alpha-value>)",
+                        ring: "oklch(var(--ring) / <alpha-value>)",
+
+                        // Optional status colors (use as needed)
+                        success: "oklch(var(--success) / <alpha-value>)",
+                        warning: "oklch(var(--warning) / <alpha-value>)",
+                        info: "oklch(var(--info) / <alpha-value>)",
+
+                        /* Optional sidebar tokens */
+                        sidebar: "oklch(var(--sidebar) / <alpha-value>)",
+                        "sidebar-foreground": "oklch(var(--sidebar-foreground) / <alpha-value>)",
+                        "sidebar-primary": "oklch(var(--sidebar-primary) / <alpha-value>)",
+                        "sidebar-primary-foreground": "oklch(var(--sidebar-primary-foreground) / <alpha-value>)",
+                        "sidebar-accent": "oklch(var(--sidebar-accent) / <alpha-value>)",
+                        "sidebar-accent-foreground": "oklch(var(--sidebar-accent-foreground) / <alpha-value>)",
+                        "sidebar-border": "oklch(var(--sidebar-border) / <alpha-value>)",
+                        "sidebar-ring": "oklch(var(--sidebar-ring) / <alpha-value>)",
+                    },
+                    borderColor: {
+                        DEFAULT: "oklch(var(--border) / 1)"
+                    },
+                    ringColor: {
+                        DEFAULT: "oklch(var(--ring) / 1)"
+                    },
+                }
+            },
+            // If you build classes dynamically in JS, safelist them here so CDN JIT doesn't purge them.
+            safelist: [
+                'bg-primary', 'text-primary-foreground', 'hover:bg-primary-hover', 'active:bg-primary-active',
+                'bg-secondary', 'text-secondary-foreground', 'hover:bg-secondary-hover', 'active:bg-secondary-active',
+                'bg-destructive', 'text-destructive-foreground', 'hover:bg-destructive-hover', 'active:bg-destructive-active',
+                'bg-accent', 'text-accent-foreground', 'bg-muted', 'text-muted-foreground',
+                'border-border', 'ring-ring', 'bg-card', 'text-card-foreground', 'bg-popover', 'text-popover-foreground',
+
+                // NEW for the inverse/default button:
+                'bg-foreground', 'text-background',
+                // optional, if you'll reference them dynamically:
+                'hover:bg-foreground', 'active:bg-foreground',
+                'bg-primary', 'border-primary', 'bg-card', 'border-input', 'focus:ring-ring', 'hover:bg-primary-hover', 'active:bg-primary-active',
+
+                'rounded', 'rounded-sm', 'rounded-md', 'rounded-lg', 'rounded-xl',
+                'rounded-full'
+            ]
+        }
+    </script>
+
+    <style>
+        :root {
+            /* Map old variable names → new OKLCH tokens */
+            --primary-color: oklch(var(--primary) / 1);
+            --white-color: oklch(var(--background) / 1);
+            --background-color: oklch(var(--sidebar) / 1);
+            --text-primary: oklch(var(--sidebar-foreground) / 1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* In dark, these still point to your dark tokens defined above */
+                --primary-color: oklch(var(--primary) / 1);
+                --white-color: oklch(var(--background) / 1);
+                --background-color: oklch(var(--sidebar) / 1);
+                --text-primary: oklch(var(--sidebar-foreground) / 1);
+            }
+        }
+
+        /* If you allow manual theme via [data-theme], keep aliases in sync too */
+        html[data-theme="light"] {
+            --primary-color: oklch(var(--primary) / 1);
+            --white-color: oklch(var(--background) / 1);
+            --background-color: oklch(var(--sidebar) / 1);
+            --text-primary: oklch(var(--sidebar-foreground) / 1);
+        }
+
+        html[data-theme="dark"] {
+            --primary-color: oklch(var(--primary) / 1);
+            --white-color: oklch(var(--background) / 1);
+            --background-color: oklch(var(--sidebar) / 1);
+            --text-primary: oklch(var(--sidebar-foreground) / 1);
+        }
+    </style>
+
+    <!-- Shadcn-style Tokens (Light + Dark) -->
+    <style type="text/tailwindcss">
+        :root {
+    --radius: 0.625rem;
+
+    /* Base neutrals (light) */
+    --background: 1 0 0;           /* white */
+    --foreground: 0.145 0 0;       /* near-black */
+    --tertiary-foreground: 0.65 0 0; /* extra-subtle text */
+
+    --card: 1 0 0;
+    --card-foreground: 0.145 0 0;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.145 0 0;
+
+    /* Brand primary: Blue (light) */
+    --primary: 0.546 0.215 262.881;          /* blue-600 */
+    --primary-foreground: 0.985 0 0;         /* on-primary text */
+    --primary-hover: 0.488 0.217 264.376;    /* blue-700 */
+    --primary-active: 0.424 0.181 265.638;   /* blue-800 */
+
+    /* Secondary (subtle surfaces) */
+    --secondary: 0.97 0 0;                 /* subtle gray */
+    --secondary-foreground: 0.205 0 0;
+    --secondary-hover: 0.94 0 0;           /* slightly deeper */
+    --secondary-active: 0.91 0 0;
+
+    /* Muted and Accent */
+    --muted: 0.97 0 0;
+    --muted-foreground: 0.556 0 0;
+
+    --accent: 0.97 0 0;
+    --accent-foreground: 0.205 0 0;
+
+    /* Destructive (light) */
+    --destructive: 0.577 0.245 27.325;     /* red-ish */
+    --destructive-foreground: 0.985 0 0;
+    --destructive-hover: 0.528 0.242 27.4; /* deeper */
+    --destructive-active: 0.48 0.235 27.5; /* deeper again */
+
+    /* Controls */
+    --border: 0.922 0 0;
+    --input: 0.922 0 0;
+    --ring: 0.708 0 0;
+
+    /* Status (optional) */
+    --success: 0.69 0.17 148;  /* green-ish */
+    --warning: 0.84 0.16 84;   /* amber-ish */
+    --info: 0.75 0.05 250;     /* bluish */
+
+    /* Sidebar */
+    --sidebar: 0.985 0 0;
+    --sidebar-foreground: 0.145 0 0;
+    --sidebar-primary: 0.546 0.215 262.881;       /* blue-600 */
+    --sidebar-primary-foreground: 0.985 0 0;
+    --sidebar-accent: 0.97 0 0;
+    --sidebar-accent-foreground: 0.205 0 0;
+    --sidebar-border: 0.922 0 0;
+    --sidebar-ring: 0.708 0 0;
+
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      /* Base neutrals (dark) */
+      --background: 0.145 0 0;      /* near-black */
+      --foreground: 0.985 0 0;      /* near-white */
+      --tertiary-foreground: 0.62 0 0; /* extra-subtle on dark */
+
+      --card: 0.205 0 0;
+      --card-foreground: 0.985 0 0;
+
+      --popover: 0.269 0 0;
+      --popover-foreground: 0.985 0 0;
+
+      /* Brand primary: Blue (dark) */
+      --primary: 0.714 0.143 254.624;        /* blue-400 */
+      --primary-foreground: 0.145 0 0;
+      --primary-hover: 0.623 0.188 259.815;  /* blue-500 */
+      --primary-active: 0.546 0.215 262.881; /* blue-600 */
+
+      /* Secondary (dark) */
+      --secondary: 0.269 0 0;
+      --secondary-foreground: 0.985 0 0;
+      --secondary-hover: 0.313 0 0;
+      --secondary-active: 0.371 0 0;
+
+      /* Muted and Accent */
+      --muted: 0.269 0 0;
+      --muted-foreground: 0.708 0 0;
+
+      --accent: 0.371 0 0;
+      --accent-foreground: 0.985 0 0;
+
+      /* Destructive (dark) */
+      --destructive: 0.704 0.191 22.216;
+      --destructive-foreground: 0.985 0 0;
+      --destructive-hover: 0.651 0.206 22.3;
+      --destructive-active: 0.577 0.245 27.325;
+
+      /* Controls */
+      --border: 0.269 0 0; /* neutral-800 */
+      --input: 0.269 0 0;
+      --ring: 0.556 0 0;
+
+      /* Status (optional) */
+      --success: 0.72 0.16 148;
+      --warning: 0.78 0.17 84;
+      --info: 0.72 0.06 250;
+
+      /* Sidebar */
+      --sidebar: 0.205 0 0;
+      --sidebar-foreground: 0.985 0 0;
+      --sidebar-primary: 0.714 0.143 254.624;       /* blue-400 */
+      --sidebar-primary-foreground: 0.145 0 0;
+      --sidebar-accent: 0.269 0 0;
+      --sidebar-accent-foreground: 0.985 0 0;
+      --sidebar-border: 1 0 0 / 10%;
+      --sidebar-ring: 0.439 0 0;
+
+      color-scheme: dark;
+    }
+  }
+
+  /* Manual overrides (works with Theme.setDisplayMode) */
+  html[data-theme="light"] { color-scheme: light; }
+  html[data-theme="dark"]  { color-scheme: dark; }
+
+  /* Base tweaks using tokens (optional but handy) */
+  @layer base {
+    html, body { @apply bg-background text-foreground antialiased; }
+    * { border-color: oklch(var(--border) / 1); }
+    ::selection { background: oklch(var(--primary) / 0.2); }
+  }
+</style>
+
+    <!-- Smooth Theme Transition -->
+    <style>
+        html.theme-transition *,
+        html.theme-transition *::before,
+        html.theme-transition *::after {
+            transition:
+                background-color 200ms ease,
+                color 200ms ease,
+                border-color 200ms ease,
+                fill 200ms ease,
+                stroke 200ms ease,
+                box-shadow 200ms ease,
+                outline-color 200ms ease;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html.theme-transition *,
+            html.theme-transition *::before,
+            html.theme-transition *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+
+    <!-- Theme Switcher -->
+    <script>
+        const THEME_KEY = 'app.displayMode';
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function applyTheme(mode) {
+            const root = document.documentElement;
+            if (mode === 'light') root.setAttribute('data-theme', 'light');
+            else if (mode === 'dark') root.setAttribute('data-theme', 'dark');
+            else root.removeAttribute('data-theme'); // system
+        }
+
+        function getDisplayMode() {
+            return localStorage.getItem(THEME_KEY) || 'system';
+        }
+
+        function withThemeTransition(fn) {
+            const root = document.documentElement;
+            root.classList.add('theme-transition');
+            requestAnimationFrame(() => {
+                fn();
+                setTimeout(() => root.classList.remove('theme-transition'), 250);
+            });
+        }
+
+        function setDisplayMode(mode) {
+            localStorage.setItem(THEME_KEY, mode);
+            withThemeTransition(() => applyTheme(mode));
+            // Optional: update the "instant" theme-color meta for standalone PWAs
+            const m = document.querySelector('meta[name="theme-color"][id="instant-theme"]') ||
+                Object.assign(document.createElement('meta'), {
+                    name: 'theme-color',
+                    id: 'instant-theme'
+                });
+            // Use simple hex for reliability
+            m.content = mode === 'dark' ? '#0b0b0b' : '#ffffff';
+            if (!m.parentNode) document.head.appendChild(m);
+        }
+
+        media.addEventListener('change', () => {
+            if (getDisplayMode() === 'system') applyTheme('system');
+        });
+
+        applyTheme(getDisplayMode());
+        window.Theme = {
+            getDisplayMode,
+            setDisplayMode
+        };
+    </script>
+
+    <!-- Optional: example canonical (good for SEO) -->
+    <link rel="canonical" href="https://yoursite.com" />
+
+</head>
+```
+</CodeGroup>
+
+---
+
+## What This Code Includes
+
+### Meta Tags & SEO
+- Character encoding and viewport configuration
+- Color scheme and theme color for light/dark modes
+- Open Graph tags for social media sharing
+- Twitter card metadata
+- Canonical URL for SEO
+
+### External Libraries
+- **Tailwind CSS** - Utility-first CSS framework
+- **Font Awesome** - Icon library
+- **Shoelace UI** - Web component library
+- **V-Calendar** - Date picker components
+- **Vue-DateTime** - DateTime picker
+- **Uppy** - File upload library (optional)
+- **DM Sans** - Custom font from Google Fonts
+
+### Theme System
+- **OKLCH Color Tokens** - Modern color space for better color handling
+- **Light & Dark Mode** - Automatic system preference detection
+- **Manual Theme Toggle** - JavaScript API for theme switching
+- **Smooth Transitions** - Animated theme changes with accessibility support
+
+### Tailwind Configuration
+- Extended color palette using OKLCH tokens
+- Custom font family configuration
+- Container settings
+- Safelist for dynamically generated classes
+
+---
+
+## Customization
+
+You can customize various aspects of this code to match your brand:
+
+### Update Meta Information
+
+```html
+<!-- Change these to match your application -->
+<meta name="description" content="Your app description here." />
+<meta property="og:title" content="Your App Name" />
+<meta property="og:url" content="https://yoursite.com" />
+```
+
+### Update Font
+
+Replace the Google Fonts link and Tailwind font family:
+
+```html
+<!-- Change font -->
+<link href="https://fonts.googleapis.com/css2?family=Your+Font&display=swap" rel="stylesheet" />
+```
+
+```javascript
+// Update in Tailwind config
+fontFamily: {
+  sans: ['Your Font', 'system-ui', 'sans-serif']
+}
+```
+
+### Update Font Awesome Kit
+
+Replace with your own Font Awesome kit ID:
+
+```html
+<script src="https://kit.fontawesome.com/YOUR-KIT-ID.js" crossorigin="anonymous"></script>
+```
+
+---
+
+## Theme Switching
+
+The code includes a JavaScript API for programmatic theme switching:
+
+```javascript
+// Get current theme mode
+Theme.getDisplayMode() // returns 'light', 'dark', or 'system'
+
+// Set theme mode
+Theme.setDisplayMode('light')  // Force light mode
+Theme.setDisplayMode('dark')   // Force dark mode
+Theme.setDisplayMode('system') // Use system preference
+```
+
+You can use this in your BetterForms named actions to create theme toggle buttons.
+
+---
+
+## Next Steps
+
+After applying this code:
+
+1. **Save your changes** in the BetterForms Settings
+2. **Hard refresh** any active page previews (see [Before you begin](/fmbf-styling/before-you-begin))
+3. **Apply the CSS code** from the [CSS page](/fmbf-styling/css)
+4. **Customize the theme** by modifying the OKLCH color values to match your brand
