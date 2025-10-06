@@ -161,19 +161,19 @@ The Checkbox component is configured using JSON objects with properties for form
 ### Basic Checkbox
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Checkbox" 
         modelKey="agreeToTerms"
         label="I agree to the terms and conditions">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define basic checkbox in your model
 model.agreeToTerms = false
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "agreeToTerms",
   "label": "I agree to the terms and conditions",
@@ -188,7 +188,7 @@ model.agreeToTerms = false
 ### Checkbox with Description
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Checkbox" 
         modelKey="newsletterSubscription"
         label="Subscribe to newsletter"
@@ -196,12 +196,12 @@ model.agreeToTerms = false
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define checkbox with description in your model
 model.newsletterSubscription = false
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "newsletterSubscription",
   "label": "Subscribe to newsletter",
@@ -217,7 +217,7 @@ model.newsletterSubscription = false
 ### Disabled Checkbox
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Checkbox" 
         modelKey="adminOnly"
         label="Administrator access"
@@ -226,12 +226,12 @@ model.newsletterSubscription = false
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define disabled checkbox in your model
 model.adminOnly = false
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "adminOnly",
   "label": "Administrator access",
@@ -247,7 +247,7 @@ model.adminOnly = false
 ### Indeterminate Checkbox
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Checkbox" 
         modelKey="selectAll"
         label="Select all items"
@@ -255,12 +255,12 @@ model.adminOnly = false
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define indeterminate checkbox in your model
 model.selectAll = false
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "selectAll",
   "label": "Select all items",
@@ -275,7 +275,7 @@ model.selectAll = false
 ### Checkbox with Action
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Checkbox" 
         modelKey="autoSave"
         label="Enable auto-save"
@@ -285,12 +285,12 @@ model.selectAll = false
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define checkbox with action in your model
 model.autoSave = false
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "autoSave",
   "label": "Enable auto-save",
@@ -308,7 +308,7 @@ model.autoSave = false
 ### Complete Checkbox Example
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Checkbox" 
         modelKey="premiumFeatures"
         label="Enable premium features"
@@ -320,12 +320,12 @@ model.autoSave = false
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define complete checkbox in your model
 model.premiumFeatures = false
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "premiumFeatures",
   "label": "Enable premium features",
@@ -341,6 +341,122 @@ model.premiumFeatures = false
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Checkbox component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "actionOptions": {},
+    "disabled": false,
+    "emptyText": "No results found.",
+    "html": "<!-- Wrapper -->\n<div class=\"flex items-start gap-3 select-none my-4\">\n  <!-- Clickable control -->\n  <button\n    type=\"button\"\n    :id=\"schema.id || schema.modelKey || 'cb-'+schema.windowIndex\"\n    role=\"checkbox\"\n    :aria-checked=\"schema.indeterminate ? 'mixed' : (Boolean((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {})[schema.modelKey]) ? 'true' : 'false')\"\n    :disabled=\"(schema.isDisabled===true)||['true','1','on','yes'].includes(String(schema.isDisabled||schema.disabled||'').toLowerCase())\"\n    @click=\"(function(){\n      const DIS = (schema.isDisabled===true)||['true','1','on','yes'].includes(String(schema.isDisabled||schema.disabled||'').toLowerCase());\n      if (DIS) return;\n      const win   = vueapp.$store.state.wndw.windows[schema.windowIndex];\n      const model = win.formSchema.model;\n      const k     = schema.modelKey || 'checkboxValue';\n      if (schema.indeterminate === true) { model[k] = true; } else { model[k] = !Boolean(model[k]); }\n      if (schema.namedAction) namedAction(schema.namedAction, schema.actionOptions || {});\n    })()\"\n    @keydown.enter.prevent=\"$el.click()\"\n    @keydown.space.prevent=\"$el.click()\"\n    class=\"relative inline-flex h-5 w-5 items-center justify-center rounded\n           outline-none transition-colors\n           focus:ring-2 focus:ring-ring\n           disabled:opacity-50 disabled:cursor-not-allowed\"\n    :class=\"\n      (schema.indeterminate || Boolean((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {})[schema.modelKey]))\n        ? 'bg-primary border border-primary'\n        : 'bg-card border border-input'\n    \"\n  >\n    <!-- Icon overlay -->\n    <span\n      class=\"pointer-events-none absolute inset-0 flex items-center justify-center rounded text-white transition-opacity\"\n      :class=\"(schema.indeterminate || Boolean((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {})[schema.modelKey])) ? 'opacity-100' : 'opacity-0'\">\n      <i v-if=\"schema.indeterminate\" class=\"fa-solid fa-minus text-[10px]\"></i>\n      <i v-else class=\"fa-solid fa-check text-[10px]\"></i>\n    </span>\n  </button>\n\n  <!-- Label + description (label remains clickable for good UX) -->\n  <div class=\"flex flex-col gap-1 mt-[2px]\">\n    <button\n      type=\"button\"\n      class=\"text-left cursor-pointer block text-sm font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-50\"\n      :disabled=\"(schema.isDisabled===true)||['true','1','on','yes'].includes(String(schema.isDisabled||schema.disabled||'').toLowerCase())\"\n      @click=\"(function(){ const t=document.getElementById(schema.id || schema.modelKey || 'cb-'+schema.windowIndex); if(t) t.click(); })()\"\n    >\n      {{ schema.label || 'Checkbox' }}\n    </button>\n    <span v-if=\"schema.description\" class=\"block text-xs text-muted-foreground\">\n      {{ schema.description }}\n    </span>\n  </div>\n</div>",
+    "items": [],
+    "modelKey": "comboValue",
+    "namedAction": "",
+    "placeholder": "Select an option…",
+    "windowIndex": 0
+}
+```
+
+```html title="HTML Template"
+<!-- Wrapper -->
+<div class="flex items-start gap-3 select-none my-4">
+  <!-- Clickable control -->
+  <button
+    type="button"
+    :id="schema.id || schema.modelKey || 'cb-'+schema.windowIndex"
+    role="checkbox"
+    :aria-checked="schema.indeterminate ? 'mixed' : (Boolean((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {})[schema.modelKey]) ? 'true' : 'false')"
+    :disabled="(schema.isDisabled===true)||['true','1','on','yes'].includes(String(schema.isDisabled||schema.disabled||'').toLowerCase())"
+    @click="(function(){
+      const DIS = (schema.isDisabled===true)||['true','1','on','yes'].includes(String(schema.isDisabled||schema.disabled||'').toLowerCase());
+      if (DIS) return;
+      const win   = vueapp.$store.state.wndw.windows[schema.windowIndex];
+      const model = win.formSchema.model;
+      const k     = schema.modelKey || 'checkboxValue';
+      if (schema.indeterminate === true) { model[k] = true; } else { model[k] = !Boolean(model[k]); }
+      if (schema.namedAction) namedAction(schema.namedAction, schema.actionOptions || {});
+    })()"
+    @keydown.enter.prevent="$el.click()"
+    @keydown.space.prevent="$el.click()"
+    class="relative inline-flex h-5 w-5 items-center justify-center rounded
+           outline-none transition-colors
+           focus:ring-2 focus:ring-ring
+           disabled:opacity-50 disabled:cursor-not-allowed"
+    :class="
+      (schema.indeterminate || Boolean((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {})[schema.modelKey]))
+        ? 'bg-primary border border-primary'
+        : 'bg-card border border-input'
+    "
+  >
+    <!-- Icon overlay -->
+    <span
+      class="pointer-events-none absolute inset-0 flex items-center justify-center rounded text-white transition-opacity"
+      :class="(schema.indeterminate || Boolean((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {})[schema.modelKey])) ? 'opacity-100' : 'opacity-0'">
+      <i v-if="schema.indeterminate" class="fa-solid fa-minus text-[10px]"></i>
+      <i v-else class="fa-solid fa-check text-[10px]"></i>
+    </span>
+  </button>
+
+  <!-- Label + description (label remains clickable for good UX) -->
+  <div class="flex flex-col gap-1 mt-[2px]">
+    <button
+      type="button"
+      class="text-left cursor-pointer block text-sm font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-50"
+      :disabled="(schema.isDisabled===true)||['true','1','on','yes'].includes(String(schema.isDisabled||schema.disabled||'').toLowerCase())"
+      @click="(function(){ const t=document.getElementById(schema.id || schema.modelKey || 'cb-'+schema.windowIndex); if(t) t.click(); })()"
+    >
+      {{ schema.label || 'Checkbox' }}
+    </button>
+    <span v-if="schema.description" class="block text-xs text-muted-foreground">
+      {{ schema.description }}
+    </span>
+  </div>
+</div>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Checkbox component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`modelKey`**: Model key where checkbox state is stored
+- **`label`**: Text label displayed next to the checkbox
+- **`description`**: Optional descriptive text below the label
+- **`disabled`**: Whether the checkbox is disabled
+- **`indeterminate`**: Whether checkbox is in indeterminate state
+- **`items`**: Array for future checkbox list functionality
+- **`namedAction`**: Action to trigger when checkbox state changes
+- **`actionOptions`**: Additional options for the named action
+- **`windowIndex`**: Window index for multi-window applications (default: 0)
+- **`id`**: Optional unique identifier for the checkbox element
+- **`emptyText`**: Text displayed when no results found (for future use)
+- **`placeholder`**: Placeholder text (for future use)
 
 ---
 

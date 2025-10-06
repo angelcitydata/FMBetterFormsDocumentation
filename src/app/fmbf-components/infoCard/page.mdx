@@ -96,7 +96,7 @@ The Info Card component is configured using JSON objects with properties for dat
 ### Basic Info Card
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="InfoCard" 
         title="Total Revenue"
         value="125000"
@@ -105,7 +105,7 @@ The Info Card component is configured using JSON objects with properties for dat
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define basic info card in your model
 model.revenueCard = {
   title: "Total Revenue",
@@ -118,7 +118,7 @@ model.revenueCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Total Revenue",
   "value": 125000,
@@ -135,7 +135,7 @@ model.revenueCard = {
 ### Info Card with Trend Indicator
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="InfoCard" 
         title="Average Order"
         value="1732"
@@ -147,7 +147,7 @@ model.revenueCard = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define info card with trend in your model
 model.averageOrderCard = {
   title: "Average Order",
@@ -160,7 +160,7 @@ model.averageOrderCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Average Order",
   "value": 1732,
@@ -177,7 +177,7 @@ model.averageOrderCard = {
 ### Info Card with Percentage Format
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="InfoCard" 
         title="Conversion Rate"
         value="0.0845"
@@ -188,7 +188,7 @@ model.averageOrderCard = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define info card with percentage format in your model
 model.conversionCard = {
   title: "Conversion Rate",
@@ -201,7 +201,7 @@ model.conversionCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Conversion Rate",
   "value": 0.0845,
@@ -218,7 +218,7 @@ model.conversionCard = {
 ### Minimal Info Card
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="InfoCard" 
         title="Active Users"
         value="2847"
@@ -226,7 +226,7 @@ model.conversionCard = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define minimal info card in your model
 model.activeUsersCard = {
   title: "Active Users",
@@ -239,7 +239,7 @@ model.activeUsersCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Active Users",
   "value": 2847,
@@ -256,7 +256,7 @@ model.activeUsersCard = {
 ### Info Card with Downward Trend
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="InfoCard" 
         title="Customer Satisfaction"
         value="0.782"
@@ -268,7 +268,7 @@ model.activeUsersCard = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define info card with downward trend in your model
 model.satisfactionCard = {
   title: "Customer Satisfaction",
@@ -281,7 +281,7 @@ model.satisfactionCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Customer Satisfaction",
   "value": 0.782,
@@ -298,7 +298,7 @@ model.satisfactionCard = {
 ### Complete Info Card Example
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="InfoCard" 
         title="Monthly Growth"
         value="0.125"
@@ -310,7 +310,7 @@ model.satisfactionCard = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define complete info card in your model
 model.growthCard = {
   title: "Monthly Growth",
@@ -323,7 +323,7 @@ model.growthCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Monthly Growth",
   "value": 0.125,
@@ -340,7 +340,7 @@ model.growthCard = {
 ### Dashboard Layout Example
 
 <CodeGroup>
-```html {{ title: 'Dashboard Grid Layout' }}
+```html title="Dashboard Grid Layout"
 <div class="hidden lg:!grid grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
     <bfcomp v-for="card in model.infoCardData" 
             name="InfoCard" 
@@ -355,7 +355,7 @@ model.growthCard = {
 </div>
 ```
 
-```javascript {{ title: 'Dashboard Data Model' }}
+```javascript title="Dashboard Data Model"
 // Define dashboard data in your model
 model.infoCardData = [
   {
@@ -401,7 +401,7 @@ model.infoCardData = [
 ]
 ```
 
-```json {{ title: 'Dashboard JSON Configuration' }}
+```json title="Dashboard JSON Configuration"
 {
   "infoCardData": [
     {
@@ -759,3 +759,299 @@ When using the Info Card component, follow these guidelines for optimal user exp
 - Use generic model keys that might conflict with other components
 - Create cards that require excessive data fetching or calculations
 - Update cards too frequently without debouncing
+
+---
+
+## Component Schema
+
+The complete component schema for the Info Card component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "bodySubText": "",
+    "bodyText": "",
+    "direction": "",
+    "html": "<div class=\"flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border gap-2\">\n  <div class=\"flex justify-between items-center\">\n    <h3 class=\"text-muted-foreground text-sm font-medium\">{{ schema.title }}</h3>\n\n    <!-- Badge: only render if percentage is a number; format from decimal 0–1 -->\n    <span\n      v-if=\"schema.percentage !== null && schema.percentage !== undefined && !isNaN(Number(schema.percentage))\"\n      class=\"inline-flex items-center gap-1.5 w-fit select-none text-sm font-medium px-2.5 py-1 border transition-colors rounded-md bg-transparent border-border\"\n      :class=\"schema.direction === 'up' ? 'text-success' : 'text-destructive'\"\n    >\n      <i\n        class=\"fa-regular\"\n        :class=\"schema.direction === 'up' ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'\"\n      ></i>\n      {{ schema.direction === 'up' ? '+' : '-' }}\n      {{\n        new Intl.NumberFormat('en-US', { style: 'percent', minimumFractionDigits: 1 })\n          .format(Number(schema.percentage) || 0)\n      }}\n    </span>\n  </div>\n\n  <!-- Value: normalize valueFormat + value before choosing formatter -->\n  <span class=\"text-foreground font-bold text-4xl\">\n    {{\n      ((fmt, val) => {\n        if (fmt === 'currency') {\n          return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);\n        }\n        if (fmt === 'percentage') {\n          // expects decimal 0–1\n          return new Intl.NumberFormat('en-US', { style: 'percent', minimumFractionDigits: 2 }).format(val);\n        }\n        // default: plain number\n        return new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(val);\n      })(\n        (schema.valueFormat || 'number').toString().toLowerCase().trim(),\n        Number(schema.value) || 0\n      )\n    }}\n  </span>\n\n  <div v-if=\"!_.isEmpty(_.trim(schema.bodyText))\" class=\"flex flex-col my-4 gap-0.5\">\n    <span class=\"text-sm font-semibold text-foreground\">{{ schema.bodyText }}</span>\n    <span \n  v-if=\"!_.isEmpty(_.trim(schema.bodySubText))\" \n  class=\"text-sm font-medium text-muted-foreground whitespace-pre-line\"\n>\n  {{ schema.bodySubText }}\n</span>\n  </div>\n</div>",
+    "percentage": null,
+    "subtitle": "",
+    "title": "",
+    "value": 0,
+    "valueFormat": "number"
+}
+```
+
+```html title="HTML Template"
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border gap-2">
+  <div class="flex justify-between items-center">
+    <h3 class="text-muted-foreground text-sm font-medium">{{ schema.title }}</h3>
+
+    <!-- Badge: only render if percentage is a number; format from decimal 0–1 -->
+    <span
+      v-if="schema.percentage !== null && schema.percentage !== undefined && !isNaN(Number(schema.percentage))"
+      class="inline-flex items-center gap-1.5 w-fit select-none text-sm font-medium px-2.5 py-1 border transition-colors rounded-md bg-transparent border-border"
+      :class="schema.direction === 'up' ? 'text-success' : 'text-destructive'"
+    >
+      <i
+        class="fa-regular"
+        :class="schema.direction === 'up' ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'"
+      ></i>
+      {{ schema.direction === 'up' ? '+' : '-' }}
+      {{
+        new Intl.NumberFormat('en-US', { style: 'percent', minimumFractionDigits: 1 })
+          .format(Number(schema.percentage) || 0)
+      }}
+    </span>
+  </div>
+
+  <!-- Value: normalize valueFormat + value before choosing formatter -->
+  <span class="text-foreground font-bold text-4xl">
+    {{
+      ((fmt, val) => {
+        if (fmt === 'currency') {
+          return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
+        }
+        if (fmt === 'percentage') {
+          // expects decimal 0–1
+          return new Intl.NumberFormat('en-US', { style: 'percent', minimumFractionDigits: 2 }).format(val);
+        }
+        // default: plain number
+        return new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(val);
+      })(
+        (schema.valueFormat || 'number').toString().toLowerCase().trim(),
+        Number(schema.value) || 0
+      )
+    }}
+  </span>
+
+  <div v-if="!_.isEmpty(_.trim(schema.bodyText))" class="flex flex-col my-4 gap-0.5">
+    <span class="text-sm font-semibold text-foreground">{{ schema.bodyText }}</span>
+    <span 
+  v-if="!_.isEmpty(_.trim(schema.bodySubText))" 
+  class="text-sm font-medium text-muted-foreground whitespace-pre-line"
+>
+  {{ schema.bodySubText }}
+</span>
+  </div>
+</div>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Info Card component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`title`**: Text displayed at the top of the info card
+- **`value`**: Primary numeric value to display prominently
+- **`valueFormat`**: Format type for the value (currency, percentage, number)
+- **`percentage`**: Percentage change value for trend badge
+- **`direction`**: Trend direction (up or down)
+- **`bodyText`**: Main descriptive text below the value
+- **`bodySubText`**: Additional contextual information
+- **`subtitle`**: Alternative subtitle property (currently unused)
+
+---
+
+## Data Formatting
+
+The Info Card component provides sophisticated data formatting capabilities for different types of metrics and values.
+
+### Value Formatting
+
+The component supports three value format types:
+
+**Currency Format:**
+```javascript
+// Input: value = 1732, valueFormat = "currency"
+// Output: "$1,732.00"
+```
+
+**Percentage Format:**
+```javascript
+// Input: value = 0.0845, valueFormat = "percentage"
+// Output: "8.45%"
+```
+
+**Number Format:**
+```javascript
+// Input: value = 2847, valueFormat = "number"
+// Output: "2,847"
+```
+
+### Trend Badge Formatting
+
+The trend badge automatically formats percentage values:
+
+```javascript
+// Input: percentage = "12.5%", direction = "up"
+// Output: "+12.5%" with up arrow icon
+
+// Input: percentage = "3.1%", direction = "down"
+// Output: "-3.1%" with down arrow icon
+```
+
+### Conditional Rendering
+
+Content sections are conditionally rendered based on available data:
+
+**Trend Badge:**
+- Only displays when `percentage` is not null/undefined and is a valid number
+- Automatically shows appropriate icon and color based on `direction`
+
+**Body Text Section:**
+- Only displays when `bodyText` is not empty after trimming
+- `bodySubText` only displays when `bodySubText` is not empty after trimming
+
+### Number Formatting Implementation
+
+The component uses JavaScript's `Intl.NumberFormat` for consistent, locale-aware formatting:
+
+```javascript
+// Currency formatting
+new Intl.NumberFormat('en-US', { 
+  style: 'currency', 
+  currency: 'USD' 
+}).format(value)
+
+// Percentage formatting
+new Intl.NumberFormat('en-US', { 
+  style: 'percent', 
+  minimumFractionDigits: 2 
+}).format(value)
+
+// Number formatting
+new Intl.NumberFormat('en-US', { 
+  maximumFractionDigits: 2 
+}).format(value)
+```
+
+---
+
+## State Management
+
+The Info Card component is a display-only component that doesn't manage internal state. However, it integrates with your BetterForms model for data binding and updates.
+
+### Data Binding
+
+The component reads data from your model and displays it in real-time:
+
+```javascript
+// Model data
+model.revenueCard = {
+  title: "Total Revenue",
+  value: 125000,
+  valueFormat: "currency",
+  percentage: "12.5%",
+  direction: "up",
+  bodyText: "Monthly target achieved",
+  bodySubText: "Up from $110,000 last month"
+}
+
+// Component automatically updates when model changes
+model.revenueCard.value = 135000 // Card updates immediately
+```
+
+### Dynamic Updates
+
+The component supports dynamic data updates through model changes:
+
+```javascript
+// Update value
+model.revenueCard.value = newValue
+
+// Update trend
+model.revenueCard.percentage = "15.2%"
+model.revenueCard.direction = "up"
+
+// Update descriptive text
+model.revenueCard.bodyText = "New insights"
+model.revenueCard.bodySubText = "Updated analysis"
+```
+
+### Model Integration Patterns
+
+**Single Card:**
+```javascript
+// Direct model binding
+model.cardData = {
+  title: "Active Users",
+  value: 2847,
+  valueFormat: "number"
+}
+```
+
+**Multiple Cards:**
+```javascript
+// Array of card data
+model.dashboardCards = [
+  {
+    title: "Total Revenue",
+    value: 125000,
+    valueFormat: "currency",
+    percentage: "12.5%",
+    direction: "up"
+  },
+  {
+    title: "Active Users",
+    value: 2847,
+    valueFormat: "number",
+    percentage: "5.2%",
+    direction: "up"
+  }
+]
+```
+
+### Data Validation
+
+The component includes built-in data validation and fallbacks:
+
+```javascript
+// Value validation
+Number(schema.value) || 0 // Falls back to 0 if invalid
+
+// Percentage validation
+schema.percentage !== null && 
+schema.percentage !== undefined && 
+!isNaN(Number(schema.percentage)) // Only shows badge if valid
+
+// Text validation
+!_.isEmpty(_.trim(schema.bodyText)) // Only shows if not empty
+```
+
+### Best Practices for State Management
+
+**✅ Do:**
+
+- Use descriptive model keys for card data
+- Initialize card data with proper structure
+- Update model values to trigger component updates
+- Use consistent data types across similar cards
+- Implement proper error handling for data updates
+
+**❌ Don't:**
+
+- Manually manipulate DOM elements
+- Use generic model keys that might conflict
+- Forget to validate data before updating models
+- Create cards with inconsistent data structures
+- Update model values too frequently without debouncing

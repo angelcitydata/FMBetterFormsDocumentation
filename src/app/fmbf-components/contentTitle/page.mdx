@@ -64,19 +64,19 @@ The Content Title component is configured using a simple title property. Here ar
 ### Basic Content Title
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ContentTitle" title="User Information">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define content title in your model
 model.userInfoTitle = {
   title: "User Information"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "User Information"
 }
@@ -87,19 +87,19 @@ model.userInfoTitle = {
 ### Contact Details Title
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ContentTitle" title="Contact Details">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define contact details title in your model
 model.contactDetailsTitle = {
   title: "Contact Details"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Contact Details"
 }
@@ -110,19 +110,19 @@ model.contactDetailsTitle = {
 ### Preferences Title
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ContentTitle" title="Preferences">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define preferences title in your model
 model.preferencesTitle = {
   title: "Preferences"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Preferences"
 }
@@ -133,19 +133,19 @@ model.preferencesTitle = {
 ### Order Summary Title
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ContentTitle" title="Order Summary">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define order summary title in your model
 model.orderSummaryTitle = {
   title: "Order Summary"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Order Summary"
 }
@@ -156,25 +156,72 @@ model.orderSummaryTitle = {
 ### Billing Information Title
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ContentTitle" title="Billing Information">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define billing information title in your model
 model.billingInfoTitle = {
   title: "Billing Information"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Billing Information"
 }
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Content Title component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "html": "<div class=\"flex flex-col my-4\">\n    <span class=\"font-semibold text-lg text-foreground\">{{schema.title}}</span>\n</div> ",
+    "title": "Content Title"
+}
+```
+
+```html title="HTML Template"
+<div class="flex flex-col my-4">
+    <span class="font-semibold text-lg text-foreground">{{schema.title}}</span>
+</div> 
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Content Title component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`title`**: The content title text to display
 
 ---
 

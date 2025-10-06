@@ -83,7 +83,7 @@ The Card component is configured using JSON objects with properties for content 
 ### Basic Card
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Card" 
         title="Welcome"
         subtitle="Get started with your account"
@@ -91,7 +91,7 @@ The Card component is configured using JSON objects with properties for content 
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define basic card in your model
 model.welcomeCard = {
   title: "Welcome",
@@ -101,7 +101,7 @@ model.welcomeCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Welcome",
   "subtitle": "Get started with your account",
@@ -115,14 +115,14 @@ model.welcomeCard = {
 ### Card with Title and Subtitle Only
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Card" 
         title="User Profile"
         subtitle="Personal Information">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define card with title and subtitle in your model
 model.userProfileCard = {
   title: "User Profile",
@@ -132,7 +132,7 @@ model.userProfileCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "User Profile",
   "subtitle": "Personal Information",
@@ -146,7 +146,7 @@ model.userProfileCard = {
 ### Card with Body Text
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Card" 
         title="Order Summary"
         subtitle="Items in your cart"
@@ -154,7 +154,7 @@ model.userProfileCard = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define card with body text in your model
 model.orderSummaryCard = {
   title: "Order Summary",
@@ -164,7 +164,7 @@ model.orderSummaryCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Order Summary",
   "subtitle": "Items in your cart",
@@ -178,13 +178,13 @@ model.orderSummaryCard = {
 ### Minimal Card
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Card" 
         title="Quick Info">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define minimal card in your model
 model.quickInfoCard = {
   title: "Quick Info",
@@ -194,7 +194,7 @@ model.quickInfoCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Quick Info",
   "subtitle": "",
@@ -208,7 +208,7 @@ model.quickInfoCard = {
 ### Informational Card
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Card" 
         title="System Status"
         subtitle="Current Status"
@@ -216,7 +216,7 @@ model.quickInfoCard = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define informational card in your model
 model.systemStatusCard = {
   title: "System Status",
@@ -226,7 +226,7 @@ model.systemStatusCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "System Status",
   "subtitle": "Current Status",
@@ -240,7 +240,7 @@ model.systemStatusCard = {
 ### Card with All Properties
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Card" 
         title="Complete Example"
         subtitle="All properties included"
@@ -249,7 +249,7 @@ model.systemStatusCard = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define complete card in your model
 model.completeExampleCard = {
   title: "Complete Example",
@@ -259,7 +259,7 @@ model.completeExampleCard = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Complete Example",
   "subtitle": "All properties included",
@@ -269,6 +269,64 @@ model.completeExampleCard = {
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Card component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "bodyText": "",
+    "html": "<div class=\"flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border\">\n    <div class=\"flex flex-col gap-1\">\n        <h3 class=\"text-foreground font-bold\">{{schema.title}}</h3>\n        <h4 class=\"text-sm text-muted-foreground font-medium\">{{schema.subtitle}}</h4>\n    </div>\n\n    <div v-if=\"!_.isEmpty(_.trim(schema.bodyText))\" class=\"flex my-2\">\n        <span class=\"text-base text-foreground\">{{schema.bodyText}}</span>\n    </div>\n</div>",
+    "subtitle": "",
+    "title": ""
+}
+```
+
+```html title="HTML Template"
+<div class="flex flex-col bg-card text-card-foreground rounded-lg p-4 w-full border border-border">
+    <div class="flex flex-col gap-1">
+        <h3 class="text-foreground font-bold">{{schema.title}}</h3>
+        <h4 class="text-sm text-muted-foreground font-medium">{{schema.subtitle}}</h4>
+    </div>
+
+    <div v-if="!_.isEmpty(_.trim(schema.bodyText))" class="flex my-2">
+        <span class="text-base text-foreground">{{schema.bodyText}}</span>
+    </div>
+</div>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Card component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`title`**: Main title displayed at the top of the card
+- **`subtitle`**: Secondary title displayed below the main title
+- **`bodyText`**: Main body content of the card (only displayed if not empty)
 
 ---
 

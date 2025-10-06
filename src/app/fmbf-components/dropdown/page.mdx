@@ -395,14 +395,14 @@ The Dropdown component can be used in two ways: as JSON configuration objects or
 ### Basic Dropdown
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Actions" 
         :items="model.actionsMenuItems">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.actionsMenuItems = [
   { label: 'Edit', value: 'edit', onClick: 'handleEdit' },
@@ -410,7 +410,7 @@ model.actionsMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Actions",
   "items": [
@@ -425,7 +425,7 @@ model.actionsMenuItems = [
 ### Dropdown with Icons
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Menu" 
         icon="fa-bars"
@@ -433,7 +433,7 @@ model.actionsMenuItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.mainMenuItems = [
   { label: 'New', icon: 'fa-plus', onClick: 'createNew' },
@@ -443,7 +443,7 @@ model.mainMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Menu",
   "icon": "fa-bars",
@@ -461,7 +461,7 @@ model.mainMenuItems = [
 ### Dropdown with Checkboxes
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Filters" 
         stateKey="filterMenuOpen"
@@ -469,7 +469,7 @@ model.mainMenuItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.filterMenuItems = [
   {
@@ -493,7 +493,7 @@ model.filterMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Filters",
   "stateKey": "filterMenuOpen",
@@ -525,7 +525,7 @@ model.filterMenuItems = [
 ### Dropdown with Radio Items
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Sort By" 
         modelKey="sortField"
@@ -533,7 +533,7 @@ model.filterMenuItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.sortMenuItems = [
   { type: 'radio', label: 'Name', value: 'name', onClick: 'updateSort' },
@@ -552,7 +552,7 @@ model.sortMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Sort By",
   "modelKey": "sortField",
@@ -584,14 +584,14 @@ model.sortMenuItems = [
 ### Dropdown with Groups
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Options" 
         :items="model.groupedMenuItems">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.groupedMenuItems = [
   {
@@ -615,7 +615,7 @@ model.groupedMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Options",
   "items": [
@@ -665,14 +665,14 @@ model.groupedMenuItems = [
 ### Dropdown with Disabled Items
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Edit" 
         :items="model.editMenuItems">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.editMenuItems = [
   { label: 'Undo', icon: 'fa-rotate-left', disabled: true },
@@ -683,7 +683,7 @@ model.editMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Edit",
   "items": [
@@ -701,7 +701,7 @@ model.editMenuItems = [
 ### Dropdown with Custom Alignment
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="User Menu" 
         align="start"
@@ -710,7 +710,7 @@ model.editMenuItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.userMenuItems = [
   { label: 'Profile', icon: 'fa-user', onClick: 'viewProfile' },
@@ -720,7 +720,7 @@ model.userMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "User Menu",
   "align": "start",
@@ -739,7 +739,7 @@ model.userMenuItems = [
 ### Full Width Dropdown
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Select Action" 
         fullWidth="true"
@@ -747,7 +747,7 @@ model.userMenuItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.exportMenuItems = [
   { label: 'Export to PDF', icon: 'fa-file-pdf', onClick: 'exportPDF' },
@@ -756,7 +756,7 @@ model.exportMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Select Action",
   "fullWidth": true,
@@ -777,7 +777,7 @@ model.exportMenuItems = [
 ### Dropdown with Action Options
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Share" 
         icon="fa-share-nodes"
@@ -785,7 +785,7 @@ model.exportMenuItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.shareMenuItems = [
   {
@@ -807,7 +807,7 @@ model.shareMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Share",
   "icon": "fa-share-nodes",
@@ -837,7 +837,7 @@ model.shareMenuItems = [
 ### Grouped Items with Action Options
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Dropdown" 
         label="Add Role" 
         icon="fa-user-plus"
@@ -845,7 +845,7 @@ model.shareMenuItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.roleMenuItems = [
   {
@@ -885,7 +885,7 @@ model.roleMenuItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Add Role",
   "icon": "fa-user-plus",
@@ -929,6 +929,348 @@ model.roleMenuItems = [
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Dropdown component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "checkboxModelKey": "dropdownChecks",
+    "closeOnSelect": "",
+    "html": "<!-- DROPDOWN (BetterForms) -->\n<div\n  class=\"relative inline-block text-left\"\n  :class=\"(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (v==='true'||v==='1'||v==='on'||v==='yes') ? 'w-full' : 'w-fit'; })(schema.fullWidth)\"\n>\n  <!-- Init -->\n  <script>\n    (function(){\n      try{\n        var win = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)];\n        var m   = win.formSchema.model || {};\n        var sk  = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n        if (typeof m[sk] === 'undefined') m[sk] = false;\n        var ck  = sk + '_checks';\n        if (!m[ck]) m[ck] = {};\n        win.formSchema.model = m;\n      }catch(_){}\n    })();\n  </script>\n\n  <!-- Trigger -->\n  <button\n    type=\"button\"\n    :id=\"(schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default')\"\n    :aria-haspopup=\"'menu'\"\n    :aria-expanded=\"(function(){\n      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n      var sk= (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n      return !!m[sk] ? 'true' : 'false';\n    })()\"\n    @click=\"(function(){\n      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n      var sk= (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n      m[sk] = !m[sk];\n    })()\"\n    @keydown.escape.stop.prevent=\"(function(){\n      var id = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');\n      var el = document.getElementById(id); if (el) el.focus();\n      var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n      var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n      m[sk] = false;\n    })()\"\n    class=\"inline-flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground focus:outline-none\"\n  >\n    <i v-if=\"schema.icon\" class=\"fa-regular text-[12px]\" :class=\"schema.icon\"></i>\n    <span>{{ schema.label || 'Open Menu' }}</span>\n    <i class=\"fa-regular fa-chevron-down text-[12px]\"></i>\n  </button>\n\n  <!-- Menu -->\n  <div\n    class=\"absolute z-50 mt-2 min-w-48 max-w-[calc(100vw-1rem)] rounded-md border border-border bg-popover text-popover-foreground shadow focus:outline-none\"\n    :class=\"(function(a){\n      if (a==='start')  return 'left-0 right-auto origin-top-left';\n      if (a==='center') return 'left-1/2 -translate-x-1/2 origin-top';\n      return 'right-0 left-auto origin-top-right';\n    })(schema.align)\"\n    role=\"menu\"\n    :aria-hidden=\"(function(){\n      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n      var sk= (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n      return !!m[sk] ? 'false' : 'true';\n    })()\"\n    :style=\"(function(){\n      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n      var sk= (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n      return (!!m[sk]) ? '' : 'display:none;';\n    })()\"\n    @keydown.escape.stop.prevent=\"(function(){\n      var id = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');\n      var el = document.getElementById(id); if (el) el.focus();\n      var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n      var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n      m[sk] = false;\n    })()\"\n  >\n    <div class=\"py-1\" role=\"none\">\n      <!-- Top-level loop -->\n      <template\n        v-for=\"(it, idx) in (function(){\n          try { return Array.isArray(schema.items) ? schema.items : (typeof schema.items==='string' ? JSON.parse(schema.items) : []); }\n          catch(_) { return []; }\n        })()\"\n        :key=\"'top-'+idx\"\n      >\n        <!-- GROUP: label + children -->\n        <div v-if=\"(it.type==='group')\" role=\"group\" aria-label=\"Group\">\n          <div class=\"px-2 pb-1 pt-2 text-xs font-semibold text-muted-foreground\" role=\"presentation\">\n            {{ it.label || '' }}\n          </div>\n\n          <!-- children -->\n          <template v-for=\"(node, nidx) in (Array.isArray(it.items) ? it.items : [])\" :key=\"'g-'+idx+'-'+nidx\">\n            <!-- Default item -->\n            <button\n              v-if=\"(!node.type || node.type==='item')\"\n              type=\"button\" role=\"menuitem\"\n              :disabled=\"(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)\"\n              @click=\"(function(){\n                if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)) return;\n\n                var win = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)];\n                var m   = win.formSchema.model || {};\n                var sk  = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n\n                var cos   = schema.closeOnSelect;\n                var close = (cos===true) || ['true','1','on','yes',''].includes(((cos??'')+'').toLowerCase());\n                if (close) {\n                  var id = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');\n                  var el = document.getElementById(id); if (el) el.focus();\n                  m[sk] = false;\n                }\n\n                var act = node.onClick;\n                var name='', opts={};\n                if (act && typeof act==='object'){ name=(act.namedAction||'').toString().trim(); opts=act.actionOptions||{}; }\n                else { name=(act||'').toString().trim(); }\n                if (name){\n                  opts = Object.assign({ value: node.value, item: node }, opts);\n                  if (typeof BF!=='undefined' && BF.namedAction) BF.namedAction(name, opts);\n                  else if (typeof namedAction!=='undefined')     namedAction(name, opts);\n                }\n              })()\"\n              class=\"flex w-full items-center gap-2 p-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none\"\n            >\n              <i v-if=\"node.icon\" class=\"fa-regular text-[12px]\" :class=\"node.icon\"></i>\n              <span class=\"flex-1 text-left\">{{ node.label || node.value || ('Item ' + (nidx+1)) }}</span>\n              <span v-if=\"node.shortcut\" class=\"text-xs text-muted-foreground\">{{ node.shortcut }}</span>\n            </button>\n\n            <!-- Checkbox item -->\n            <button\n              v-else-if=\"(node.type==='checkbox')\"\n              type=\"button\" role=\"menuitemcheckbox\"\n              :aria-checked=\"(function(){\n                var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n                var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n                var ck = sk + '_checks';\n                return (node.modelKey ? !!m[node.modelKey] : !!(m[ck] && m[ck][node.value])) ? 'true' : 'false';\n              })()\"\n              :disabled=\"(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)\"\n              @click=\"(function(){\n                if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)) return;\n\n                var win = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)];\n                var m   = win.formSchema.model || {};\n                var sk  = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n                var ck  = sk + '_checks';\n\n                if (node.modelKey) m[node.modelKey] = !m[node.modelKey];\n                else { if (!m[ck]) m[ck] = {}; m[ck][node.value] = !m[ck][node.value]; }\n\n                var act = node.onClick;\n                var name='', opts={};\n                if (act && typeof act==='object'){ name=(act.namedAction||'').toString().trim(); opts=act.actionOptions||{}; }\n                else { name=(act||'').toString().trim(); }\n                if (name){\n                  var checked = (node.modelKey ? !!m[node.modelKey] : !!(m[ck] && m[ck][node.value]));\n                  opts = Object.assign({ value: node.value, checked: checked, item: node }, opts);\n                  if (typeof BF!=='undefined' && BF.namedAction) BF.namedAction(name, opts);\n                  else if (typeof namedAction!=='undefined')     namedAction(name, opts);\n                }\n              })()\"\n              class=\"flex w-full items-center gap-2 px-2 py-1.5 text-sm text-foreground hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none\"\n            >\n              <i v-if=\"node.icon\" class=\"fa-regular text-[12px]\" :class=\"node.icon\"></i>\n              <span class=\"inline-flex h-3.5 w-3.5 items-center justify-center rounded border border-input bg-background text-[10px]\"\n                    :class=\"(function(){\n                      var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n                      var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n                      var ck = sk + '_checks';\n                      var on = (node.modelKey ? !!m[node.modelKey] : !!(m[ck] && m[ck][node.value]));\n                      return on ? 'bg-primary border-primary text-primary-foreground' : '';\n                    })()\">\n                <i class=\"fa-regular fa-check\" v-if=\"(function(){\n                  var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n                  var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n                  var ck = sk + '_checks';\n                  return (node.modelKey ? !!m[node.modelKey] : !!(m[ck] && m[ck][node.value]));\n                })()\"></i>\n              </span>\n              <span class=\"flex-1 text-left\">{{ node.label || node.value || ('Item ' + (nidx+1)) }}</span>\n            </button>\n\n            <!-- Radio item -->\n            <button\n              v-else-if=\"(node.type==='radio')\"\n              type=\"button\" role=\"menuitemradio\"\n              :aria-checked=\"(function(){\n                var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n                var k = (schema.modelKey || 'dropdownRadio');\n                return (m[k] === node.value) ? 'true' : 'false';\n              })()\"\n              :disabled=\"(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)\"\n              @click=\"(function(){\n                if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)) return;\n\n                var win = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)];\n                var m   = win.formSchema.model || {};\n                var k   = (schema.modelKey || 'dropdownRadio');\n                m[k]    = node.value;\n\n                var sk  = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n                var id  = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');\n                var el  = document.getElementById(id); if (el) el.focus();\n                m[sk] = false;\n\n                var act = node.onClick;\n                var name='', opts={};\n                if (act && typeof act==='object'){ name=(act.namedAction||'').toString().trim(); opts=act.actionOptions||{}; }\n                else { name=(act||'').toString().trim(); }\n                if (name){\n                  opts = Object.assign({ value: node.value, item: node }, opts);\n                  if (typeof BF!=='undefined' && BF.namedAction) BF.namedAction(name, opts);\n                  else if (typeof namedAction!=='undefined')     namedAction(name, opts);\n                }\n              })()\"\n              class=\"flex w-full items-center gap-2 px-2 py-1.5 text-sm text-foreground hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none\"\n            >\n              <i v-if=\"node.icon\" class=\"fa-regular text-[12px]\" :class=\"node.icon\"></i>\n              <span class=\"inline-flex h-3.5 w-3.5 items-center justify-center rounded-full border border-input bg-background\"\n                    :class=\"(function(){\n                      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n                      var k = (schema.modelKey || 'dropdownRadio');\n                      return (m[k] === node.value) ? 'border-primary' : '';\n                    })()\">\n                <span class=\"h-2 w-2 rounded-full\"\n                      :class=\"(function(){\n                        var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n                        var k = (schema.modelKey || 'dropdownRadio');\n                        return (m[k] === node.value) ? 'bg-primary' : 'bg-transparent';\n                      })()\"></span>\n              </span>\n              <span class=\"flex-1 text-left\">{{ node.label || node.value || ('Item ' + (nidx+1)) }}</span>\n            </button>\n          </template>\n        </div>\n\n        <!-- SEPARATOR at top level -->\n        <div v-else-if=\"(it.type==='separator')\" class=\"my-1 border-t border-border\" role=\"separator\" aria-orientation=\"horizontal\"></div>\n\n        <!-- TOP-LEVEL ITEM (if not grouped) -->\n        <button\n          v-else\n          type=\"button\" role=\"menuitem\"\n          :disabled=\"(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (it.disabled===true)||['true','1','on','yes'].includes(v); })(it.disabled)\"\n          @click=\"(function(){\n            if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (it.disabled===true)||['true','1','on','yes'].includes(v); })(it.disabled)) return;\n\n            var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};\n            var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));\n            var cos   = schema.closeOnSelect;\n            var close = (cos===true) || ['true','1','on','yes',''].includes(((cos??'')+'').toLowerCase());\n            if (close) {\n              var id = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');\n              var el = document.getElementById(id); if (el) el.focus();\n              m[sk] = false;\n            }\n\n            var act = it.onClick;\n            var name='', opts={};\n            if (act && typeof act==='object'){ name=(act.namedAction||'').toString().trim(); opts=act.actionOptions||{}; }\n            else { name=(act||'').toString().trim(); }\n            if (name){\n              opts = Object.assign({ value: it.value, item: it }, opts);\n              if (typeof BF!=='undefined' && BF.namedAction) BF.namedAction(name, opts);\n              else if (typeof namedAction!=='undefined')     namedAction(name, opts);\n            }\n          })()\"\n          class=\"flex w-full items-center gap-2 px-2 py-1.5 text-sm text-foreground hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none\"\n        >\n          <i v-if=\"it.icon\" class=\"fa-regular text-[12px]\" :class=\"it.icon\"></i>\n          <span class=\"flex-1 text-left\">{{ it.label || it.value || ('Item ' + (idx+1)) }}</span>\n          <span v-if=\"it.shortcut\" class=\"text-xs text-muted-foreground\">{{ it.shortcut }}</span>\n        </button>\n      </template>\n    </div>\n  </div>\n</div>",
+    "icon": "",
+    "items": [],
+    "label": "Open menu",
+    "modelKey": "",
+    "radioModelKey": "dropdownRadio",
+    "stateKey": "dropdownOpen",
+    "windowIndex": 0
+}
+```
+
+```html title="HTML Template"
+<!-- DROPDOWN (BetterForms) -->
+<div
+  class="relative inline-block text-left"
+  :class="(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (v==='true'||v==='1'||v==='on'||v==='yes') ? 'w-full' : 'w-fit'; })(schema.fullWidth)"
+>
+  <!-- Init -->
+  <script>
+    (function(){
+      try{
+        var win = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)];
+        var m   = win.formSchema.model || {};
+        var sk  = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+        if (typeof m[sk] === 'undefined') m[sk] = false;
+        var ck  = sk + '_checks';
+        if (!m[ck]) m[ck] = {};
+        win.formSchema.model = m;
+      }catch(_){}
+    })();
+  </script>
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    :id="(schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default')"
+    :aria-haspopup="'menu'"
+    :aria-expanded="(function(){
+      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+      var sk= (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+      return !!m[sk] ? 'true' : 'false';
+    })()"
+    @click="(function(){
+      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+      var sk= (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+      m[sk] = !m[sk];
+    })()"
+    @keydown.escape.stop.prevent="(function(){
+      var id = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');
+      var el = document.getElementById(id); if (el) el.focus();
+      var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+      var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+      m[sk] = false;
+    })()"
+    class="inline-flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground focus:outline-none"
+  >
+    <i v-if="schema.icon" class="fa-regular text-[12px]" :class="schema.icon"></i>
+    <span>{{ schema.label || 'Open Menu' }}</span>
+    <i class="fa-regular fa-chevron-down text-[12px]"></i>
+  </button>
+
+  <!-- Menu -->
+  <div
+    class="absolute z-50 mt-2 min-w-48 max-w-[calc(100vw-1rem)] rounded-md border border-border bg-popover text-popover-foreground shadow focus:outline-none"
+    :class="(function(a){
+      if (a==='start')  return 'left-0 right-auto origin-top-left';
+      if (a==='center') return 'left-1/2 -translate-x-1/2 origin-top';
+      return 'right-0 left-auto origin-top-right';
+    })(schema.align)"
+    role="menu"
+    :aria-hidden="(function(){
+      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+      var sk= (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+      return !!m[sk] ? 'false' : 'true';
+    })()"
+    :style="(function(){
+      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+      var sk= (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+      return (!!m[sk]) ? '' : 'display:none;';
+    })()"
+    @keydown.escape.stop.prevent="(function(){
+      var id = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');
+      var el = document.getElementById(id); if (el) el.focus();
+      var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+      var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+      m[sk] = false;
+    })()"
+  >
+    <div class="py-1" role="none">
+      <!-- Top-level loop -->
+      <template
+        v-for="(it, idx) in (function(){
+          try { return Array.isArray(schema.items) ? schema.items : (typeof schema.items==='string' ? JSON.parse(schema.items) : []); }
+          catch(_) { return []; }
+        })()"
+        :key="'top-'+idx"
+      >
+        <!-- GROUP: label + children -->
+        <div v-if="(it.type==='group')" role="group" aria-label="Group">
+          <div class="px-2 pb-1 pt-2 text-xs font-semibold text-muted-foreground" role="presentation">
+            {{ it.label || '' }}
+          </div>
+
+          <!-- children -->
+          <template v-for="(node, nidx) in (Array.isArray(it.items) ? it.items : [])" :key="'g-'+idx+'-'+nidx">
+            <!-- Default item -->
+            <button
+              v-if="(!node.type || node.type==='item')"
+              type="button" role="menuitem"
+              :disabled="(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)"
+              @click="(function(){
+                if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)) return;
+
+                var win = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)];
+                var m   = win.formSchema.model || {};
+                var sk  = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+
+                var cos   = schema.closeOnSelect;
+                var close = (cos===true) || ['true','1','on','yes',''].includes(((cos??'')+'').toLowerCase());
+                if (close) {
+                  var id = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');
+                  var el = document.getElementById(id); if (el) el.focus();
+                  m[sk] = false;
+                }
+
+                var act = node.onClick;
+                var name='', opts={};
+                if (act && typeof act==='object'){ name=(act.namedAction||'').toString().trim(); opts=act.actionOptions||{}; }
+                else { name=(act||'').toString().trim(); }
+                if (name){
+                  opts = Object.assign({ value: node.value, item: node }, opts);
+                  if (typeof BF!=='undefined' && BF.namedAction) BF.namedAction(name, opts);
+                  else if (typeof namedAction!=='undefined')     namedAction(name, opts);
+                }
+              })()"
+              class="flex w-full items-center gap-2 p-2 text-sm text-foreground hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <i v-if="node.icon" class="fa-regular text-[12px]" :class="node.icon"></i>
+              <span class="flex-1 text-left">{{ node.label || node.value || ('Item ' + (nidx+1)) }}</span>
+              <span v-if="node.shortcut" class="text-xs text-muted-foreground">{{ node.shortcut }}</span>
+            </button>
+
+            <!-- Checkbox item -->
+            <button
+              v-else-if="(node.type==='checkbox')"
+              type="button" role="menuitemcheckbox"
+              :aria-checked="(function(){
+                var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+                var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+                var ck = sk + '_checks';
+                return (node.modelKey ? !!m[node.modelKey] : !!(m[ck] && m[ck][node.value])) ? 'true' : 'false';
+              })()"
+              :disabled="(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)"
+              @click="(function(){
+                if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)) return;
+
+                var win = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)];
+                var m   = win.formSchema.model || {};
+                var sk  = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+                var ck  = sk + '_checks';
+
+                if (node.modelKey) m[node.modelKey] = !m[node.modelKey];
+                else { if (!m[ck]) m[ck] = {}; m[ck][node.value] = !m[ck][node.value]; }
+
+                var act = node.onClick;
+                var name='', opts={};
+                if (act && typeof act==='object'){ name=(act.namedAction||'').toString().trim(); opts=act.actionOptions||{}; }
+                else { name=(act||'').toString().trim(); }
+                if (name){
+                  var checked = (node.modelKey ? !!m[node.modelKey] : !!(m[ck] && m[ck][node.value]));
+                  opts = Object.assign({ value: node.value, checked: checked, item: node }, opts);
+                  if (typeof BF!=='undefined' && BF.namedAction) BF.namedAction(name, opts);
+                  else if (typeof namedAction!=='undefined')     namedAction(name, opts);
+                }
+              })()"
+              class="flex w-full items-center gap-2 px-2 py-1.5 text-sm text-foreground hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <i v-if="node.icon" class="fa-regular text-[12px]" :class="node.icon"></i>
+              <span class="inline-flex h-3.5 w-3.5 items-center justify-center rounded border border-input bg-background text-[10px]"
+                    :class="(function(){
+                      var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+                      var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+                      var ck = sk + '_checks';
+                      var on = (node.modelKey ? !!m[node.modelKey] : !!(m[ck] && m[ck][node.value]));
+                      return on ? 'bg-primary border-primary text-primary-foreground' : '';
+                    })()">
+                <i class="fa-regular fa-check" v-if="(function(){
+                  var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+                  var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+                  var ck = sk + '_checks';
+                  return (node.modelKey ? !!m[node.modelKey] : !!(m[ck] && m[ck][node.value]));
+                })()"></i>
+              </span>
+              <span class="flex-1 text-left">{{ node.label || node.value || ('Item ' + (nidx+1)) }}</span>
+            </button>
+
+            <!-- Radio item -->
+            <button
+              v-else-if="(node.type==='radio')"
+              type="button" role="menuitemradio"
+              :aria-checked="(function(){
+                var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+                var k = (schema.modelKey || 'dropdownRadio');
+                return (m[k] === node.value) ? 'true' : 'false';
+              })()"
+              :disabled="(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)"
+              @click="(function(){
+                if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (node.disabled===true)||['true','1','on','yes'].includes(v); })(node.disabled)) return;
+
+                var win = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)];
+                var m   = win.formSchema.model || {};
+                var k   = (schema.modelKey || 'dropdownRadio');
+                m[k]    = node.value;
+
+                var sk  = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+                var id  = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');
+                var el  = document.getElementById(id); if (el) el.focus();
+                m[sk] = false;
+
+                var act = node.onClick;
+                var name='', opts={};
+                if (act && typeof act==='object'){ name=(act.namedAction||'').toString().trim(); opts=act.actionOptions||{}; }
+                else { name=(act||'').toString().trim(); }
+                if (name){
+                  opts = Object.assign({ value: node.value, item: node }, opts);
+                  if (typeof BF!=='undefined' && BF.namedAction) BF.namedAction(name, opts);
+                  else if (typeof namedAction!=='undefined')     namedAction(name, opts);
+                }
+              })()"
+              class="flex w-full items-center gap-2 px-2 py-1.5 text-sm text-foreground hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <i v-if="node.icon" class="fa-regular text-[12px]" :class="node.icon"></i>
+              <span class="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full border border-input bg-background"
+                    :class="(function(){
+                      var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+                      var k = (schema.modelKey || 'dropdownRadio');
+                      return (m[k] === node.value) ? 'border-primary' : '';
+                    })()">
+                <span class="h-2 w-2 rounded-full"
+                      :class="(function(){
+                        var m = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+                        var k = (schema.modelKey || 'dropdownRadio');
+                        return (m[k] === node.value) ? 'bg-primary' : 'bg-transparent';
+                      })()"></span>
+              </span>
+              <span class="flex-1 text-left">{{ node.label || node.value || ('Item ' + (nidx+1)) }}</span>
+            </button>
+          </template>
+        </div>
+
+        <!-- SEPARATOR at top level -->
+        <div v-else-if="(it.type==='separator')" class="my-1 border-t border-border" role="separator" aria-orientation="horizontal"></div>
+
+        <!-- TOP-LEVEL ITEM (if not grouped) -->
+        <button
+          v-else
+          type="button" role="menuitem"
+          :disabled="(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (it.disabled===true)||['true','1','on','yes'].includes(v); })(it.disabled)"
+          @click="(function(){
+            if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (it.disabled===true)||['true','1','on','yes'].includes(v); })(it.disabled)) return;
+
+            var m  = vueapp.$store.state.wndw.windows[(schema.windowIndex ?? 0)].formSchema.model || {};
+            var sk = (schema.stateKey && (schema.stateKey+'').trim()) || ('dropdownState_' + (schema.modelKey || 'default'));
+            var cos   = schema.closeOnSelect;
+            var close = (cos===true) || ['true','1','on','yes',''].includes(((cos??'')+'').toLowerCase());
+            if (close) {
+              var id = (schema.idPrefix || 'dd') + '-btn-' + (schema.modelKey || 'default');
+              var el = document.getElementById(id); if (el) el.focus();
+              m[sk] = false;
+            }
+
+            var act = it.onClick;
+            var name='', opts={};
+            if (act && typeof act==='object'){ name=(act.namedAction||'').toString().trim(); opts=act.actionOptions||{}; }
+            else { name=(act||'').toString().trim(); }
+            if (name){
+              opts = Object.assign({ value: it.value, item: it }, opts);
+              if (typeof BF!=='undefined' && BF.namedAction) BF.namedAction(name, opts);
+              else if (typeof namedAction!=='undefined')     namedAction(name, opts);
+            }
+          })()"
+          class="flex w-full items-center gap-2 px-2 py-1.5 text-sm text-foreground hover:bg-accent hover:text-accent-foreground disabled:opacity-50 disabled:pointer-events-none"
+        >
+          <i v-if="it.icon" class="fa-regular text-[12px]" :class="it.icon"></i>
+          <span class="flex-1 text-left">{{ it.label || it.value || ('Item ' + (idx+1)) }}</span>
+          <span v-if="it.shortcut" class="text-xs text-muted-foreground">{{ it.shortcut }}</span>
+        </button>
+      </template>
+    </div>
+  </div>
+</div>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Dropdown component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`label`**: Text displayed on the dropdown trigger button
+- **`icon`**: Font Awesome icon class for the trigger button
+- **`items`**: Array of menu items to display in the dropdown
+- **`align`**: Horizontal alignment of the dropdown menu (start, center, end)
+- **`fullWidth`**: Whether the dropdown trigger expands to full width
+- **`idPrefix`**: Prefix for generating unique element IDs
+- **`stateKey`**: Model key for tracking dropdown open/closed state
+- **`modelKey`**: Model key for radio items to store selected value
+- **`radioModelKey`**: Alternative property name for radio model key
+- **`checkboxModelKey`**: Base model key for checkbox state management
+- **`closeOnSelect`**: Whether dropdown closes when item is selected
+- **`windowIndex`**: Window index for multi-window applications (default: 0)
 
 ---
 

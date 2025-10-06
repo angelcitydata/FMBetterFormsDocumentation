@@ -65,19 +65,19 @@ The Divider component is configured using a variant property to control the bord
 ### Default Divider (Solid)
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Divider" variant="default">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define default divider in your model
 model.sectionDivider = {
   variant: "default"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "variant": "default"
 }
@@ -88,19 +88,19 @@ model.sectionDivider = {
 ### Dashed Divider
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Divider" variant="dashed">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define dashed divider in your model
 model.subsectionDivider = {
   variant: "dashed"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "variant": "dashed"
 }
@@ -111,19 +111,19 @@ model.subsectionDivider = {
 ### Dotted Divider
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Divider" variant="dotted">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define dotted divider in your model
 model.subtleDivider = {
   variant: "dotted"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "variant": "dotted"
 }
@@ -134,19 +134,19 @@ model.subtleDivider = {
 ### Form Section Separation
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Divider" variant="default">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define form section divider in your model
 model.formSectionDivider = {
   variant: "default"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "variant": "default"
 }
@@ -157,25 +157,79 @@ model.formSectionDivider = {
 ### Content Group Separation
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Divider" variant="dashed">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define content group divider in your model
 model.contentGroupDivider = {
   variant: "dashed"
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "variant": "dashed"
 }
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Divider component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "html": "<hr\n  class=\"w-full self-stretch border border-border my-4\"\n  :class=\"(\n    schema.variant === 'dashed'\n      ? 'border-dashed'\n      : schema.variant === 'dotted'\n        ? 'border-dotted'\n        : ''\n  )\"\n/>",
+    "variant": "default"
+}
+```
+
+```html title="HTML Template"
+<hr
+  class="w-full self-stretch border border-border my-4"
+  :class="(
+    schema.variant === 'dashed'
+      ? 'border-dashed'
+      : schema.variant === 'dotted'
+        ? 'border-dotted'
+        : ''
+  )"
+/>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Divider component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`variant`**: Border style variant for the divider (default, dashed, dotted)
 
 ---
 
@@ -255,18 +309,7 @@ The component uses CSS custom properties for consistent theming:
 
 ---
 
-## Related Components
-
-The Divider component works well with other layout and organizational components to create clear content structure:
-
-### Layout Components
-
-1. **[Page Title](/fmbf-components/pageTitle)** - Main page headings for section identification
-2. **[Content Title](/fmbf-components/contentTitle)** - Section headings for content organization
-3. **[Section Title](/fmbf-components/sectionTitle)** - Subsection headings for detailed organization
-4. **Divider** - Visual separation between content sections - *Current component*
-
-### When to Use Divider
+## When to Use Divider
 
 **Use Default Divider for:**
 - Strong separation between major content sections

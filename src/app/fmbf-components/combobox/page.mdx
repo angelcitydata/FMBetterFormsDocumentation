@@ -173,7 +173,7 @@ The Combobox component is configured using JSON objects with properties for form
 ### Basic Combobox
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Combobox" 
         modelKey="selectedCountry"
         label="Select Country"
@@ -181,7 +181,7 @@ The Combobox component is configured using JSON objects with properties for form
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define basic combobox in your model
 model.selectedCountry = null
 model.comboState = { open: false, q: '', active: -1 }
@@ -196,7 +196,7 @@ const countryOptions = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "selectedCountry",
   "label": "Select Country",
@@ -220,7 +220,7 @@ const countryOptions = [
 ### Combobox with Icons
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Combobox" 
         modelKey="userRole"
         label="Select User Role"
@@ -228,13 +228,13 @@ const countryOptions = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define combobox with icons in your model
 model.userRole = null
 model.roleComboState = { open: false, q: '', active: -1 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "userRole",
   "label": "Select User Role",
@@ -257,7 +257,7 @@ model.roleComboState = { open: false, q: '', active: -1 }
 ### Disabled Combobox
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Combobox" 
         modelKey="restrictedCategory"
         label="Restricted Category"
@@ -266,12 +266,12 @@ model.roleComboState = { open: false, q: '', active: -1 }
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define disabled combobox in your model
 model.restrictedCategory = null
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "restrictedCategory",
   "label": "Restricted Category",
@@ -293,7 +293,7 @@ model.restrictedCategory = null
 ### Combobox with Action
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Combobox" 
         modelKey="selectedRegion"
         label="Select Region"
@@ -303,13 +303,13 @@ model.restrictedCategory = null
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define combobox with action in your model
 model.selectedRegion = null
 model.regionComboState = { open: false, q: '', active: -1 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "selectedRegion",
   "label": "Select Region",
@@ -334,7 +334,7 @@ model.regionComboState = { open: false, q: '', active: -1 }
 ### Combobox with Disabled Options
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Combobox" 
         modelKey="subscriptionTier"
         label="Select Subscription Tier"
@@ -342,13 +342,13 @@ model.regionComboState = { open: false, q: '', active: -1 }
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define combobox with disabled options in your model
 model.subscriptionTier = null
 model.subscriptionComboState = { open: false, q: '', active: -1 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "subscriptionTier",
   "label": "Select Subscription Tier",
@@ -371,7 +371,7 @@ model.subscriptionComboState = { open: false, q: '', active: -1 }
 ### Complete Combobox Example
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Combobox" 
         modelKey="departmentManager"
         label="Select Department Manager"
@@ -383,13 +383,13 @@ model.subscriptionComboState = { open: false, q: '', active: -1 }
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define complete combobox in your model
 model.departmentManager = null
 model.managerComboState = { open: false, q: '', active: -1 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "departmentManager",
   "label": "Select Department Manager",
@@ -416,7 +416,7 @@ model.managerComboState = { open: false, q: '', active: -1 }
 This example demonstrates a real-world use case with a large dataset of companies, showing how the Combobox component handles extensive option lists with search functionality.
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Combobox" 
         modelKey="selectedCompany"
         label="Select Company"
@@ -428,7 +428,7 @@ This example demonstrates a real-world use case with a large dataset of companie
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define company selection combobox in your model
 model.selectedCompany = null
 model.companyComboState = { open: false, q: '', active: -1 }
@@ -562,7 +562,7 @@ model.companySelectOptions = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "selectedCompany",
   "label": "Select Company",
@@ -587,6 +587,255 @@ model.companySelectOptions = [
 - **Action Integration**: Triggers company detail loading when a selection is made
 - **Performance**: Shows how the component handles large option lists efficiently
 - **User Experience**: Provides clear placeholder text and empty state messaging
+
+---
+
+## Component Schema
+
+The complete component schema for the Combobox component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "actionOptions": {},
+    "disabled": false,
+    "emptyText": "No results found.",
+    "html": "<div class=\"w-full\">\n  <!-- Optional label -->\n  <label v-if=\"schema.label\" class=\"mb-1 block text-sm font-medium text-foreground\">\n    {{ schema.label }}\n    <span v-if=\"schema.required\" aria-hidden=\"true\" class=\"text-destructive\"> *</span>\n  </label>\n\n  <div class=\"relative w-full\">\n    <!-- Trigger -->\n    <button\n      type=\"button\"\n      class=\"w-full inline-flex items-center justify-between gap-2 rounded-md border border-input bg-card text-foreground px-3 py-2 text-sm shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed\"\n      :disabled=\"(schema.isDisabled===true)||String(schema.isDisabled||'').toLowerCase()==='true'\"\n      @click=\"(function(){\n        var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n        var model = win.formSchema.model;\n        var sk = schema.stateKey || 'comboState';\n        if (!model[sk]) model[sk] = { open:false, q:'', active:-1 };\n        model[sk] = Object.assign({}, model[sk], { open: !model[sk].open });\n      })()\"\n    >\n      <span class=\"truncate text-left\">\n        {{\n          (function(){\n            var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n            var model = win.formSchema.model;\n            var val = (function(o,p){\n              p = String(p||'').replace(/\\[(\\w+)\\]/g,'.$1').replace(/^\\./,'').split('.');\n              return p.reduce(function(cur,k){ return cur==null ? undefined : cur[k]; }, o);\n            })(model, schema.modelKey);\n            var arr = schema.items || [];\n            var f = arr.find(function(i){ return i.value === val; });\n            return f ? f.label : (schema.placeholder || 'Select an option...');\n          })()\n        }}\n      </span>\n      <i class=\"fa-regular fa-chevron-down text-muted-foreground\"></i>\n    </button>\n\n    <!-- Popover -->\n    <div\n      v-if=\"(vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[(schema.stateKey||'comboState')]||{}).open\"\n      class=\"absolute inset-x-0 z-50 mt-2 w-full rounded-md border border-border bg-popover text-popover-foreground shadow-lg\"\n    >\n      <!-- Search -->\n      <div class=\"p-2 border-b border-border\">\n        <div class=\"relative\">\n          <i class=\"fa-regular fa-magnifying-glass absolute left-2 top-2.5 text-muted-foreground text-xs\"></i>\n          <input\n            type=\"text\"\n            class=\"w-full rounded-md bg-background text-foreground placeholder:text-muted-foreground pl-7 pr-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring\"\n            :placeholder=\"schema.placeholder || 'Search…'\"\n            :value=\"(vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[(schema.stateKey||'comboState')]||{}).q || ''\"\n            @input=\"(function(e){\n              var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n              var m = win.formSchema.model; var sk = schema.stateKey || 'comboState';\n              if (!m[sk]) m[sk] = { open:true, q:'', active:-1 };\n              m[sk] = Object.assign({}, m[sk], { q: e.target.value, active: -1 });\n            })(event)\"\n            @keydown.down.prevent=\"(function(){\n              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n              var st=win.formSchema.model[schema.stateKey||'comboState']||{open:true,q:'',active:-1};\n              var list=(schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });\n              st.active = Math.min(list.length-1, st.active+1);\n              win.formSchema.model[schema.stateKey||'comboState']=Object.assign({}, st);\n            })()\"\n            @keydown.up.prevent=\"(function(){\n              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n              var st=win.formSchema.model[schema.stateKey||'comboState']||{open:true,q:'',active:-1};\n              var list=(schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });\n              st.active = Math.max(0, (st.active<0?0:st.active)-1);\n              win.formSchema.model[schema.stateKey||'comboState']=Object.assign({}, st);\n            })()\"\n            @keydown.enter.prevent=\"(function(){\n              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n              var m=win.formSchema.model; var sk=schema.stateKey||'comboState';\n              var st=m[sk]||{open:true,q:'',active:-1};\n              var list=(schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });\n              if(list.length){\n                var idx = st.active>=0? st.active: 0; var it=list[idx];\n                if(!it.disabled){\n                  (function(o,p,v){\n                    var parts = String(p||'').replace(/\\[(\\w+)\\]/g,'.$1').replace(/^\\./,'').split('.');\n                    var cur=o; for(var i=0;i<parts.length-1;i++){ var k=parts[i]; if(cur[k]==null||typeof cur[k]!=='object') cur[k]={}; cur=cur[k]; }\n                    cur[parts[parts.length-1]] = v;\n                  })(m, schema.modelKey, it.value);\n                  m[sk]=Object.assign({}, st, { open:false, q:'', active:-1 });\n                  if(schema.namedAction) namedAction(schema.namedAction, schema.actionOptions||{});\n                }\n              }\n            })()\"\n            @keydown.esc.prevent=\"(function(){\n              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n              var sk=schema.stateKey||'comboState';\n              var st=win.formSchema.model[sk]||{open:false};\n              win.formSchema.model[sk]=Object.assign({}, st, { open:false });\n            })()\"\n            @blur=\"(function(){\n              setTimeout(function(){\n                var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n                var sk=schema.stateKey||'comboState';\n                var st=win.formSchema.model[sk]||{open:false};\n                win.formSchema.model[sk]=Object.assign({}, st, { open:false });\n              },120);\n            })()\"\n          />\n        </div>\n      </div>\n\n      <!-- Options -->\n      <div class=\"max-h-64 overflow-auto py-1\">\n        <template\n          v-if=\"(function(){\n            var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n            var st=win.formSchema.model[schema.stateKey||'comboState']||{q:''};\n            var list=(schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });\n            return list.length>0;\n          })()\"\n        >\n          <div\n            v-for=\"(opt, idx) in (function(){\n              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n              var st=win.formSchema.model[schema.stateKey||'comboState']||{q:''};\n              return (schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });\n            })()\"\n            :key=\"opt.value\"\n          >\n            <button\n              type=\"button\"\n              class=\"w-full flex items-center gap-2 px-3 py-2 text-left text-sm transition-colors\"\n              :class=\"(function(){\n                var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n                var m=win.formSchema.model; var sk=schema.stateKey||'comboState';\n                var st=m[sk]||{active:-1};\n                var isActive = st.active===idx;\n                var selectedVal = (function(o,p){\n                  p = String(p||'').replace(/\\[(\\w+)\\]/g,'.$1').replace(/^\\./,'').split('.');\n                  return p.reduce(function(cur,k){ return cur==null ? undefined : cur[k]; }, o);\n                })(m, schema.modelKey);\n                var isSelected = selectedVal === opt.value;\n                return (opt.disabled?'opacity-50 cursor-not-allowed ':'') +\n                       (isActive?' bg-accent text-accent-foreground ':'') +\n                       (isSelected&&!isActive?' bg-muted ':'');\n              })()\"\n              :disabled=\"opt.disabled===true\"\n              @mousedown.prevent=\"(function(){})()\"\n              @click=\"(function(){\n                var win=vueapp.$store.state.wndw.windows[schema.windowIndex];\n                var m=win.formSchema.model; var sk=schema.stateKey||'comboState';\n                var st=m[sk]||{open:true};\n                if(!opt.disabled){\n                  (function(o,p,v){\n                    var parts = String(p||'').replace(/\\[(\\w+)\\]/g,'.$1').replace(/^\\./,'').split('.');\n                    var cur=o; for(var i=0;i<parts.length-1;i++){ var k=parts[i]; if(cur[k]==null||typeof cur[k]!=='object') cur[k]={}; cur=cur[k]; }\n                    cur[parts[parts.length-1]] = v;\n                  })(m, schema.modelKey, opt.value);\n                  m[sk]=Object.assign({}, st, { open:false, q:'', active:-1 });\n                  if(schema.namedAction) namedAction(schema.namedAction, schema.actionOptions||{});\n                }\n              })()\"\n            >\n              <i v-if=\"opt.icon\" class=\"fa-regular text-xs\" :class=\"opt.icon\"></i>\n              <span class=\"truncate\">{{ opt.label }}</span>\n              <i\n                v-if=\"(function(o,p,v){\n                  p = String(p||'').replace(/\\[(\\w+)\\]/g,'.$1').replace(/^\\./,'').split('.');\n                  var cur = p.reduce(function(acc,k){ return acc==null?undefined:acc[k]; }, o);\n                  return cur === v;\n                })(vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model, schema.modelKey, opt.value)\"\n                class=\"ml-auto fa-regular fa-check text-xs\"\n              ></i>\n            </button>\n          </div>\n        </template>\n\n        <div v-else class=\"px-3 py-6 text-center text-sm text-muted-foreground\">\n          {{ schema.emptyText || 'No results found.' }}\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- Helper / messages -->\n  <p v-if=\"schema.errorMessage\" class=\"mt-1 text-xs text-destructive\">{{ schema.errorMessage }}</p>\n  <p v-else-if=\"schema.successMessage\" class=\"mt-1 text-xs text-success\">{{ schema.successMessage }}</p>\n  <p v-else-if=\"schema.helperText\" class=\"mt-1 text-xs text-muted-foreground\">{{ schema.helperText }}</p>\n</div>",
+    "items": [],
+    "label": "",
+    "modelKey": "comboValue",
+    "namedAction": "",
+    "placeholder": "Select an option…",
+    "stateKey": "comboState",
+    "windowIndex": 0
+}
+```
+
+```html title="HTML Template"
+<div class="w-full">
+  <!-- Optional label -->
+  <label v-if="schema.label" class="mb-1 block text-sm font-medium text-foreground">
+    {{ schema.label }}
+    <span v-if="schema.required" aria-hidden="true" class="text-destructive"> *</span>
+  </label>
+
+  <div class="relative w-full">
+    <!-- Trigger -->
+    <button
+      type="button"
+      class="w-full inline-flex items-center justify-between gap-2 rounded-md border border-input bg-card text-foreground px-3 py-2 text-sm shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+      :disabled="(schema.isDisabled===true)||String(schema.isDisabled||'').toLowerCase()==='true'"
+      @click="(function(){
+        var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+        var model = win.formSchema.model;
+        var sk = schema.stateKey || 'comboState';
+        if (!model[sk]) model[sk] = { open:false, q:'', active:-1 };
+        model[sk] = Object.assign({}, model[sk], { open: !model[sk].open });
+      })()"
+    >
+      <span class="truncate text-left">
+        {{
+          (function(){
+            var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+            var model = win.formSchema.model;
+            var val = (function(o,p){
+              p = String(p||'').replace(/\[(\w+)\]/g,'.$1').replace(/^\./,'').split('.');
+              return p.reduce(function(cur,k){ return cur==null ? undefined : cur[k]; }, o);
+            })(model, schema.modelKey);
+            var arr = schema.items || [];
+            var f = arr.find(function(i){ return i.value === val; });
+            return f ? f.label : (schema.placeholder || 'Select an option...');
+          })()
+        }}
+      </span>
+      <i class="fa-regular fa-chevron-down text-muted-foreground"></i>
+    </button>
+
+    <!-- Popover -->
+    <div
+      v-if="(vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[(schema.stateKey||'comboState')]||{}).open"
+      class="absolute inset-x-0 z-50 mt-2 w-full rounded-md border border-border bg-popover text-popover-foreground shadow-lg"
+    >
+      <!-- Search -->
+      <div class="p-2 border-b border-border">
+        <div class="relative">
+          <i class="fa-regular fa-magnifying-glass absolute left-2 top-2.5 text-muted-foreground text-xs"></i>
+          <input
+            type="text"
+            class="w-full rounded-md bg-background text-foreground placeholder:text-muted-foreground pl-7 pr-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            :placeholder="schema.placeholder || 'Search…'"
+            :value="(vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[(schema.stateKey||'comboState')]||{}).q || ''"
+            @input="(function(e){
+              var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+              var m = win.formSchema.model; var sk = schema.stateKey || 'comboState';
+              if (!m[sk]) m[sk] = { open:true, q:'', active:-1 };
+              m[sk] = Object.assign({}, m[sk], { q: e.target.value, active: -1 });
+            })(event)"
+            @keydown.down.prevent="(function(){
+              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+              var st=win.formSchema.model[schema.stateKey||'comboState']||{open:true,q:'',active:-1};
+              var list=(schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });
+              st.active = Math.min(list.length-1, st.active+1);
+              win.formSchema.model[schema.stateKey||'comboState']=Object.assign({}, st);
+            })()"
+            @keydown.up.prevent="(function(){
+              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+              var st=win.formSchema.model[schema.stateKey||'comboState']||{open:true,q:'',active:-1};
+              var list=(schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });
+              st.active = Math.max(0, (st.active<0?0:st.active)-1);
+              win.formSchema.model[schema.stateKey||'comboState']=Object.assign({}, st);
+            })()"
+            @keydown.enter.prevent="(function(){
+              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+              var m=win.formSchema.model; var sk=schema.stateKey||'comboState';
+              var st=m[sk]||{open:true,q:'',active:-1};
+              var list=(schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });
+              if(list.length){
+                var idx = st.active>=0? st.active: 0; var it=list[idx];
+                if(!it.disabled){
+                  (function(o,p,v){
+                    var parts = String(p||'').replace(/\[(\w+)\]/g,'.$1').replace(/^\./,'').split('.');
+                    var cur=o; for(var i=0;i<parts.length-1;i++){ var k=parts[i]; if(cur[k]==null||typeof cur[k]!=='object') cur[k]={}; cur=cur[k]; }
+                    cur[parts[parts.length-1]] = v;
+                  })(m, schema.modelKey, it.value);
+                  m[sk]=Object.assign({}, st, { open:false, q:'', active:-1 });
+                  if(schema.namedAction) namedAction(schema.namedAction, schema.actionOptions||{});
+                }
+              }
+            })()"
+            @keydown.esc.prevent="(function(){
+              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+              var sk=schema.stateKey||'comboState';
+              var st=win.formSchema.model[sk]||{open:false};
+              win.formSchema.model[sk]=Object.assign({}, st, { open:false });
+            })()"
+            @blur="(function(){
+              setTimeout(function(){
+                var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+                var sk=schema.stateKey||'comboState';
+                var st=win.formSchema.model[sk]||{open:false};
+                win.formSchema.model[sk]=Object.assign({}, st, { open:false });
+              },120);
+            })()"
+          />
+        </div>
+      </div>
+
+      <!-- Options -->
+      <div class="max-h-64 overflow-auto py-1">
+        <template
+          v-if="(function(){
+            var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+            var st=win.formSchema.model[schema.stateKey||'comboState']||{q:''};
+            var list=(schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });
+            return list.length>0;
+          })()"
+        >
+          <div
+            v-for="(opt, idx) in (function(){
+              var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+              var st=win.formSchema.model[schema.stateKey||'comboState']||{q:''};
+              return (schema.items||[]).filter(function(i){ return !st.q || i.label.toLowerCase().indexOf(st.q.toLowerCase())>-1; });
+            })()"
+            :key="opt.value"
+          >
+            <button
+              type="button"
+              class="w-full flex items-center gap-2 px-3 py-2 text-left text-sm transition-colors"
+              :class="(function(){
+                var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+                var m=win.formSchema.model; var sk=schema.stateKey||'comboState';
+                var st=m[sk]||{active:-1};
+                var isActive = st.active===idx;
+                var selectedVal = (function(o,p){
+                  p = String(p||'').replace(/\[(\w+)\]/g,'.$1').replace(/^\./,'').split('.');
+                  return p.reduce(function(cur,k){ return cur==null ? undefined : cur[k]; }, o);
+                })(m, schema.modelKey);
+                var isSelected = selectedVal === opt.value;
+                return (opt.disabled?'opacity-50 cursor-not-allowed ':'') +
+                       (isActive?' bg-accent text-accent-foreground ':'') +
+                       (isSelected&&!isActive?' bg-muted ':'');
+              })()"
+              :disabled="opt.disabled===true"
+              @mousedown.prevent="(function(){})()"
+              @click="(function(){
+                var win=vueapp.$store.state.wndw.windows[schema.windowIndex];
+                var m=win.formSchema.model; var sk=schema.stateKey||'comboState';
+                var st=m[sk]||{open:true};
+                if(!opt.disabled){
+                  (function(o,p,v){
+                    var parts = String(p||'').replace(/\[(\w+)\]/g,'.$1').replace(/^\./,'').split('.');
+                    var cur=o; for(var i=0;i<parts.length-1;i++){ var k=parts[i]; if(cur[k]==null||typeof cur[k]!=='object') cur[k]={}; cur=cur[k]; }
+                    cur[parts[parts.length-1]] = v;
+                  })(m, schema.modelKey, opt.value);
+                  m[sk]=Object.assign({}, st, { open:false, q:'', active:-1 });
+                  if(schema.namedAction) namedAction(schema.namedAction, schema.actionOptions||{});
+                }
+              })()"
+            >
+              <i v-if="opt.icon" class="fa-regular text-xs" :class="opt.icon"></i>
+              <span class="truncate">{{ opt.label }}</span>
+              <i
+                v-if="(function(o,p,v){
+                  p = String(p||'').replace(/\[(\w+)\]/g,'.$1').replace(/^\./,'').split('.');
+                  var cur = p.reduce(function(acc,k){ return acc==null?undefined:acc[k]; }, o);
+                  return cur === v;
+                })(vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model, schema.modelKey, opt.value)"
+                class="ml-auto fa-regular fa-check text-xs"
+              ></i>
+            </button>
+          </div>
+        </template>
+
+        <div v-else class="px-3 py-6 text-center text-sm text-muted-foreground">
+          {{ schema.emptyText || 'No results found.' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Helper / messages -->
+  <p v-if="schema.errorMessage" class="mt-1 text-xs text-destructive">{{ schema.errorMessage }}</p>
+  <p v-else-if="schema.successMessage" class="mt-1 text-xs text-success">{{ schema.successMessage }}</p>
+  <p v-else-if="schema.helperText" class="mt-1 text-xs text-muted-foreground">{{ schema.helperText }}</p>
+</div>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Combobox component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`modelKey`**: Model key where selected value is stored
+- **`label`**: Text label displayed above the combobox
+- **`placeholder`**: Placeholder text in the trigger button
+- **`disabled`**: Whether the combobox is disabled
+- **`items`**: Array of option objects with label/value properties
+- **`emptyText`**: Text displayed when no options match search
+- **`namedAction`**: Action to trigger when option is selected
+- **`actionOptions`**: Additional options for the named action
+- **`stateKey`**: Key for internal dropdown state management
+- **`windowIndex`**: Window index for multi-window applications (default: 0)
 
 ---
 

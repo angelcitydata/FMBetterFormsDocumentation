@@ -142,7 +142,7 @@ Selecting the appropriate accordion mode helps create an intuitive user experien
 - **Comparison Tool**: Different product features expanded side-by-side
 - **Form Sections**: Multiple independent sections of a long form
 
-```json {{ title: 'Mode Selection Examples' }}
+```json title="Mode Selection Examples"
 {
   "FAQ": { "type": "single", "collapsible": true },
   "Checkout Process": { "type": "single", "collapsible": false },
@@ -210,7 +210,7 @@ The Accordion component can be used in two ways: as JSON configuration objects o
 ### Basic Accordion (Single Mode)
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="single" 
         collapsible="true" 
@@ -220,7 +220,7 @@ The Accordion component can be used in two ways: as JSON configuration objects o
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.faqItems = [
   {
@@ -244,7 +244,7 @@ model.faqItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "single",
   "collapsible": true,
@@ -275,7 +275,7 @@ model.faqItems = [
 ### FAQ Accordion
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="single" 
         collapsible="true" 
@@ -285,7 +285,7 @@ model.faqItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.helpItems = [
   {
@@ -309,7 +309,7 @@ model.helpItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "single",
   "collapsible": true,
@@ -340,7 +340,7 @@ model.helpItems = [
 ### Multiple Mode Accordion (Filters)
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="multiple" 
         stateKey="filterAccordion" 
@@ -349,7 +349,7 @@ model.helpItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.filterItems = [
   {
@@ -375,7 +375,7 @@ model.filterItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "multiple",
   "stateKey": "filterAccordion",
@@ -410,7 +410,7 @@ model.filterItems = [
 ### Settings Accordion (Non-collapsible)
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="single" 
         collapsible="false" 
@@ -420,7 +420,7 @@ model.filterItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.settingsItems = [
   {
@@ -449,7 +449,7 @@ model.settingsItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "single",
   "collapsible": false,
@@ -485,7 +485,7 @@ model.settingsItems = [
 ### Accordion with Disabled Item
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="single" 
         collapsible="true" 
@@ -495,7 +495,7 @@ model.settingsItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.featureItems = [
   {
@@ -518,7 +518,7 @@ model.featureItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "single",
   "collapsible": true,
@@ -551,7 +551,7 @@ model.featureItems = [
 ### Documentation Accordion (Multiple Mode)
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="multiple" 
         stateKey="docsAccordion" 
@@ -560,7 +560,7 @@ model.featureItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.docsItems = [
   {
@@ -590,7 +590,7 @@ model.docsItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "multiple",
   "stateKey": "docsAccordion",
@@ -625,7 +625,7 @@ model.docsItems = [
 ### Product Information Accordion
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="single" 
         collapsible="true" 
@@ -635,7 +635,7 @@ model.docsItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.productItems = [
   {
@@ -665,7 +665,7 @@ model.productItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "single",
   "collapsible": true,
@@ -701,7 +701,7 @@ model.productItems = [
 ### Task Management Accordion
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="single" 
         collapsible="true" 
@@ -711,7 +711,7 @@ model.productItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.taskItems = [
   {
@@ -740,7 +740,7 @@ model.taskItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "single",
   "collapsible": true,
@@ -776,7 +776,7 @@ model.taskItems = [
 ### Customer Support Tickets
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="single" 
         collapsible="true" 
@@ -786,7 +786,7 @@ model.taskItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items dynamically from FileMaker data
 // Example: Items could be populated from FileMaker records
 model.ticketItems = [
@@ -811,7 +811,7 @@ model.ticketItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "single",
   "collapsible": true,
@@ -842,7 +842,7 @@ model.ticketItems = [
 ### Order Details Accordion
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="multiple" 
         stateKey="orderAccordion" 
@@ -851,7 +851,7 @@ model.ticketItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.orderItems = [
   {
@@ -881,7 +881,7 @@ model.orderItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "multiple",
   "stateKey": "orderAccordion",
@@ -916,7 +916,7 @@ model.orderItems = [
 ### Training Modules Accordion
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="single" 
         collapsible="false" 
@@ -926,7 +926,7 @@ model.orderItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.trainingItems = [
   {
@@ -960,7 +960,7 @@ model.trainingItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "single",
   "collapsible": false,
@@ -1000,7 +1000,7 @@ model.trainingItems = [
 ### Event Schedule Accordion
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Accordion" 
         type="multiple" 
         stateKey="scheduleAccordion" 
@@ -1009,7 +1009,7 @@ model.trainingItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define items in your model
 model.scheduleItems = [
   {
@@ -1033,7 +1033,7 @@ model.scheduleItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "type": "multiple",
   "stateKey": "scheduleAccordion",
@@ -1059,6 +1059,104 @@ model.scheduleItems = [
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Accordion component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "collapsible": true,
+    "html": "<div class=\"w-full bg-card text-card-foreground border border-border rounded-lg divide-y divide-border overflow-hidden\">\n    <!-- Item -->\n    <div v-for=\"(item, idx) in schema.items\" :key=\"item.id\" class=\"group\">\n        <!-- Trigger -->\n        <button :id=\"(schema.idPrefix || 'acc') + '-' + item.id + '-trigger'\" :aria-controls=\"(schema.idPrefix || 'acc') + '-' + item.id + '-content'\" role=\"button\" :aria-expanded=\"!!(vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[schema.stateKey] || {})[item.id]\" :disabled=\"item.disabled\" @click=\"(function(){\n  var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n  var model = win.formSchema.model;\n  var k = schema.stateKey || 'accordionState';\n  var cur = (model[k] || {});\n  var isOpen = !!cur[item.id];\n  var t = schema.type || 'single';\n  var canCollapse = (schema.collapsible !== false);\n\n  var nextMap;\n\n  if (t === 'single') {\n    // Build the next state from scratch (atomic update)\n    if (canCollapse && isOpen) {\n      nextMap = {}; // collapse the only open item\n    } else {\n      nextMap = {};             // close others\n      nextMap[item.id] = true;  // open target\n    }\n  } else {\n    // multiple: toggle this one, keep others\n    nextMap = Object.assign({}, cur, { [item.id]: !isOpen });\n  }\n\n  // Single assignment avoids intermediate paints\n  model[k] = nextMap;\n})()\" class=\"w-full flex items-center justify-between gap-2 px-4 py-3 text-left hover:bg-accent hover:text-accent-foreground transition-colors disabled:opacity-50 disabled:pointer-events-none\">\n            <span class=\"text-base font-medium\">{{ item.title }}</span>\n            <i class=\"fa-regular fa-chevron-down transition-transform duration-200\" :class=\"((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[schema.stateKey] || {})[item.id]) ? 'rotate-180' : 'rotate-0'\"></i>\n        </button>\n\n        <!-- Content -->\n        <div :id=\"(schema.idPrefix || 'acc') + '-' + item.id + '-content'\" role=\"region\" :aria-labelledby=\"(schema.idPrefix || 'acc') + '-' + item.id + '-trigger'\" class=\"overflow-hidden transition-all duration-300 will-change-[max-height,opacity]\" :class=\"((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[schema.stateKey] || {})[item.id]) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'\">\n            <div class=\"px-4 pb-4 text-base text-muted-foreground\">\n                {{ item.content }}\n            </div>\n        </div>\n    </div>\n</div>",
+    "idPrefix": "acc",
+    "items": [],
+    "stateKey": "accordion",
+    "type": "single",
+    "windowIndex": 0
+}
+```
+
+```html title="HTML Template"
+<div class="w-full bg-card text-card-foreground border border-border rounded-lg divide-y divide-border overflow-hidden">
+    <!-- Item -->
+    <div v-for="(item, idx) in schema.items" :key="item.id" class="group">
+        <!-- Trigger -->
+        <button :id="(schema.idPrefix || 'acc') + '-' + item.id + '-trigger'" :aria-controls="(schema.idPrefix || 'acc') + '-' + item.id + '-content'" role="button" :aria-expanded="!!(vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[schema.stateKey] || {})[item.id]" :disabled="item.disabled" @click="(function(){
+  var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+  var model = win.formSchema.model;
+  var k = schema.stateKey || 'accordionState';
+  var cur = (model[k] || {});
+  var isOpen = !!cur[item.id];
+  var t = schema.type || 'single';
+  var canCollapse = (schema.collapsible !== false);
+
+  var nextMap;
+
+  if (t === 'single') {
+    // Build the next state from scratch (atomic update)
+    if (canCollapse && isOpen) {
+      nextMap = {}; // collapse the only open item
+    } else {
+      nextMap = {};             // close others
+      nextMap[item.id] = true;  // open target
+    }
+  } else {
+    // multiple: toggle this one, keep others
+    nextMap = Object.assign({}, cur, { [item.id]: !isOpen });
+  }
+
+  // Single assignment avoids intermediate paints
+  model[k] = nextMap;
+})()" class="w-full flex items-center justify-between gap-2 px-4 py-3 text-left hover:bg-accent hover:text-accent-foreground transition-colors disabled:opacity-50 disabled:pointer-events-none">
+            <span class="text-base font-medium">{{ item.title }}</span>
+            <i class="fa-regular fa-chevron-down transition-transform duration-200" :class="((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[schema.stateKey] || {})[item.id]) ? 'rotate-180' : 'rotate-0'"></i>
+        </button>
+
+        <!-- Content -->
+        <div :id="(schema.idPrefix || 'acc') + '-' + item.id + '-content'" role="region" :aria-labelledby="(schema.idPrefix || 'acc') + '-' + item.id + '-trigger'" class="overflow-hidden transition-all duration-300 will-change-[max-height,opacity]" :class="((vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model[schema.stateKey] || {})[item.id]) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'">
+            <div class="px-4 pb-4 text-base text-muted-foreground">
+                {{ item.content }}
+            </div>
+        </div>
+    </div>
+</div>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Accordion component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`name`**: Component name (must be "Accordion")
+- **`type`**: Accordion mode - "single" (one panel open) or "multiple" (multiple panels open)
+- **`collapsible`**: Whether panels can be closed in single mode (true/false)
+- **`stateKey`**: Model path for storing accordion state
+- **`idPrefix`**: Prefix for generating unique HTML element IDs
+- **`windowIndex`**: Window index for multi-window applications (default: 0)
+- **`items`**: Array of accordion items with `id`, `title`, `content`, and optional `disabled` properties
 
 ---
 

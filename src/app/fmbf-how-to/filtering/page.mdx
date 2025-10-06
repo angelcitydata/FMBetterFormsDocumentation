@@ -13,7 +13,7 @@ Since we're working with different pages (a list view and a filter popover (anot
 ## App model
 To do that we implement the app model which holds the `selectedFilter` property at any time. I think we only have one filter at a time, so it is easy enough to use the same object. This app model property looks like this:
 <CodeGroup>
-```json {{ title: 'App Model Structure' }}
+```json title="App Model Structure"
 {
   "selectedFilter": {
     "data": {},
@@ -61,7 +61,7 @@ The list view page has the following properties in its model:
 </Col>
 <Col>
 <CodeGroup>
-```json {{ title: 'Page Model Structure' }}
+```json title="Page Model Structure"
 {
       "availableFilters": [{
         "data": {},
@@ -111,7 +111,7 @@ The filter popover page has the following properties in its model:
 </Col>
 <Col>
 <CodeGroup>
-```json {{ title: 'Filter Popover Page Model Structure' }}
+```json title="Filter Popover Page Model Structure"
 {
     "_hideHeader": true,
     "activeField": "",

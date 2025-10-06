@@ -147,14 +147,14 @@ The Tabs component is configured using JSON objects with properties for form int
 ### Basic Tabs
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Tabs" 
         modelKey="activeTab"
         :items="model.tabItems">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define basic tabs in your model
 model.activeTab = "general"
 model.tabItems = [
@@ -164,7 +164,7 @@ model.tabItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "activeTab",
   "items": [
@@ -183,14 +183,14 @@ model.tabItems = [
 ### Tabs with Icons
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Tabs" 
         modelKey="tabSelection"
         :items="model.tabItems">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define tabs with icons in your model
 model.tabSelection = "caseInfo"
 model.tabItems = [
@@ -201,7 +201,7 @@ model.tabItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "tabSelection",
   "items": [
@@ -220,7 +220,7 @@ model.tabItems = [
 ### Solid Variant Tabs
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Tabs" 
         modelKey="selectedSection"
         variant="solid"
@@ -228,7 +228,7 @@ model.tabItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define solid variant tabs in your model
 model.selectedSection = "overview"
 model.sectionItems = [
@@ -238,7 +238,7 @@ model.sectionItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "selectedSection",
   "items": [
@@ -257,7 +257,7 @@ model.sectionItems = [
 ### Pill Variant Tabs
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Tabs" 
         modelKey="activeView"
         variant="pill"
@@ -265,7 +265,7 @@ model.sectionItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define pill variant tabs in your model
 model.activeView = "grid"
 model.viewItems = [
@@ -275,7 +275,7 @@ model.viewItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "activeView",
   "items": [
@@ -294,7 +294,7 @@ model.viewItems = [
 ### Vertical Orientation Tabs
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Tabs" 
         modelKey="navigationTab"
         orientation="vertical"
@@ -303,7 +303,7 @@ model.viewItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define vertical tabs in your model
 model.navigationTab = "dashboard"
 model.navItems = [
@@ -314,7 +314,7 @@ model.navItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "navigationTab",
   "items": [
@@ -334,14 +334,14 @@ model.navItems = [
 ### Tabs with Disabled Items
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Tabs" 
         modelKey="currentTab"
         :items="model.tabItems">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define tabs with disabled items in your model
 model.currentTab = "available"
 model.tabItems = [
@@ -352,7 +352,7 @@ model.tabItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "currentTab",
   "items": [
@@ -371,7 +371,7 @@ model.tabItems = [
 ### Complete Tabs Example with Action
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Tabs" 
         modelKey="activeSection"
         variant="pill"
@@ -382,7 +382,7 @@ model.tabItems = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define complete tabs in your model
 model.activeSection = "overview"
 model.sectionItems = [
@@ -393,7 +393,7 @@ model.sectionItems = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "modelKey": "activeSection",
   "items": [

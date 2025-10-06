@@ -109,14 +109,14 @@ The Badge component is configured using JSON objects with properties for text, s
 ### Basic Status Badge
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Badge" 
         label="Active" 
         variant="success">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define badge in your model
 model.statusBadge = {
   label: 'Active',
@@ -124,7 +124,7 @@ model.statusBadge = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Active",
   "variant": "success"
@@ -136,7 +136,7 @@ model.statusBadge = {
 ### Badge with Icon
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Badge" 
         label="New" 
         variant="primary"
@@ -144,7 +144,7 @@ model.statusBadge = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define badge with icon in your model
 model.newBadge = {
   label: 'New',
@@ -153,7 +153,7 @@ model.newBadge = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "New",
   "variant": "primary",
@@ -166,7 +166,7 @@ model.newBadge = {
 ### Dismissible Notification Badge
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Badge" 
         label="Notification" 
         variant="info"
@@ -176,7 +176,7 @@ model.newBadge = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define dismissible badge in your model
 model.notificationBadge = {
   label: 'Notification',
@@ -187,7 +187,7 @@ model.notificationBadge = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Notification",
   "variant": "info",
@@ -202,7 +202,7 @@ model.notificationBadge = {
 ### Pill-Shaped Badge
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Badge" 
         label="Beta" 
         variant="warning"
@@ -210,7 +210,7 @@ model.notificationBadge = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define pill-shaped badge in your model
 model.betaBadge = {
   label: 'Beta',
@@ -219,7 +219,7 @@ model.betaBadge = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Beta",
   "variant": "warning",
@@ -232,7 +232,7 @@ model.betaBadge = {
 ### Badge with Right Icon
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Badge" 
         label="External Link" 
         variant="outline"
@@ -240,7 +240,7 @@ model.betaBadge = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define badge with right icon in your model
 model.linkBadge = {
   label: 'External Link',
@@ -249,7 +249,7 @@ model.linkBadge = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "External Link",
   "variant": "outline",
@@ -262,7 +262,7 @@ model.linkBadge = {
 ### Error Status Badge
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="Badge" 
         label="Error" 
         variant="destructive"
@@ -270,7 +270,7 @@ model.linkBadge = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define error badge in your model
 model.errorBadge = {
   label: 'Error',
@@ -279,7 +279,7 @@ model.errorBadge = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "label": "Error",
   "variant": "destructive",
@@ -288,6 +288,105 @@ model.errorBadge = {
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Badge component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "actionOptions": {},
+    "dismissible": false,
+    "html": "<span\n  :class=\"\n    // base\n    'inline-flex items-center gap-1.5 w-fit select-none text-xs font-medium px-2.5 py-1 border transition-colors ' +\n    // shape\n    (schema.pill ? 'rounded-full ' : 'rounded-md ') +\n    // variant\n    (\n      schema.variant==='primary'      ? 'bg-primary text-primary-foreground border-transparent' :\n      schema.variant==='secondary'    ? 'bg-secondary text-secondary-foreground border-transparent' :\n      schema.variant==='destructive'  ? 'bg-destructive text-destructive-foreground border-transparent' :\n      schema.variant==='outline'      ? 'bg-transparent text-foreground border-border' :\n      schema.variant==='success'      ? 'bg-success text-foreground border-transparent' :\n      schema.variant==='warning'      ? 'bg-warning text-foreground border-transparent' :\n      schema.variant==='info'         ? 'bg-info text-foreground border-transparent' :\n                                        'bg-foreground text-background border-transparent'\n    )\n  \"\n>\n  <!-- Left icon -->\n  <i v-if=\"schema.icon\" class=\"fa-regular\" :class=\"schema.icon\"></i>\n\n  <!-- Label -->\n  <span>{{ schema.label || 'Badge' }}</span>\n\n  <!-- Right icon -->\n  <i v-if=\"schema.iconRight\" class=\"fa-regular\" :class=\"schema.iconRight\"></i>\n\n  <!-- Dismiss -->\n  <button\n    v-if=\"schema.dismissible\"\n    type=\"button\"\n    class=\"ml-1 inline-flex h-4 w-4 items-center justify-center rounded focus:outline-none focus:ring-2 focus:ring-ring hover:bg-accent hover:text-accent-foreground\"\n    aria-label=\"Remove badge\"\n    @click=\"schema.namedAction && namedAction(schema.namedAction, schema.actionOptions)\"\n  >\n    <i class=\"fa-regular fa-xmark text-[10px]\"></i>\n  </button>\n</span>",
+    "icon": "",
+    "iconRight": "",
+    "label": "Badge",
+    "namedAction": "",
+    "pill": false,
+    "variant": "default",
+    "windowIndex": 0
+}
+```
+
+```html title="HTML Template"
+<span
+  :class="
+    // base
+    'inline-flex items-center gap-1.5 w-fit select-none text-xs font-medium px-2.5 py-1 border transition-colors ' +
+    // shape
+    (schema.pill ? 'rounded-full ' : 'rounded-md ') +
+    // variant
+    (
+      schema.variant==='primary'      ? 'bg-primary text-primary-foreground border-transparent' :
+      schema.variant==='secondary'    ? 'bg-secondary text-secondary-foreground border-transparent' :
+      schema.variant==='destructive'  ? 'bg-destructive text-destructive-foreground border-transparent' :
+      schema.variant==='outline'      ? 'bg-transparent text-foreground border-border' :
+      schema.variant==='success'      ? 'bg-success text-foreground border-transparent' :
+      schema.variant==='warning'      ? 'bg-warning text-foreground border-transparent' :
+      schema.variant==='info'         ? 'bg-info text-foreground border-transparent' :
+                                        'bg-foreground text-background border-transparent'
+    )
+  "
+>
+  <!-- Left icon -->
+  <i v-if="schema.icon" class="fa-regular" :class="schema.icon"></i>
+
+  <!-- Label -->
+  <span>{{ schema.label || 'Badge' }}</span>
+
+  <!-- Right icon -->
+  <i v-if="schema.iconRight" class="fa-regular" :class="schema.iconRight"></i>
+
+  <!-- Dismiss -->
+  <button
+    v-if="schema.dismissible"
+    type="button"
+    class="ml-1 inline-flex h-4 w-4 items-center justify-center rounded focus:outline-none focus:ring-2 focus:ring-ring hover:bg-accent hover:text-accent-foreground"
+    aria-label="Remove badge"
+    @click="schema.namedAction && namedAction(schema.namedAction, schema.actionOptions)"
+  >
+    <i class="fa-regular fa-xmark text-[10px]"></i>
+  </button>
+</span>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Badge component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`label`**: Badge text content
+- **`variant`**: Visual style variant (default, primary, secondary, destructive, outline, success, warning, info)
+- **`icon`**: Font Awesome icon class for left side
+- **`iconRight`**: Font Awesome icon class for right side
+- **`pill`**: Whether to use pill shape (rounded-full) or rounded corners
+- **`dismissible`**: Whether to show dismiss button
+- **`namedAction`**: Action to trigger when dismiss button is clicked
+- **`actionOptions`**: Additional options for the named action
+- **`windowIndex`**: Window index for multi-window applications (default: 0)
 
 ---
 

@@ -73,7 +73,7 @@ The Alert Dialog component is configured using JSON objects. The `actionButtons`
 ### Basic Confirmation Dialog
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="AlertDialog" 
         title="Confirm Action" 
         body="Are you sure you want to proceed with this action?"
@@ -81,7 +81,7 @@ The Alert Dialog component is configured using JSON objects. The `actionButtons`
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define action buttons in your model
 model.confirmButtons = [
   { label: 'Cancel', variant: 'outline', namedAction: 'closeDialog' },
@@ -89,7 +89,7 @@ model.confirmButtons = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Confirm Action",
   "body": "Are you sure you want to proceed with this action?",
@@ -113,7 +113,7 @@ model.confirmButtons = [
 ### Delete Confirmation Dialog
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="AlertDialog" 
         title="Delete Record?" 
         body="Are you sure you want to delete this record? This action cannot be undone."
@@ -121,7 +121,7 @@ model.confirmButtons = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define action buttons in your model
 model.deleteButtons = [
   { label: 'Cancel', variant: 'outline', namedAction: 'closeDialog' },
@@ -134,7 +134,7 @@ model.deleteButtons = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Delete Record?",
   "body": "Are you sure you want to delete this record? This action cannot be undone.",
@@ -159,7 +159,7 @@ model.deleteButtons = [
 ### Save Changes Dialog
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="AlertDialog" 
         title="Save Changes?" 
         body="You have unsaved changes. Would you like to save them before continuing?"
@@ -167,7 +167,7 @@ model.deleteButtons = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define action buttons in your model
 model.saveButtons = [
   { label: 'Cancel', variant: 'outline', namedAction: 'closeDialog' },
@@ -181,7 +181,7 @@ model.saveButtons = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Save Changes?",
   "body": "You have unsaved changes. Would you like to save them before continuing?",
@@ -207,7 +207,7 @@ model.saveButtons = [
 ### Approval Workflow Dialog
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="AlertDialog" 
         title="Approve Request" 
         body="Review and approve this request. You can also reject it or save it for later review."
@@ -215,7 +215,7 @@ model.saveButtons = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define action buttons in your model
 model.approvalButtons = [
   {
@@ -239,7 +239,7 @@ model.approvalButtons = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Approve Request",
   "body": "Review and approve this request. You can also reject it or save it for later review.",
@@ -271,7 +271,7 @@ model.approvalButtons = [
 ### Unsaved Changes Warning
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="AlertDialog" 
         title="Unsaved Changes" 
         body="You have unsaved changes that will be lost if you leave this page. What would you like to do?"
@@ -279,7 +279,7 @@ model.approvalButtons = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define action buttons in your model
 model.unsavedButtons = [
   {
@@ -302,7 +302,7 @@ model.unsavedButtons = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Unsaved Changes",
   "body": "You have unsaved changes that will be lost if you leave this page. What would you like to do?",
@@ -333,7 +333,7 @@ model.unsavedButtons = [
 ### Information Alert
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="AlertDialog" 
         title="Important Notice" 
         body="Your subscription will expire in 7 days. Please renew to continue using all features."
@@ -341,7 +341,7 @@ model.unsavedButtons = [
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define action buttons in your model
 model.noticeButtons = [
   {
@@ -358,7 +358,7 @@ model.noticeButtons = [
 ]
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "title": "Important Notice",
   "body": "Your subscription will expire in 7 days. Please renew to continue using all features.",
@@ -379,6 +379,140 @@ model.noticeButtons = [
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Alert Dialog component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "actionButtons": [{
+        "actionOptions": {},
+        "icon": "",
+        "label": "Cancel",
+        "loadingKey": "",
+        "namedAction": "",
+        "variant": "outline"
+    }, {
+        "actionOptions": {},
+        "icon": "",
+        "label": "Delete",
+        "loadingKey": "",
+        "namedAction": "",
+        "variant": "destructive"
+    }, {
+        "actionOptions": {},
+        "icon": "",
+        "label": "Confirm",
+        "loadingKey": "",
+        "namedAction": "",
+        "variant": "primary"
+    }],
+    "body": "Accusantium vel velit sed ullam exercitationem hic dolore officia. Dolores veniam harum sed illo. Velit rerum fuga magni aut. Officiis at quas velit dolore facere voluptatem et error nihil amet eveniet exercitationem. Omnis reprehenderit soluta culpa sit amet eos officiis aut et vel sit et corrupti. Error minus officia facere voluptas maxime magni.",
+    "html": "<div role=\"alertdialog\" class=\"flex flex-col gap-4 bg-background border border-border p-6 rounded-lg shadow-lg sm:max-w-xl\">\n    <div class=\"flex flex-col gap-2 text-center sm:text-left\">\n        <h2 class=\"text-lg font-semibold text-foreground\">\n            {{schema.title}}\n        </h2>\n        <p class=\"text-muted-foreground text-sm\">\n            {{schema.body}}\n        </p>\n    </div>\n\n    <div class=\"flex flex-col-reverse gap-4 sm:flex-row sm:justify-end\">\n        <button v-for=\"(btn, idx) in (schema.actionButtons || [])\" :key=\"idx\" type=\"button\" @click=\"(function(){\n      var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n      var m   = win.formSchema.model;\n      var lk  = btn.loadingKey || '';           // may be empty\n      var isLoading = !!lk && !!m[lk];\n      if (isLoading) return;                    // guard\n      if (btn.namedAction) namedAction(btn.namedAction, btn.actionOptions || {});\n    })()\" :disabled=\"(function(){\n      var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n      var m   = win.formSchema.model;\n      var lk  = btn.loadingKey || '';\n      return !!(lk && m[lk]);\n    })()\" :class=\"\n      // base\n      'inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 font-medium transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none ' +\n      // width (default to w-fit in dialogs)\n      ((btn.width==='full') ? 'w-full ' : 'w-fit ') +\n      // hover/active motion (optional)\n      'hover:scale-105 active:scale-95 ' +\n      // variant\n      (\n        btn.variant==='primary'      ? 'bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active' :\n        btn.variant==='secondary'    ? 'bg-secondary text-secondary-foreground hover:bg-secondary-hover active:bg-secondary-active' :\n        btn.variant==='destructive'  ? 'bg-destructive text-destructive-foreground hover:bg-destructive-hover active:bg-destructive-active' :\n        btn.variant==='success'      ? 'bg-success text-foreground hover:opacity-90 active:opacity-80' :\n        btn.variant==='warning'      ? 'bg-warning text-foreground hover:opacity-90 active:opacity-80' :\n        btn.variant==='info'         ? 'bg-info text-foreground hover:opacity-90 active:opacity-80' :\n        btn.variant==='outline'      ? 'border border-border text-foreground hover:bg-accent hover:text-accent-foreground' :\n        btn.variant==='ghost'        ? 'text-foreground hover:bg-accent hover:text-accent-foreground' :\n        btn.variant==='link'         ? 'text-primary hover:text-primary-hover active:text-primary-active underline underline-offset-4' :\n                                       'bg-foreground text-background hover:bg-foreground/90 hover:text-background'\n      )\n    \">\n            <!-- Icon / Spinner -->\n            <i v-if=\"btn.icon && !(function(){\n        var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n        var m   = win.formSchema.model;\n        var lk  = btn.loadingKey || '';\n        return !!(lk && m[lk]);\n      })()\" class=\"fa-regular\" :class=\"btn.icon\"></i>\n\n            <i v-if=\"(function(){\n        var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n        var m   = win.formSchema.model;\n        var lk  = btn.loadingKey || '';\n        return !!(lk && m[lk]);\n      })()\" class=\"fa-regular fa-spinner-third animate-spin\"></i>\n\n            {{ btn.label || 'Button' }}\n        </button>\n    </div>\n</div>",
+    "title": "Sequi aliquid quasi in ut odio?",
+    "windowIndex": 0
+}
+```
+
+```html title="HTML Template"
+<div role="alertdialog" class="flex flex-col gap-4 bg-background border border-border p-6 rounded-lg shadow-lg sm:max-w-xl">
+    <div class="flex flex-col gap-2 text-center sm:text-left">
+        <h2 class="text-lg font-semibold text-foreground">
+            {{schema.title}}
+        </h2>
+        <p class="text-muted-foreground text-sm">
+            {{schema.body}}
+        </p>
+    </div>
+
+    <div class="flex flex-col-reverse gap-4 sm:flex-row sm:justify-end">
+        <button v-for="(btn, idx) in (schema.actionButtons || [])" :key="idx" type="button" @click="(function(){
+      var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+      var m   = win.formSchema.model;
+      var lk  = btn.loadingKey || '';           // may be empty
+      var isLoading = !!lk && !!m[lk];
+      if (isLoading) return;                    // guard
+      if (btn.namedAction) namedAction(btn.namedAction, btn.actionOptions || {});
+    })()" :disabled="(function(){
+      var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+      var m   = win.formSchema.model;
+      var lk  = btn.loadingKey || '';
+      return !!(lk && m[lk]);
+    })()" :class="
+      // base
+      'inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 font-medium transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none ' +
+      // width (default to w-fit in dialogs)
+      ((btn.width==='full') ? 'w-full ' : 'w-fit ') +
+      // hover/active motion (optional)
+      'hover:scale-105 active:scale-95 ' +
+      // variant
+      (
+        btn.variant==='primary'      ? 'bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active' :
+        btn.variant==='secondary'    ? 'bg-secondary text-secondary-foreground hover:bg-secondary-hover active:bg-secondary-active' :
+        btn.variant==='destructive'  ? 'bg-destructive text-destructive-foreground hover:bg-destructive-hover active:bg-destructive-active' :
+        btn.variant==='success'      ? 'bg-success text-foreground hover:opacity-90 active:opacity-80' :
+        btn.variant==='warning'      ? 'bg-warning text-foreground hover:opacity-90 active:opacity-80' :
+        btn.variant==='info'         ? 'bg-info text-foreground hover:opacity-90 active:opacity-80' :
+        btn.variant==='outline'      ? 'border border-border text-foreground hover:bg-accent hover:text-accent-foreground' :
+        btn.variant==='ghost'        ? 'text-foreground hover:bg-accent hover:text-accent-foreground' :
+        btn.variant==='link'         ? 'text-primary hover:text-primary-hover active:text-primary-active underline underline-offset-4' :
+                                       'bg-foreground text-background hover:bg-foreground/90 hover:text-background'
+      )
+    ">
+            <!-- Icon / Spinner -->
+            <i v-if="btn.icon && !(function(){
+        var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+        var m   = win.formSchema.model;
+        var lk  = btn.loadingKey || '';
+        return !!(lk && m[lk]);
+      })()" class="fa-regular" :class="btn.icon"></i>
+
+            <i v-if="(function(){
+        var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+        var m   = win.formSchema.model;
+        var lk  = btn.loadingKey || '';
+        return !!(lk && m[lk]);
+      })()" class="fa-regular fa-spinner-third animate-spin"></i>
+
+            {{ btn.label || 'Button' }}
+        </button>
+    </div>
+</div>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Alert Dialog component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`title`**: Dialog heading text
+- **`body`**: Main content/message text
+- **`actionButtons`**: Array of button objects with `label`, `variant`, `icon`, `namedAction`, `actionOptions`, `loadingKey`, and `width` properties
+- **`windowIndex`**: Window index for multi-window applications (default: 0)
 
 ---
 

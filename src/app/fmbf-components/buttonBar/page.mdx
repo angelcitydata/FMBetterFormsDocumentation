@@ -112,14 +112,14 @@ The Button Bar component is configured using JSON objects with properties for op
 ### Basic Button Bar
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ButtonBar" 
         items='[{"label": "Option 1", "value": "opt1"}, {"label": "Option 2", "value": "opt2"}]'
         modelKey="selectedOption">
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define button bar in your model
 model.optionSelector = {
   items: [
@@ -130,7 +130,7 @@ model.optionSelector = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "items": [
     {"label": "Option 1", "value": "opt1"},
@@ -145,7 +145,7 @@ model.optionSelector = {
 ### Button Bar with Icons
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ButtonBar" 
         items='[{"label": "Home", "value": "home", "icon": "fa-home"}, {"label": "Profile", "value": "profile", "icon": "fa-user"}]'
         variant="pill"
@@ -153,7 +153,7 @@ model.optionSelector = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define button bar with icons in your model
 model.navigationBar = {
   items: [
@@ -165,7 +165,7 @@ model.navigationBar = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "items": [
     {"label": "Home", "value": "home", "icon": "fa-home"},
@@ -181,7 +181,7 @@ model.navigationBar = {
 ### Full-Width Button Bar
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ButtonBar" 
         items='[{"label": "Small", "value": "small"}, {"label": "Medium", "value": "medium"}, {"label": "Large", "value": "large"}]'
         variant="solid"
@@ -190,7 +190,7 @@ model.navigationBar = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define full-width button bar in your model
 model.sizeSelector = {
   items: [
@@ -204,7 +204,7 @@ model.sizeSelector = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "items": [
     {"label": "Small", value: "small"},
@@ -222,7 +222,7 @@ model.sizeSelector = {
 ### Vertical Button Bar
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ButtonBar" 
         items='[{"label": "Settings", "value": "settings"}, {"label": "Help", "value": "help"}, {"label": "About", "value": "about"}]'
         orientation="vertical"
@@ -231,7 +231,7 @@ model.sizeSelector = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define vertical button bar in your model
 model.sideMenu = {
   items: [
@@ -245,7 +245,7 @@ model.sideMenu = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "items": [
     {"label": "Settings", value: "settings"},
@@ -263,7 +263,7 @@ model.sideMenu = {
 ### Button Bar with Disabled Options
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ButtonBar" 
         items='[{"label": "Active", "value": "active"}, {"label": "Disabled", "value": "disabled", "disabled": true}, {"label": "Another", "value": "another"}]'
         variant="pill"
@@ -272,7 +272,7 @@ model.sideMenu = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define button bar with disabled options in your model
 model.statusBar = {
   items: [
@@ -286,7 +286,7 @@ model.statusBar = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "items": [
     {"label": "Active", value: "active"},
@@ -304,7 +304,7 @@ model.statusBar = {
 ### Button Bar with Change Handler
 
 <CodeGroup>
-```html {{ title: 'HTML Component' }}
+```html title="HTML Component"
 <bfcomp name="ButtonBar" 
         items='[{"label": "Tab 1", "value": "tab1"}, {"label": "Tab 2", "value": "tab2"}, {"label": "Tab 3", "value": "tab3"}]'
         variant="underline"
@@ -313,7 +313,7 @@ model.statusBar = {
 </bfcomp>
 ```
 
-```javascript {{ title: 'Model Definition' }}
+```javascript title="Model Definition"
 // Define button bar with change handler in your model
 model.tabBar = {
   items: [
@@ -327,7 +327,7 @@ model.tabBar = {
 }
 ```
 
-```json {{ title: 'JSON Configuration' }}
+```json title="JSON Configuration"
 {
   "items": [
     {"label": "Tab 1", value: "tab1"},
@@ -341,6 +341,211 @@ model.tabBar = {
 ```
 
 </CodeGroup>
+
+---
+
+## Component Schema
+
+The complete component schema for the Button Bar component. Copy and paste this code into the Component Schema section of your BetterForms app.
+
+### Complete Schema
+
+<CodeGroup>
+```json title="Component Schema"
+{
+    "fullWidth": "false",
+    "html": "<!-- SEGMENTED CONTROL / BUTTON BAR -->\n<div\n  role=\"tablist\"\n  :aria-orientation=\"(schema.orientation==='vertical' ? 'vertical' : 'horizontal')\"\n  :class=\"(function(){\n    function truthy(v){ v=(v??'')+''; v=v.toLowerCase(); return (v==='true'||v==='1'||v==='on'||v==='yes'); }\n\n    var v = schema.variant || 'underline';\n    var r = schema.radius  || 'rounded-md';\n    var full = truthy(schema.fullWidth);\n\n    // use flex so width can expand; toggle w-full/w-fit\n    var base = (schema.orientation==='vertical' ? 'flex flex-col' : 'flex') + ' gap-1 ' + (full ? 'w-full' : 'w-fit');\n\n    if (v === 'pill')    return base + ' bg-muted/40 p-1 rounded-full';\n    if (v === 'solid')   return base + ' bg-muted/40 p-1 ' + r;\n    if (v === 'rounded') return base + ' bg-muted/40 p-1 ' + r;\n    return base; // underline\n  })()\"\n\n  @keydown.stop.prevent=\"(function(e){\n    var code  = e.key;\n    var raw   = schema.items;\n    var items;\n    try { items = Array.isArray(raw) ? raw : (typeof raw==='string' ? JSON.parse(raw) : []); } catch(_) { items = []; }\n    if (!items.length) return;\n\n    var win   = vueapp.$store.state.wndw.windows[schema.windowIndex];\n    var model = win.formSchema.model || {};\n    var k     = schema.modelKey || 'segValue';\n\n    function isDisabled(it){\n      var d = it && it.disabled;\n      if (d === true) return true;\n      var s = ((d ?? '') + '').toLowerCase();\n      return ['true','1','on','yes'].includes(s);\n    }\n\n    var idx = Math.max(0, items.findIndex(function(it){ return it && it.value === model[k]; }));\n    var horiz = (schema.orientation!=='vertical');\n\n    function nextIndex(dir){\n      var i = idx;\n      for (var tries=0; tries<items.length; tries++){\n        i = (i + dir + items.length) % items.length;\n        if (!isDisabled(items[i])) return i;\n      }\n      return idx;\n    }\n\n    if ((horiz && code==='ArrowRight') || (!horiz && code==='ArrowDown')) { var ni = nextIndex(+1); model[k] = items[ni]?.value; return; }\n    if ((horiz && code==='ArrowLeft')  || (!horiz && code==='ArrowUp'))   { var pi = nextIndex(-1); model[k] = items[pi]?.value; return; }\n    if (code==='Home'){ var f = items.find(function(it){ return it && !isDisabled(it); }); if (f) model[k]=f.value; return; }\n    if (code==='End'){ for (var j=items.length-1;j>=0;j--){ if(!isDisabled(items[j])){ model[k]=items[j].value; break; } } return; }\n  })(event)\"\n>\n  <!-- Segment -->\n  <button\n    v-for=\"(opt, i) in (function(){\n      try { return Array.isArray(schema.items) ? schema.items : (typeof schema.items==='string' ? JSON.parse(schema.items) : []); }\n      catch(_) { return []; }\n    })()\"\n    :key=\"opt.value || i\"\n    type=\"button\"\n    role=\"tab\"\n    :disabled=\"(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (opt.disabled===true)||['true','1','on','yes'].includes(v); })(opt.disabled)\"\n    :aria-selected=\"(function(){\n      var m = vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {};\n      return (m[schema.modelKey||'segValue'] === opt.value) ? 'true' : 'false';\n    })()\"\n    :tabindex=\"(function(){\n      var m = vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {};\n      return (m[schema.modelKey||'segValue'] === opt.value) ? 0 : -1;\n    })()\"\n    @click=\"(function(){\n      if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (opt.disabled===true)||['true','1','on','yes'].includes(v); })(opt.disabled)) return;\n      var win = vueapp.$store.state.wndw.windows[schema.windowIndex];\n      var m   = win.formSchema.model || {};\n      var k   = schema.modelKey || 'segValue';\n      m[k]    = opt.value;\n      if (schema.onChange) { namedAction(schema.onChange, { value: opt.value, index: i }); }\n    })()\"\n\n    :class=\"(function(){\n      function truthy(v){ v=(v??'')+''; v=v.toLowerCase(); return (v==='true'||v==='1'||v==='on'||v==='yes'); }\n\n      var m   = vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {};\n      var on  = (m[schema.modelKey||'segValue'] === opt.value);\n      var v   = schema.variant || 'underline';\n      var r   = schema.radius  || 'rounded-md';\n      var s   = (schema.scheme || 'neutral').toLowerCase();\n      var grow = truthy(schema.fullWidth);\n\n      // shape helpers\n      var shape = (v === 'pill') ? 'rounded-full' : r;\n\n      // color helpers for ACTIVE chip\n      function activeByScheme(sc){\n        switch(sc){\n          case 'primary':     return 'bg-primary text-primary-foreground';\n          case 'secondary':   return 'bg-secondary text-secondary-foreground';\n          case 'destructive': return 'bg-destructive text-destructive-foreground';\n          case 'success':     return 'bg-success text-foreground';\n          case 'warning':     return 'bg-warning text-foreground';\n          case 'info':        return 'bg-info text-foreground';\n          case 'neutral':\n          default:            return 'bg-background text-foreground border border-input shadow-sm';\n        }\n      }\n      // underline color per scheme\n      function underlineByScheme(sc){\n        switch(sc){\n          case 'secondary':   return 'after:bg-secondary';\n          case 'destructive': return 'after:bg-destructive';\n          case 'success':     return 'after:bg-success';\n          case 'warning':     return 'after:bg-warning';\n          case 'info':        return 'after:bg-info';\n          case 'neutral':     return 'after:bg-primary';\n          case 'primary':\n          default:            return 'after:bg-primary';\n        }\n      }\n\n      var base = [\n        'relative inline-flex items-center justify-center text-sm font-medium transition-colors',\n        'focus:outline-none disabled:opacity-50 disabled:pointer-events-none',\n        (schema.orientation==='vertical' ? 'px-3 py-2' : 'px-4 py-2'),\n        (grow ? 'flex-1 min-w-0' : '') // stretch evenly if fullWidth\n      ].join(' ');\n\n      // variant-specific composition\n      if (v === 'solid' || v === 'pill' || v === 'rounded') {\n        return base + ' ' + (on\n          ? (activeByScheme(s) + ' ' + shape)\n          : ('text-muted-foreground hover:text-foreground ' + shape));\n      }\n\n      // underline (default)\n      return base + ' ' + (on\n        ? ('text-foreground after:absolute after:left-0 after:-bottom-[1px] after:h-0.5 after:w-full after:content-[\\'\\'] ' + underlineByScheme(s))\n        : 'text-muted-foreground hover:text-foreground');\n    })()\"\n  >\n    <i v-if=\"opt.icon\" class=\"fa-regular text-[12px] mr-1\" :class=\"opt.icon\"></i>\n    <span>{{ opt.label || opt.value || ('Option ' + (i+1)) }}</span>\n  </button>\n</div>",
+    "items": [],
+    "modelKey": "rangeChoice",
+    "onChange": "",
+    "orientation": "horizontal",
+    "schema": "neutral",
+    "variant": "pill",
+    "windowIndex": 0
+}
+```
+
+```html title="HTML Template"
+<!-- SEGMENTED CONTROL / BUTTON BAR -->
+<div
+  role="tablist"
+  :aria-orientation="(schema.orientation==='vertical' ? 'vertical' : 'horizontal')"
+  :class="(function(){
+    function truthy(v){ v=(v??'')+''; v=v.toLowerCase(); return (v==='true'||v==='1'||v==='on'||v==='yes'); }
+
+    var v = schema.variant || 'underline';
+    var r = schema.radius  || 'rounded-md';
+    var full = truthy(schema.fullWidth);
+
+    // use flex so width can expand; toggle w-full/w-fit
+    var base = (schema.orientation==='vertical' ? 'flex flex-col' : 'flex') + ' gap-1 ' + (full ? 'w-full' : 'w-fit');
+
+    if (v === 'pill')    return base + ' bg-muted/40 p-1 rounded-full';
+    if (v === 'solid')   return base + ' bg-muted/40 p-1 ' + r;
+    if (v === 'rounded') return base + ' bg-muted/40 p-1 ' + r;
+    return base; // underline
+  })()"
+
+  @keydown.stop.prevent="(function(e){
+    var code  = e.key;
+    var raw   = schema.items;
+    var items;
+    try { items = Array.isArray(raw) ? raw : (typeof raw==='string' ? JSON.parse(raw) : []); } catch(_) { items = []; }
+    if (!items.length) return;
+
+    var win   = vueapp.$store.state.wndw.windows[schema.windowIndex];
+    var model = win.formSchema.model || {};
+    var k     = schema.modelKey || 'segValue';
+
+    function isDisabled(it){
+      var d = it && it.disabled;
+      if (d === true) return true;
+      var s = ((d ?? '') + '').toLowerCase();
+      return ['true','1','on','yes'].includes(s);
+    }
+
+    var idx = Math.max(0, items.findIndex(function(it){ return it && it.value === model[k]; }));
+    var horiz = (schema.orientation!=='vertical');
+
+    function nextIndex(dir){
+      var i = idx;
+      for (var tries=0; tries<items.length; tries++){
+        i = (i + dir + items.length) % items.length;
+        if (!isDisabled(items[i])) return i;
+      }
+      return idx;
+    }
+
+    if ((horiz && code==='ArrowRight') || (!horiz && code==='ArrowDown')) { var ni = nextIndex(+1); model[k] = items[ni]?.value; return; }
+    if ((horiz && code==='ArrowLeft')  || (!horiz && code==='ArrowUp'))   { var pi = nextIndex(-1); model[k] = items[pi]?.value; return; }
+    if (code==='Home'){ var f = items.find(function(it){ return it && !isDisabled(it); }); if (f) model[k]=f.value; return; }
+    if (code==='End'){ for (var j=items.length-1;j>=0;j--){ if(!isDisabled(items[j])){ model[k]=items[j].value; break; } } return; }
+  })(event)"
+>
+  <!-- Segment -->
+  <button
+    v-for="(opt, i) in (function(){
+      try { return Array.isArray(schema.items) ? schema.items : (typeof schema.items==='string' ? JSON.parse(schema.items) : []); }
+      catch(_) { return []; }
+    })()"
+    :key="opt.value || i"
+    type="button"
+    role="tab"
+    :disabled="(function(v){ v=(v??'')+''; v=v.toLowerCase(); return (opt.disabled===true)||['true','1','on','yes'].includes(v); })(opt.disabled)"
+    :aria-selected="(function(){
+      var m = vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {};
+      return (m[schema.modelKey||'segValue'] === opt.value) ? 'true' : 'false';
+    })()"
+    :tabindex="(function(){
+      var m = vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {};
+      return (m[schema.modelKey||'segValue'] === opt.value) ? 0 : -1;
+    })()"
+    @click="(function(){
+      if ((function(v){ v=(v??'')+''; v=v.toLowerCase(); return (opt.disabled===true)||['true','1','on','yes'].includes(v); })(opt.disabled)) return;
+      var win = vueapp.$store.state.wndw.windows[schema.windowIndex];
+      var m   = win.formSchema.model || {};
+      var k   = schema.modelKey || 'segValue';
+      m[k]    = opt.value;
+      if (schema.onChange) { namedAction(schema.onChange, { value: opt.value, index: i }); }
+    })()"
+
+    :class="(function(){
+      function truthy(v){ v=(v??'')+''; v=v.toLowerCase(); return (v==='true'||v==='1'||v==='on'||v==='yes'); }
+
+      var m   = vueapp.$store.state.wndw.windows[schema.windowIndex].formSchema.model || {};
+      var on  = (m[schema.modelKey||'segValue'] === opt.value);
+      var v   = schema.variant || 'underline';
+      var r   = schema.radius  || 'rounded-md';
+      var s   = (schema.scheme || 'neutral').toLowerCase();
+      var grow = truthy(schema.fullWidth);
+
+      // shape helpers
+      var shape = (v === 'pill') ? 'rounded-full' : r;
+
+      // color helpers for ACTIVE chip
+      function activeByScheme(sc){
+        switch(sc){
+          case 'primary':     return 'bg-primary text-primary-foreground';
+          case 'secondary':   return 'bg-secondary text-secondary-foreground';
+          case 'destructive': return 'bg-destructive text-destructive-foreground';
+          case 'success':     return 'bg-success text-foreground';
+          case 'warning':     return 'bg-warning text-foreground';
+          case 'info':        return 'bg-info text-foreground';
+          case 'neutral':
+          default:            return 'bg-background text-foreground border border-input shadow-sm';
+        }
+      }
+      // underline color per scheme
+      function underlineByScheme(sc){
+        switch(sc){
+          case 'secondary':   return 'after:bg-secondary';
+          case 'destructive': return 'after:bg-destructive';
+          case 'success':     return 'after:bg-success';
+          case 'warning':     return 'after:bg-warning';
+          case 'info':        return 'after:bg-info';
+          case 'neutral':     return 'after:bg-primary';
+          case 'primary':
+          default:            return 'after:bg-primary';
+        }
+      }
+
+      var base = [
+        'relative inline-flex items-center justify-center text-sm font-medium transition-colors',
+        'focus:outline-none disabled:opacity-50 disabled:pointer-events-none',
+        (schema.orientation==='vertical' ? 'px-3 py-2' : 'px-4 py-2'),
+        (grow ? 'flex-1 min-w-0' : '') // stretch evenly if fullWidth
+      ].join(' ');
+
+      // variant-specific composition
+      if (v === 'solid' || v === 'pill' || v === 'rounded') {
+        return base + ' ' + (on
+          ? (activeByScheme(s) + ' ' + shape)
+          : ('text-muted-foreground hover:text-foreground ' + shape));
+      }
+
+      // underline (default)
+      return base + ' ' + (on
+        ? ('text-foreground after:absolute after:left-0 after:-bottom-[1px] after:h-0.5 after:w-full after:content-[\'\'] ' + underlineByScheme(s))
+        : 'text-muted-foreground hover:text-foreground');
+    })()"
+  >
+    <i v-if="opt.icon" class="fa-regular text-[12px] mr-1" :class="opt.icon"></i>
+    <span>{{ opt.label || opt.value || ('Option ' + (i+1)) }}</span>
+  </button>
+</div>
+```
+</CodeGroup>
+
+### How to Add This Component to Your BetterForms App
+
+1. **Navigate to Components**: In your BetterForms site environment, click the **Components** tab in the left sidebar.
+
+2. **Create New Component**: If the Button Bar component is not already in your components list, click the **+New** button at the top left.
+
+3. **Open Component Schema**: In the new component, click the **`</> Component Schema`** button to access the schema editor.
+
+4. **Replace Schema Code**: Copy the complete schema from the **Component Schema** tab above and replace all the existing code in the Component Schema section.
+
+5. **Open HTML Tab**: Click the **HTML** tab (located directly next to the Component Schema tab) to access the HTML editor.
+
+6. **Replace HTML Code**: Copy the HTML template from the **HTML Template** tab above and replace all the existing code in the HTML section.
+
+   **Note**: This step might feel redundant since the HTML is included as a key/value in the component schema. However, this is sometimes a quirk in BetterForms, where the HTML doesn't render properly until you manually insert the HTML in the HTML tab on the new component.
+
+7. **Save Component**: Click the **Save** button in the top right to save the component for use in your application.
+
+8. **Refresh Pages**: **Important**: The component will not be available for use in any live pages you are currently viewing until you manually refresh the page using your browser's Refresh button. However, the component will be immediately available in the **Page Builder** section of every page after you save and navigate away from the Components section.
+
+### Schema Properties Reference
+
+- **`items`**: Array of option objects with `label`, `value`, optional `icon` and `disabled`
+- **`modelKey`**: Model key where selected value is stored
+- **`variant`**: Visual style variant (underline, pill, solid, rounded)
+- **`orientation`**: Layout orientation (horizontal, vertical)
+- **`fullWidth`**: Whether buttons expand to fill container width
+- **`schema`**: Color scheme for active state (neutral, primary, secondary, destructive, success, warning, info)
+- **`onChange`**: Named action to trigger on selection change
+- **`windowIndex`**: Window index for multi-window applications (default: 0)
 
 ---
 
