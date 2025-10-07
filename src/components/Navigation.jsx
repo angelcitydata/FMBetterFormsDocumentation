@@ -196,11 +196,7 @@ function NavigationGroup({ group, className }) {
 
 export const navigation = [
   {
-    title: 'How To',
-    links: [{ title: 'Filtering', href: '/fmbf-how-to/filtering' }],
-  },
-  {
-    title: 'Styling',
+    title: 'Getting Started',
     links: [
       { title: 'Before you begin', href: '/fmbf-styling/before-you-begin' },
       { title: 'DOM Header', href: '/fmbf-styling/dom-header' },
@@ -229,6 +225,12 @@ export const navigation = [
       { title: 'Switch', href: '/fmbf-components/switch' },
       { title: 'Tabs', href: '/fmbf-components/tabs' },
       { title: 'Text Area', href: '/fmbf-components/textArea' },
+    ],
+  },
+  {
+    title: 'Common Interaction Models',
+    links: [
+      { title: 'Filtering', href: '/fmbf-common-interaction-models/filtering' },
     ],
   },
 ]

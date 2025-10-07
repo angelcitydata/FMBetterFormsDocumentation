@@ -3,7 +3,7 @@ import { Heading } from '@/components/Heading'
 
 const guides = [
   {
-    href: '/fmbf-how-to/filtering',
+    href: '/fmbf-common-interaction-models/filtering',
     name: 'Filtering data',
     description: 'Learn how to filter data in a list view.',
   },
