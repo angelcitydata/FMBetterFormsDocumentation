@@ -201,6 +201,7 @@ export const navigation = [
       { title: 'Before you begin', href: '/fmbf-styling/before-you-begin' },
       { title: 'DOM Header', href: '/fmbf-styling/dom-header' },
       { title: 'CSS', href: '/fmbf-styling/css' },
+      { title: 'Theme Colors', href: '/fmbf-styling/theme-colors' },
     ],
   },
   {

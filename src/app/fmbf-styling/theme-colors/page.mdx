@@ -1,0 +1,277 @@
+export const metadata = {
+  title: 'Theme Colors',
+  description:
+    'Complete reference of all available theme colors in FM BetterForms applications.',
+}
+
+# Theme Colors
+
+A comprehensive color system that provides consistent theming across all FM BetterForms components. These colors automatically adapt to light and dark modes and follow modern design principles. {{ className: 'lead' }}
+
+---
+
+## Base Colors
+
+The foundational colors that form the base of your application's visual hierarchy.
+
+### Background & Foreground
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg border bg-background">
+    <div className="font-mono text-sm text-muted-foreground mb-2">background</div>
+    <div className="text-sm">Main background color of the application</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">foreground</div>
+    <div className="text-sm">Primary text color on backgrounds</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">tertiary-foreground</div>
+    <div className="text-sm">Lighter text color for less emphasis</div>
+  </div>
+</div>
+
+### Cards & Containers
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg border bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">card</div>
+    <div className="text-sm">Background color for card containers</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">card-foreground</div>
+    <div className="text-sm">Text color on card backgrounds</div>
+  </div>
+</div>
+
+### Popovers & Dropdowns
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg border bg-popover">
+    <div className="font-mono text-sm text-muted-foreground mb-2">popover</div>
+    <div className="text-sm">Background for floating elements</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-popover">
+    <div className="font-mono text-sm text-muted-foreground mb-2">popover-foreground</div>
+    <div className="text-sm">Text color in popovers and dropdowns</div>
+  </div>
+</div>
+
+---
+
+## Interactive Colors
+
+Colors for buttons, links, and interactive elements with hover and active states.
+
+### Primary Actions
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg bg-primary text-primary-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">primary</div>
+    <div className="text-sm">Main action color</div>
+  </div>
+  <div className="p-4 rounded-lg bg-primary/90 text-primary-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">primary-hover</div>
+    <div className="text-sm">Hover state</div>
+  </div>
+  <div className="p-4 rounded-lg bg-primary/80 text-primary-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">primary-active</div>
+    <div className="text-sm">Active/pressed state</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-card col-span-full">
+    <div className="font-mono text-sm text-muted-foreground mb-2">primary-foreground</div>
+    <div className="text-sm">Text color on primary backgrounds</div>
+  </div>
+</div>
+
+### Secondary Actions
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg bg-secondary text-secondary-foreground">
+    <div className="font-mono text-sm text-muted-foreground mb-2">secondary</div>
+    <div className="text-sm">Secondary action color</div>
+  </div>
+  <div className="p-4 rounded-lg bg-secondary/80 text-secondary-foreground">
+    <div className="font-mono text-sm text-muted-foreground mb-2">secondary-hover</div>
+    <div className="text-sm">Hover state</div>
+  </div>
+  <div className="p-4 rounded-lg bg-secondary/60 text-secondary-foreground">
+    <div className="font-mono text-sm text-muted-foreground mb-2">secondary-active</div>
+    <div className="text-sm">Active/pressed state</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-card col-span-full">
+    <div className="font-mono text-sm text-muted-foreground mb-2">secondary-foreground</div>
+    <div className="text-sm">Text color on secondary backgrounds</div>
+  </div>
+</div>
+
+---
+
+## Semantic Colors
+
+Colors that convey meaning and status information.
+
+### Utility Colors
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg bg-muted text-muted-foreground">
+    <div className="font-mono text-sm opacity-75 mb-2">muted</div>
+    <div className="text-sm">Subdued background color</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">muted-foreground</div>
+    <div className="text-sm">Subdued text color</div>
+  </div>
+  <div className="p-4 rounded-lg bg-accent text-accent-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">accent</div>
+    <div className="text-sm">Highlight and emphasis color</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">accent-foreground</div>
+    <div className="text-sm">Text color on accent backgrounds</div>
+  </div>
+</div>
+
+### Destructive Actions
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg bg-destructive text-destructive-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">destructive</div>
+    <div className="text-sm">Error and delete actions</div>
+  </div>
+  <div className="p-4 rounded-lg bg-destructive/90 text-destructive-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">destructive-hover</div>
+    <div className="text-sm">Hover state</div>
+  </div>
+  <div className="p-4 rounded-lg bg-destructive/80 text-destructive-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">destructive-active</div>
+    <div className="text-sm">Active/pressed state</div>
+  </div>
+  <div className="p-4 rounded-lg border bg-card col-span-full">
+    <div className="font-mono text-sm text-muted-foreground mb-2">destructive-foreground</div>
+    <div className="text-sm">Text color on destructive backgrounds</div>
+  </div>
+</div>
+
+### Status Colors
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg bg-green-500 text-white">
+    <div className="font-mono text-sm opacity-90 mb-2">success</div>
+    <div className="text-sm">Success states and confirmations</div>
+  </div>
+  <div className="p-4 rounded-lg bg-yellow-500 text-white">
+    <div className="font-mono text-sm opacity-90 mb-2">warning</div>
+    <div className="text-sm">Warning states and alerts</div>
+  </div>
+  <div className="p-4 rounded-lg bg-blue-500 text-white">
+    <div className="font-mono text-sm opacity-90 mb-2">info</div>
+    <div className="text-sm">Informational messages</div>
+  </div>
+</div>
+
+---
+
+## Form & Input Colors
+
+Colors specifically for form controls and interactive elements.
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg border-2 border-border bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">border</div>
+    <div className="text-sm">Default border color for elements</div>
+  </div>
+  <div className="p-4 rounded-lg border-2 border-input bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">input</div>
+    <div className="text-sm">Border color for input fields</div>
+  </div>
+  <div className="p-4 rounded-lg border-2 border-ring bg-card ring-2 ring-ring ring-offset-2">
+    <div className="font-mono text-sm text-muted-foreground mb-2">ring</div>
+    <div className="text-sm">Focus ring color for accessibility</div>
+  </div>
+</div>
+
+---
+
+## Sidebar Colors
+
+Specialized colors for sidebar navigation components.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 not-prose mb-6">
+  <div className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-900">
+    <div className="font-mono text-sm text-muted-foreground mb-2">sidebar</div>
+    <div className="text-sm">Sidebar background color</div>
+  </div>
+  <div className="p-4 rounded-lg bg-zinc-100 dark:bg-zinc-900">
+    <div className="font-mono text-sm text-muted-foreground mb-2">sidebar-foreground</div>
+    <div className="text-sm">Default text in sidebar</div>
+  </div>
+  <div className="p-4 rounded-lg bg-primary text-primary-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">sidebar-primary</div>
+    <div className="text-sm">Primary elements in sidebar</div>
+  </div>
+  <div className="p-4 rounded-lg bg-primary text-primary-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">sidebar-primary-foreground</div>
+    <div className="text-sm">Text on primary sidebar elements</div>
+  </div>
+  <div className="p-4 rounded-lg bg-accent text-accent-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">sidebar-accent</div>
+    <div className="text-sm">Accent elements in sidebar</div>
+  </div>
+  <div className="p-4 rounded-lg bg-accent text-accent-foreground">
+    <div className="font-mono text-sm opacity-90 mb-2">sidebar-accent-foreground</div>
+    <div className="text-sm">Text on accent sidebar elements</div>
+  </div>
+  <div className="p-4 rounded-lg border-2 border-zinc-200 dark:border-zinc-700 bg-card">
+    <div className="font-mono text-sm text-muted-foreground mb-2">sidebar-border</div>
+    <div className="text-sm">Border color in sidebar</div>
+  </div>
+  <div className="p-4 rounded-lg border-2 border-ring bg-card ring-2 ring-ring ring-offset-2">
+    <div className="font-mono text-sm text-muted-foreground mb-2">sidebar-ring</div>
+    <div className="text-sm">Focus ring in sidebar components</div>
+  </div>
+</div>
+
+---
+
+## Usage Guidelines
+
+### CSS Variable Access
+
+All theme colors are available as CSS custom properties:
+
+```css
+/* Use theme colors in your custom CSS */
+.my-element {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+}
+
+/* Status colors */
+.success-message {
+  background-color: hsl(var(--success));
+  color: white;
+}
+```
+
+### Tailwind Classes
+
+Theme colors are integrated with Tailwind CSS:
+
+```html
+<!-- Background and text colors -->
+<div class="bg-card text-card-foreground">Card content</div>
+
+<!-- Interactive elements -->
+<button class="bg-primary text-primary-foreground hover:bg-primary-hover">
+  Primary Button
+</button>
+
+<!-- Borders and focus states -->
+<input class="border-input focus:ring-ring" />
+```
+
+### Dark Mode
+
+All theme colors automatically adapt to dark mode when using the `data-theme="dark"` attribute or `dark` class on the root element. The color values are carefully calibrated for optimal contrast and accessibility in both light and dark themes.
