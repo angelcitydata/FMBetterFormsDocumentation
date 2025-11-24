@@ -157,7 +157,7 @@ The Radio Group component is configured using JSON objects with properties for f
 
 <CodeGroup>
 ```html title="HTML Component"
-<bfcomp name="RadioGroup" 
+<bfcomp name="Radio Group" 
         modelKey="preferredContact"
         label="Preferred contact method"
         groupLabel="Choose your preferred contact method"
@@ -192,7 +192,7 @@ model.preferredContact = ""
 
 <CodeGroup>
 ```html title="HTML Component"
-<bfcomp name="RadioGroup" 
+<bfcomp name="Radio Group" 
         modelKey="shippingMethod"
         label="Shipping options"
         groupLabel="Select your preferred shipping method"
@@ -227,7 +227,7 @@ model.shippingMethod = ""
 
 <CodeGroup>
 ```html title="HTML Component"
-<bfcomp name="RadioGroup" 
+<bfcomp name="Radio Group" 
         modelKey="adminLevel"
         label="Administrator level"
         groupLabel="Select your administrator access level"
@@ -263,7 +263,7 @@ model.adminLevel = ""
 
 <CodeGroup>
 ```html title="HTML Component"
-<bfcomp name="RadioGroup" 
+<bfcomp name="Radio Group" 
         modelKey="priority"
         label="Priority level"
         groupLabel="Select the priority level"
@@ -299,7 +299,7 @@ model.priority = ""
 
 <CodeGroup>
 ```html title="HTML Component"
-<bfcomp name="RadioGroup" 
+<bfcomp name="Radio Group" 
         modelKey="paymentType"
         label="Payment method"
         groupLabel="Choose your payment method"
@@ -338,7 +338,7 @@ model.paymentType = ""
 
 <CodeGroup>
 ```html title="HTML Component"
-<bfcomp name="RadioGroup" 
+<bfcomp name="Radio Group" 
         modelKey="subscriptionTier"
         label="Subscription tier"
         groupLabel="Choose your subscription level"
@@ -382,25 +382,25 @@ model.subscriptionTier = ""
 <CodeGroup>
 ```html title="HTML Component"
 <bfcomp name="Radio Group" 
-        modelKey="radioGroupSelection" 
+        modelKey="Radio GroupSelection" 
         stateKey="comboBoxState" 
-        :items="model.radioGroupOptions">
+        :items="model.Radio GroupOptions">
 </bfcomp>
 ```
 
 ```javascript title="Model Definition"
 // Define notification preferences in your model
-model.radioGroupOptions = [
+model.Radio GroupOptions = [
   {"label": "Email", "value": "email"},
   {"label": "SMS", "value": "sms"},
   {"label": "Push Notification", "value": "push"}
 ]
-model.radioGroupSelection = ""
+model.Radio GroupSelection = ""
 ```
 
 ```json title="JSON Configuration"
 {
-  "modelKey": "radioGroupSelection",
+  "modelKey": "Radio GroupSelection",
   "stateKey": "comboBoxState",
   "items": [
     {"label": "Email", "value": "email"},
@@ -423,7 +423,7 @@ The Radio Group component features a clean, accessible design with consistent sp
 The radio group renders with the following structure:
 
 - **Wrapper Container**: Full width container with optional label
-- **Radio Group**: Container with role="radiogroup" and aria-label
+- **Radio Group**: Container with role="Radio Group" and aria-label
 - **Radio Options**: Individual button elements with radio role
 - **Radio Control**: Circular button with state-based styling
 - **Option Content**: Label and optional description text
@@ -441,7 +441,7 @@ The radio group renders with the following structure:
   <!-- Radio Group Container -->
   <div
     id="rg_0_options"
-    role="radiogroup"
+    role="Radio Group"
     aria-label="Choose one"
     aria-disabled="false"
     class="w-full flex flex-col gap-2"
@@ -616,7 +616,7 @@ The component includes comprehensive accessibility support:
 - **Keyboard Support** - Arrow keys navigate, Space and Enter select options
 - **Screen Reader Support** - Proper labeling and state announcements for radio group
 - **Focus Management** - Clear focus indicators with ring styling
-- **Group Accessibility** - `role="radiogroup"` with proper aria-label for the entire group
+- **Group Accessibility** - `role="Radio Group"` with proper aria-label for the entire group
 
 ### Theme Integration
 
